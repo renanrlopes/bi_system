@@ -1336,6 +1336,7 @@ loadDB(); loadNFFromAPI();
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor SN</div><input id="nf2-sn" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Tipo</div><select id="nf2-tipo" class="dinp"><option value="cmv">CMV</option><option value="desp">Despesa</option></select></div>
     </div>
+    <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">PDF da nota (opcional)</div><input id="nf2-pdf" type="file" accept="application/pdf,.pdf" class="dinp" style="padding:6px"></div>
     <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Observação</div><input id="nf2-obs" class="dinp" placeholder="Opcional"></div>
     <button onclick="nf2Save()" class="cbtn">Lançar nota</button>
   </div>
@@ -1345,7 +1346,7 @@ loadDB(); loadNFFromAPI();
       <button onclick="nf2Filter('cmv')" id="nf2f-cmv" class="mt">CMV</button>
       <button onclick="nf2Filter('desp')" id="nf2f-dp" class="mt">Despesas</button>
     </div>
-    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>NF</th><th>Fornecedor</th><th class="r">Total</th><th class="r">c/Nota</th><th class="r">SN</th><th>Tipo</th><th>Obs</th><th class="r">Ação</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
+    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>NF</th><th>Fornecedor</th><th class="r">Total</th><th class="r">c/Nota</th><th class="r">SN</th><th>Tipo</th><th>PDF</th><th>Obs</th><th class="r">Ação</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
     <div id="nf2-ft" style="padding:9px 10px;text-align:right;font-size:12px;color:var(--mu);border-top:1px solid var(--bdr)"></div>
   </div>
 </div>
@@ -1635,22 +1636,36 @@ function nf2Render(){
     <td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--am)">${fc2(n.valor||0)}</td>
     <td class="r">${n.valor_nf?fc2(n.valor_nf):'—'}</td><td class="r">${n.valor_sn?fc2(n.valor_sn):'—'}</td>
     <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;background:${n.tipo==='cmv'?'rgba(0,229,160,.12)':'rgba(245,158,11,.12)'};color:${n.tipo==='cmv'?'var(--g)':'var(--am)'}">${n.tipo==='cmv'?'CMV':'Desp'}</span></td>
+    <td>${n.has_pdf?`<button onclick="nf2OpenPdf(${n.id})" style="padding:3px 8px;background:rgba(59,130,246,.12);color:var(--b);border:1px solid rgba(59,130,246,.3);border-radius:5px;cursor:pointer;font-size:11px">Abrir</button>`:'—'}</td>
     <td style="font-size:11px;color:var(--mu)">${n.obs||''}</td>
     <td style="text-align:right"><button onclick="nf2Del(${n.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">✕</button></td></tr>`).join('')
-    :'<tr><td colspan="9" style="text-align:center;color:var(--mu);padding:20px">Nenhuma nota</td></tr>';
+    :'<tr><td colspan="10" style="text-align:center;color:var(--mu);padding:20px">Nenhuma nota</td></tr>';
   const tot=lista.reduce((a,n)=>a+(n.valor||0),0);
   document.getElementById('nf2-ft').textContent=lista.length?`Total: R$ ${tot.toLocaleString('pt-BR',{minimumFractionDigits:2})} (${lista.length} notas)`:'';
 }
 async function nf2Save(){
   const d={data:document.getElementById('nf2-data').value,numero:document.getElementById('nf2-num').value.trim(),fornecedor:document.getElementById('nf2-forn').value.trim(),valor:parseFloat(document.getElementById('nf2-val').value)||0,valor_nf:parseFloat(document.getElementById('nf2-nf').value)||0,valor_sn:parseFloat(document.getElementById('nf2-sn').value)||0,tipo:document.getElementById('nf2-tipo').value,obs:document.getElementById('nf2-obs').value.trim()};
+  const pdfInput=document.getElementById('nf2-pdf');
+  const pdfFile=pdfInput&&pdfInput.files?pdfInput.files[0]:null;
   if(!d.fornecedor)return gToast('Informe o fornecedor',true);
   if(!d.valor)return gToast('Informe o valor',true);
-  await gAPI('POST','/api/notas',d);
+  if(pdfFile){
+    const form=new FormData();
+    form.append('pdf',pdfFile);
+    Object.entries(d).forEach(([k,v])=>form.append(k,String(v??'')));
+    const r=await fetch('/api/notas/upload',{method:'POST',body:form});
+    const j=await r.json();
+    if(!j.ok)return gToast(j.error||'Erro ao salvar nota com PDF',true);
+  }else{
+    await gAPI('POST','/api/notas',d);
+  }
   gToast('Nota lançada!');
   ['nf2-data','nf2-num','nf2-forn','nf2-val','nf2-nf','nf2-sn','nf2-obs'].forEach(id=>document.getElementById(id).value='');
+  if(pdfInput)pdfInput.value='';
   nf2Load();
 }
 async function nf2Del(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/notas/'+id);gToast('Excluída');nf2Load();}
+function nf2OpenPdf(id){window.open('/api/notas/'+id+'/pdf','_blank');}
 function nf2Filter(f){nf2F=f;['all','cmv','dp'].forEach(k=>{const el=document.getElementById('nf2f-'+k);if(el)el.classList.toggle('on',k===f||(f==='desp'&&k==='dp'));});nf2Render();}
 
 // ── Aportes ───────────────────────────────────────────────────

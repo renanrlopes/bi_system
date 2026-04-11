@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_file
 from functools import wraps
 import json, os, hashlib, io, zipfile, threading, time, re, shutil
+import base64
 from datetime import datetime
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
@@ -296,6 +297,18 @@ def _validate_extrato(payload):
     return True, ''
 
 
+def _nota_public(nota: dict):
+    d = dict(nota or {})
+    has_pdf = bool(d.get('pdf_b64'))
+    d.pop('pdf_b64', None)
+    d['has_pdf'] = has_pdf
+    return d
+
+
+def _find_nota(notas: list, nid: int):
+    return next((n for n in notas if n.get('id') == nid), None)
+
+
 def _build_skus_from_produtos():
     produtos = load('produtos', default=[])
     return [
@@ -440,7 +453,9 @@ def delete_produto(pid):
 # ── Notas ─────────────────────────────────────────────────────
 @app.route('/api/notas', methods=['GET'])
 @login_required
-def get_notas(): return jsonify(load('notas'))
+def get_notas():
+    notas = load('notas', default=[])
+    return jsonify([_nota_public(n) for n in notas])
 
 @app.route('/api/notas', methods=['POST'])
 @editor_required
@@ -453,13 +468,78 @@ def add_nota():
     notas.append(d)
     save('notas', notas)
     log_action('nota.add', f"NF {d.get('numero','')} {d.get('fornecedor','')}")
-    return jsonify({'ok': True, 'nota': d})
+    return jsonify({'ok': True, 'nota': _nota_public(d)})
+
+
+@app.route('/api/notas/upload', methods=['POST'])
+@editor_required
+def add_nota_with_pdf():
+    fornecedor = (request.form.get('fornecedor') or '').strip()
+    valor = float(request.form.get('valor') or 0)
+    if not fornecedor:
+        return jsonify({'ok': False, 'error': 'Fornecedor é obrigatório'}), 400
+    if valor <= 0:
+        return jsonify({'ok': False, 'error': 'Valor deve ser maior que zero'}), 400
+
+    pdf_file = request.files.get('pdf')
+    if not pdf_file:
+        return jsonify({'ok': False, 'error': 'Arquivo PDF não enviado'}), 400
+
+    filename = (pdf_file.filename or '').strip()
+    if not filename.lower().endswith('.pdf'):
+        return jsonify({'ok': False, 'error': 'Arquivo deve ser PDF (.pdf)'}), 400
+
+    content = pdf_file.read()
+    if not content:
+        return jsonify({'ok': False, 'error': 'PDF vazio'}), 400
+    if len(content) > 8 * 1024 * 1024:
+        return jsonify({'ok': False, 'error': 'PDF excede 8MB'}), 400
+
+    d = {
+        'id': int(datetime.now().timestamp() * 1000),
+        'data': (request.form.get('data') or '').strip(),
+        'numero': (request.form.get('numero') or '').strip(),
+        'fornecedor': fornecedor,
+        'valor': valor,
+        'valor_nf': float(request.form.get('valor_nf') or 0),
+        'valor_sn': float(request.form.get('valor_sn') or 0),
+        'tipo': (request.form.get('tipo') or 'cmv').strip() or 'cmv',
+        'obs': (request.form.get('obs') or '').strip(),
+        'pdf_name': filename,
+        'pdf_b64': base64.b64encode(content).decode('ascii'),
+    }
+
+    notas = load('notas', default=[])
+    notas.append(d)
+    save('notas', notas)
+    log_action('nota.add', f"NF {d.get('numero','')} {d.get('fornecedor','')} + PDF")
+    return jsonify({'ok': True, 'nota': _nota_public(d)})
+
+
+@app.route('/api/notas/<int:nid>/pdf', methods=['GET'])
+@login_required
+def get_nota_pdf(nid):
+    notas = load('notas', default=[])
+    nota = _find_nota(notas, nid)
+    if not nota or not nota.get('pdf_b64'):
+        return jsonify({'ok': False, 'error': 'PDF não encontrado para esta nota'}), 404
+    try:
+        content = base64.b64decode(nota['pdf_b64'])
+    except Exception:
+        return jsonify({'ok': False, 'error': 'PDF inválido'}), 400
+    filename = nota.get('pdf_name') or f'nota_{nid}.pdf'
+    return send_file(
+        io.BytesIO(content),
+        mimetype='application/pdf',
+        as_attachment=False,
+        download_name=filename,
+    )
 
 @app.route('/api/notas/<int:nid>', methods=['DELETE'])
 @editor_required
 def delete_nota(nid):
     notas = load('notas')
-    rem = next((n for n in notas if n['id']==nid), None)
+    rem = _find_nota(notas, nid)
     save('notas', [n for n in notas if n['id']!=nid])
     log_action('nota.delete', f"NF {rem.get('numero','') if rem else nid}")
     return jsonify({'ok': True})
