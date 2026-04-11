@@ -2,12 +2,13 @@ services:
   - type: web
     name: bi-gerencial
     env: python
+    plan: starter
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT app:app
-    disks:
-      - name: bi_data
-        mountPath: /var/data
-        sizeGB: 1
+    disk:
+      name: bi_data
+      mountPath: /var/data
+      sizeGB: 1
     envVars:
       - key: FLASK_SECRET_KEY
         generateValue: true
