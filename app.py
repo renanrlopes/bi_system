@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify, session, redirect, u
 from functools import wraps
 import json, os, hashlib, io, zipfile, threading, time, re, shutil
 from datetime import datetime
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 try:
     from dotenv import load_dotenv
@@ -77,8 +78,10 @@ def bootstrap_data_dir():
 
 def _normalize_db_url(url: str) -> str:
     if url.startswith('postgres://'):
-        return 'postgresql://' + url[len('postgres://'):]
-    return url
+        url = 'postgresql://' + url[len('postgres://'):]
+    parsed = urlsplit(url)
+    q = [(k, v) for k, v in parse_qsl(parsed.query, keep_blank_values=True) if k.lower() != 'pgbouncer']
+    return urlunsplit((parsed.scheme, parsed.netloc, parsed.path, urlencode(q), parsed.fragment))
 
 
 def _pg_connect():
