@@ -116,14 +116,18 @@ O processo salva automaticamente:
 
 ## Hospedagem
 
-### Opção 1: Render (simples)
+### Opção 1: Render Free + Supabase (recomendado sem custo)
 
-1. Suba o repositório para GitHub.
-2. No Render, crie um Web Service.
-3. Build command: `pip install -r requirements.txt`
-4. Start command: `gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT app:app`
-5. Configure variáveis do `.env` no painel.
-6. Use o arquivo `render.yaml` como base.
+1. Crie um projeto no Supabase e copie a `Connection string` PostgreSQL.
+2. No Render, faça deploy via `Blueprint` usando o arquivo `render.yaml`.
+3. No serviço criado, configure a variável `DATABASE_URL` com a string do Supabase.
+4. Configure também no Render:
+    - `FLASK_SECRET_KEY` (forte)
+    - `SESSION_COOKIE_SECURE=true`
+    - variáveis do Mercado Livre (se for usar sync)
+5. Faça deploy; na primeira inicialização o app copia os dados JSON padrão para o Postgres.
+
+Observação: com `DATABASE_URL` preenchida, o sistema deixa de depender de disco local para os dados principais.
 
 ### Opção 2: Docker
 

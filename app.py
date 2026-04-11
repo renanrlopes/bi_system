@@ -12,6 +12,11 @@ except ModuleNotFoundError:
 from db import init_db, list_users, get_user, verify_user, save_sync_run, list_sync_runs
 from ml_sync import sync_mercado_livre_data
 
+try:
+    import psycopg
+except ModuleNotFoundError:
+    psycopg = None
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -25,6 +30,9 @@ DEFAULT_DATA_DIR = os.path.join(APP_ROOT, 'data')
 DATA_DIR = os.getenv('DATA_DIR', DEFAULT_DATA_DIR)
 LOG_DIR  = os.path.join(DATA_DIR, 'logs')
 DB_PATH = os.getenv('DB_PATH', os.path.join(DATA_DIR, 'app.db'))
+DATABASE_URL = os.getenv('DATABASE_URL', '').strip()
+USE_POSTGRES = bool(DATABASE_URL)
+_MISSING = object()
 
 ML_ACCESS_TOKEN = os.getenv('ML_ACCESS_TOKEN', '').strip()
 ML_SELLER_ID = os.getenv('ML_SELLER_ID', '').strip()
@@ -66,9 +74,68 @@ def bootstrap_data_dir():
             if not os.path.exists(dst):
                 shutil.copy2(src, dst)
 
-def load(name, default=None):
-    path = os.path.join(DATA_DIR, f'{name}.json')
-    if not os.path.exists(path): return default if default is not None else []
+
+def _normalize_db_url(url: str) -> str:
+    if url.startswith('postgres://'):
+        return 'postgresql://' + url[len('postgres://'):]
+    return url
+
+
+def _pg_connect():
+    if not USE_POSTGRES:
+        raise RuntimeError('DATABASE_URL não configurada')
+    if psycopg is None:
+        raise RuntimeError('psycopg não instalado. Execute pip install -r requirements.txt')
+    return psycopg.connect(_normalize_db_url(DATABASE_URL))
+
+
+def init_pg_kv_store():
+    if not USE_POSTGRES:
+        return
+    with _pg_connect() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS app_kv (
+                    key TEXT PRIMARY KEY,
+                    value JSONB NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                )
+                """
+            )
+        conn.commit()
+
+
+def _pg_get_json(key: str, default=_MISSING):
+    with _pg_connect() as conn:
+        with conn.cursor() as cur:
+            cur.execute('SELECT value FROM app_kv WHERE key=%s', (key,))
+            row = cur.fetchone()
+    if row is None:
+        if default is _MISSING:
+            raise KeyError(key)
+        return default
+    return row[0]
+
+
+def _pg_set_json(key: str, data):
+    with _pg_connect() as conn:
+        with conn.cursor() as cur:
+            cur.execute(
+                """
+                INSERT INTO app_kv (key, value, updated_at)
+                VALUES (%s, %s::jsonb, NOW())
+                ON CONFLICT (key)
+                DO UPDATE SET value = EXCLUDED.value, updated_at = NOW()
+                """,
+                (key, json.dumps(data, ensure_ascii=False)),
+            )
+        conn.commit()
+
+
+def _load_json_file(path, default=None):
+    if not os.path.exists(path):
+        return default if default is not None else []
     for enc in ('utf-8', 'utf-8-sig', 'cp1252', 'latin-1'):
         try:
             with open(path, encoding=enc) as f:
@@ -77,7 +144,33 @@ def load(name, default=None):
             continue
     raise UnicodeDecodeError('json', b'', 0, 1, f'Nao foi possivel decodificar {path}')
 
+
+def bootstrap_pg_store():
+    if not USE_POSTGRES:
+        return
+    for root, _, files in os.walk(DEFAULT_DATA_DIR):
+        rel_root = os.path.relpath(root, DEFAULT_DATA_DIR)
+        for fname in files:
+            if not fname.endswith('.json'):
+                continue
+            name = fname[:-5]
+            key = name if rel_root == '.' else f"{rel_root.replace(os.sep, '/')}/{name}"
+            current = _pg_get_json(key, default=_MISSING)
+            if current is not _MISSING:
+                continue
+            src_path = os.path.join(root, fname)
+            _pg_set_json(key, _load_json_file(src_path, default=[]))
+
+def load(name, default=None):
+    if USE_POSTGRES:
+        return _pg_get_json(name, default if default is not None else [])
+    path = os.path.join(DATA_DIR, f'{name}.json')
+    return _load_json_file(path, default=default)
+
 def save(name, data):
+    if USE_POSTGRES:
+        _pg_set_json(name, data)
+        return
     path = os.path.join(DATA_DIR, f'{name}.json')
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f: json.dump(data, f, ensure_ascii=False, indent=2)
@@ -207,6 +300,9 @@ def _run_ml_sync():
         client_id=ML_CLIENT_ID,
         client_secret=ML_CLIENT_SECRET,
         refresh_token=ML_REFRESH_TOKEN,
+        token_loader=lambda: load('ml_tokens', default={}) or {},
+        token_saver=lambda tokens: save('ml_tokens', tokens),
+        dataset_saver=lambda dataset_name, payload: save(dataset_name, payload),
     )
     save_sync_run(DB_PATH, 'mercadolivre', 'success', json.dumps(result, ensure_ascii=False))
     return result
@@ -591,6 +687,8 @@ def sync_ml_status():
 os.makedirs(DATA_DIR, exist_ok=True)
 os.makedirs(LOG_DIR, exist_ok=True)
 bootstrap_data_dir()
+init_pg_kv_store()
+bootstrap_pg_store()
 init_db(DB_PATH, DEFAULT_USERS)
 
 if __name__ == '__main__':

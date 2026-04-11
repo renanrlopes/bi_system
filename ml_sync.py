@@ -55,11 +55,14 @@ def sync_mercado_livre_data(
     client_id: str = "",
     client_secret: str = "",
     refresh_token: str = "",
+    token_loader=None,
+    token_saver=None,
+    dataset_saver=None,
 ) -> dict:
     if not access_token or not seller_id:
         raise ValueError("Configure ML_ACCESS_TOKEN e ML_SELLER_ID")
 
-    token_cache = _load_json(_token_cache_path(data_dir), default={})
+    token_cache = token_loader() if callable(token_loader) else _load_json(_token_cache_path(data_dir), default={})
     current_access = token_cache.get("access_token") or access_token
     current_refresh = token_cache.get("refresh_token") or refresh_token
 
@@ -74,14 +77,15 @@ def sync_mercado_livre_data(
             token_payload = _refresh_access_token(client_id, client_secret, current_refresh)
             current_access = token_payload.get("access_token", current_access)
             current_refresh = token_payload.get("refresh_token", current_refresh)
-            _save_json(
-                _token_cache_path(data_dir),
-                {
-                    "access_token": current_access,
-                    "refresh_token": current_refresh,
-                    "updated_at": datetime.utcnow().isoformat(),
-                },
-            )
+            token_payload_saved = {
+                "access_token": current_access,
+                "refresh_token": current_refresh,
+                "updated_at": datetime.utcnow().isoformat(),
+            }
+            if callable(token_saver):
+                token_saver(token_payload_saved)
+            else:
+                _save_json(_token_cache_path(data_dir), token_payload_saved)
             return _get(url, current_access, params=params)
 
     offset = 0
@@ -162,8 +166,12 @@ def sync_mercado_livre_data(
         for sku, v in sorted(agg.items(), key=lambda kv: kv[1]["r"], reverse=True)
     ]
 
-    _save_json(os.path.join(data_dir, "vendas.json"), vendas)
-    _save_json(os.path.join(data_dir, "skus.json"), skus)
+    if callable(dataset_saver):
+        dataset_saver("vendas", vendas)
+        dataset_saver("skus", skus)
+    else:
+        _save_json(os.path.join(data_dir, "vendas.json"), vendas)
+        _save_json(os.path.join(data_dir, "skus.json"), skus)
 
     return {
         "orders": len(order_ids),
