@@ -35,6 +35,12 @@ DATABASE_URL = os.getenv('DATABASE_URL', '').strip()
 USE_POSTGRES = bool(DATABASE_URL)
 _MISSING = object()
 
+
+def _disable_postgres(reason: str):
+    global USE_POSTGRES
+    USE_POSTGRES = False
+    print(f'[warn] PostgreSQL desativado: {reason}. Usando armazenamento local.')
+
 ML_ACCESS_TOKEN = os.getenv('ML_ACCESS_TOKEN', '').strip()
 ML_SELLER_ID = os.getenv('ML_SELLER_ID', '').strip()
 ML_CLIENT_ID = os.getenv('ML_CLIENT_ID', '').strip()
@@ -95,18 +101,21 @@ def _pg_connect():
 def init_pg_kv_store():
     if not USE_POSTGRES:
         return
-    with _pg_connect() as conn:
-        with conn.cursor() as cur:
-            cur.execute(
-                """
-                CREATE TABLE IF NOT EXISTS app_kv (
-                    key TEXT PRIMARY KEY,
-                    value JSONB NOT NULL,
-                    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    try:
+        with _pg_connect() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    CREATE TABLE IF NOT EXISTS app_kv (
+                        key TEXT PRIMARY KEY,
+                        value JSONB NOT NULL,
+                        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                    )
+                    """
                 )
-                """
-            )
-        conn.commit()
+            conn.commit()
+    except Exception as exc:
+        _disable_postgres(str(exc))
 
 
 def _pg_get_json(key: str, default=_MISSING):
