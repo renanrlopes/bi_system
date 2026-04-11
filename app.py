@@ -1,0 +1,603 @@
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_file
+from functools import wraps
+import json, os, hashlib, io, zipfile, threading, time, re, shutil
+from datetime import datetime
+
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    def load_dotenv(*args, **kwargs):
+        return False
+
+from db import init_db, list_users, get_user, verify_user, save_sync_run, list_sync_runs
+from ml_sync import sync_mercado_livre_data
+
+load_dotenv()
+
+app = Flask(__name__)
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'change-me-in-production')
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+app.config['SESSION_COOKIE_SECURE'] = os.getenv('SESSION_COOKIE_SECURE', 'false').lower() == 'true'
+
+APP_ROOT = os.path.dirname(__file__)
+DEFAULT_DATA_DIR = os.path.join(APP_ROOT, 'data')
+DATA_DIR = os.getenv('DATA_DIR', DEFAULT_DATA_DIR)
+LOG_DIR  = os.path.join(DATA_DIR, 'logs')
+DB_PATH = os.getenv('DB_PATH', os.path.join(DATA_DIR, 'app.db'))
+
+ML_ACCESS_TOKEN = os.getenv('ML_ACCESS_TOKEN', '').strip()
+ML_SELLER_ID = os.getenv('ML_SELLER_ID', '').strip()
+ML_CLIENT_ID = os.getenv('ML_CLIENT_ID', '').strip()
+ML_CLIENT_SECRET = os.getenv('ML_CLIENT_SECRET', '').strip()
+ML_REFRESH_TOKEN = os.getenv('ML_REFRESH_TOKEN', '').strip()
+ML_AUTO_SYNC_MINUTES = int(os.getenv('ML_AUTO_SYNC_MINUTES', '0') or 0)
+
+DEFAULT_USERS = {
+    'admin': {'hash': hashlib.sha256(b'admin123').hexdigest(), 'role': 'admin'},
+    'user1': {'hash': hashlib.sha256(b'user1123').hexdigest(), 'role': 'editor'},
+    'user2': {'hash': hashlib.sha256(b'user2123').hexdigest(), 'role': 'editor'},
+    'user3': {'hash': hashlib.sha256(b'user3123').hexdigest(), 'role': 'viewer'},
+    'user4': {'hash': hashlib.sha256(b'user4123').hexdigest(), 'role': 'viewer'},
+}
+
+LOGIN_ATTEMPTS = {}
+MAX_LOGIN_ATTEMPTS = 6
+LOCK_SECONDS = 300
+
+
+def bootstrap_data_dir():
+    """If using external DATA_DIR, seed missing JSON files from bundled ./data."""
+    if os.path.abspath(DATA_DIR) == os.path.abspath(DEFAULT_DATA_DIR):
+        return
+
+    os.makedirs(DATA_DIR, exist_ok=True)
+    os.makedirs(LOG_DIR, exist_ok=True)
+
+    for root, _, files in os.walk(DEFAULT_DATA_DIR):
+        rel_root = os.path.relpath(root, DEFAULT_DATA_DIR)
+        dest_root = DATA_DIR if rel_root == '.' else os.path.join(DATA_DIR, rel_root)
+        os.makedirs(dest_root, exist_ok=True)
+        for fname in files:
+            if not fname.endswith('.json'):
+                continue
+            src = os.path.join(root, fname)
+            dst = os.path.join(dest_root, fname)
+            if not os.path.exists(dst):
+                shutil.copy2(src, dst)
+
+def load(name, default=None):
+    path = os.path.join(DATA_DIR, f'{name}.json')
+    if not os.path.exists(path): return default if default is not None else []
+    for enc in ('utf-8', 'utf-8-sig', 'cp1252', 'latin-1'):
+        try:
+            with open(path, encoding=enc) as f:
+                return json.load(f)
+        except UnicodeDecodeError:
+            continue
+    raise UnicodeDecodeError('json', b'', 0, 1, f'Nao foi possivel decodificar {path}')
+
+def save(name, data):
+    path = os.path.join(DATA_DIR, f'{name}.json')
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, 'w', encoding='utf-8') as f: json.dump(data, f, ensure_ascii=False, indent=2)
+
+def log_action(action, detail=''):
+    logs = load('logs/historico', default=[])
+    logs.append({'ts': datetime.now().strftime('%d/%m/%Y %H:%M:%S'), 'user': session.get('user','?'), 'action': action, 'detail': detail})
+    save('logs/historico', logs[-500:])
+
+def login_required(f):
+    @wraps(f)
+    def dec(*a, **kw):
+        if 'user' not in session: return redirect(url_for('login'))
+        return f(*a, **kw)
+    return dec
+
+def editor_required(f):
+    @wraps(f)
+    def dec(*a, **kw):
+        if 'user' not in session: return redirect(url_for('login'))
+        user = get_user(DB_PATH, session['user'])
+        if (user or {}).get('role') not in ('admin','editor'):
+            return jsonify({'ok':False,'error':'Sem permissão de edição'}), 403
+        return f(*a, **kw)
+    return dec
+
+def admin_required(f):
+    @wraps(f)
+    def dec(*a, **kw):
+        if 'user' not in session: return redirect(url_for('login'))
+        user = get_user(DB_PATH, session['user'])
+        if (user or {}).get('role') != 'admin':
+            return jsonify({'ok':False,'error':'Acesso restrito ao admin'}), 403
+        return f(*a, **kw)
+    return dec
+
+
+def _client_ip():
+    forwarded = request.headers.get('X-Forwarded-For', '')
+    if forwarded:
+        return forwarded.split(',')[0].strip()
+    return request.remote_addr or 'unknown'
+
+
+def _is_login_locked(ip: str):
+    info = LOGIN_ATTEMPTS.get(ip)
+    if not info:
+        return False
+    if info.get('count', 0) < MAX_LOGIN_ATTEMPTS:
+        return False
+    blocked_until = info.get('blocked_until', 0)
+    return time.time() < blocked_until
+
+
+def _register_login_failure(ip: str):
+    info = LOGIN_ATTEMPTS.get(ip, {'count': 0, 'blocked_until': 0})
+    info['count'] += 1
+    if info['count'] >= MAX_LOGIN_ATTEMPTS:
+        info['blocked_until'] = time.time() + LOCK_SECONDS
+    LOGIN_ATTEMPTS[ip] = info
+
+
+def _register_login_success(ip: str):
+    LOGIN_ATTEMPTS.pop(ip, None)
+
+
+def _require_json_object(payload, fields=None):
+    if not isinstance(payload, dict):
+        return False, 'Payload JSON inválido'
+    if fields:
+        for f in fields:
+            if f not in payload:
+                return False, f'Campo obrigatório ausente: {f}'
+    return True, ''
+
+
+def _validate_meses(payload):
+    if not isinstance(payload, list):
+        return False, 'Meses deve ser uma lista'
+    for m in payload:
+        if not isinstance(m, dict):
+            return False, 'Mês inválido'
+        key = str(m.get('key', ''))
+        label = str(m.get('label', ''))
+        if not re.match(r'^\d{4}-\d{2}$', key):
+            return False, f'Formato de key inválido: {key}'
+        if not label:
+            return False, 'Label do mês obrigatório'
+    return True, ''
+
+
+def _validate_estoque(payload):
+    if not isinstance(payload, list):
+        return False, 'Estoque deve ser uma lista'
+    for e in payload:
+        if not isinstance(e, dict):
+            return False, 'Item de estoque inválido'
+        if not str(e.get('sku', '')).strip():
+            return False, 'SKU é obrigatório em estoque'
+    return True, ''
+
+
+def _validate_extrato(payload):
+    if not isinstance(payload, dict):
+        return False, 'Extrato deve ser objeto por mês'
+    for mes, data in payload.items():
+        if not re.match(r'^\d{4}-\d{2}$', str(mes)):
+            return False, f'Mês inválido no extrato: {mes}'
+        if not isinstance(data, dict):
+            return False, f'Extrato de {mes} inválido'
+    return True, ''
+
+
+def _build_skus_from_produtos():
+    produtos = load('produtos', default=[])
+    return [
+        {'s': p.get('sku', ''), 'p': 0, 'u': int(p.get('v30') or 0), 'r': 0.0, 'l': 0.0}
+        for p in produtos if p.get('sku')
+    ]
+
+
+def _run_ml_sync():
+    result = sync_mercado_livre_data(
+        DATA_DIR,
+        ML_ACCESS_TOKEN,
+        ML_SELLER_ID,
+        client_id=ML_CLIENT_ID,
+        client_secret=ML_CLIENT_SECRET,
+        refresh_token=ML_REFRESH_TOKEN,
+    )
+    save_sync_run(DB_PATH, 'mercadolivre', 'success', json.dumps(result, ensure_ascii=False))
+    return result
+
+
+def _start_background_ml_sync():
+    if ML_AUTO_SYNC_MINUTES <= 0:
+        return
+
+    def loop_sync():
+        while True:
+            try:
+                _run_ml_sync()
+            except Exception as exc:
+                save_sync_run(DB_PATH, 'mercadolivre', 'error', str(exc))
+            time.sleep(ML_AUTO_SYNC_MINUTES * 60)
+
+    t = threading.Thread(target=loop_sync, daemon=True)
+    t.start()
+
+@app.route('/')
+@login_required
+def index():
+    u = session['user']
+    user = get_user(DB_PATH, u)
+    return render_template('index.html', user=u, role=(user or {}).get('role','viewer'))
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        ip = _client_ip()
+        if _is_login_locked(ip):
+            error = 'Muitas tentativas. Aguarde alguns minutos.'
+            return render_template('login.html', error=error)
+        u = request.form.get('username','').strip()
+        pwd = request.form.get('password','')
+        user = verify_user(DB_PATH, u, pwd)
+        if user:
+            session['user'] = u
+            _register_login_success(ip)
+            log_action('login')
+            return redirect(url_for('index'))
+        _register_login_failure(ip)
+        error = 'Usuário ou senha incorretos'
+    return render_template('login.html', error=error)
+
+@app.route('/logout')
+def logout():
+    log_action('logout')
+    session.clear()
+    return redirect(url_for('login'))
+
+# ── Financeiro (V, CMV, DEB_ML, ENC, EMP, DESP) ──────────────
+@app.route('/api/financeiro', methods=['GET'])
+@login_required
+def get_fin(): return jsonify(load('financeiro', default={}))
+
+@app.route('/api/financeiro', methods=['POST'])
+@editor_required
+def save_fin():
+    ok, msg = _require_json_object(request.json, fields=['V'])
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+    save('financeiro', request.json)
+    log_action('financeiro.save')
+    return jsonify({'ok': True})
+
+# ── Meses ─────────────────────────────────────────────────────
+@app.route('/api/meses', methods=['GET'])
+@login_required
+def get_meses(): return jsonify(load('meses', default=[{'key':'2026-01','label':'Jan/2026'},{'key':'2026-02','label':'Fev/2026'},{'key':'2026-03','label':'Mar/2026'}]))
+
+@app.route('/api/meses', methods=['POST'])
+@editor_required
+def save_meses():
+    ok, msg = _validate_meses(request.json)
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+    save('meses', request.json)
+    log_action('meses.save')
+    return jsonify({'ok': True})
+
+# ── Produtos ──────────────────────────────────────────────────
+@app.route('/api/produtos', methods=['GET'])
+@login_required
+def get_produtos(): return jsonify(load('produtos'))
+
+@app.route('/api/produtos', methods=['POST'])
+@editor_required
+def add_produto():
+    ok, msg = _require_json_object(request.json, fields=['sku'])
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+    produtos = load('produtos')
+    d = {**request.json, 'id': int(datetime.now().timestamp()*1000)}
+    produtos.append(d)
+    save('produtos', produtos)
+    log_action('produto.add', d.get('sku',''))
+    return jsonify({'ok': True, 'produto': d})
+
+@app.route('/api/produtos/<int:pid>', methods=['PUT'])
+@editor_required
+def update_produto(pid):
+    produtos = load('produtos')
+    for i,p in enumerate(produtos):
+        if p['id'] == pid:
+            produtos[i] = {**p, **request.json, 'id': pid}
+            save('produtos', produtos)
+            log_action('produto.update', produtos[i].get('sku',''))
+            return jsonify({'ok': True})
+    return jsonify({'ok': False}), 404
+
+@app.route('/api/produtos/<int:pid>', methods=['DELETE'])
+@editor_required
+def delete_produto(pid):
+    produtos = load('produtos')
+    rem = next((p for p in produtos if p['id']==pid), None)
+    save('produtos', [p for p in produtos if p['id']!=pid])
+    log_action('produto.delete', rem.get('sku','') if rem else str(pid))
+    return jsonify({'ok': True})
+
+# ── Notas ─────────────────────────────────────────────────────
+@app.route('/api/notas', methods=['GET'])
+@login_required
+def get_notas(): return jsonify(load('notas'))
+
+@app.route('/api/notas', methods=['POST'])
+@editor_required
+def add_nota():
+    ok, msg = _require_json_object(request.json, fields=['fornecedor', 'valor'])
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+    notas = load('notas')
+    d = {**request.json, 'id': int(datetime.now().timestamp()*1000)}
+    notas.append(d)
+    save('notas', notas)
+    log_action('nota.add', f"NF {d.get('numero','')} {d.get('fornecedor','')}")
+    return jsonify({'ok': True, 'nota': d})
+
+@app.route('/api/notas/<int:nid>', methods=['DELETE'])
+@editor_required
+def delete_nota(nid):
+    notas = load('notas')
+    rem = next((n for n in notas if n['id']==nid), None)
+    save('notas', [n for n in notas if n['id']!=nid])
+    log_action('nota.delete', f"NF {rem.get('numero','') if rem else nid}")
+    return jsonify({'ok': True})
+
+# ── Aportes ───────────────────────────────────────────────────
+@app.route('/api/aportes', methods=['GET'])
+@login_required
+def get_aportes(): return jsonify(load('aportes', default=[]))
+
+@app.route('/api/aportes', methods=['POST'])
+@editor_required
+def add_aporte():
+    ok, msg = _require_json_object(request.json, fields=['socio', 'valor', 'tipo'])
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+    aportes = load('aportes', default=[])
+    d = {**request.json, 'id': int(datetime.now().timestamp()*1000)}
+    aportes.append(d)
+    save('aportes', aportes)
+    log_action('aporte.add', f"{d.get('socio','')} R$ {d.get('valor',0)}")
+    return jsonify({'ok': True})
+
+@app.route('/api/aportes/<int:aid>', methods=['DELETE'])
+@editor_required
+def delete_aporte(aid):
+    aportes = load('aportes', default=[])
+    save('aportes', [a for a in aportes if a['id']!=aid])
+    log_action('aporte.delete', str(aid))
+    return jsonify({'ok': True})
+
+# ── Empréstimos ───────────────────────────────────────────────
+@app.route('/api/emprestimos', methods=['GET'])
+@login_required
+def get_emp(): return jsonify(load('emprestimos', default=[]))
+
+@app.route('/api/emprestimos', methods=['POST'])
+@editor_required
+def add_emp():
+    ok, msg = _require_json_object(request.json, fields=['descricao', 'valor'])
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+    emps = load('emprestimos', default=[])
+    d = {**request.json, 'id': int(datetime.now().timestamp()*1000)}
+    emps.append(d)
+    save('emprestimos', emps)
+    log_action('emp.add', f"R$ {d.get('valor',0)}")
+    return jsonify({'ok': True})
+
+@app.route('/api/emprestimos/<int:eid>', methods=['DELETE'])
+@editor_required
+def delete_emp(eid):
+    emps = load('emprestimos', default=[])
+    save('emprestimos', [e for e in emps if e['id']!=eid])
+    log_action('emp.delete', str(eid))
+    return jsonify({'ok': True})
+
+# ── Extrato ───────────────────────────────────────────────────
+@app.route('/api/extrato', methods=['GET'])
+@login_required
+def get_extrato(): return jsonify(load('extrato', default={}))
+
+@app.route('/api/extrato', methods=['POST'])
+@editor_required
+def save_extrato():
+    ok, msg = _validate_extrato(request.json)
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+    save('extrato', request.json)
+    log_action('extrato.save')
+    return jsonify({'ok': True})
+
+# ── Despesas ──────────────────────────────────────────────────
+@app.route('/api/despesas', methods=['GET'])
+@login_required
+def get_desp(): return jsonify(load('despesas', default={}))
+
+@app.route('/api/despesas', methods=['POST'])
+@editor_required
+def save_desp():
+    save('despesas', request.json)
+    log_action('despesas.save')
+    return jsonify({'ok': True})
+
+# ── Estoque ───────────────────────────────────────────────────
+@app.route('/api/estoque', methods=['GET'])
+@login_required
+def get_est(): return jsonify(load('estoque', default=[]))
+
+@app.route('/api/estoque', methods=['POST'])
+@editor_required
+def save_est():
+    ok, msg = _validate_estoque(request.json)
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+    save('estoque', request.json)
+    log_action('estoque.save')
+    return jsonify({'ok': True})
+
+# ── SKUs ranking ──────────────────────────────────────────────
+@app.route('/api/skus', methods=['GET'])
+@login_required
+def get_skus():
+    skus = load('skus', default=[])
+    if not skus:
+        skus = _build_skus_from_produtos()
+    return jsonify(skus)
+
+@app.route('/api/skus', methods=['POST'])
+@editor_required
+def save_skus():
+    save('skus', request.json)
+    log_action('skus.save')
+    return jsonify({'ok': True})
+
+# ── Margem por SKU ────────────────────────────────────────────
+@app.route('/api/marg', methods=['GET'])
+@login_required
+def get_marg(): return jsonify(load('marg', default=[]))
+
+@app.route('/api/marg', methods=['POST'])
+@editor_required
+def save_marg():
+    save('marg', request.json)
+    log_action('marg.save')
+    return jsonify({'ok': True})
+
+# ── Histórico ─────────────────────────────────────────────────
+@app.route('/api/historico', methods=['GET'])
+@login_required
+def get_hist(): return jsonify(list(reversed(load('logs/historico', default=[]))))
+
+# ── Import Excel ──────────────────────────────────────────────
+@app.route('/api/import/produtos', methods=['POST'])
+@editor_required
+def import_produtos():
+    try:
+        import pandas as pd
+        f = request.files.get('file')
+        df = pd.read_excel(io.BytesIO(f.read()))
+        df.columns = [c.strip().lower() for c in df.columns]
+        produtos = load('produtos')
+        added = updated = 0
+        for _, row in df.iterrows():
+            nome = str(row.get('produto') or row.get('nome') or row.get('sku') or '').strip()
+            custo = float(row.get('custo') or row.get('custo unit') or row.get('custo unitário') or 0)
+            if not nome or nome=='nan': continue
+            ex = next((p for p in produtos if p['sku'].lower()==nome.lower()), None)
+            if not ex:
+                produtos.append({'id': int(datetime.now().timestamp()*1000)+added, 'sku': nome, 'custo': custo, 'estoque': 0, 'v30': 0})
+                added += 1
+            else:
+                ex['custo'] = custo
+                updated += 1
+        save('produtos', produtos)
+        log_action('import.produtos', f'{added} add, {updated} upd')
+        return jsonify({'ok': True, 'added': added, 'updated': updated})
+    except Exception as e:
+        return jsonify({'ok': False, 'error': str(e)}), 400
+
+@app.route('/api/import/skus', methods=['POST'])
+@editor_required
+def import_skus():
+    try:
+        import pandas as pd
+        f = request.files.get('file')
+        df = pd.read_excel(io.BytesIO(f.read()))
+        df.columns = [c.strip().lower() for c in df.columns]
+        skus = []
+        for _, row in df.iterrows():
+            s = str(row.get('produto') or row.get('sku') or row.get('nome') or '').strip()
+            if not s or s=='nan': continue
+            skus.append({'s': s, 'p': int(row.get('pedidos') or 0), 'u': int(row.get('unidades') or 0), 'r': float(row.get('receita') or 0), 'l': float(row.get('liquido') or row.get('líquido') or 0)})
+        save('skus', skus)
+        log_action('import.skus', f'{len(skus)} SKUs')
+        return jsonify({'ok': True, 'count': len(skus)})
+    except Exception as e:
+        return jsonify({'ok': False, 'error': str(e)}), 400
+
+@app.route('/api/import/marg', methods=['POST'])
+@editor_required
+def import_marg():
+    try:
+        import pandas as pd
+        f = request.files.get('file')
+        df = pd.read_excel(io.BytesIO(f.read()))
+        df.columns = [c.strip().lower() for c in df.columns]
+        marg = []
+        for _, row in df.iterrows():
+            sku = str(row.get('sku') or row.get('produto') or '').strip()
+            if not sku or sku=='nan': continue
+            marg.append({'sku': sku, 'custo': float(row.get('custo') or 0), 'un_est': int(row.get('estoque') or 0), 'v30': int(row.get('v30') or row.get('vendas 30d') or 0), 'custo_est': float(row.get('custo estoque') or 0)})
+        save('marg', marg)
+        log_action('import.marg', f'{len(marg)} SKUs')
+        return jsonify({'ok': True, 'count': len(marg)})
+    except Exception as e:
+        return jsonify({'ok': False, 'error': str(e)}), 400
+
+# ── Backup ────────────────────────────────────────────────────
+@app.route('/api/backup', methods=['GET'])
+@admin_required
+def backup():
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, 'w', zipfile.ZIP_DEFLATED) as z:
+        for root, _, files in os.walk(DATA_DIR):
+            for fname in files:
+                fpath = os.path.join(root, fname)
+                z.write(fpath, os.path.relpath(fpath, DATA_DIR))
+    buf.seek(0)
+    ts = datetime.now().strftime('%Y%m%d_%H%M%S')
+    log_action('backup', f'backup_{ts}.zip')
+    return send_file(buf, mimetype='application/zip', as_attachment=True, download_name=f'backup_{ts}.zip')
+
+# ── Usuários ──────────────────────────────────────────────────
+@app.route('/api/usuarios', methods=['GET'])
+@admin_required
+def get_usuarios(): return jsonify(list_users(DB_PATH))
+
+
+# ── Sync Mercado Livre ────────────────────────────────────────
+@app.route('/api/sync/ml', methods=['POST'])
+@admin_required
+def sync_ml_now():
+    try:
+        result = _run_ml_sync()
+        log_action('sync.ml', f"orders={result.get('orders',0)} vendas={result.get('vendas',0)}")
+        return jsonify({'ok': True, 'result': result})
+    except Exception as exc:
+        save_sync_run(DB_PATH, 'mercadolivre', 'error', str(exc))
+        return jsonify({'ok': False, 'error': str(exc)}), 400
+
+
+@app.route('/api/sync/ml/status', methods=['GET'])
+@admin_required
+def sync_ml_status():
+    return jsonify({'ok': True, 'runs': list_sync_runs(DB_PATH)})
+
+os.makedirs(DATA_DIR, exist_ok=True)
+os.makedirs(LOG_DIR, exist_ok=True)
+bootstrap_data_dir()
+init_db(DB_PATH, DEFAULT_USERS)
+
+if __name__ == '__main__':
+    if os.getenv('WERKZEUG_RUN_MAIN') == 'true' or os.getenv('FLASK_DEBUG', 'false').lower() != 'true':
+        _start_background_ml_sync()
+    app.run(
+        debug=os.getenv('FLASK_DEBUG', 'false').lower() == 'true',
+        host='0.0.0.0',
+        port=int(os.getenv('PORT', '5000')),
+    )

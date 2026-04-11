@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "data": "09/01",
+    "socio": "Lucas Cristiano Pereira",
+    "descricao": "Kloos Distribuidora",
+    "obs": "Pgto via PF Lucas · fora do extrato ML",
+    "valor": 21421.08,
+    "tipo": "entrada",
+    "mes": "2026-01"
+  },
+  {
+    "id": 2,
+    "data": "12/01",
+    "socio": "Lucas Cristiano Pereira",
+    "descricao": "LCP Serviços LTDA",
+    "obs": "Pix recebido · 141082891601",
+    "valor": 18578.92,
+    "tipo": "entrada",
+    "mes": "2026-01"
+  },
+  {
+    "id": 3,
+    "data": "14/01",
+    "socio": "Lucas Cristiano Pereira",
+    "descricao": "Lucas Cristiano Pereira",
+    "obs": "Pix recebido · 141347230455",
+    "valor": 6000.0,
+    "tipo": "entrada",
+    "mes": "2026-01"
+  },
+  {
+    "id": 4,
+    "data": "23/01",
+    "socio": "Lucas Cristiano Pereira",
+    "descricao": "Devolução de aporte",
+    "obs": "Saída para conta pessoal · Jan/2026",
+    "valor": 14200.0,
+    "tipo": "devolucao",
+    "mes": "2026-01"
+  },
+  {
+    "id": 5,
+    "data": "12/01",
+    "socio": "Fellipe Genestra Delfino",
+    "descricao": "Fellipe Genestra Delfino",
+    "obs": "Pix recebido · 141084044527",
+    "valor": 20000.0,
+    "tipo": "entrada",
+    "mes": "2026-01"
+  },
+  {
+    "id": 6,
+    "data": "15/01",
+    "socio": "Fellipe Genestra Delfino",
+    "descricao": "Fellipe Genestra Delfino",
+    "obs": "Pix recebido · 141464085997",
+    "valor": 4800.0,
+    "tipo": "entrada",
+    "mes": "2026-01"
+  },
+  {
+    "id": 7,
+    "data": "15/01",
+    "socio": "Fellipe Genestra Delfino",
+    "descricao": "Fellipe Genestra Delfino",
+    "obs": "Pix recebido",
+    "valor": 3974.54,
+    "tipo": "entrada",
+    "mes": "2026-01"
+  },
+  {
+    "id": 8,
+    "data": "29/01",
+    "socio": "Fellipe Genestra Delfino",
+    "descricao": "Rebeka Bustamante Fernandes Ribas",
+    "obs": "Pix recebido · 143957739352 — em nome de Fellipe",
+    "valor": 8872.79,
+    "tipo": "entrada",
+    "mes": "2026-01"
+  },
+  {
+    "id": 9,
+    "data": "20/02",
+    "socio": "Fellipe Genestra Delfino",
+    "descricao": "Devolução de aporte",
+    "obs": "Pix enviado · 146336187381",
+    "valor": 8872.79,
+    "tipo": "devolucao",
+    "mes": "2026-02"
+  },
+  {
+    "id": 10,
+    "data": "27/02",
+    "socio": "Fellipe Genestra Delfino",
+    "descricao": "Fellipe Genestra Delfino",
+    "obs": "Pix recebido · Fev/2026",
+    "valor": 60.0,
+    "tipo": "entrada",
+    "mes": "2026-02"
+  },
+  {
+    "id": 11,
+    "data": "06/03",
+    "socio": "Fellipe Genestra Delfino",
+    "descricao": "Fellipe Genestra Delfino",
+    "obs": "Pix recebido · Mar/2026",
+    "valor": 400.0,
+    "tipo": "entrada",
+    "mes": "2026-03"
+  }
+]

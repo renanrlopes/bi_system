@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: bi-gerencial
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn -w 2 -k gthread -b 0.0.0.0:$PORT app:app
+    disks:
+      - name: bi_data
+        mountPath: /var/data
+        sizeGB: 1
+    envVars:
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: FLASK_DEBUG
+        value: "false"
+      - key: SESSION_COOKIE_SECURE
+        value: "true"
+      - key: DATA_DIR
+        value: /var/data
+      - key: DB_PATH
+        value: /var/data/app.db
+      - key: ML_AUTO_SYNC_MINUTES
+        value: "30"
