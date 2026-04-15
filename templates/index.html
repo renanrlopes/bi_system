@@ -148,7 +148,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
     <div class="ni" onclick="sp('g-historico')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Histórico</div>
   </nav>
   <div class="sbf">
-  <div style="display:flex;align-items:center;gap:6px"><span class="dot"></span><span id="sb-periodo">Jan–Mar 2026</span></div>
+  <div style="display:flex;align-items:center;gap:6px"><span class="dot"></span><span id="sb-periodo">Período automático</span></div>
   <div style="margin-top:8px;font-size:11px;color:var(--tx)">{{ user }} <span style="color:var(--mu);font-size:10px">({{ role }})</span></div>
   <a href="/logout" style="font-size:11px;color:var(--r);text-decoration:none;display:block;margin-top:4px">Sair</a>
 </div>
@@ -157,13 +157,8 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 
 <div class="main">
   <div class="top">
-    <div class="top-left"><button class="mob-nav-btn" onclick="toggleMobileNav()" aria-label="Abrir menu">☰</button><div><div class="tpt" id="pgt">Visão geral</div><div class="tps">Jan–Mar 2026 · 3.143 pedidos · Mercado Livre BR</div></div></div>
-    <div class="mts" id="mts">
-      <button class="mt" onclick="sm(0)">Jan/26</button>
-      <button class="mt" onclick="sm(1)">Fev/26</button>
-      <button class="mt" onclick="sm(2)">Mar/26</button>
-      <button class="mt on" onclick="sm(-1)">Total</button>
-    </div>
+    <div class="top-left"><button class="mob-nav-btn" onclick="toggleMobileNav()" aria-label="Abrir menu">☰</button><div><div class="tpt" id="pgt">Visão geral</div><div class="tps" id="top-sub">Período automático · 0 pedidos · Mercado Livre BR</div></div></div>
+    <div class="mts" id="mts" style="display:none"></div>
   </div>
 
   <!-- OVERVIEW -->
@@ -463,16 +458,15 @@ async function loadDB(){
       })));
     }
 
-    // update sidebar period
-    if(M.length){const first=M[0],last=M[M.length-1];document.getElementById('sb-periodo').textContent=first===last?first:first.split('/')[0]+'–'+last;}
-
-    // reload month tabs
-    const mtsEl=document.getElementById('mts');
-    if(mtsEl){
-      let btns='';
-      M.forEach((lbl,i)=>btns+=`<button class="mt" onclick="sm(${i})">${lbl}</button>`);
-      btns+=`<button class="mt on" onclick="sm(-1)">Total</button>`;
-      mtsEl.innerHTML=btns;
+    // update dynamic header/subtitle
+    if(M.length){
+      const first=M[0],last=M[M.length-1];
+      const periodo=first===last?first:first.split('/')[0]+'–'+last;
+      const totalPedidos=(V.pd||[]).reduce((a,v)=>a+(parseInt(v||0)),0);
+      const sb=document.getElementById('sb-periodo');
+      if(sb) sb.textContent=periodo;
+      const topSub=document.getElementById('top-sub');
+      if(topSub) topSub.textContent=`${periodo} · ${totalPedidos.toLocaleString('pt-BR')} pedidos · Mercado Livre BR`;
     }
     _dbReady=true;
     rAll();rExt();rNF();rComp();rForn();rSKU();rApo();rEst();rMarg();buildCharts();
@@ -553,7 +547,8 @@ function sp(p){
   const idx=ps.indexOf(p);
   if(idx>=0)document.querySelectorAll('.ni')[idx].classList.add('on');
   document.getElementById('pgt').textContent=ts[idx]||p;
-  document.getElementById('mts').style.visibility=['produtos','compras','fornec','extrato','aportes'].includes(p)?'hidden':'visible';
+  const mtsEl=document.getElementById('mts');
+  if(mtsEl) mtsEl.style.visibility='hidden';
   closeMobileNav();
 }
 
