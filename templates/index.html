@@ -1159,10 +1159,21 @@ loadDB(); loadNFFromAPI();
   <div class="sh"><div class="st">Produtos / Custos</div><span class="sb2" id="gp-count2">—</span></div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-bottom:14px">
     <div class="ct">Cadastrar / editar produto</div>
-    <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:10px;margin-bottom:12px">
+    <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">SKU</div><input id="gp-sku" class="dinp" placeholder="Nome do produto"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição detalhada</div><input id="gp-desc" class="dinp" placeholder="Descrição completa do item"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Embalagem</div><input id="gp-emb" class="dinp" placeholder="Ex: caixa com 12"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Quantidade</div><input id="gp-qt" type="number" class="dinp" placeholder="0"></div>
+    </div>
+    <div class="form-grid-4" style="display:grid;grid-template-columns:1fr 1fr 1.5fr 1.5fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Custo unit. (R$)</div><input id="gp-custo" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Estoque</div><input id="gp-est" type="number" class="dinp" placeholder="0"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Custo total (R$)</div><input id="gp-custo-total" type="number" step="0.01" class="dinp" placeholder="Auto: qtd x custo unit."></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Equivalente no catálogo</div><input id="gp-eq" class="dinp" placeholder="Produto equivalente"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Ref. / Página</div><input id="gp-ref" class="dinp" placeholder="Ex: Catálogo 2026 p.14"></div>
+    </div>
+    <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:12px">
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="gp-obs" class="dinp" placeholder="Observações do produto"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Foto (URL)</div><input id="gp-foto" class="dinp" placeholder="https://..."></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Vendas 30d</div><input id="gp-v30" type="number" class="dinp" placeholder="0"></div>
     </div>
     <div style="display:flex;gap:8px;align-items:center">
@@ -1175,8 +1186,8 @@ loadDB(); loadNFFromAPI();
     <input type="hidden" id="gp-id">
   </div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
-    <div style="overflow-x:auto"><table class="tb" style="min-width:600px">
-      <thead><tr><th>#</th><th>SKU</th><th class="r">Custo unit.</th><th class="r">Estoque</th><th class="r">Custo est.</th><th class="r">V30</th><th class="r">Ações</th></tr></thead>
+    <div style="overflow-x:auto"><table class="tb" style="min-width:1400px">
+      <thead><tr><th>#</th><th>SKU</th><th>Descrição detalhada</th><th>Embalagem</th><th class="r">Quantidade</th><th class="r">Custo Unit.</th><th class="r">Custo Total</th><th>Obs</th><th>Equivalente no catálogo</th><th>Ref. / Página</th><th>Foto</th><th class="r">V30</th><th class="r">Ações</th></tr></thead>
       <tbody id="gp-tb"></tbody>
     </table></div>
   </div>
@@ -1464,26 +1475,63 @@ async function gpLoad(){
   document.getElementById('gp-count2').textContent=gpList.length+' produtos';
   document.getElementById('gp-tb').innerHTML=gpList.length?gpList.map((p,i)=>`
     <tr><td class="dt">${i+1}</td><td style="font-size:12px;font-weight:500">${p.sku}</td>
-    <td class="rp">${fc2(p.custo||0)}</td><td class="r">${p.estoque||0}</td>
-    <td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--am)">${fc2((p.custo||0)*(p.estoque||0))}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.descricao_detalhada||''}">${p.descricao_detalhada||'—'}</td>
+    <td style="font-size:11px;color:var(--mu)">${p.embalagem||'—'}</td>
+    <td class="r">${(p.quantidade ?? p.estoque) || 0}</td>
+    <td class="rp">${fc2(p.custo||0)}</td>
+    <td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--am)">${fc2(p.custo_total ?? ((p.custo||0)*((p.quantidade ?? p.estoque)||0)))}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.obs||''}">${p.obs||'—'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.equivalente_catalogo||''}">${p.equivalente_catalogo||'—'}</td>
+    <td style="font-size:11px;color:var(--mu)">${p.ref_pagina||'—'}</td>
+    <td style="font-size:11px">${p.foto?`<a href="${p.foto}" target="_blank" rel="noopener" style="color:var(--b)">Abrir</a>`:'—'}</td>
     <td class="r">${p.v30||0}</td>
     <td style="text-align:right">
       <button onclick="gpEdit(${p.id})" style="padding:3px 8px;background:var(--bg3);color:var(--tx);border:1px solid var(--bdr);border-radius:5px;cursor:pointer;font-size:11px;margin-right:3px">Ed</button>
       <button onclick="gpDel(${p.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">✕</button>
     </td></tr>`).join('')
-    :'<tr><td colspan="7" style="text-align:center;color:var(--mu);padding:20px">Nenhum produto</td></tr>';
+    :'<tr><td colspan="13" style="text-align:center;color:var(--mu);padding:20px">Nenhum produto</td></tr>';
 }
 async function gpSave(){
   const sku=document.getElementById('gp-sku').value.trim();
   if(!sku)return gToast('Informe o SKU',true);
-  const d={sku,custo:parseFloat(document.getElementById('gp-custo').value)||0,estoque:parseInt(document.getElementById('gp-est').value)||0,v30:parseInt(document.getElementById('gp-v30').value)||0};
+  const quantidade=parseInt(document.getElementById('gp-qt').value)||0;
+  const custo=parseFloat(document.getElementById('gp-custo').value)||0;
+  const custoTotalManual=parseFloat(document.getElementById('gp-custo-total').value);
+  const d={
+    sku,
+    descricao_detalhada:document.getElementById('gp-desc').value.trim(),
+    embalagem:document.getElementById('gp-emb').value.trim(),
+    quantidade,
+    custo,
+    custo_total:Number.isFinite(custoTotalManual)?custoTotalManual:(quantidade*custo),
+    obs:document.getElementById('gp-obs').value.trim(),
+    equivalente_catalogo:document.getElementById('gp-eq').value.trim(),
+    ref_pagina:document.getElementById('gp-ref').value.trim(),
+    foto:document.getElementById('gp-foto').value.trim(),
+    estoque:quantidade,
+    v30:parseInt(document.getElementById('gp-v30').value)||0,
+  };
   if(gpEditId){await gAPI('PUT','/api/produtos/'+gpEditId,d);gToast('Atualizado!');}
   else{await gAPI('POST','/api/produtos',d);gToast('Salvo!');}
   gpClear();gpLoad();
 }
-function gpEdit(id){const p=gpList.find(x=>x.id===id);if(!p)return;gpEditId=id;document.getElementById('gp-sku').value=p.sku;document.getElementById('gp-custo').value=p.custo||'';document.getElementById('gp-est').value=p.estoque||'';document.getElementById('gp-v30').value=p.v30||'';}
+function gpEdit(id){
+  const p=gpList.find(x=>x.id===id);if(!p)return;
+  gpEditId=id;
+  document.getElementById('gp-sku').value=p.sku||'';
+  document.getElementById('gp-desc').value=p.descricao_detalhada||'';
+  document.getElementById('gp-emb').value=p.embalagem||'';
+  document.getElementById('gp-qt').value=(p.quantidade ?? p.estoque) || '';
+  document.getElementById('gp-custo').value=p.custo||'';
+  document.getElementById('gp-custo-total').value=p.custo_total||'';
+  document.getElementById('gp-obs').value=p.obs||'';
+  document.getElementById('gp-eq').value=p.equivalente_catalogo||'';
+  document.getElementById('gp-ref').value=p.ref_pagina||'';
+  document.getElementById('gp-foto').value=p.foto||'';
+  document.getElementById('gp-v30').value=p.v30||'';
+}
 async function gpDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/produtos/'+id);gToast('Excluído');gpLoad();}
-function gpClear(){gpEditId=null;['gp-sku','gp-custo','gp-est','gp-v30'].forEach(id=>document.getElementById(id).value='');}
+function gpClear(){gpEditId=null;['gp-sku','gp-desc','gp-emb','gp-qt','gp-custo','gp-custo-total','gp-obs','gp-eq','gp-ref','gp-foto','gp-v30'].forEach(id=>document.getElementById(id).value='');}
 async function gpImport(inp){const file=inp.files[0];if(!file)return;const form=new FormData();form.append('file',file);const r=await fetch('/api/import/produtos',{method:'POST',body:form});const d=await r.json();if(d.ok){gToast(`${d.added} adicionados, ${d.updated} atualizados`);gpLoad();}else gToast('Erro: '+d.error,true);inp.value='';}
 
 // ── Notas ─────────────────────────────────────────────────────
