@@ -1173,7 +1173,11 @@ loadDB(); loadNFFromAPI();
     </div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:12px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="gp-obs" class="dinp" placeholder="Observações do produto"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Foto (URL)</div><input id="gp-foto" class="dinp" placeholder="https://..."></div>
+      <div>
+        <div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Foto (arquivo)</div>
+        <input id="gp-foto-arq" type="file" accept="image/*" class="dinp" style="padding:6px">
+        <div id="gp-foto-info" style="font-size:10px;color:var(--mu);margin-top:4px">Nenhum arquivo selecionado</div>
+      </div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Vendas 30d</div><input id="gp-v30" type="number" class="dinp" placeholder="0"></div>
     </div>
     <div style="display:flex;gap:8px;align-items:center">
@@ -1483,7 +1487,7 @@ async function gpLoad(){
     <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.obs||''}">${p.obs||'—'}</td>
     <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.equivalente_catalogo||''}">${p.equivalente_catalogo||'—'}</td>
     <td style="font-size:11px;color:var(--mu)">${p.ref_pagina||'—'}</td>
-    <td style="font-size:11px">${p.foto?`<a href="${p.foto}" target="_blank" rel="noopener" style="color:var(--b)">Abrir</a>`:'—'}</td>
+    <td style="font-size:11px">${(p.foto_b64||p.foto)?`<a href="${p.foto_b64?`data:${p.foto_mime||'image/*'};base64,${p.foto_b64}`:p.foto}" target="_blank" rel="noopener" style="color:var(--b)">Abrir</a>`:'—'}</td>
     <td class="r">${p.v30||0}</td>
     <td style="text-align:right">
       <button onclick="gpEdit(${p.id})" style="padding:3px 8px;background:var(--bg3);color:var(--tx);border:1px solid var(--bdr);border-radius:5px;cursor:pointer;font-size:11px;margin-right:3px">Ed</button>
@@ -1497,6 +1501,31 @@ async function gpSave(){
   const quantidade=parseInt(document.getElementById('gp-qt').value)||0;
   const custo=parseFloat(document.getElementById('gp-custo').value)||0;
   const custoTotalManual=parseFloat(document.getElementById('gp-custo-total').value);
+  const fotoInput=document.getElementById('gp-foto-arq');
+  const fotoFile=fotoInput&&fotoInput.files&&fotoInput.files[0]?fotoInput.files[0]:null;
+  let fotoPayload={};
+  if(fotoFile){
+    const b64=await new Promise((resolve,reject)=>{
+      const reader=new FileReader();
+      reader.onload=()=>{
+        const result=String(reader.result||'');
+        const idx=result.indexOf(',');
+        resolve(idx>=0?result.slice(idx+1):'');
+      };
+      reader.onerror=()=>reject(new Error('Falha ao ler imagem'));
+      reader.readAsDataURL(fotoFile);
+    });
+    fotoPayload={foto_b64:b64,foto_nome:fotoFile.name||'',foto_mime:fotoFile.type||'image/*'};
+  }else if(gpEditId){
+    const current=gpList.find(x=>x.id===gpEditId)||{};
+    fotoPayload={
+      foto_b64:current.foto_b64||'',
+      foto_nome:current.foto_nome||'',
+      foto_mime:current.foto_mime||'',
+      foto:current.foto||'',
+    };
+  }
+
   const d={
     sku,
     descricao_detalhada:document.getElementById('gp-desc').value.trim(),
@@ -1507,9 +1536,9 @@ async function gpSave(){
     obs:document.getElementById('gp-obs').value.trim(),
     equivalente_catalogo:document.getElementById('gp-eq').value.trim(),
     ref_pagina:document.getElementById('gp-ref').value.trim(),
-    foto:document.getElementById('gp-foto').value.trim(),
     estoque:quantidade,
     v30:parseInt(document.getElementById('gp-v30').value)||0,
+    ...fotoPayload,
   };
   if(gpEditId){await gAPI('PUT','/api/produtos/'+gpEditId,d);gToast('Atualizado!');}
   else{await gAPI('POST','/api/produtos',d);gToast('Salvo!');}
@@ -1527,11 +1556,29 @@ function gpEdit(id){
   document.getElementById('gp-obs').value=p.obs||'';
   document.getElementById('gp-eq').value=p.equivalente_catalogo||'';
   document.getElementById('gp-ref').value=p.ref_pagina||'';
-  document.getElementById('gp-foto').value=p.foto||'';
+  const fi=document.getElementById('gp-foto-info');
+  if(fi) fi.textContent=p.foto_nome?`Arquivo atual: ${p.foto_nome}`:((p.foto_b64||p.foto)?'Arquivo atual: imagem cadastrada':'Nenhum arquivo selecionado');
+  const inp=document.getElementById('gp-foto-arq');
+  if(inp) inp.value='';
   document.getElementById('gp-v30').value=p.v30||'';
 }
 async function gpDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/produtos/'+id);gToast('Excluído');gpLoad();}
-function gpClear(){gpEditId=null;['gp-sku','gp-desc','gp-emb','gp-qt','gp-custo','gp-custo-total','gp-obs','gp-eq','gp-ref','gp-foto','gp-v30'].forEach(id=>document.getElementById(id).value='');}
+function gpClear(){
+  gpEditId=null;
+  ['gp-sku','gp-desc','gp-emb','gp-qt','gp-custo','gp-custo-total','gp-obs','gp-eq','gp-ref','gp-v30'].forEach(id=>document.getElementById(id).value='');
+  const inp=document.getElementById('gp-foto-arq');
+  if(inp) inp.value='';
+  const fi=document.getElementById('gp-foto-info');
+  if(fi) fi.textContent='Nenhum arquivo selecionado';
+}
+
+document.addEventListener('change',(ev)=>{
+  if(ev.target&&ev.target.id==='gp-foto-arq'){
+    const f=ev.target.files&&ev.target.files[0];
+    const fi=document.getElementById('gp-foto-info');
+    if(fi) fi.textContent=f?`Selecionado: ${f.name}`:'Nenhum arquivo selecionado';
+  }
+});
 async function gpImport(inp){const file=inp.files[0];if(!file)return;const form=new FormData();form.append('file',file);const r=await fetch('/api/import/produtos',{method:'POST',body:form});const d=await r.json();if(d.ok){gToast(`${d.added} adicionados, ${d.updated} atualizados`);gpLoad();}else gToast('Erro: '+d.error,true);inp.value='';}
 
 // ── Notas ─────────────────────────────────────────────────────
