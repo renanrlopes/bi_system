@@ -603,6 +603,28 @@ async function loadDB(){
       EMP=fin.EMP||{};EMP_ENTRADA=fin.EMP_ENTRADA||{};EMP_TOTAL=fin.EMP_TOTAL||{};
       APORTES=fin.APORTES||{};DEV_APORTE=fin.DEV_APORTE||{};DESP=fin.DESP||{};E=fin.E||{};
     }
+
+    const n=K.length||0;
+    const normArr=(arr)=>Array.from({length:n},(_,i)=>Number((arr||[])[i]||0));
+    V={
+      rp:normArr(V.rp),ac:normArr(V.ac),txa:normArr(V.txa),tv:normArr(V.tv),re:normArr(V.re),
+      te:normArr(V.te),ca:normArr(V.ca),db:normArr(V.db),lq:normArr(V.lq),pd:normArr(V.pd),
+    };
+    K.forEach(k=>{
+      CMV[k]=Number(CMV[k]||0);
+      CMV_NF[k]=Number(CMV_NF[k]||0);
+      CMV_SN[k]=Number(CMV_SN[k]||0);
+      DEB_ML[k]=Number(DEB_ML[k]||0);
+      ENC[k]=Number(ENC[k]||0);
+      EMP[k]=Number(EMP[k]||0);
+      EMP_ENTRADA[k]=Number(EMP_ENTRADA[k]||0);
+      EMP_TOTAL[k]=Number(EMP_TOTAL[k]||0);
+      APORTES[k]=Number(APORTES[k]||0);
+      DEV_APORTE[k]=Number(DEV_APORTE[k]||0);
+      DEB_ML_DET[k]={...(DEB_ML_DET[k]||{}),recl:Number((DEB_ML_DET[k]||{}).recl||0),retido:Number((DEB_ML_DET[k]||{}).retido||0),devolv:Number((DEB_ML_DET[k]||{}).devolv||0),envio:Number((DEB_ML_DET[k]||{}).envio||0)};
+      DESP[k]={...(DESP[k]||{}),contab:Number((DESP[k]||{}).contab||0),pub:Number((DESP[k]||{}).pub||0),imp:Number((DESP[k]||{}).imp||0),tml:Number((DESP[k]||{}).tml||0),prolabore_lucas:Number((DESP[k]||{}).prolabore_lucas||0),prolabore_fellipe:Number((DESP[k]||{}).prolabore_fellipe||0),galpao:Number((DESP[k]||{}).galpao||0),frete:Number((DESP[k]||{}).frete||0)};
+      E[k]={...(E[k]||{}),lib:Number((E[k]||{}).lib||0),dr:Number((E[k]||{}).dr||0),em:Number((E[k]||{}).em||0),rb:Number((E[k]||{}).rb||0),ee:Number((E[k]||{}).ee||0),pc:Number((E[k]||{}).pc||0),demp:Number((E[k]||{}).demp||0),drc:Number((E[k]||{}).drc||0),drt:Number((E[k]||{}).drt||0),ddv:Number((E[k]||{}).ddv||0),denv:Number((E[k]||{}).denv||0),dec:Number((E[k]||{}).dec||0),dft:Number((E[k]||{}).dft||0),ddf:Number((E[k]||{}).ddf||0),pub:Number((E[k]||{}).pub||0),imp:Number((E[k]||{}).imp||0),ban:Number((E[k]||{}).ban||0),tml:Number((E[k]||{}).tml||0)};
+    });
     if(skusData&&skusData.length) SK.splice(0,SK.length,...skusData);
     if(margData&&margData.length) MARG.splice(0,MARG.length,...margData);
     if(extratoData&&Object.keys(extratoData).length){
@@ -644,28 +666,6 @@ async function loadNFFromAPI(){
   rNF();rComp();rForn();
 }
 
-M=['Jan/2026','Fev/2026','Mar/2026'];
-K=['2026-01','2026-02','2026-03'];
-V={rp:[10237.62,94233.00,104767.80],ac:[185.89,2039.25,2359.21],txa:[-185.89,-2039.25,-2359.21],tv:[-2401.73,-21120.99,-13859.08],re:[854.05,5682.23,5968.93],te:[-868.12,-6992.16,-18009.63],ca:[-580.39,-2840.38,-2656.68],db:[110.11,738.07,298.89],lq:[7351.54,69699.77,76510.23],pd:[183,1556,1737]};
-CMV={'2026-01':70511.21,'2026-02':46909.99,'2026-03':75010.14};
-CMV_NF={'2026-01':47354.29,'2026-02':23640.00,'2026-03':32541.92};
-CMV_SN={'2026-01':23156.92,'2026-02':23269.99,'2026-03':35700.22};
-DEB_ML={'2026-01':-(1461.22+440.51+164.19),'2026-02':-(2655.18+2311.20+168.92),'2026-03':-(1902.22+153.43+4918.41+372.78)};
-DEB_ML_DET={'2026-01':{recl:-1461.22,retido:-440.51,devolv:0,envio:-164.19},'2026-02':{recl:-2655.18,retido:-2311.20,devolv:0,envio:-168.92},'2026-03':{recl:-1902.22,retido:-153.43,devolv:-4918.41,envio:-372.78}};
-DESP={'2026-01':{contab:0,pub:229.96,imp:0,tml:0,prolabore_lucas:0,prolabore_fellipe:0,galpao:0},'2026-02':{contab:370,pub:7.99,imp:4105.79,tml:0,prolabore_lucas:0,prolabore_fellipe:0,galpao:0},'2026-03':{contab:0,pub:57.89,imp:4434.05,tml:40.05,prolabore_lucas:0,prolabore_fellipe:8000,galpao:567.10,frete:795.00}};
-ENC={'2026-01':0,'2026-02':2982.17,'2026-03':7588.68};
-// EMP = parcelas efetivamente pagas no mês (débito real de caixa)
-// Jan: Dinheiro Express — parcelas pagas em jan via extrato
-// Fev: Dinheiro Express — pagamento total via extrato MP
-// Mar: Dinheiro Express + Crédito Porcentagem Vendas parcelas pagas
-EMP={'2026-01':0,'2026-02':17602.42,'2026-03':11202.05};
-EMP_ENTRADA={'2026-01':13940.00,'2026-02':0,'2026-03':45569.00};
-// Totais contratuais (para exibição informativa)
-EMP_TOTAL={'2026-01':17602.42,'2026-02':17602.42,'2026-03':69115.32};
-// APORTES — não entram no resultado operacional
-APORTES={'2026-01':83647.33,'2026-02':60,'2026-03':400.00};
-DEV_APORTE={'2026-01':14200.00,'2026-02':8872.79,'2026-03':0};
-E={'2026-01':{lib:7676.49,dr:567.60,em:179.20,rb:1020.47,ee:13940.00,pc:83.14,demp:0,drc:-1461.22,drt:-440.51,ddv:0,denv:-164.19,dec:-16.82,dft:0,ddf:0,pub:-229.96,imp:0,ban:0,tml:0},'2026-02':{lib:40803.40,dr:1695.94,em:419.18,rb:960.30,ee:0,pc:0,demp:-17602.42,drc:-2655.18,drt:-2311.20,ddv:0,denv:-168.92,dec:0,dft:-2982.17,ddf:-25.82,pub:-7.99,imp:-4105.79,ban:0,tml:0},'2026-03':{lib:51474.57,dr:1928.53,em:314.31,rb:62933.72,ee:45569.00,pc:598.82,demp:0,drc:-1902.22,drt:-1811.11,ddv:-3107.30,denv:-372.78,dec:-153.43,dft:-7588.68,ddf:0,pub:-57.89,imp:-4434.05,ban:0,tml:-41.55}};
 const CP=[
   {d:'09/01',n:'6318',f:'KLOOS DISTRIBUIDORA DE MATERIAIS LTDA',v:21421.08,m:'2026-01',t:'cmv',sn:0},
   {d:'16/01',n:'23909',f:'MOHNISH IMPORTS LTDA',v:14862.30,m:'2026-01',t:'cmv',nf:7855.82,sn:7006.48},
@@ -852,11 +852,27 @@ function rc(){rDRE();rOV();}
 
 // KPI APORTES
 function rApo(){
+  const socios={};
+  (apList||[]).forEach(a=>{
+    const nome=(a.socio||'Não informado').trim()||'Não informado';
+    const val=Number(a.valor||0);
+    if(!socios[nome]) socios[nome]={ent:0,dev:0};
+    if(a.tipo==='devolucao') socios[nome].dev+=val;
+    else socios[nome].ent+=val;
+  });
+  const saldoSocios=Object.entries(socios)
+    .map(([nome,s])=>({nome,saldo:s.ent-s.dev}))
+    .sort((a,b)=>Math.abs(b.saldo)-Math.abs(a.saldo));
+  const top1=saldoSocios[0]||{nome:'Sem lançamentos',saldo:0};
+  const top2=saldoSocios[1]||{nome:'Sem lançamentos',saldo:0};
+  const empEntrada=(emList||[]).reduce((a,e)=>a+Number(e.valor||0),0);
+  const totalAportes=(apList||[]).reduce((a,x)=>a+(x.tipo==='devolucao'?-1:1)*Number(x.valor||0),0);
+
   document.getElementById('kpi-apo').innerHTML=`
-    <div class="kc cb"><div class="kl">Lucas Cristiano Pereira</div><div class="kv" style="color:var(--b)">R$&nbsp;31.800,00</div><div class="ks">Líquido na operação · Jan/2026</div></div>
-    <div class="kc cp"><div class="kl">Fellipe Genestra Delfino</div><div class="kv" style="color:var(--p)">R$&nbsp;29.234,54</div><div class="ks">Líquido após devolução · Jan–Fev/2026</div></div>
-    <div class="kc co"><div class="kl">Empréstimo ML Pago</div><div class="kv" style="color:var(--o)">R$&nbsp;13.940,00</div><div class="ks">Jan/2026</div></div>
-    <div class="kc ct"><div class="kl">Capital total injetado</div><div class="kv" style="color:var(--tl)">R$&nbsp;74.974,54</div><div class="ks">Saldo consolidado</div></div>`;
+    <div class="kc cb"><div class="kl">${top1.nome}</div><div class="kv" style="color:var(--b)">${fn(top1.saldo)}</div><div class="ks">Saldo líquido de aportes</div></div>
+    <div class="kc cp"><div class="kl">${top2.nome}</div><div class="kv" style="color:var(--p)">${fn(top2.saldo)}</div><div class="ks">Saldo líquido de aportes</div></div>
+    <div class="kc co"><div class="kl">Entradas de empréstimo</div><div class="kv" style="color:var(--o)">${f(empEntrada)}</div><div class="ks">Total dos lançamentos</div></div>
+    <div class="kc ct"><div class="kl">Capital líquido injetado</div><div class="kv" style="color:var(--tl)">${fn(totalAportes)}</div><div class="ks">Aportes - devoluções</div></div>`;
 }
 
 // EXTRATO
@@ -998,7 +1014,9 @@ function buildCharts(){
   const mrgs=rt.map((r,i)=>(lcs[i]/r*100).toFixed(1));
   new Chart(document.getElementById('ch-mg'),{type:'bar',data:{labels:M,datasets:[{label:'Margem',data:mrgs,backgroundColor:mrgs.map(v=>v>=0?'rgba(0,229,160,0.7)':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y+'%'}}},scales:{x:axX,y:{ticks:{color:'#7a7f8e',font:{size:10},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   // Aportes chart
-  new Chart(document.getElementById('ch-apo'),{type:'bar',data:{labels:['Lucas','Fellipe (bruto)','Fellipe (dev.)','Empréstimo ML'],datasets:[{label:'Valor',data:[31800,38107.33,-8872.79,13940],backgroundColor:['rgba(59,130,246,0.6)','rgba(167,139,250,0.6)','rgba(244,63,94,0.6)','rgba(251,146,60,0.6)'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fn(ctx.parsed.y)}}},scales:{x:axX,y:ax}}});
+  const apRec=K.map(k=>Number(APORTES[k]||0));
+  const apDev=K.map(k=>-Math.abs(Number(DEV_APORTE[k]||0)));
+  new Chart(document.getElementById('ch-apo'),{type:'bar',data:{labels:M,datasets:[{label:'Aportes',data:apRec,backgroundColor:'rgba(59,130,246,0.6)',borderRadius:4,stack:'apo'},{label:'Devoluções',data:apDev,backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'apo'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fn(ctx.parsed.y)}}},scales:{x:axX,y:ax}}});
   // Extrato charts
   new Chart(document.getElementById('ch-eb'),{type:'bar',data:{labels:M,datasets:[{label:'Entradas',data:K.map(k=>{const e=E[k];return e.lib+e.dr+e.em+e.rb+e.ee}),backgroundColor:'#00e5a0',borderRadius:4},{label:'Saídas',data:K.map(k=>{const e=E[k];return Math.abs(e.demp+e.drc+e.drt+(e.ddv||0)+e.denv+(e.dec||0)+e.dft+(e.ddf||0)+e.pub+e.imp+e.tml)}),backgroundColor:'#f43f5e',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
   const sd=K.reduce((a,k)=>({emp:a.emp+Math.abs(E[k].demp||0),rc:a.rc+Math.abs(E[k].drc)+Math.abs(E[k].drt)+Math.abs(E[k].ddv||0),env:a.env+Math.abs(E[k].denv),fat:a.fat+Math.abs(E[k].dft)+Math.abs(E[k].ddf||0),imp:a.imp+Math.abs(E[k].imp),pub:a.pub+Math.abs(E[k].pub)}),{emp:0,rc:0,env:0,fat:0,imp:0,pub:0});
@@ -1698,7 +1716,7 @@ function nf2Filter(f){nf2F=f;['all','cmv','dp'].forEach(k=>{const el=document.ge
 
 // ── Aportes ───────────────────────────────────────────────────
 let apList=[], emList=[];
-async function apLoad(){apList=await fetch('/api/aportes').then(r=>r.json());apRender();}
+async function apLoad(){apList=await fetch('/api/aportes').then(r=>r.json());apRender();rApo();}
 function apRender(){
   document.getElementById('ap-tb').innerHTML=apList.length?apList.map(a=>`
     <tr><td class="dt">${a.data||''}</td><td style="font-size:12px">${(a.socio||'').split(' ')[0]}</td>
@@ -1717,7 +1735,7 @@ async function apSave(){
 }
 async function apDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/aportes/'+id);gToast('Excluído');apLoad();}
 
-async function emLoad(){emList=await fetch('/api/emprestimos').then(r=>r.json());emRender();}
+async function emLoad(){emList=await fetch('/api/emprestimos').then(r=>r.json());emRender();rApo();}
 function emRender(){
   document.getElementById('em-tb').innerHTML=emList.length?emList.map(e=>`
     <tr><td class="dt">${e.data||''}</td><td style="font-size:12px">${e.descricao||''}</td>
