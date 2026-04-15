@@ -500,6 +500,8 @@ def add_nota_with_pdf():
         'data': (request.form.get('data') or '').strip(),
         'numero': (request.form.get('numero') or '').strip(),
         'fornecedor': fornecedor,
+        'item': (request.form.get('item') or '').strip(),
+        'cod_ncm': (request.form.get('cod_ncm') or '').strip(),
         'valor': valor,
         'valor_nf': float(request.form.get('valor_nf') or 0),
         'valor_sn': float(request.form.get('valor_sn') or 0),
@@ -695,6 +697,81 @@ def import_produtos():
                 updated += 1
         save('produtos', produtos)
         log_action('import.produtos', f'{added} add, {updated} upd')
+        return jsonify({'ok': True, 'added': added, 'updated': updated})
+    except Exception as e:
+        return jsonify({'ok': False, 'error': str(e)}), 400
+
+
+@app.route('/api/import/notas_item_ncm', methods=['POST'])
+@editor_required
+def import_notas_item_ncm():
+    try:
+        import pandas as pd
+
+        f = request.files.get('file')
+        if not f:
+            return jsonify({'ok': False, 'error': 'Arquivo não enviado'}), 400
+
+        df = pd.read_excel(io.BytesIO(f.read()))
+        if df.empty:
+            return jsonify({'ok': False, 'error': 'Planilha vazia'}), 400
+
+        cols = {str(c).strip().lower(): c for c in df.columns}
+
+        item_key = next((k for k in cols if k in ('item', 'itens', 'produto', 'descricao', 'descrição')), None)
+        ncm_key = next((k for k in cols if k in ('cod ncm', 'codigo ncm', 'código ncm', 'ncm', 'cod_ncm')), None)
+
+        if not item_key or not ncm_key:
+            return jsonify({'ok': False, 'error': 'Colunas esperadas: ITEM e COD NCM'}), 400
+
+        item_col = cols[item_key]
+        ncm_col = cols[ncm_key]
+
+        notas = load('notas', default=[])
+        added = 0
+        updated = 0
+
+        for _, row in df.iterrows():
+            item = str(row.get(item_col) or '').strip()
+            cod_ncm = str(row.get(ncm_col) or '').strip()
+
+            if item.lower() == 'nan':
+                item = ''
+            if cod_ncm.lower() == 'nan':
+                cod_ncm = ''
+
+            if not item and not cod_ncm:
+                continue
+
+            existing = next((n for n in notas if str(n.get('item') or '').strip().lower() == item.lower()), None)
+            if existing:
+                before = (str(existing.get('cod_ncm') or '').strip(), str(existing.get('item') or '').strip())
+                existing['item'] = item
+                existing['cod_ncm'] = cod_ncm
+                if not str(existing.get('fornecedor') or '').strip():
+                    existing['fornecedor'] = item
+                after = (str(existing.get('cod_ncm') or '').strip(), str(existing.get('item') or '').strip())
+                if before != after:
+                    updated += 1
+                continue
+
+            notas.append({
+                'id': int(datetime.now().timestamp() * 1000) + added,
+                'data': '',
+                'numero': '',
+                'fornecedor': item,
+                'item': item,
+                'cod_ncm': cod_ncm,
+                'valor': 0,
+                'valor_nf': 0,
+                'valor_sn': 0,
+                'tipo': 'cmv',
+                'obs': 'Importado de planilha ITEM/COD NCM',
+            })
+            added += 1
+
+        save('notas', notas)
+        log_action('import.notas_item_ncm', f'{added} add, {updated} upd')
         return jsonify({'ok': True, 'added': added, 'updated': updated})
     except Exception as e:
         return jsonify({'ok': False, 'error': str(e)}), 400
