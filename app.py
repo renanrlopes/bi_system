@@ -865,6 +865,34 @@ def import_notas_item_ncm():
 
         data_col = next((orig for nrm, orig in normalized_cols if nrm in date_aliases), None)
 
+        # Fallback para planilhas com colunas sem cabecalho (ex.: Unnamed: 6 / Unnamed: 7).
+        if not item_col or not ncm_col:
+            unnamed_cols = [orig for _, orig in normalized_cols if str(orig).strip().lower().startswith('unnamed')]
+            if len(unnamed_cols) >= 2:
+                sample = df.head(300)
+                scored = []
+                for col in unnamed_cols:
+                    vals = [_cell_text(v) for v in sample[col].tolist()]
+                    non_empty = [v for v in vals if v]
+                    ncm_hits = sum(1 for v in non_empty if _is_ncm_like(v))
+                    text_hits = sum(
+                        1 for v in non_empty
+                        if any(ch.isalpha() for ch in v) and not _looks_like_date_text(v) and not _looks_like_supplier_name(v)
+                    )
+                    scored.append({'col': col, 'ncm_hits': ncm_hits, 'text_hits': text_hits, 'non_empty': len(non_empty)})
+
+                if not ncm_col:
+                    best_ncm = max(scored, key=lambda c: (c['ncm_hits'], c['non_empty']))
+                    if best_ncm['ncm_hits'] > 0:
+                        ncm_col = best_ncm['col']
+
+                if not item_col:
+                    item_candidates = [c for c in scored if c['col'] != ncm_col]
+                    if item_candidates:
+                        best_item = max(item_candidates, key=lambda c: (c['text_hits'], c['non_empty']))
+                        if best_item['text_hits'] > 0:
+                            item_col = best_item['col']
+
         if not item_col or not ncm_col:
             encontrados = ', '.join([str(c) for c in df.columns])
             return jsonify({
