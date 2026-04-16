@@ -863,16 +863,10 @@ def import_notas_item_ncm():
         if not file_bytes:
             return jsonify({'ok': False, 'error': 'Arquivo vazio'}), 400
 
-        df = pd.read_excel(io.BytesIO(file_bytes))
-        if df.empty:
-            return jsonify({'ok': False, 'error': 'Planilha vazia'}), 400
-
         def _norm_col(name):
             raw = str(name or '').strip().lower()
             raw = unicodedata.normalize('NFKD', raw).encode('ascii', 'ignore').decode('ascii')
             return re.sub(r'[^a-z0-9]+', '', raw)
-
-        normalized_cols = [(_norm_col(c), c) for c in df.columns]
 
         item_aliases = {
             'item', 'itens', 'produto', 'produtos', 'descricao',
@@ -887,25 +881,72 @@ def import_notas_item_ncm():
             'data', 'date', 'dt', 'dtemissao', 'emissao', 'dataemissao',
             'datanota', 'datafiscal', 'datadocumento'
         }
+
+        xls = pd.ExcelFile(io.BytesIO(file_bytes))
+
+        def _try_extract_from_sheet(sheet_name):
+            # Tentativa 1: cabecalho na linha 1 da aba.
+            df0 = pd.read_excel(xls, sheet_name=sheet_name)
+            if not df0.empty:
+                cols0 = [(_norm_col(c), c) for c in df0.columns]
+                item0 = next((orig for nrm, orig in cols0 if nrm in item_aliases), None)
+                ncm0 = next((orig for nrm, orig in cols0 if nrm in ncm_aliases), None)
+                data0 = next((orig for nrm, orig in cols0 if nrm in date_aliases), None)
+                if item0 and ncm0:
+                    return df0, item0, ncm0, data0, 0
+
+            # Tentativa 2: cabecalho deslocado em alguma linha.
+            df_raw = pd.read_excel(xls, sheet_name=sheet_name, header=None)
+            if df_raw.empty:
+                return None
+            max_scan = min(len(df_raw.index), 50)
+            for ridx in range(max_scan):
+                row_vals = [(_norm_col(v), cidx) for cidx, v in enumerate(df_raw.iloc[ridx].tolist())]
+                cand_item = next((cidx for nrm, cidx in row_vals if nrm in item_aliases), None)
+                cand_ncm = next((cidx for nrm, cidx in row_vals if nrm in ncm_aliases), None)
+                cand_date = next((cidx for nrm, cidx in row_vals if nrm in date_aliases), None)
+                if cand_item is not None and cand_ncm is not None and cand_item != cand_ncm:
+                    df_fixed = pd.DataFrame({
+                        'ITEM': df_raw.iloc[ridx + 1:, cand_item].tolist(),
+                        'COD NCM': df_raw.iloc[ridx + 1:, cand_ncm].tolist(),
+                    })
+                    if cand_date is not None:
+                        df_fixed['DATA_TMP'] = df_raw.iloc[ridx + 1:, cand_date].tolist()
+                        data_col_local = 'DATA_TMP'
+                    else:
+                        data_col_local = None
+                    return df_fixed, 'ITEM', 'COD NCM', data_col_local, ridx
+            return None
+
+        selected_sheet = None
+        selected_header_row = 0
+        df = None
+        item_col = None
+        ncm_col = None
+        data_col = None
+
+        for s in xls.sheet_names:
+            result = _try_extract_from_sheet(s)
+            if not result:
+                continue
+            df_candidate, item_candidate, ncm_candidate, data_candidate, header_row_candidate = result
+            if df_candidate is None or df_candidate.empty:
+                continue
+            df = df_candidate
+            item_col = item_candidate
+            ncm_col = ncm_candidate
+            data_col = data_candidate
+            selected_sheet = s
+            selected_header_row = header_row_candidate
+            break
+
+        if df is None or df.empty:
+            return jsonify({
+                'ok': False,
+                'error': f'Planilha vazia ou sem dados utilizáveis. Abas encontradas: {", ".join([str(s) for s in xls.sheet_names])}',
+            }), 400
         
-        # Tenta identificar ITEM/NCM nas colunas Unnamed lendo os primeiros valores
-        if not item_col or not ncm_col:
-            unnamed_cols = [c for c in df.columns if str(c).startswith('Unnamed')]
-            for ucol in unnamed_cols:
-                sample = df[ucol].dropna().astype(str).head(20).tolist()
-                # Coluna de item: tem textos com letras e comprimento > 4
-                if not item_col and any(len(v) > 4 and any(ch.isalpha() for ch in v) for v in sample):
-                    # Confirma que não é coluna de data nem número puro
-                    non_date_non_num = [v for v in sample
-                                        if not re.fullmatch(r'\d{1,2}[/\-]\d{1,2}[/\-]\d{2,4}', v)
-                                        and not re.fullmatch(r'[\d.,]+', v)
-                                        and len(v) > 5]
-                    if len(non_date_non_num) >= 3:
-                        item_col = ucol
-                        continue
-                # Coluna de NCM: valores com 6–10 dígitos numéricos
-                if not ncm_col and any(re.fullmatch(r'\d{6,10}', re.sub(r'\D', '', v)) for v in sample):
-                    ncm_col = ucol
+        
 
         def _cell_text(v):
             if pd.isna(v):
@@ -942,51 +983,11 @@ def import_notas_item_ncm():
             )
             return any(tok in f' {s} ' for tok in supplier_tokens)
 
-        item_col = next((orig for nrm, orig in normalized_cols if nrm in item_aliases), None)
-        ncm_col = next((orig for nrm, orig in normalized_cols if nrm in ncm_aliases), None)
-
-        data_col = next((orig for nrm, orig in normalized_cols if nrm in date_aliases), None)
-
         if not item_col or not ncm_col:
-            # Fallback: procura linha real de cabecalho dentro da planilha.
-            df_raw = pd.read_excel(io.BytesIO(file_bytes), header=None)
-            header_row = None
-            idx_item = None
-            idx_ncm = None
-            idx_date = None
-
-            max_scan = min(len(df_raw.index), 30)
-            for ridx in range(max_scan):
-                row_vals = [(_norm_col(v), cidx) for cidx, v in enumerate(df_raw.iloc[ridx].tolist())]
-                cand_item = next((cidx for nrm, cidx in row_vals if nrm in item_aliases), None)
-                cand_ncm = next((cidx for nrm, cidx in row_vals if nrm in ncm_aliases), None)
-                cand_date = next((cidx for nrm, cidx in row_vals if nrm in date_aliases), None)
-                if cand_item is not None and cand_ncm is not None and cand_item != cand_ncm:
-                    header_row = ridx
-                    idx_item = cand_item
-                    idx_ncm = cand_ncm
-                    idx_date = cand_date
-                    break
-
-            if header_row is not None:
-                df_fixed = pd.DataFrame({
-                    'ITEM': df_raw.iloc[header_row + 1:, idx_item].tolist(),
-                    'COD NCM': df_raw.iloc[header_row + 1:, idx_ncm].tolist(),
-                })
-                if idx_date is not None:
-                    df_fixed['DATA_TMP'] = df_raw.iloc[header_row + 1:, idx_date].tolist()
-                    data_col = 'DATA_TMP'
-                else:
-                    data_col = None
-                df = df_fixed
-                item_col = 'ITEM'
-                ncm_col = 'COD NCM'
-            else:
-                encontrados = ', '.join([str(c) for c in df.columns])
-                return jsonify({
-                    'ok': False,
-                    'error': f'Não consegui identificar ITEM e COD NCM de forma segura. Renomeie as colunas para ITEM e COD NCM (exatos). Cabeçalhos encontrados: {encontrados}',
-                }), 400
+            return jsonify({
+                'ok': False,
+                'error': f'Não consegui identificar ITEM e COD NCM em nenhuma aba. Abas encontradas: {", ".join([str(s) for s in xls.sheet_names])}',
+            }), 400
 
         # Sempre substitui para evitar mistura com base antiga em deploys com frontend defasado.
         replace_mode = True
@@ -1103,6 +1104,8 @@ def import_notas_item_ncm():
             'item_col': str(item_col),
             'ncm_col': str(ncm_col),
             'data_col': str(data_col) if data_col else '',
+            'sheet': str(selected_sheet) if selected_sheet else '',
+            'header_row': int(selected_header_row),
         })
     except Exception as e:
         return jsonify({'ok': False, 'error': str(e)}), 400
