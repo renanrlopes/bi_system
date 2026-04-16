@@ -1075,7 +1075,8 @@ loadDB(); loadNFFromAPI();
 <div class="pg" id="page-g-notas">
   <div class="sh"><div class="st">Notas Fiscais</div></div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-bottom:14px">
-    <div class="ct">Lançar nova nota</div>
+    <div class="ct" id="nf2-mode-title">Cadastro e edição de nota</div>
+    <p style="font-size:12px;color:var(--mu);margin:4px 0 12px">Você pode importar ITEM + COD NCM em lote e depois editar os detalhes de cada nota nesta tela.</p>
     <div class="form-grid-3" style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="nf2-data" type="date" class="dinp"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Número NF</div><input id="nf2-num" class="dinp" placeholder="Ex: 12534"></div>
@@ -1094,7 +1095,8 @@ loadDB(); loadNFFromAPI();
     <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">PDF da nota (opcional)</div><input id="nf2-pdf" type="file" accept="application/pdf,.pdf" class="dinp" style="padding:6px"></div>
     <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Observação</div><input id="nf2-obs" class="dinp" placeholder="Opcional"></div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <button onclick="nf2Save()" class="cbtn">Lançar nota</button>
+      <button onclick="nf2Save()" class="cbtn" id="nf2-save-btn">Salvar nota</button>
+      <button onclick="nf2CancelEdit()" id="nf2-cancel-btn" style="display:none;padding:8px 14px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:13px;font-family:var(--fb)">Cancelar edição</button>
       <label style="font-size:12px;color:var(--g);cursor:pointer;padding:8px 14px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.25);border-radius:var(--rs)">
         Importar ITEM + COD NCM (.xlsx)
         <input type="file" accept=".xlsx" style="display:none" onchange="nf2ImportItemNcm(this)">
@@ -1226,6 +1228,12 @@ function finField(label,path,val,type='number'){
   </div>`;
 }
 
+    </div>
+
+    <div style="height:1px;background:var(--bdr);margin:14px 0"></div>
+    <div class="ct" style="font-size:14px">Importação rápida de ITEM + COD NCM</div>
+    <p style="font-size:12px;color:var(--mu);margin:4px 0 10px">Este importador apenas complementa notas já existentes. Ele não cria nova nota fiscal.</p>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
 function finMonthGrid(fields){
   const months=M.length?M:['Jan','Fev','Mar'];
   let html=`<div style="display:grid;grid-template-columns:180px ${months.map(()=>'1fr').join(' ')};gap:8px;align-items:center;margin-bottom:4px">
@@ -1467,11 +1475,12 @@ async function gpImport(inp){const file=inp.files[0];if(!file)return;const form=
 
 // �"?�"? Notas �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 let nf2List=[], nf2F='all';
+let nf2EditId=null;
 async function nf2Load(){nf2List=await fetch('/api/notas').then(r=>r.json());nf2Render();}
 function nf2Render(){
   const lista=nf2F==='all'?nf2List:nf2List.filter(n=>n.tipo===nf2F);
   document.getElementById('nf2-tb').innerHTML=lista.length?lista.map(n=>`
-    <tr><td class="dt">${(n.data||'').slice(8)}/${(n.data||'').slice(5,7)}</td>
+    <tr><td class="dt">${n.data?`${(n.data||'').slice(8)}/${(n.data||'').slice(5,7)}`:'—'}</td>
     <td style="font-family:var(--fm);font-size:11px">${n.numero||''}</td>
     <td style="font-size:12px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n.fornecedor||''}</td>
     <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${n.item||''}">${n.item||'—'}</td>
@@ -1481,7 +1490,10 @@ function nf2Render(){
     <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;background:${n.tipo==='cmv'?'rgba(0,229,160,.12)':'rgba(245,158,11,.12)'};color:${n.tipo==='cmv'?'var(--g)':'var(--am)'}">${n.tipo==='cmv'?'CMV':'Desp'}</span></td>
     <td>${n.has_pdf?`<button onclick="nf2OpenPdf(${n.id})" style="padding:3px 8px;background:rgba(59,130,246,.12);color:var(--b);border:1px solid rgba(59,130,246,.3);border-radius:5px;cursor:pointer;font-size:11px">Abrir</button>`:'—'}</td>
     <td style="font-size:11px;color:var(--mu)">${n.obs||''}</td>
-    <td style="text-align:right"><button onclick="nf2Del(${n.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">Excluir</button></td></tr>`).join('')
+    <td style="text-align:right">
+      <button onclick="nf2Edit(${n.id})" style="padding:3px 8px;background:var(--bg3);color:var(--tx);border:1px solid var(--bdr);border-radius:5px;cursor:pointer;font-size:11px;margin-right:3px">Editar</button>
+      <button onclick="nf2Del(${n.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">Excluir</button>
+    </td></tr>`).join('')
     :'<tr><td colspan="12" style="text-align:center;color:var(--mu);padding:20px">Nenhuma nota</td></tr>';
   const tot=lista.reduce((a,n)=>a+(n.valor||0),0);
   document.getElementById('nf2-ft').textContent=lista.length?`Total: R$ ${tot.toLocaleString('pt-BR',{minimumFractionDigits:2})} (${lista.length} notas)`:'';
@@ -1490,6 +1502,17 @@ async function nf2Save(){
   const d={data:document.getElementById('nf2-data').value,numero:document.getElementById('nf2-num').value.trim(),fornecedor:document.getElementById('nf2-forn').value.trim(),valor:parseFloat(document.getElementById('nf2-val').value)||0,valor_nf:parseFloat(document.getElementById('nf2-nf').value)||0,valor_sn:parseFloat(document.getElementById('nf2-sn').value)||0,tipo:document.getElementById('nf2-tipo').value,item:document.getElementById('nf2-item').value.trim(),cod_ncm:document.getElementById('nf2-ncm').value.trim(),obs:document.getElementById('nf2-obs').value.trim()};
   const pdfInput=document.getElementById('nf2-pdf');
   const pdfFile=pdfInput&&pdfInput.files?pdfInput.files[0]:null;
+  if(nf2EditId){
+    const r=await gAPI('PUT','/api/notas/'+nf2EditId,d);
+    if(!r.ok)return gToast(r.error||'Erro ao atualizar nota',true);
+    gToast('Nota atualizada!');
+    nf2CancelEdit();
+    nf2Load();
+    return;
+  }
+
+  if(!d.data)return gToast('Informe a data da nota',true);
+  if(!d.numero)return gToast('Informe o número da NF',true);
   if(!d.fornecedor)return gToast('Informe o fornecedor',true);
   if(!d.valor)return gToast('Informe o valor',true);
   if(pdfFile){
@@ -1502,10 +1525,45 @@ async function nf2Save(){
   }else{
     await gAPI('POST','/api/notas',d);
   }
-  gToast('Nota lançada!');
-  ['nf2-data','nf2-num','nf2-forn','nf2-val','nf2-nf','nf2-sn','nf2-item','nf2-ncm','nf2-obs'].forEach(id=>document.getElementById(id).value='');
-  if(pdfInput)pdfInput.value='';
+  gToast('Nota cadastrada!');
+  nf2ClearForm();
   nf2Load();
+}
+function nf2Edit(id){
+  const n=nf2List.find(x=>x.id===id);
+  if(!n)return;
+  nf2EditId=id;
+  document.getElementById('nf2-data').value=n.data||'';
+  document.getElementById('nf2-num').value=n.numero||'';
+  document.getElementById('nf2-forn').value=n.fornecedor||'';
+  document.getElementById('nf2-val').value=n.valor||'';
+  document.getElementById('nf2-nf').value=n.valor_nf||'';
+  document.getElementById('nf2-sn').value=n.valor_sn||'';
+  document.getElementById('nf2-tipo').value=n.tipo||'cmv';
+  document.getElementById('nf2-item').value=n.item||'';
+  document.getElementById('nf2-ncm').value=n.cod_ncm||'';
+  document.getElementById('nf2-obs').value=n.obs||'';
+  const saveBtn=document.getElementById('nf2-save-btn');
+  const cancelBtn=document.getElementById('nf2-cancel-btn');
+  const title=document.getElementById('nf2-mode-title');
+  if(saveBtn)saveBtn.textContent='Salvar edição';
+  if(cancelBtn)cancelBtn.style.display='inline-flex';
+  if(title)title.textContent='Editando nota fiscal';
+}
+function nf2ClearForm(){
+  ['nf2-data','nf2-num','nf2-forn','nf2-val','nf2-nf','nf2-sn','nf2-item','nf2-ncm','nf2-obs'].forEach(id=>document.getElementById(id).value='');
+  const pdfInput=document.getElementById('nf2-pdf');
+  if(pdfInput)pdfInput.value='';
+}
+function nf2CancelEdit(){
+  nf2EditId=null;
+  nf2ClearForm();
+  const saveBtn=document.getElementById('nf2-save-btn');
+  const cancelBtn=document.getElementById('nf2-cancel-btn');
+  const title=document.getElementById('nf2-mode-title');
+  if(saveBtn)saveBtn.textContent='Salvar nota';
+  if(cancelBtn)cancelBtn.style.display='none';
+  if(title)title.textContent='Cadastro e edição de nota';
 }
 async function nf2Del(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/notas/'+id);gToast('Excluída');nf2Load();}
 function nf2OpenPdf(id){window.open('/api/notas/'+id+'/pdf','_blank');}
@@ -1518,7 +1576,7 @@ async function nf2ImportItemNcm(inp){
   const r=await fetch('/api/import/notas_item_ncm',{method:'POST',body:form});
   const d=await r.json();
   if(d.ok){
-    gToast(`Importação concluída: ${d.added} novos, ${d.updated} atualizados`);
+    gToast(`Importação concluída: ${d.added} novas, ${d.updated} atualizadas`);
     nf2Load();
   }else{
     gToast(d.error||'Erro ao importar ITEM/COD NCM',true);

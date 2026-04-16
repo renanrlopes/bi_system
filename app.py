@@ -460,11 +460,29 @@ def get_notas():
 @app.route('/api/notas', methods=['POST'])
 @editor_required
 def add_nota():
-    ok, msg = _require_json_object(request.json, fields=['fornecedor', 'valor'])
+    ok, msg = _require_json_object(request.json, fields=['data', 'numero', 'fornecedor', 'valor'])
     if not ok:
         return jsonify({'ok': False, 'error': msg}), 400
+
+    data = str(request.json.get('data') or '').strip()
+    numero = str(request.json.get('numero') or '').strip()
+    fornecedor = str(request.json.get('fornecedor') or '').strip()
+    try:
+        valor = float(request.json.get('valor') or 0)
+    except (TypeError, ValueError):
+        valor = 0
+
+    if not data:
+        return jsonify({'ok': False, 'error': 'Data é obrigatória'}), 400
+    if not numero:
+        return jsonify({'ok': False, 'error': 'Número da NF é obrigatório'}), 400
+    if not fornecedor:
+        return jsonify({'ok': False, 'error': 'Fornecedor é obrigatório'}), 400
+    if valor <= 0:
+        return jsonify({'ok': False, 'error': 'Valor deve ser maior que zero'}), 400
+
     notas = load('notas')
-    d = {**request.json, 'id': int(datetime.now().timestamp()*1000)}
+    d = {**request.json, 'id': int(datetime.now().timestamp()*1000), 'data': data, 'numero': numero, 'fornecedor': fornecedor, 'valor': valor}
     notas.append(d)
     save('notas', notas)
     log_action('nota.add', f"NF {d.get('numero','')} {d.get('fornecedor','')}")
@@ -474,8 +492,14 @@ def add_nota():
 @app.route('/api/notas/upload', methods=['POST'])
 @editor_required
 def add_nota_with_pdf():
+    data = (request.form.get('data') or '').strip()
+    numero = (request.form.get('numero') or '').strip()
     fornecedor = (request.form.get('fornecedor') or '').strip()
     valor = float(request.form.get('valor') or 0)
+    if not data:
+        return jsonify({'ok': False, 'error': 'Data é obrigatória'}), 400
+    if not numero:
+        return jsonify({'ok': False, 'error': 'Número da NF é obrigatório'}), 400
     if not fornecedor:
         return jsonify({'ok': False, 'error': 'Fornecedor é obrigatório'}), 400
     if valor <= 0:
@@ -497,8 +521,8 @@ def add_nota_with_pdf():
 
     d = {
         'id': int(datetime.now().timestamp() * 1000),
-        'data': (request.form.get('data') or '').strip(),
-        'numero': (request.form.get('numero') or '').strip(),
+        'data': data,
+        'numero': numero,
         'fornecedor': fornecedor,
         'item': (request.form.get('item') or '').strip(),
         'cod_ncm': (request.form.get('cod_ncm') or '').strip(),
@@ -536,6 +560,35 @@ def get_nota_pdf(nid):
         as_attachment=False,
         download_name=filename,
     )
+
+@app.route('/api/notas/<int:nid>', methods=['PUT'])
+@editor_required
+def update_nota(nid):
+    ok, msg = _require_json_object(request.json)
+    if not ok:
+        return jsonify({'ok': False, 'error': msg}), 400
+
+    notas = load('notas', default=[])
+    nota = _find_nota(notas, nid)
+    if not nota:
+        return jsonify({'ok': False, 'error': 'Nota não encontrada'}), 404
+
+    payload = dict(request.json or {})
+    for field in ('data', 'numero', 'fornecedor', 'item', 'cod_ncm', 'obs', 'tipo'):
+        if field in payload:
+            payload[field] = str(payload.get(field) or '').strip()
+
+    for field in ('valor', 'valor_nf', 'valor_sn'):
+        if field in payload:
+            try:
+                payload[field] = float(payload.get(field) or 0)
+            except (TypeError, ValueError):
+                return jsonify({'ok': False, 'error': f'Valor inválido em {field}'}), 400
+
+    nota.update(payload)
+    save('notas', notas)
+    log_action('nota.update', f"NF {nota.get('numero','')} {nota.get('fornecedor','')}")
+    return jsonify({'ok': True, 'nota': _nota_public(nota)})
 
 @app.route('/api/notas/<int:nid>', methods=['DELETE'])
 @editor_required
