@@ -343,6 +343,60 @@ def _sanitize_notas_remove_legacy(notas: list):
     return clean, removed
 
 
+def _sanitize_notas_invalid_catalog_rows(notas: list):
+    """Remove linhas inválidas oriundas do importador ITEM/COD NCM."""
+    if not isinstance(notas, list):
+        return notas, 0
+
+    finance_tokens = (
+        'PGTO', 'PAGTO', 'A VISTA', 'NOTA EMITIDA', 'CONTABILIDADE',
+        'MATERIAL DE ESCRITORIO', 'CHAVE DE ACESSO', 'NF EMITIDA'
+    )
+    supplier_tokens = (
+        ' LTDA', ' EIRELI', ' S/A', ' SA ', ' MEI', ' ME ', ' EPP',
+        ' IMPORTACAO', ' IMPORTS', ' DISTRIBUIDORA', ' COMERCIO',
+        ' SERVICOS', ' CONTABEIS'
+    )
+
+    def norm_txt(v):
+        return re.sub(r'\s+', ' ', str(v or '').strip()).upper()
+
+    def is_catalog_import_row(n):
+        obs = norm_txt((n or {}).get('obs'))
+        return 'IMPORTADO DE PLANILHA ITEM/COD NCM' in obs
+
+    def looks_invalid_item(item_norm):
+        if not item_norm:
+            return True
+        if any(tok in item_norm for tok in finance_tokens):
+            return True
+        if any(tok in f' {item_norm} ' for tok in supplier_tokens):
+            return True
+        # apenas números (ex.: 52010, 12112) não é item válido
+        if re.fullmatch(r'\d+', item_norm):
+            return True
+        # precisa ter pelo menos uma letra para ser descrição de item
+        if not any(ch.isalpha() for ch in item_norm):
+            return True
+        return False
+
+    def looks_invalid_ncm(ncm_raw):
+        digits = re.sub(r'\D+', '', str(ncm_raw or ''))
+        return len(digits) != 8
+
+    clean = []
+    removed = 0
+    for n in notas:
+        if is_catalog_import_row(n):
+            item_norm = norm_txt((n or {}).get('item'))
+            ncm_raw = (n or {}).get('cod_ncm')
+            if looks_invalid_item(item_norm) or looks_invalid_ncm(ncm_raw):
+                removed += 1
+                continue
+        clean.append(n)
+    return clean, removed
+
+
 def _build_skus_from_produtos():
     produtos = load('produtos', default=[])
     return [
@@ -489,6 +543,11 @@ def delete_produto(pid):
 @login_required
 def get_notas():
     notas = load('notas', default=[])
+    notas2, removed = _sanitize_notas_invalid_catalog_rows(notas)
+    if removed:
+        save('notas', notas2)
+        log_action('notas.cleanup_invalid_catalog', f'removidos={removed}')
+    notas = notas2
     return jsonify([_nota_public(n) for n in notas])
 
 @app.route('/api/notas', methods=['POST'])
@@ -865,39 +924,11 @@ def import_notas_item_ncm():
 
         data_col = next((orig for nrm, orig in normalized_cols if nrm in date_aliases), None)
 
-        # Fallback para planilhas com colunas sem cabecalho (ex.: Unnamed: 6 / Unnamed: 7).
-        if not item_col or not ncm_col:
-            unnamed_cols = [orig for _, orig in normalized_cols if str(orig).strip().lower().startswith('unnamed')]
-            if len(unnamed_cols) >= 2:
-                sample = df.head(300)
-                scored = []
-                for col in unnamed_cols:
-                    vals = [_cell_text(v) for v in sample[col].tolist()]
-                    non_empty = [v for v in vals if v]
-                    ncm_hits = sum(1 for v in non_empty if _is_ncm_like(v))
-                    text_hits = sum(
-                        1 for v in non_empty
-                        if any(ch.isalpha() for ch in v) and not _looks_like_date_text(v) and not _looks_like_supplier_name(v)
-                    )
-                    scored.append({'col': col, 'ncm_hits': ncm_hits, 'text_hits': text_hits, 'non_empty': len(non_empty)})
-
-                if not ncm_col:
-                    best_ncm = max(scored, key=lambda c: (c['ncm_hits'], c['non_empty']))
-                    if best_ncm['ncm_hits'] > 0:
-                        ncm_col = best_ncm['col']
-
-                if not item_col:
-                    item_candidates = [c for c in scored if c['col'] != ncm_col]
-                    if item_candidates:
-                        best_item = max(item_candidates, key=lambda c: (c['text_hits'], c['non_empty']))
-                        if best_item['text_hits'] > 0:
-                            item_col = best_item['col']
-
         if not item_col or not ncm_col:
             encontrados = ', '.join([str(c) for c in df.columns])
             return jsonify({
                 'ok': False,
-                'error': f'Não consegui identificar ITEM e COD NCM de forma segura. Renomeie as colunas para ITEM e COD NCM. Cabeçalhos encontrados: {encontrados}',
+                'error': f'Não consegui identificar ITEM e COD NCM de forma segura. Renomeie as colunas para ITEM e COD NCM (exatos). Cabeçalhos encontrados: {encontrados}',
             }), 400
 
         # Sempre substitui para evitar mistura com base antiga em deploys com frontend defasado.
@@ -947,6 +978,21 @@ def import_notas_item_ncm():
             # Evita importar linha que parece fornecedor/observacao financeira no campo ITEM.
             if _looks_like_supplier_name(item):
                 continue
+
+            # Evita importar textos de observacao/financeiro como item.
+            item_up = item.upper()
+            if any(tok in item_up for tok in ('PGTO', 'PAGTO', 'A VISTA', 'NOTA EMITIDA', 'CONTABILIDADE', 'MATERIAL DE ESCRITORIO', 'CHAVE DE ACESSO', 'NF EMITIDA')):
+                continue
+
+            # ITEM precisa parecer descricao de produto.
+            if not any(ch.isalpha() for ch in item):
+                continue
+
+            # NCM valido: exatamente 8 digitos.
+            cod_digits = re.sub(r'\D+', '', str(cod_ncm or ''))
+            if len(cod_digits) != 8:
+                continue
+            cod_ncm = cod_digits
 
             existing = next((n for n in notas if str(n.get('item') or '').strip().lower() == item.lower()), None)
             if existing:
