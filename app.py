@@ -149,13 +149,16 @@ def _pg_set_json(key: str, data):
 def _load_json_file(path, default=None):
     if not os.path.exists(path):
         return default if default is not None else []
-    for enc in ('utf-8', 'utf-8-sig', 'cp1252', 'latin-1'):
+    last_err = None
+    # Tenta utf-8-sig primeiro para consumir BOM sem quebrar o parser JSON.
+    for enc in ('utf-8-sig', 'utf-8', 'cp1252', 'latin-1'):
         try:
             with open(path, encoding=enc) as f:
                 return json.load(f)
-        except UnicodeDecodeError:
+        except (UnicodeDecodeError, json.JSONDecodeError) as e:
+            last_err = e
             continue
-    raise UnicodeDecodeError('json', b'', 0, 1, f'Nao foi possivel decodificar {path}')
+    raise ValueError(f'Nao foi possivel carregar JSON {path}: {last_err}')
 
 
 def bootstrap_pg_store():
