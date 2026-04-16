@@ -887,6 +887,25 @@ def import_notas_item_ncm():
             'data', 'date', 'dt', 'dtemissao', 'emissao', 'dataemissao',
             'datanota', 'datafiscal', 'datadocumento'
         }
+        
+        # Tenta identificar ITEM/NCM nas colunas Unnamed lendo os primeiros valores
+        if not item_col or not ncm_col:
+            unnamed_cols = [c for c in df.columns if str(c).startswith('Unnamed')]
+            for ucol in unnamed_cols:
+                sample = df[ucol].dropna().astype(str).head(20).tolist()
+                # Coluna de item: tem textos com letras e comprimento > 4
+                if not item_col and any(len(v) > 4 and any(ch.isalpha() for ch in v) for v in sample):
+                    # Confirma que não é coluna de data nem número puro
+                    non_date_non_num = [v for v in sample
+                                        if not re.fullmatch(r'\d{1,2}[/\-]\d{1,2}[/\-]\d{2,4}', v)
+                                        and not re.fullmatch(r'[\d.,]+', v)
+                                        and len(v) > 5]
+                    if len(non_date_non_num) >= 3:
+                        item_col = ucol
+                        continue
+                # Coluna de NCM: valores com 6–10 dígitos numéricos
+                if not ncm_col and any(re.fullmatch(r'\d{6,10}', re.sub(r'\D', '', v)) for v in sample):
+                    ncm_col = ucol
 
         def _cell_text(v):
             if pd.isna(v):
