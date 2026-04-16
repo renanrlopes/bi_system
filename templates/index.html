@@ -1557,17 +1557,27 @@ function nf2Filter(f){nf2F=f;['all','cmv','dp'].forEach(k=>{const el=document.ge
 async function nf2ImportItemNcm(inp){
   const file=inp.files&&inp.files[0];
   if(!file)return;
-  const form=new FormData();
-  form.append('file',file);
-  const r=await fetch('/api/import/notas_item_ncm',{method:'POST',body:form});
-  const d=await r.json();
-  if(d.ok){
+  try{
+    gToast('Importando planilha...');
+    const form=new FormData();
+    form.append('file',file);
+    const r=await fetch('/api/import/notas_item_ncm',{method:'POST',body:form});
+    const text=await r.text();
+    let d={};
+    try{ d=JSON.parse(text||'{}'); }catch(_){ d={ok:false,error:text||`Falha HTTP ${r.status}`}; }
+
+    if(!r.ok||!d.ok){
+      gToast(d.error||'Erro ao importar ITEM/COD NCM',true);
+      return;
+    }
+
     gToast(`Importação concluída: ${d.added} novas, ${d.updated} atualizadas`);
     nf2Load();
-  }else{
-    gToast(d.error||'Erro ao importar ITEM/COD NCM',true);
+  }catch(err){
+    gToast(`Falha ao importar planilha: ${err&&err.message?err.message:'erro inesperado'}`,true);
+  }finally{
+    inp.value='';
   }
-  inp.value='';
 }
 
 // �"?�"? Aportes �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?

@@ -801,15 +801,49 @@ def import_notas_item_ncm():
         notas = load('notas', default=[])
         added = 0
         updated = 0
+        total_rows = int(len(df.index))
+
+        def _cell_text(v):
+            if pd.isna(v):
+                return ''
+            txt = str(v).strip()
+            return '' if txt.lower() == 'nan' else txt
+
+        def _extract_item_and_ncm(row):
+            item = _cell_text(row.get(item_col))
+            cod_ncm = _cell_text(row.get(ncm_col))
+
+            # Fallback por linha: usa a primeira celula textual como item.
+            if not item:
+                for raw in row.tolist():
+                    t = _cell_text(raw)
+                    if not t:
+                        continue
+                    if re.fullmatch(r'\d{6,10}', re.sub(r'\D+', '', t)):
+                        continue
+                    item = t
+                    break
+
+            # Fallback por linha: tenta localizar um NCM numerico em qualquer coluna.
+            if not cod_ncm:
+                for raw in row.tolist():
+                    t = _cell_text(raw)
+                    if not t:
+                        continue
+                    digits = re.sub(r'\D+', '', t)
+                    if re.fullmatch(r'\d{6,10}', digits):
+                        cod_ncm = digits
+                        break
+
+            # Mantem somente os digitos do NCM quando houver.
+            if cod_ncm:
+                digits = re.sub(r'\D+', '', cod_ncm)
+                cod_ncm = digits or cod_ncm
+
+            return item, cod_ncm
 
         for _, row in df.iterrows():
-            item = str(row.get(item_col) or '').strip()
-            cod_ncm = str(row.get(ncm_col) or '').strip()
-
-            if item.lower() == 'nan':
-                item = ''
-            if cod_ncm.lower() == 'nan':
-                cod_ncm = ''
+            item, cod_ncm = _extract_item_and_ncm(row)
 
             if not item and not cod_ncm:
                 continue
@@ -844,9 +878,17 @@ def import_notas_item_ncm():
             })
             added += 1
 
+        if added == 0 and updated == 0:
+            return jsonify({
+                'ok': False,
+                'error': 'Nenhuma linha válida encontrada para importar. Verifique se a planilha tem ITEM e COD NCM (ou deixe essas informações nas duas primeiras colunas).',
+                'total_rows': total_rows,
+                'detected_columns': [str(c) for c in df.columns],
+            }), 400
+
         save('notas', notas)
         log_action('import.notas_item_ncm', f'{added} add, {updated} upd')
-        return jsonify({'ok': True, 'added': added, 'updated': updated})
+        return jsonify({'ok': True, 'added': added, 'updated': updated, 'total_rows': total_rows})
     except Exception as e:
         return jsonify({'ok': False, 'error': str(e)}), 400
 
