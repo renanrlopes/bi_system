@@ -859,7 +859,11 @@ def import_notas_item_ncm():
         if not f:
             return jsonify({'ok': False, 'error': 'Arquivo não enviado'}), 400
 
-        df = pd.read_excel(io.BytesIO(f.read()))
+        file_bytes = f.read()
+        if not file_bytes:
+            return jsonify({'ok': False, 'error': 'Arquivo vazio'}), 400
+
+        df = pd.read_excel(io.BytesIO(file_bytes))
         if df.empty:
             return jsonify({'ok': False, 'error': 'Planilha vazia'}), 400
 
@@ -925,11 +929,45 @@ def import_notas_item_ncm():
         data_col = next((orig for nrm, orig in normalized_cols if nrm in date_aliases), None)
 
         if not item_col or not ncm_col:
-            encontrados = ', '.join([str(c) for c in df.columns])
-            return jsonify({
-                'ok': False,
-                'error': f'Não consegui identificar ITEM e COD NCM de forma segura. Renomeie as colunas para ITEM e COD NCM (exatos). Cabeçalhos encontrados: {encontrados}',
-            }), 400
+            # Fallback: procura linha real de cabecalho dentro da planilha.
+            df_raw = pd.read_excel(io.BytesIO(file_bytes), header=None)
+            header_row = None
+            idx_item = None
+            idx_ncm = None
+            idx_date = None
+
+            max_scan = min(len(df_raw.index), 30)
+            for ridx in range(max_scan):
+                row_vals = [(_norm_col(v), cidx) for cidx, v in enumerate(df_raw.iloc[ridx].tolist())]
+                cand_item = next((cidx for nrm, cidx in row_vals if nrm in item_aliases), None)
+                cand_ncm = next((cidx for nrm, cidx in row_vals if nrm in ncm_aliases), None)
+                cand_date = next((cidx for nrm, cidx in row_vals if nrm in date_aliases), None)
+                if cand_item is not None and cand_ncm is not None and cand_item != cand_ncm:
+                    header_row = ridx
+                    idx_item = cand_item
+                    idx_ncm = cand_ncm
+                    idx_date = cand_date
+                    break
+
+            if header_row is not None:
+                df_fixed = pd.DataFrame({
+                    'ITEM': df_raw.iloc[header_row + 1:, idx_item].tolist(),
+                    'COD NCM': df_raw.iloc[header_row + 1:, idx_ncm].tolist(),
+                })
+                if idx_date is not None:
+                    df_fixed['DATA_TMP'] = df_raw.iloc[header_row + 1:, idx_date].tolist()
+                    data_col = 'DATA_TMP'
+                else:
+                    data_col = None
+                df = df_fixed
+                item_col = 'ITEM'
+                ncm_col = 'COD NCM'
+            else:
+                encontrados = ', '.join([str(c) for c in df.columns])
+                return jsonify({
+                    'ok': False,
+                    'error': f'Não consegui identificar ITEM e COD NCM de forma segura. Renomeie as colunas para ITEM e COD NCM (exatos). Cabeçalhos encontrados: {encontrados}',
+                }), 400
 
         # Sempre substitui para evitar mistura com base antiga em deploys com frontend defasado.
         replace_mode = True
