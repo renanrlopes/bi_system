@@ -760,6 +760,7 @@ def import_produtos():
 def import_notas_item_ncm():
     try:
         import pandas as pd
+        import unicodedata
 
         f = request.files.get('file')
         if not f:
@@ -769,16 +770,33 @@ def import_notas_item_ncm():
         if df.empty:
             return jsonify({'ok': False, 'error': 'Planilha vazia'}), 400
 
-        cols = {str(c).strip().lower(): c for c in df.columns}
+        def _norm_col(name):
+            raw = str(name or '').strip().lower()
+            raw = unicodedata.normalize('NFKD', raw).encode('ascii', 'ignore').decode('ascii')
+            return re.sub(r'[^a-z0-9]+', '', raw)
 
-        item_key = next((k for k in cols if k in ('item', 'itens', 'produto', 'descricao', 'descrição')), None)
-        ncm_key = next((k for k in cols if k in ('cod ncm', 'codigo ncm', 'código ncm', 'ncm', 'cod_ncm')), None)
+        normalized_cols = [(_norm_col(c), c) for c in df.columns]
 
-        if not item_key or not ncm_key:
-            return jsonify({'ok': False, 'error': 'Colunas esperadas: ITEM e COD NCM'}), 400
+        item_aliases = {
+            'item', 'itens', 'produto', 'produtos', 'descricao',
+            'descricaoproduto', 'descricaodoproduto', 'itemdescricao'
+        }
+        ncm_aliases = {
+            'codncm', 'codigoncm', 'ncm', 'ncmsh', 'classificacaofiscal',
+            'classfiscal', 'ncmfiscal'
+        }
 
-        item_col = cols[item_key]
-        ncm_col = cols[ncm_key]
+        item_col = next((orig for nrm, orig in normalized_cols if nrm in item_aliases), None)
+        ncm_col = next((orig for nrm, orig in normalized_cols if nrm in ncm_aliases), None)
+
+        # Fallback: quando nao reconhece cabecalho, usa as duas primeiras colunas.
+        if (not item_col or not ncm_col) and len(df.columns) >= 2:
+            item_col = item_col or df.columns[0]
+            ncm_col = ncm_col or df.columns[1]
+
+        if not item_col or not ncm_col:
+            encontrados = ', '.join([str(c) for c in df.columns])
+            return jsonify({'ok': False, 'error': f'Não consegui identificar colunas de ITEM/NCM. Cabeçalhos encontrados: {encontrados}'}), 400
 
         notas = load('notas', default=[])
         added = 0
@@ -794,6 +812,9 @@ def import_notas_item_ncm():
                 cod_ncm = ''
 
             if not item and not cod_ncm:
+                continue
+
+            if not item:
                 continue
 
             existing = next((n for n in notas if str(n.get('item') or '').strip().lower() == item.lower()), None)
