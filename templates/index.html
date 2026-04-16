@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>BI Gerencial â€” Mercado Livre</title>
+<title>BI Gerencial — Mercado Livre</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
@@ -126,29 +126,29 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 <body>
 <div class="app">
 <aside class="sb">
-  <div class="sbl"><div class="sbt">BI Gerencial</div><div class="sbs">Mercado Livre Â· 2026</div></div>
+  <div class="sbl"><div class="sbt">BI Gerencial</div><div class="sbs">Mercado Livre · 2026</div></div>
   <nav class="sbn">
-    <div class="nl">AnÃ¡lise</div>
-    <div class="ni on" onclick="sp('overview')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>VisÃ£o geral</div>
+    <div class="nl">Análise</div>
+    <div class="ni on" onclick="sp('overview')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Visão geral</div>
     <div class="ni" onclick="sp('dre')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 17H7a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2h-2"/><rect x="9" y="13" width="6" height="8" rx="1"/></svg>DRE gerencial</div>
     <div class="ni" onclick="sp('aportes')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Aportes de capital</div>
     <div class="ni" onclick="sp('extrato')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Extrato ML</div>
-    <div class="ni" onclick="sp('evolucao')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>EvoluÃ§Ã£o mensal</div>
+    <div class="ni" onclick="sp('evolucao')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Evolução mensal</div>
     <div class="ni" onclick="sp('produtos')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Produtos / SKU</div>
     <div class="ni" onclick="sp('compras')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Notas de compra</div>
     <div class="ni" onclick="sp('fornec')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M19 11l2 2 4-4"/></svg>Fornecedores</div>
     <div class="ni" onclick="sp('estoque')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8h4M6 11h8"/></svg>Estoque</div>
     <div class="ni" onclick="sp('margem')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Margem por SKU</div>
-    <div class="nl">GestÃ£o</div>
+    <div class="nl">Gestão</div>
     <div class="ni" onclick="sp('g-financeiro')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Dados financeiros</div>
     <div class="ni" onclick="sp('g-produtos')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4z"/></svg>Produtos / Custos</div>
     <div class="ni" onclick="sp('g-notas')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Notas fiscais</div>
-    <div class="ni" onclick="sp('g-aportes')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Aportes / EmprÃ©stimos</div>
+    <div class="ni" onclick="sp('g-aportes')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Aportes / Empréstimos</div>
     <div class="ni" onclick="sp('g-skus')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Importar dados</div>
-    <div class="ni" onclick="sp('g-historico')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>HistÃ³rico</div>
+    <div class="ni" onclick="sp('g-historico')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Histórico</div>
   </nav>
   <div class="sbf">
-  <div style="display:flex;align-items:center;gap:6px"><span class="dot"></span><span id="sb-periodo">PerÃ­odo automÃ¡tico</span></div>
+  <div style="display:flex;align-items:center;gap:6px"><span class="dot"></span><span id="sb-periodo">Período automático</span></div>
   <div style="margin-top:8px;font-size:11px;color:var(--tx)">{{ user }} <span style="color:var(--mu);font-size:10px">({{ role }})</span></div>
   <a href="/logout" style="font-size:11px;color:var(--r);text-decoration:none;display:block;margin-top:4px">Sair</a>
 </div>
@@ -157,7 +157,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 
 <div class="main">
   <div class="top">
-    <div class="top-left"><button class="mob-nav-btn" onclick="toggleMobileNav()" aria-label="Abrir menu">â˜°</button><div><div class="tpt" id="pgt">VisÃ£o geral</div><div class="tps" id="top-sub">PerÃ­odo automÃ¡tico Â· 0 pedidos Â· Mercado Livre BR</div></div></div>
+    <div class="top-left"><button class="mob-nav-btn" onclick="toggleMobileNav()" aria-label="Abrir menu">&#9776;</button><div><div class="tpt" id="pgt">Visão geral</div><div class="tps" id="top-sub">Período automático · 0 pedidos · Mercado Livre BR</div></div></div>
     <div class="mts" id="mts" style="display:none"></div>
   </div>
 
@@ -165,12 +165,12 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
   <div class="pg on" id="page-overview">
     <div class="kg" id="kpi-ov"></div>
     <div class="g32 sec">
-      <div class="card"><div class="ct">Receita bruta Â· LÃ­quido ML Â· Resultado operacional</div><div class="cw" style="height:240px"><canvas id="ch-ov"></canvas></div></div>
-      <div class="card"><div class="ct">ComposiÃ§Ã£o retenÃ§Ãµes ML</div><div class="cw" style="height:240px"><canvas id="ch-rp"></canvas></div></div>
+      <div class="card"><div class="ct">Receita bruta · Líquido ML · Resultado operacional</div><div class="cw" style="height:240px"><canvas id="ch-ov"></canvas></div></div>
+      <div class="card"><div class="ct">Composição retenções ML</div><div class="cw" style="height:240px"><canvas id="ch-rp"></canvas></div></div>
     </div>
     <div class="g2 sec">
-      <div class="card"><div class="ct">Pedidos por mÃªs</div><div class="cw" style="height:160px"><canvas id="ch-pd"></canvas></div></div>
-      <div class="card"><div class="ct">Ticket mÃ©dio (R$)</div><div class="cw" style="height:160px"><canvas id="ch-tk"></canvas></div></div>
+      <div class="card"><div class="ct">Pedidos por mês</div><div class="cw" style="height:160px"><canvas id="ch-pd"></canvas></div></div>
+      <div class="card"><div class="ct">Ticket médio (R$)</div><div class="cw" style="height:160px"><canvas id="ch-tk"></canvas></div></div>
     </div>
   </div>
 
@@ -179,7 +179,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
     <div class="sh"><div class="st">DRE Gerencial</div><span class="sb2" id="dre-b">Total</span></div>
     <div class="dw" id="dre-body"></div>
     <div style="margin-top:16px">
-      <div class="st" style="margin-bottom:10px;font-size:13px">LanÃ§ar despesas adicionais</div>
+      <div class="st" style="margin-bottom:10px;font-size:13px">Lançar despesas adicionais</div>
       <div class="dg">
         <div class="dbox"><div class="dlb">Embalagens / Insumos</div><div class="drow"><span class="dpfx">R$</span><input class="dinp" id="d-e" type="number" placeholder="0,00"></div></div>
         <div class="dbox"><div class="dlb">Plataformas / SaaS</div><div class="drow"><span class="dpfx">R$</span><input class="dinp" id="d-s" type="number" placeholder="0,00"></div></div>
@@ -191,23 +191,23 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 
   <!-- APORTES -->
   <div class="pg" id="page-aportes">
-    <div class="sh"><div class="st">Aportes de capital â€” Extratos por sÃ³cio</div></div>
+    <div class="sh"><div class="st">Aportes de capital — Extratos por sócio</div></div>
     <div style="background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.2);border-radius:var(--rd);padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--mu);line-height:1.7">
-      Aportes de capital <strong style="color:var(--tl)">nÃ£o afetam o resultado operacional</strong> da DRE â€” sÃ£o entradas de capital prÃ³prio dos sÃ³cios. Registrados individualmente por sÃ³cio para controle e transparÃªncia.
+      Aportes de capital <strong style="color:var(--tl)">não afetam o resultado operacional</strong> da DRE — são entradas de capital próprio dos sócios. Registrados individualmente por sócio para controle e transparência.
     </div>
     <div class="kg" id="kpi-apo"></div>
     <div class="g2 sec">
       <div class="card">
-        <div class="ct">MovimentaÃ§Ã£o mensal de capital</div>
+        <div class="ct">Movimentação mensal de capital</div>
         <div class="cw" style="height:180px"><canvas id="ch-apo"></canvas></div>
       </div>
       <div class="card">
         <div class="ct">Resumo</div>
         <div style="font-size:12px;color:var(--mu);line-height:1.8">
-          Os valores desta pÃ¡gina sÃ£o carregados em tempo real dos lanÃ§amentos de Aportes e EmprÃ©stimos.
+          Os valores desta página são carregados em tempo real dos lançamentos de Aportes e Empréstimos.
         </div>
         <div style="margin-top:10px;font-size:12px;color:var(--mu);line-height:1.8">
-          Para lanÃ§ar novos registros, use o menu <strong style="color:var(--tl)">Aportes / EmprÃ©stimos</strong> na seÃ§Ã£o de gestÃ£o.
+          Para lançar novos registros, use o menu <strong style="color:var(--tl)">Aportes / Empréstimos</strong> na seção de gestão.
         </div>
       </div>
     </div>
@@ -230,28 +230,28 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
     <div id="emp-hl"></div>
     <div class="kg" id="kpi-ext"></div>
     <div class="g2 sec">
-      <div class="card"><div class="ct">Entradas Ã— SaÃ­das por mÃªs</div><div class="cw" style="height:190px"><canvas id="ch-eb"></canvas></div></div>
-      <div class="card"><div class="ct">ComposiÃ§Ã£o das saÃ­das</div><div class="cw" style="height:190px"><canvas id="ch-ep"></canvas></div></div>
+      <div class="card"><div class="ct">Entradas × Saídas por mês</div><div class="cw" style="height:190px"><canvas id="ch-eb"></canvas></div></div>
+      <div class="card"><div class="ct">Composição das saídas</div><div class="cw" style="height:190px"><canvas id="ch-ep"></canvas></div></div>
     </div>
     <div class="card sec">
-      <div class="ct">Categorias por mÃªs</div>
+      <div class="ct">Categorias por mês</div>
       <table class="tb"><thead><tr><th>Categoria</th><th class="r">Jan/26</th><th class="r">Fev/26</th><th class="r">Mar/26</th><th class="r">Total</th></tr></thead><tbody id="ext-tb"></tbody></table>
     </div>
     <div class="card sec">
-      <div class="ct">Editar categorias por mÃªs</div>
+      <div class="ct">Editar categorias por mês</div>
       <div id="ext-edit-body"></div>
     </div>
   </div>
 
-  <!-- EVOLUÃ‡ÃƒO -->
+  <!-- EVOLUCAO -->
   <div class="pg" id="page-evolucao">
     <div class="card sec">
-      <div class="ct">Resultado operacional por mÃªs (sem aportes)</div>
+      <div class="ct">Resultado operacional por mês (sem aportes)</div>
       <div class="leg">
         <span class="li"><span class="lsq" style="background:#3b82f6"></span>Receita</span>
-        <span class="li"><span class="lsq" style="background:#00e5a0"></span>LÃ­quido ML</span>
+        <span class="li"><span class="lsq" style="background:#00e5a0"></span>Líquido ML</span>
         <span class="li"><span class="lsq" style="background:#f43f5e"></span>CMV</span>
-        <span class="li"><span class="lsq" style="background:#fb923c"></span>EmprÃ©stimo</span>
+        <span class="li"><span class="lsq" style="background:#fb923c"></span>Empréstimo</span>
         <span class="li"><span class="lsq" style="background:#1D9E75"></span>Resultado op.</span>
       </div>
       <div class="cw" style="height:275px"><canvas id="ch-ev"></canvas></div>
@@ -260,24 +260,24 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
       <div class="card">
         <div class="ct">Custos e despesas empilhados</div>
         <div class="leg">
-          <span class="li"><span class="lsq" style="background:#f43f5e"></span>RetenÃ§Ãµes ML</span>
+          <span class="li"><span class="lsq" style="background:#f43f5e"></span>Retenções ML</span>
           <span class="li"><span class="lsq" style="background:#f59e0b"></span>CMV</span>
           <span class="li"><span class="lsq" style="background:#a78bfa"></span>Desp. op.</span>
           <span class="li"><span class="lsq" style="background:#fb923c"></span>Enc. + Emp.</span>
         </div>
         <div class="cw" style="height:200px"><canvas id="ch-cs"></canvas></div>
       </div>
-      <div class="card"><div class="ct">Margem lÃ­quida (%)</div><div class="cw" style="height:200px"><canvas id="ch-mg"></canvas></div></div>
+      <div class="card"><div class="ct">Margem líquida (%)</div><div class="cw" style="height:200px"><canvas id="ch-mg"></canvas></div></div>
     </div>
   </div>
 
   <!-- PRODUTOS -->
   <div class="pg" id="page-produtos">
-    <div class="sh"><div class="st">Ranking de produtos</div><div class="sb2">Top 15 SKUs Â· acumulado</div></div>
+    <div class="sh"><div class="st">Ranking de produtos</div><div class="sb2">Top 15 SKUs · acumulado</div></div>
     <div class="card sec"><table class="tb" id="sku-tb"></table></div>
     <div class="g2 sec">
       <div class="card"><div class="ct">Receita por produto (top 10)</div><div class="cw" style="height:305px"><canvas id="ch-sb"></canvas></div></div>
-      <div class="card"><div class="ct">ParticipaÃ§Ã£o na receita</div><div class="cw" style="height:305px"><canvas id="ch-sp"></canvas></div></div>
+      <div class="card"><div class="ct">Participação na receita</div><div class="cw" style="height:305px"><canvas id="ch-sp"></canvas></div></div>
     </div>
   </div>
 
@@ -299,11 +299,11 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
   <div class="pg" id="page-fornec">
     <div class="kg" id="kpi-fn"></div>
     <div class="g2 sec">
-      <div class="card"><div class="ct">ConcentraÃ§Ã£o por fornecedor</div><div id="fb-bars"></div></div>
-      <div class="card"><div class="ct">DistribuiÃ§Ã£o percentual</div><div class="cw" style="height:265px"><canvas id="ch-fp"></canvas></div></div>
+      <div class="card"><div class="ct">Concentração por fornecedor</div><div id="fb-bars"></div></div>
+      <div class="card"><div class="ct">Distribuição percentual</div><div class="cw" style="height:265px"><canvas id="ch-fp"></canvas></div></div>
     </div>
     <div class="card sec">
-      <div class="ct">Compras por fornecedor Ã— mÃªs</div>
+      <div class="ct">Compras por fornecedor × mês</div>
       <div class="leg"><span class="li"><span class="lsq" style="background:#3b82f6"></span>P&D Impex</span><span class="li"><span class="lsq" style="background:#00e5a0"></span>Kloos</span><span class="li"><span class="lsq" style="background:#f59e0b"></span>Dynasty</span><span class="li"><span class="lsq" style="background:#f43f5e"></span>Mohnish</span><span class="li"><span class="lsq" style="background:#a78bfa"></span>Outros</span></div>
       <div class="cw" style="height:190px"><canvas id="ch-fm"></canvas></div>
     </div>
@@ -317,7 +317,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
         <div style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px" id="est-filter">
           <button class="mt on" onclick="fEst('all',this)">Todos</button>
           <button class="mt" onclick="fEst('ok',this)">Boa qualidade</button>
-          <button class="mt" onclick="fEst('imp',this)">âš¡ Impulsionar</button>
+          <button class="mt" onclick="fEst('imp',this)">Impulsionar</button>
         </div>
         <button class="cbtn" onclick="estSave()">Salvar estoque</button>
       </div>
@@ -352,8 +352,8 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
         </div>
         <div style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px">
           <button class="mt on" onclick="fMarg('all',this)">Todos</button>
-          <button class="mt" onclick="fMarg('ok',this)">âœ… Positiva</button>
-          <button class="mt" onclick="fMarg('neg',this)">âš  Negativa</button>
+          <button class="mt" onclick="fMarg('ok',this)">Positiva</button>
+          <button class="mt" onclick="fMarg('neg',this)">Negativa</button>
           <button class="mt" onclick="fMarg('sem',this)">Sem custo</button>
         </div>
       </div>
@@ -369,10 +369,10 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
               <th class="r">Un.<br>vendidas</th>
               <th class="r">Receita<br>total</th>
               <th class="r">Tarifas<br>ML</th>
-              <th class="r">LÃ­q. ML<br>total</th>
+              <th class="r">Líq. ML<br>total</th>
               <th class="r">CMV<br>total</th>
               <th class="r">Mg. Bruta</th>
-              <th class="r">Mg. LÃ­quida</th>
+              <th class="r">Mg. Líquida</th>
               <th class="r">Custo<br>imob.</th>
               <th class="r">V30</th>
               <th class="r">Giro<br>(dias)</th>
@@ -387,7 +387,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 
 <script>
 
-// â”€â”€ Dynamic data loader â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Dynamic data loader �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 let M=['Jan/2026','Fev/2026','Mar/2026'], K=['2026-01','2026-02','2026-03'];
 let V={rp:[0,0,0],ac:[0,0,0],txa:[0,0,0],tv:[0,0,0],re:[0,0,0],te:[0,0,0],ca:[0,0,0],db:[0,0,0],lq:[0,0,0],pd:[0,0,0]};
 let CMV={},CMV_NF={},CMV_SN={},DEB_ML={},DEB_ML_DET={},ENC={},EMP={},EMP_ENTRADA={},EMP_TOTAL={},APORTES={},DEV_APORTE={},DESP={},E={};
@@ -485,12 +485,12 @@ async function loadDB(){
     // update dynamic header/subtitle
     if(M.length){
       const first=M[0],last=M[M.length-1];
-      const periodo=first===last?first:first.split('/')[0]+'â€“'+last;
+      const periodo=first===last?first:first.split('/')[0]+'–'+last;
       const totalPedidos=(V.pd||[]).reduce((a,v)=>a+(parseInt(v||0)),0);
       const sb=document.getElementById('sb-periodo');
       if(sb) sb.textContent=periodo;
       const topSub=document.getElementById('top-sub');
-      if(topSub) topSub.textContent=`${periodo} Â· ${totalPedidos.toLocaleString('pt-BR')} pedidos Â· Mercado Livre BR`;
+      if(topSub) topSub.textContent=`${periodo} · ${totalPedidos.toLocaleString('pt-BR')} pedidos · Mercado Livre BR`;
     }
     renderNfTabs();
     renderMargMesTabs();
@@ -513,8 +513,8 @@ let SK=[];
 
 let cm=-1;
 const f=v=>'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fn=v=>(v<0?'âˆ’ ':'')+'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const pct=(a,b)=>b?(Math.abs(a)/Math.abs(b)*100).toFixed(1)+'%':'â€”';
+const fn=v=>(v<0?'− ':'')+'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=(a,b)=>b?(Math.abs(a)/Math.abs(b)*100).toFixed(1)+'%':'—';
 const exD=()=>['d-e','d-s','d-o'].reduce((a,id)=>a+(parseFloat(document.getElementById(id)?.value)||0),0);
 
 function getD(i){
@@ -547,7 +547,7 @@ function sp(p){
   document.querySelectorAll('.ni').forEach(el=>el.classList.remove('on'));
   document.getElementById('page-'+p).classList.add('on');
   const ps=['overview','dre','aportes','extrato','evolucao','produtos','compras','fornec','estoque','margem','g-financeiro','g-produtos','g-notas','g-aportes','g-skus','g-historico'];
-  const ts=['VisÃ£o geral','DRE Gerencial','Aportes de capital','Extrato ML','EvoluÃ§Ã£o Mensal','Produtos / SKU','Notas de Compra','Fornecedores','Estoque Full','Margem por SKU','Dados Financeiros','Produtos / Custos','Notas Fiscais','Aportes / EmprÃ©stimos','Importar Dados','HistÃ³rico de AlteraÃ§Ãµes'];
+  const ts=['Visão geral','DRE Gerencial','Aportes de capital','Extrato ML','Evolução Mensal','Produtos / SKU','Notas de Compra','Fornecedores','Estoque Full','Margem por SKU','Dados Financeiros','Produtos / Custos','Notas Fiscais','Aportes / Empréstimos','Importar Dados','Histórico de Alterações'];
   const idx=ps.indexOf(p);
   if(idx>=0)document.querySelectorAll('.ni')[idx].classList.add('on');
   document.getElementById('pgt').textContent=ts[idx]||p;
@@ -573,11 +573,11 @@ function rOV(){
   const saldoApo=d.aporte-d.dev_apo;
   document.getElementById('kpi-ov').innerHTML=`
     <div class="kc cb"><div class="kl">Receita bruta</div><div class="kv" style="color:var(--b)">${f(d.rp)}</div><div class="ks">${d.pd.toLocaleString('pt-BR')} pedidos</div></div>
-    <div class="kc cg"><div class="kl">LÃ­quido ML</div><div class="kv" style="color:var(--g)">${f(d.lq)}</div><div class="ks">${pct(d.lq,d.rp)} da receita</div></div>
-    <div class="kc cr"><div class="kl">RetenÃ§Ãµes + DÃ©b. ML</div><div class="kv" style="color:var(--r)">${fn(rt+d.deb_ml)}</div><div class="ks">${pct(rt+d.deb_ml,d.rp)} da receita</div></div>
+    <div class="kc cg"><div class="kl">Líquido ML</div><div class="kv" style="color:var(--g)">${f(d.lq)}</div><div class="ks">${pct(d.lq,d.rp)} da receita</div></div>
+    <div class="kc cr"><div class="kl">Retenções + Déb. ML</div><div class="kv" style="color:var(--r)">${fn(rt+d.deb_ml)}</div><div class="ks">${pct(rt+d.deb_ml,d.rp)} da receita</div></div>
     <div class="kc ca"><div class="kl">CMV (NFs compra)</div><div class="kv" style="color:var(--am)">${f(d.cmv)}</div><div class="ks">${pct(d.cmv,rc)} da receita</div></div>
     ${d.enc>0?`<div class="kc cr"><div class="kl">Encargos ML</div><div class="kv" style="color:var(--r);font-size:16px">${f(d.enc)}</div><div class="ks">Faturas vencidas</div></div>`:''}
-    ${d.emp>0?`<div class="kc co"><div class="kl">EmprÃ©stimo MP</div><div class="kv" style="color:var(--o)">${f(d.emp)}</div><div class="ks">Parcelamento ML</div></div>`:''}
+    ${d.emp>0?`<div class="kc co"><div class="kl">Empréstimo MP</div><div class="kv" style="color:var(--o)">${f(d.emp)}</div><div class="ks">Parcelamento ML</div></div>`:''}
     <div class="kc cp"><div class="kl">Resultado operacional</div><div class="kv" style="color:${res>=0?'var(--g)':'var(--r)'}">${fn(res)}</div><div class="ks">Margem ${mrg.toFixed(1)}%</div></div>
     ${saldoApo>0?`<div class="kc ct"><div class="kl">Aportes de capital (saldo)</div><div class="kv" style="color:var(--tl)">${f(saldoApo)}</div><div class="ks">Fora do resultado</div></div>`:''}`;
 }
@@ -595,78 +595,78 @@ function rDRE(){
   document.getElementById('dre-b').textContent=d.lbl;
 
   const apo_html=d.aporte>0||d.dev_apo>0?`
-    <div class="dr dh">MOVIMENTAÃ‡ÃƒO DE CAPITAL <span style="font-size:9px;opacity:.6">(fora do resultado operacional)</span></div>
-    ${d.aporte>0?`<div class="dr dsub dapo"><span style="color:var(--tl)">Aportes recebidos de sÃ³cios/investidores</span><span class="dv tl">+ ${f(d.aporte)}</span></div>`:''}
-    ${d.dev_apo>0?`<div class="dr dsub"><span>DevoluÃ§Ã£o de aporte</span><span class="dv n">${fn(-d.dev_apo)}</span></div>`:''}
-    <div class="dr dtot"><span>= Saldo lÃ­quido de capital</span><span class="dv tl">${fn(d.aporte-d.dev_apo)}</span></div>`:'' ;
+    <div class="dr dh">MOVIMENTAÇÃO DE CAPITAL <span style="font-size:9px;opacity:.6">(fora do resultado operacional)</span></div>
+    ${d.aporte>0?`<div class="dr dsub dapo"><span style="color:var(--tl)">Aportes recebidos de sócios/investidores</span><span class="dv tl">+ ${f(d.aporte)}</span></div>`:''}
+    ${d.dev_apo>0?`<div class="dr dsub"><span>Devolução de aporte</span><span class="dv n">${fn(-d.dev_apo)}</span></div>`:''}
+    <div class="dr dtot"><span>= Saldo líquido de capital</span><span class="dv tl">${fn(d.aporte-d.dev_apo)}</span></div>`:'' ;
 
   document.getElementById('dre-body').innerHTML=`
     <div class="dr dh">RECEITAS</div>
     <div class="dr dsub"><span>Receita por produtos</span><span class="dv p">${f(d.rp)}</span></div>
     <div class="dr dtot"><span>= Receita total bruta</span><span class="dv p">${f(d.rp)}</span></div>
-    <div class="dr dh">RETENÃ‡Ã•ES MERCADO LIVRE <span style="font-size:9px;opacity:.6">(relatÃ³rio de vendas)</span></div>
-    ${d.ac>0?`<div class="dr dsub"><span>AcrÃ©scimo parcelamento <span style="font-size:10px;color:var(--mu)">(pago pelo comprador)</span></span><span class="dv p">+ ${f(d.ac)}</span></div>`:''}
-    ${d.txa<0?`<div class="dr dsub"><span>Taxa de parcelamento equivalente ao acrÃ©scimo</span><span class="dv n">${fn(d.txa)}</span></div>`:''}
+    <div class="dr dh">RETENÇÕES MERCADO LIVRE <span style="font-size:9px;opacity:.6">(relatório de vendas)</span></div>
+    ${d.ac>0?`<div class="dr dsub"><span>Acréscimo parcelamento <span style="font-size:10px;color:var(--mu)">(pago pelo comprador)</span></span><span class="dv p">+ ${f(d.ac)}</span></div>`:''}
+    ${d.txa<0?`<div class="dr dsub"><span>Taxa de parcelamento equivalente ao acréscimo</span><span class="dv n">${fn(d.txa)}</span></div>`:''}
     <div class="dr dsub"><span>Tarifa de venda e impostos</span><span class="dv n">${fn(d.tv)}</span></div>
     <div class="dr dsub"><span>Cancelamentos e reembolsos</span><span class="dv n">${fn(d.ca)}</span></div>
     ${d.re>0?`<div class="dr dsub"><span>Receita por envio</span><span class="dv p">+ ${f(d.re)}</span></div>`:''}
     ${d.te<0?`<div class="dr dsub"><span>Tarifas de envio</span><span class="dv n">${fn(d.te)}</span></div>`:''}
-    ${d.db>0?`<div class="dr dsub"><span>Descontos e bÃ´nus</span><span class="dv p">+ ${f(d.db)}</span></div>`:''}
-    <div class="dr dtot"><span>= Total lÃ­quido retenÃ§Ãµes ML</span><span class="dv n">${fn(rt)}</span></div>
-    <div class="dr dtot" style="border-bottom:1px solid rgba(59,130,246,.2)"><span style="color:#93c5fd">= LÃ­quido repassado ML</span><span class="dv bl">${f(d.lq)}</span></div>
-    <div class="dr dh">DÃ‰BITOS OPERACIONAIS ML <span style="font-size:9px;opacity:.6">(extrato Mercado Pago)</span></div>
-    ${det.recl<0?`<div class="dr dsub"><span>DÃ©b. reclamaÃ§Ãµes no Mercado Livre</span><span class="dv n">${fn(det.recl)}</span></div>`:''}
-    ${det.retido<0?`<div class="dr dsub"><span>Dinheiro retido / dÃ©b. retido</span><span class="dv n">${fn(det.retido)}</span></div>`:''}
-    ${det.devolv<0?`<div class="dr dsub"><span>DÃ©b. devoluÃ§Ãµes ML</span><span class="dv n">${fn(det.devolv)}</span></div>`:''}
-    ${det.envio<0?`<div class="dr dsub"><span>DÃ©b. envio Mercado Livre</span><span class="dv n">${fn(det.envio)}</span></div>`:''}
-    <div class="dr dtot"><span>= Total dÃ©bitos operacionais ML</span><span class="dv n">${fn(d.deb_ml)}</span></div>
-    <div class="dr dh">CMV â€” CUSTO DAS MERCADORIAS VENDIDAS</div>
+    ${d.db>0?`<div class="dr dsub"><span>Descontos e bônus</span><span class="dv p">+ ${f(d.db)}</span></div>`:''}
+    <div class="dr dtot"><span>= Total líquido retenções ML</span><span class="dv n">${fn(rt)}</span></div>
+    <div class="dr dtot" style="border-bottom:1px solid rgba(59,130,246,.2)"><span style="color:#93c5fd">= Líquido repassado ML</span><span class="dv bl">${f(d.lq)}</span></div>
+    <div class="dr dh">DÉBITOS OPERACIONAIS ML <span style="font-size:9px;opacity:.6">(extrato Mercado Pago)</span></div>
+    ${det.recl<0?`<div class="dr dsub"><span>Déb. reclamações no Mercado Livre</span><span class="dv n">${fn(det.recl)}</span></div>`:''}
+    ${det.retido<0?`<div class="dr dsub"><span>Dinheiro retido / déb. retido</span><span class="dv n">${fn(det.retido)}</span></div>`:''}
+    ${det.devolv<0?`<div class="dr dsub"><span>Déb. devoluções ML</span><span class="dv n">${fn(det.devolv)}</span></div>`:''}
+    ${det.envio<0?`<div class="dr dsub"><span>Déb. envio Mercado Livre</span><span class="dv n">${fn(det.envio)}</span></div>`:''}
+    <div class="dr dtot"><span>= Total débitos operacionais ML</span><span class="dv n">${fn(d.deb_ml)}</span></div>
+    <div class="dr dh">CMV — CUSTO DAS MERCADORIAS VENDIDAS</div>
     <div class="dr dsub"><span>Notas fiscais de compra <span style="font-size:10px;color:var(--mu)">(NF)</span></span><span class="dv n">${fn(-d.cmv_nf)}</span></div>
     <div class="dr dsub" style="background:rgba(245,158,11,.05);border-left:2px solid rgba(245,158,11,.4)"><span>Compras pedido SN <span style="font-size:10px;font-weight:600;color:var(--am);background:rgba(245,158,11,.15);padding:1px 5px;border-radius:3px;margin-left:3px">SN</span></span><span class="dv am">${fn(-d.cmv_sn)}</span></div>
     <div class="dr dtot"><span>= Total CMV (NF + SN)</span><span class="dv n">${fn(-d.cmv)}</span></div>
     <div class="dr dtot"><span>= Lucro bruto</span><span class="dv ${lb>=0?'p':'n'}">${fn(lb)}</span></div>
     <div class="dr dh">DESPESAS OPERACIONAIS</div>
-    ${d.galpao>0?`<div class="dr dsub"><span>GalpÃ£o, Ã¡gua, luz e internet <span style="font-size:10px;color:var(--mu)">23/03/2026</span></span><span class="dv n">${fn(-d.galpao)}</span></div>`:''}
+    ${d.galpao>0?`<div class="dr dsub"><span>Galpão, água, luz e internet <span style="font-size:10px;color:var(--mu)">23/03/2026</span></span><span class="dv n">${fn(-d.galpao)}</span></div>`:''}
     ${d.frete>0?`<div class="dr dsub"><span>Frete / transporte <span style="font-size:10px;color:var(--mu)">28/03/2026</span></span><span class="dv n">${fn(-d.frete)}</span></div>`:''}
     ${d.contab>0?`<div class="dr dsub"><span>Contabilidade (ESCON)</span><span class="dv n">${fn(-d.contab)}</span></div>`:''}
-    ${d.pub>0?`<div class="dr dsub"><span>Publicidade / Plataformas (Google Â· AvantPro)</span><span class="dv n">${fn(-d.pub)}</span></div>`:''}
+    ${d.pub>0?`<div class="dr dsub"><span>Publicidade / Plataformas (Google · AvantPro)</span><span class="dv n">${fn(-d.pub)}</span></div>`:''}
     ${d.tml>0?`<div class="dr dsub"><span>Tarifas ML</span><span class="dv n">${fn(-d.tml)}</span></div>`:''}
-    ${ex>0?`<div class="dr dsub"><span>Despesas adicionais lanÃ§adas</span><span class="dv n">${fn(-ex)}</span></div>`:''}
-    <div class="dr dsub"><span style="color:var(--mu);font-style:italic">Embalagens / SaaS / Outras</span><span class="dv mu">${ex>0?'incluÃ­do acima':'lanÃ§ar abaixo'}</span></div>
-    <div class="dr dh">PRÃ“-LABORE <span style="font-size:9px;opacity:.6">(remuneraÃ§Ã£o dos sÃ³cios)</span></div>
+    ${ex>0?`<div class="dr dsub"><span>Despesas adicionais lançadas</span><span class="dv n">${fn(-ex)}</span></div>`:''}
+    <div class="dr dsub"><span style="color:var(--mu);font-style:italic">Embalagens / SaaS / Outras</span><span class="dv mu">${ex>0?'incluído acima':'lançar abaixo'}</span></div>
+    <div class="dr dh">PRÓ-LABORE <span style="font-size:9px;opacity:.6">(remuneração dos sócios)</span></div>
     <div class="dr dsub dpro" style="background:rgba(168,85,247,.05);border-left:2px solid rgba(168,85,247,.4)">
       <span>Lucas Cristiano Pereira</span>
-      <span class="dv pu">${d.prolabore_lucas>0?fn(-d.prolabore_lucas):'<span style="color:var(--mu);font-size:11px">â€” nÃ£o lanÃ§ado</span>'}</span>
+      <span class="dv pu">${d.prolabore_lucas>0?fn(-d.prolabore_lucas):'<span style="color:var(--mu);font-size:11px">— não lançado</span>'}</span>
     </div>
     <div class="dr dsub dpro" style="background:rgba(168,85,247,.05);border-left:2px solid rgba(168,85,247,.4)">
       <span>Fellipe Genestra Delfino <span style="font-size:10px;color:var(--mu)">${d.prolabore_fellipe>0?'11/03/2026':''}</span></span>
-      <span class="dv pu">${d.prolabore_fellipe>0?fn(-d.prolabore_fellipe):'<span style="color:var(--mu);font-size:11px">â€” nÃ£o lanÃ§ado</span>'}</span>
+      <span class="dv pu">${d.prolabore_fellipe>0?fn(-d.prolabore_fellipe):'<span style="color:var(--mu);font-size:11px">— não lançado</span>'}</span>
     </div>
-    ${prolabore>0?`<div class="dr dtot"><span>= Total prÃ³-labore</span><span class="dv pu">${fn(-prolabore)}</span></div>`:''}
+    ${prolabore>0?`<div class="dr dtot"><span>= Total pró-labore</span><span class="dv pu">${fn(-prolabore)}</span></div>`:''}
     <div class="dr dh">IMPOSTOS <span style="font-size:9px;opacity:.6">(guias pagas)</span></div>
     <div class="dr dsub" style="background:rgba(244,63,94,.04);border-left:2px solid rgba(244,63,94,.3)">
-      <span>Impostos federais / estaduais pagos</span><span class="dv n">${d.imp>0?fn(-d.imp):'â€”'}</span>
+      <span>Impostos federais / estaduais pagos</span><span class="dv n">${d.imp>0?fn(-d.imp):'—'}</span>
     </div>
-    <div class="dr dh">ENCARGOS ML â€” FATURAS VENCIDAS</div>
-    <div class="dr denc"><span>DÃ©bito faturas vencidas Mercado Livre</span><span class="dv n">${fn(-d.enc)}</span></div>
-    ${(()=>{const resAntesEmp=lb-despOp-prolabore-d.imp-d.enc;return`<div class="dr dtot" style="border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)"><span style="color:var(--mu);font-size:12px">= Lucro operacional lÃ­quido</span><span class="dv ${resAntesEmp>=0?'p':'n'}" style="font-size:12px">${fn(resAntesEmp)}</span></div>`})()}
-    <div class="dr dh">FINANCIAMENTO â€” EMPRÃ‰STIMO MERCADO PAGO</div>
-    ${d.emp_entrada>0?`<div class="dr dsub" style="background:rgba(251,146,60,.07);border-left:2px solid rgba(251,146,60,.5)"><span style="color:var(--o)">âœš Entrada emprÃ©stimo MP aprovado</span><span class="dv or">+ ${f(d.emp_entrada)}</span></div>`:''}
-    ${d.emp>0?`<div class="dr dsub"><span>Parcelas pagas no perÃ­odo</span><span class="dv n">${fn(-d.emp)}</span></div>`:(!d.emp_entrada?`<div class="dr dsub" style="opacity:.4"><span style="font-style:italic">Sem movimentaÃ§Ã£o de emprÃ©stimo no perÃ­odo</span><span></span></div>`:'')}  
+    <div class="dr dh">ENCARGOS ML — FATURAS VENCIDAS</div>
+    <div class="dr denc"><span>Débito faturas vencidas Mercado Livre</span><span class="dv n">${fn(-d.enc)}</span></div>
+    ${(()=>{const resAntesEmp=lb-despOp-prolabore-d.imp-d.enc;return`<div class="dr dtot" style="border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)"><span style="color:var(--mu);font-size:12px">= Lucro operacional líquido</span><span class="dv ${resAntesEmp>=0?'p':'n'}" style="font-size:12px">${fn(resAntesEmp)}</span></div>`})()}
+    <div class="dr dh">FINANCIAMENTO — EMPRÉSTIMO MERCADO PAGO</div>
+    ${d.emp_entrada>0?`<div class="dr dsub" style="background:rgba(251,146,60,.07);border-left:2px solid rgba(251,146,60,.5)"><span style="color:var(--o)">Entrada empréstimo MP aprovado</span><span class="dv or">+ ${f(d.emp_entrada)}</span></div>`:''}
+    ${d.emp>0?`<div class="dr dsub"><span>Parcelas pagas no período</span><span class="dv n">${fn(-d.emp)}</span></div>`:(!d.emp_entrada?`<div class="dr dsub" style="opacity:.4"><span style="font-style:italic">Sem movimentação de empréstimo no período</span><span></span></div>`:'')}  
     <div class="dr dh">RESULTADO OPERACIONAL</div>
     <div class="dr dres" style="background:${res>=0?'rgba(0,229,160,.06)':'rgba(244,63,94,.06)'};border-left:2px solid ${res>=0?'var(--g)':'var(--r)'}">
-      <span style="color:${res>=0?'var(--g)':'var(--r)'}">= Resultado lÃ­quido operacional</span>
+      <span style="color:${res>=0?'var(--g)':'var(--r)'}">= Resultado líquido operacional</span>
       <span class="dv ${res>=0?'p':'n'}" style="font-size:15px">${fn(res)}</span>
     </div>
-    <div class="dr" style="background:var(--bg3);font-size:11px;color:var(--mu)"><span>Margem lÃ­quida</span><span class="dv am">${mrg.toFixed(1)}%</span></div>
+    <div class="dr" style="background:var(--bg3);font-size:11px;color:var(--mu)"><span>Margem líquida</span><span class="dv am">${mrg.toFixed(1)}%</span></div>
     <div class="dr dh">NECESSIDADE DE CAPITAL</div>
-    <div class="dr dsub dapo"><span style="color:var(--tl)">Aportes de sÃ³cios no perÃ­odo</span><span class="dv tl">${d.aporte>0?'+ '+f(d.aporte):'â€”'}</span></div>
-    <div class="dr dsub" style="${d.dev_apo>0?'':'opacity:.4'}"><span>DevoluÃ§Ãµes de aporte</span><span class="dv n">${d.dev_apo>0?fn(-d.dev_apo):'â€”'}</span></div>
+    <div class="dr dsub dapo"><span style="color:var(--tl)">Aportes de sócios no período</span><span class="dv tl">${d.aporte>0?'+ '+f(d.aporte):'—'}</span></div>
+    <div class="dr dsub" style="${d.dev_apo>0?'':'opacity:.4'}"><span>Devoluções de aporte</span><span class="dv n">${d.dev_apo>0?fn(-d.dev_apo):'—'}</span></div>
     ${(() => { const resFinal = res + d.aporte - d.dev_apo; return `<div class="dr dres" style="background:${resFinal>=0?'rgba(45,212,191,.07)':'rgba(244,63,94,.08)'};border-left:2px solid ${resFinal>=0?'var(--tl)':'var(--r)'}">
-      <span style="color:${resFinal>=0?'var(--tl)':'var(--r)'}">= PosiÃ§Ã£o de caixa (operacional + capital)</span>
+      <span style="color:${resFinal>=0?'var(--tl)':'var(--r)'}">= Posição de caixa (operacional + capital)</span>
       <span class="dv ${resFinal>=0?'tl':'n'}" style="font-size:15px">${fn(resFinal)}</span>
     </div>`; })()}
-    <div class="dr" style="background:var(--bg3);font-size:11px;color:var(--mu)"><span style="color:var(--mu);font-style:italic">Positivo = operaÃ§Ã£o sustentÃ¡vel Â· Negativo = capital injetado foi consumido</span><span></span></div>`;
+    <div class="dr" style="background:var(--bg3);font-size:11px;color:var(--mu)"><span style="color:var(--mu);font-style:italic">Positivo = operação sustentável · Negativo = capital injetado foi consumido</span><span></span></div>`;
 }
 function rc(){rDRE();rOV();}
 
@@ -674,7 +674,7 @@ function rc(){rDRE();rOV();}
 function rApo(){
   const socios={};
   (apList||[]).forEach(a=>{
-    const nome=(a.socio||'NÃ£o informado').trim()||'NÃ£o informado';
+    const nome=(a.socio||'Não informado').trim()||'Não informado';
     const val=Number(a.valor||0);
     if(!socios[nome]) socios[nome]={ent:0,dev:0};
     if(a.tipo==='devolucao') socios[nome].dev+=val;
@@ -683,33 +683,33 @@ function rApo(){
   const saldoSocios=Object.entries(socios)
     .map(([nome,s])=>({nome,saldo:s.ent-s.dev}))
     .sort((a,b)=>Math.abs(b.saldo)-Math.abs(a.saldo));
-  const top1=saldoSocios[0]||{nome:'Sem lanÃ§amentos',saldo:0};
-  const top2=saldoSocios[1]||{nome:'Sem lanÃ§amentos',saldo:0};
+  const top1=saldoSocios[0]||{nome:'Sem lançamentos',saldo:0};
+  const top2=saldoSocios[1]||{nome:'Sem lançamentos',saldo:0};
   const empEntrada=(emList||[]).reduce((a,e)=>a+Number(e.valor||0),0);
   const totalAportes=(apList||[]).reduce((a,x)=>a+(x.tipo==='devolucao'?-1:1)*Number(x.valor||0),0);
 
   document.getElementById('kpi-apo').innerHTML=`
-    <div class="kc cb"><div class="kl">${top1.nome}</div><div class="kv" style="color:var(--b)">${fn(top1.saldo)}</div><div class="ks">Saldo lÃ­quido de aportes</div></div>
-    <div class="kc cp"><div class="kl">${top2.nome}</div><div class="kv" style="color:var(--p)">${fn(top2.saldo)}</div><div class="ks">Saldo lÃ­quido de aportes</div></div>
-    <div class="kc co"><div class="kl">Entradas de emprÃ©stimo</div><div class="kv" style="color:var(--o)">${f(empEntrada)}</div><div class="ks">Total dos lanÃ§amentos</div></div>
-    <div class="kc ct"><div class="kl">Capital lÃ­quido injetado</div><div class="kv" style="color:var(--tl)">${fn(totalAportes)}</div><div class="ks">Aportes - devoluÃ§Ãµes</div></div>`;
+    <div class="kc cb"><div class="kl">${top1.nome}</div><div class="kv" style="color:var(--b)">${fn(top1.saldo)}</div><div class="ks">Saldo líquido de aportes</div></div>
+    <div class="kc cp"><div class="kl">${top2.nome}</div><div class="kv" style="color:var(--p)">${fn(top2.saldo)}</div><div class="ks">Saldo líquido de aportes</div></div>
+    <div class="kc co"><div class="kl">Entradas de empréstimo</div><div class="kv" style="color:var(--o)">${f(empEntrada)}</div><div class="ks">Total dos lançamentos</div></div>
+    <div class="kc ct"><div class="kl">Capital líquido injetado</div><div class="kv" style="color:var(--tl)">${fn(totalAportes)}</div><div class="ks">Aportes - devoluções</div></div>`;
 }
 
 // EXTRATO
-const ECAT=[{k:'lib',l:'LiberaÃ§Ã£o de dinheiro',t:'p'},{k:'dr',l:'Dinheiro recebido',t:'p'},{k:'em',l:'Entrada de dinheiro',t:'p'},{k:'rb',l:'Reembolsos',t:'p'},{k:'ee',l:'Entrada emprÃ©stimo ML',t:'p'},{k:'drc',l:'DÃ©bito reclamaÃ§Ãµes ML',t:'n'},{k:'drt',l:'Retido / dÃ©b. retido',t:'n'},{k:'ddv',l:'DÃ©bito devoluÃ§Ãµes ML',t:'n'},{k:'denv',l:'DÃ©bito envio ML',t:'n'},{k:'demp',l:'âš  DÃ©bito EmprÃ©stimo Mercado Pago',t:'o'},{k:'dft',l:'DÃ©bito faturas vencidas ML',t:'n'},{k:'ddf',l:'DÃ©bito DIFAL',t:'n'},{k:'pub',l:'Publicidade',t:'n'},{k:'imp',l:'Impostos',t:'n'},{k:'tml',l:'Tarifas ML',t:'n'}];
+const ECAT=[{k:'lib',l:'Liberação de dinheiro',t:'p'},{k:'dr',l:'Dinheiro recebido',t:'p'},{k:'em',l:'Entrada de dinheiro',t:'p'},{k:'rb',l:'Reembolsos',t:'p'},{k:'ee',l:'Entrada empréstimo ML',t:'p'},{k:'drc',l:'Débito reclamações ML',t:'n'},{k:'drt',l:'Retido / déb. retido',t:'n'},{k:'ddv',l:'Débito devoluções ML',t:'n'},{k:'denv',l:'Débito envio ML',t:'n'},{k:'demp',l:'Débito Empréstimo Mercado Pago',t:'o'},{k:'dft',l:'Débito faturas vencidas ML',t:'n'},{k:'ddf',l:'Débito DIFAL',t:'n'},{k:'pub',l:'Publicidade',t:'n'},{k:'imp',l:'Impostos',t:'n'},{k:'tml',l:'Tarifas ML',t:'n'}];
 let extF='all';
 function fe(f2,btn){extF=f2;document.querySelectorAll('#ext-tabs .mt').forEach(el=>el.classList.remove('on'));if(btn)btn.classList.add('on');rExt();}
 function rExt(){
   const ks=extF==='all'?K:[extF];
   const empT=ks.reduce((a,k)=>a+Math.abs(E[k].demp||0),0);
-  document.getElementById('emp-hl').innerHTML=empT>0?`<div class="emp-box"><div><div class="eb-l">EmprÃ©stimo Mercado Pago â€” separado na DRE</div><div class="eb-s">394 lanÃ§amentos em Fev/26 Â· Parcelamento automÃ¡tico diÃ¡rio</div></div><div class="eb-v">${fn(-empT)}</div></div>`:'';
+  document.getElementById('emp-hl').innerHTML=empT>0?`<div class="emp-box"><div><div class="eb-l">Empréstimo Mercado Pago — separado na DRE</div><div class="eb-s">394 lançamentos em Fev/26 · Parcelamento automático diário</div></div><div class="eb-v">${fn(-empT)}</div></div>`:'';
   const ent=ks.reduce((a,k)=>{const e=E[k];return a+e.lib+e.dr+e.em+e.rb+e.ee+(e.pc||0)},0);
   const sai=ks.reduce((a,k)=>{const e=E[k];return a+e.demp+e.drc+e.drt+(e.ddv||0)+e.denv+(e.dec||0)+e.dft+(e.ddf||0)+e.pub+e.imp+e.tml},0);
   document.getElementById('kpi-ext').innerHTML=`
-    <div class="kc cg"><div class="kl">Total entradas</div><div class="kv" style="color:var(--g)">${f(ent)}</div><div class="ks">LiberaÃ§Ãµes + reembolsos</div></div>
-    <div class="kc cr"><div class="kl">Total saÃ­das</div><div class="kv" style="color:var(--r)">${fn(sai)}</div><div class="ks">DÃ©bitos e deduÃ§Ãµes</div></div>
-    <div class="kc co"><div class="kl">EmprÃ©stimo MP</div><div class="kv" style="color:var(--o)">${f(empT)}</div><div class="ks">Separado na DRE</div></div>`;
-  const f2v=v=>v===0?'<span style="color:var(--mu)">â€”</span>':fn(v);
+    <div class="kc cg"><div class="kl">Total entradas</div><div class="kv" style="color:var(--g)">${f(ent)}</div><div class="ks">Liberações + reembolsos</div></div>
+    <div class="kc cr"><div class="kl">Total saídas</div><div class="kv" style="color:var(--r)">${fn(sai)}</div><div class="ks">Débitos e deduções</div></div>
+    <div class="kc co"><div class="kl">Empréstimo MP</div><div class="kv" style="color:var(--o)">${f(empT)}</div><div class="ks">Separado na DRE</div></div>`;
+  const f2v=v=>v===0?'<span style="color:var(--mu)">—</span>':fn(v);
   let html='';
   ECAT.forEach(c=>{
     const vs=K.map(k=>E[k][c.k]||0);
@@ -728,7 +728,7 @@ function extRenderEditor(){
   ECAT.forEach(c=>{
     html+=`<tr><td style="font-size:12px">${c.l}</td>${months.map(m=>`<td class="r"><input data-ext-k="${c.k}" data-ext-m="${m.key}" type="number" step="0.01" value="${((E[m.key]||{})[c.k]||0)}" class="dinp" style="font-family:var(--fm);font-size:11px;text-align:right;max-width:110px"></td>`).join('')}</tr>`;
   });
-  html+='</tbody></table></div><div style="margin-top:10px;font-size:11px;color:var(--mu)">Dica: entradas positivas e dÃ©bitos negativos.</div>';
+  html+='</tbody></table></div><div style="margin-top:10px;font-size:11px;color:var(--mu)">Dica: entradas positivas e débitos negativos.</div>';
   document.getElementById('ext-edit-body').innerHTML=html;
 }
 
@@ -769,7 +769,7 @@ function rNF(){
     const total = c.v;
     const snCell = valSN>0
       ? `<td class="ro" style="font-weight:500">+ ${f(valSN)}</td>`
-      : `<td class="r" style="color:var(--mu)">â€”</td>`;
+      : `<td class="r" style="color:var(--mu)">—</td>`;
     const totalStyle = valSN>0 ? 'color:var(--am);font-weight:500' : 'color:var(--mu)';
     html+=`<tr>
       <td class="dt">${c.d}</td>
@@ -797,21 +797,21 @@ function rComp(){
     <div class="kc ca"><div class="kl">Total NFs entrada</div><div class="kv">${f(tot)}</div><div class="ks">${cpOp.length} notas fiscais</div></div>
     <div class="kc cg"><div class="kl">CMV mercadorias</div><div class="kv" style="color:var(--g)">${f(cmv)}</div><div class="ks">${pct(cmv,tot)} do total</div></div>
     <div class="kc cp"><div class="kl">Despesas operac.</div><div class="kv" style="color:var(--p)">${f(desp)}</div><div class="ks">${pct(desp,tot)} do total</div></div>
-    <div class="kc ca"><div class="kl">NFs particulares</div><div class="kv" style="color:var(--am);font-size:16px">${f(totPart)}</div><div class="ks">IncluÃ­das no CMV da DRE</div></div>`;
+    <div class="kc ca"><div class="kl">NFs particulares</div><div class="kv" style="color:var(--am);font-size:16px">${f(totPart)}</div><div class="ks">Incluídas no CMV da DRE</div></div>`;
 }
 
 function rForn(){
   const mp={};CP.forEach(c=>{mp[c.f]=(mp[c.f]||0)+c.v;});
   const sorted=Object.entries(mp).sort((a,b)=>b[1]-a[1]),tot=sorted.reduce((a,v)=>a+v[1],0),conc=sorted[0][1]/tot*100;
-  document.getElementById('kpi-fn').innerHTML=`<div class="kc cb"><div class="kl">Total comprado</div><div class="kv">${f(tot)}</div><div class="ks">${sorted.length} fornecedores</div></div><div class="kc ca"><div class="kl">Maior fornecedor</div><div class="kv" style="font-size:13px;color:var(--am)">P&D Impex</div><div class="ks">${f(sorted[0][1])} Â· ${conc.toFixed(0)}%</div></div><div class="kc ${conc>60?'cr':'cg'}"><div class="kl">ConcentraÃ§Ã£o</div><div class="kv" style="color:${conc>60?'var(--r)':'var(--g)'}">${conc.toFixed(0)}%</div><div class="ks">${conc>60?'Alta â€” risco':'SaudÃ¡vel'}</div></div>`;
+  document.getElementById('kpi-fn').innerHTML=`<div class="kc cb"><div class="kl">Total comprado</div><div class="kv">${f(tot)}</div><div class="ks">${sorted.length} fornecedores</div></div><div class="kc ca"><div class="kl">Maior fornecedor</div><div class="kv" style="font-size:13px;color:var(--am)">P&D Impex</div><div class="ks">${f(sorted[0][1])} · ${conc.toFixed(0)}%</div></div><div class="kc ${conc>60?'cr':'cg'}"><div class="kl">Concentração</div><div class="kv" style="color:${conc>60?'var(--r)':'var(--g)'}">${conc.toFixed(0)}%</div><div class="ks">${conc>60?'Alta — risco':'Saudável'}</div></div>`;
   const cls=['#3b82f6','#00e5a0','#f59e0b','#f43f5e','#a78bfa','#1D9E75','#fb923c','#7a7f8e'];
   document.getElementById('fb-bars').innerHTML=sorted.map((s,i)=>`<div class="fbr"><div class="fbn" title="${s[0]}">${s[0].split(' ').slice(0,3).join(' ')}</div><div class="fbbw"><div class="fbbar" style="width:${(s[1]/sorted[0][1]*100).toFixed(0)}%;background:${cls[i%cls.length]}"></div></div><div class="fbv">${f(s[1])}</div><div class="fbp">${(s[1]/tot*100).toFixed(1)}%</div></div>`).join('');
 }
 
 function rSKU(){
   const mxR=Math.max(...SK.map(s=>s.r)),totR=SK.reduce((a,s)=>a+s.r,0);
-  let h='<thead><tr><th style="width:24px"></th><th>Produto</th><th class="r">Pedidos</th><th class="r">Receita bruta</th><th class="r">LÃ­quido ML</th><th class="r">RetenÃ§Ã£o</th><th class="r">% Total</th></tr></thead><tbody>';
-  SK.forEach((s,i)=>{const ret=s.r-s.l,retP=(ret/s.r*100).toFixed(0),sh=(s.r/totR*100).toFixed(1),bw=Math.round(s.r/mxR*100);h+=`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><div>${s.s}</div><div class="bsp" style="width:${bw}%"></div></td><td class="r">${s.p}</td><td class="rp">${f(s.r)}</td><td class="r" style="color:var(--g)">${f(s.l)}</td><td class="rn">âˆ’${retP}%</td><td class="r">${sh}%</td></tr>`;});
+  let h='<thead><tr><th style="width:24px"></th><th>Produto</th><th class="r">Pedidos</th><th class="r">Receita bruta</th><th class="r">Líquido ML</th><th class="r">Retenção</th><th class="r">% Total</th></tr></thead><tbody>';
+  SK.forEach((s,i)=>{const ret=s.r-s.l,retP=(ret/s.r*100).toFixed(0),sh=(s.r/totR*100).toFixed(1),bw=Math.round(s.r/mxR*100);h+=`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><div>${s.s}</div><div class="bsp" style="width:${bw}%"></div></td><td class="r">${s.p}</td><td class="rp">${f(s.r)}</td><td class="r" style="color:var(--g)">${f(s.l)}</td><td class="rn">−${retP}%</td><td class="r">${sh}%</td></tr>`;});
   document.getElementById('sku-tb').innerHTML=h+'</tbody>';
 }
 
@@ -828,26 +828,26 @@ function buildCharts(){
   const retTot=V.tv.map((v,i)=>Math.abs(v)+Math.abs(V.ca[i]));
   const dml=K.map(k=>Math.abs(DEB_ML[k]));
 
-  new Chart(document.getElementById('ch-ov'),{type:'bar',data:{labels:M,datasets:[{label:'Receita bruta',data:rt,backgroundColor:'#3b82f6',borderRadius:4},{label:'LÃ­quido ML',data:V.lq,backgroundColor:'#00e5a0',borderRadius:4},{label:'Resultado',data:lcs,backgroundColor:lcs.map(v=>v>=0?'#1D9E75':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
+  new Chart(document.getElementById('ch-ov'),{type:'bar',data:{labels:M,datasets:[{label:'Receita bruta',data:rt,backgroundColor:'#3b82f6',borderRadius:4},{label:'Líquido ML',data:V.lq,backgroundColor:'#00e5a0',borderRadius:4},{label:'Resultado',data:lcs,backgroundColor:lcs.map(v=>v>=0?'#1D9E75':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
   const rvT=Math.abs(V.tv.reduce((a,v)=>a+v,0)),reT=Math.abs(V.te.reduce((a,v)=>a+v,0)),rcT=Math.abs(V.ca.reduce((a,v)=>a+v,0));
   new Chart(document.getElementById('ch-rp'),{type:'doughnut',data:{labels:['Tarifa venda','Tarifa envio','Cancelamentos'],datasets:[{data:[rvT,reT,rcT],backgroundColor:['#f43f5e','#f59e0b','#a78bfa'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+f(ctx.parsed)}}}}});
   new Chart(document.getElementById('ch-pd'),{type:'bar',data:{labels:M,datasets:[{label:'Pedidos',data:V.pd,backgroundColor:'#3b82f6',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y+' pedidos'}}},scales:{x:axX,y:{ticks:{color:'#7a7f8e',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   new Chart(document.getElementById('ch-tk'),{type:'line',data:{labels:M,datasets:[{label:'Ticket',data:V.rp.map((v,i)=>+(v/V.pd[i]).toFixed(2)),borderColor:'#00e5a0',backgroundColor:'rgba(0,229,160,0.08)',tension:0.4,fill:true,pointBackgroundColor:'#00e5a0',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>f(ctx.parsed.y)}}},scales:{x:axX,y:{...ax,ticks:{...ax.ticks,callback:v=>'R$'+v}}}}});
-  new Chart(document.getElementById('ch-ev'),{type:'bar',data:{labels:M,datasets:[{label:'Receita bruta',data:rt,backgroundColor:'#3b82f6',borderRadius:4},{label:'LÃ­quido ML',data:V.lq,backgroundColor:'#00e5a0',borderRadius:4},{label:'CMV',data:cvs,backgroundColor:'#f43f5e',borderRadius:4},{label:'EmprÃ©stimo',data:emps,backgroundColor:'#fb923c',borderRadius:4},{label:'Resultado',data:lcs,backgroundColor:lcs.map(v=>v>=0?'#1D9E75':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
-  new Chart(document.getElementById('ch-cs'),{type:'bar',data:{labels:M,datasets:[{label:'RetenÃ§Ãµes ML',data:retTot,backgroundColor:'#f43f5e',borderRadius:4,stack:'s'},{label:'DÃ©b. op. ML',data:dml,backgroundColor:'rgba(244,63,94,0.4)',borderRadius:4,stack:'s'},{label:'CMV',data:cvs,backgroundColor:'#f59e0b',borderRadius:4,stack:'s'},{label:'Desp. op.',data:despOp,backgroundColor:'#a78bfa',borderRadius:4,stack:'s'},{label:'Enc.+Emp.',data:encs.map((v,i)=>v+emps[i]),backgroundColor:'#fb923c',borderRadius:4,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:{...axX,stacked:true},y:{...ax,stacked:true}}}});
+  new Chart(document.getElementById('ch-ev'),{type:'bar',data:{labels:M,datasets:[{label:'Receita bruta',data:rt,backgroundColor:'#3b82f6',borderRadius:4},{label:'Líquido ML',data:V.lq,backgroundColor:'#00e5a0',borderRadius:4},{label:'CMV',data:cvs,backgroundColor:'#f43f5e',borderRadius:4},{label:'Empréstimo',data:emps,backgroundColor:'#fb923c',borderRadius:4},{label:'Resultado',data:lcs,backgroundColor:lcs.map(v=>v>=0?'#1D9E75':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
+  new Chart(document.getElementById('ch-cs'),{type:'bar',data:{labels:M,datasets:[{label:'Retenções ML',data:retTot,backgroundColor:'#f43f5e',borderRadius:4,stack:'s'},{label:'Déb. op. ML',data:dml,backgroundColor:'rgba(244,63,94,0.4)',borderRadius:4,stack:'s'},{label:'CMV',data:cvs,backgroundColor:'#f59e0b',borderRadius:4,stack:'s'},{label:'Desp. op.',data:despOp,backgroundColor:'#a78bfa',borderRadius:4,stack:'s'},{label:'Enc.+Emp.',data:encs.map((v,i)=>v+emps[i]),backgroundColor:'#fb923c',borderRadius:4,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:{...axX,stacked:true},y:{...ax,stacked:true}}}});
   const mrgs=rt.map((r,i)=>(lcs[i]/r*100).toFixed(1));
   new Chart(document.getElementById('ch-mg'),{type:'bar',data:{labels:M,datasets:[{label:'Margem',data:mrgs,backgroundColor:mrgs.map(v=>v>=0?'rgba(0,229,160,0.7)':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y+'%'}}},scales:{x:axX,y:{ticks:{color:'#7a7f8e',font:{size:10},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   // Aportes chart
   const apRec=K.map(k=>Number(APORTES[k]||0));
   const apDev=K.map(k=>-Math.abs(Number(DEV_APORTE[k]||0)));
-  new Chart(document.getElementById('ch-apo'),{type:'bar',data:{labels:M,datasets:[{label:'Aportes',data:apRec,backgroundColor:'rgba(59,130,246,0.6)',borderRadius:4,stack:'apo'},{label:'DevoluÃ§Ãµes',data:apDev,backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'apo'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fn(ctx.parsed.y)}}},scales:{x:axX,y:ax}}});
+  new Chart(document.getElementById('ch-apo'),{type:'bar',data:{labels:M,datasets:[{label:'Aportes',data:apRec,backgroundColor:'rgba(59,130,246,0.6)',borderRadius:4,stack:'apo'},{label:'Devoluções',data:apDev,backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'apo'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fn(ctx.parsed.y)}}},scales:{x:axX,y:ax}}});
   // Extrato charts
-  new Chart(document.getElementById('ch-eb'),{type:'bar',data:{labels:M,datasets:[{label:'Entradas',data:K.map(k=>{const e=E[k];return e.lib+e.dr+e.em+e.rb+e.ee}),backgroundColor:'#00e5a0',borderRadius:4},{label:'SaÃ­das',data:K.map(k=>{const e=E[k];return Math.abs(e.demp+e.drc+e.drt+(e.ddv||0)+e.denv+(e.dec||0)+e.dft+(e.ddf||0)+e.pub+e.imp+e.tml)}),backgroundColor:'#f43f5e',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
+  new Chart(document.getElementById('ch-eb'),{type:'bar',data:{labels:M,datasets:[{label:'Entradas',data:K.map(k=>{const e=E[k];return e.lib+e.dr+e.em+e.rb+e.ee}),backgroundColor:'#00e5a0',borderRadius:4},{label:'Saídas',data:K.map(k=>{const e=E[k];return Math.abs(e.demp+e.drc+e.drt+(e.ddv||0)+e.denv+(e.dec||0)+e.dft+(e.ddf||0)+e.pub+e.imp+e.tml)}),backgroundColor:'#f43f5e',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
   const sd=K.reduce((a,k)=>({emp:a.emp+Math.abs(E[k].demp||0),rc:a.rc+Math.abs(E[k].drc)+Math.abs(E[k].drt)+Math.abs(E[k].ddv||0),env:a.env+Math.abs(E[k].denv),fat:a.fat+Math.abs(E[k].dft)+Math.abs(E[k].ddf||0),imp:a.imp+Math.abs(E[k].imp),pub:a.pub+Math.abs(E[k].pub)}),{emp:0,rc:0,env:0,fat:0,imp:0,pub:0});
-  new Chart(document.getElementById('ch-ep'),{type:'doughnut',data:{labels:['EmprÃ©stimo MP','ReclamaÃ§Ãµes/Dev.','Envio','Faturas','Impostos','Publicidade'],datasets:[{data:[sd.emp,sd.rc,sd.env,sd.fat,sd.imp,sd.pub],backgroundColor:['#fb923c','#f43f5e','#f59e0b','#a78bfa','#3b82f6','#7a7f8e'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+f(ctx.parsed)}}}}});
+  new Chart(document.getElementById('ch-ep'),{type:'doughnut',data:{labels:['Empréstimo MP','Reclamações/Dev.','Envio','Faturas','Impostos','Publicidade'],datasets:[{data:[sd.emp,sd.rc,sd.env,sd.fat,sd.imp,sd.pub],backgroundColor:['#fb923c','#f43f5e','#f59e0b','#a78bfa','#3b82f6','#7a7f8e'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+f(ctx.parsed)}}}}});
   // SKU
   const t10=SK.slice(0,10);
-  new Chart(document.getElementById('ch-sb'),{type:'bar',data:{labels:t10.map(s=>s.s.length>17?s.s.slice(0,15)+'â€¦':s.s),datasets:[{label:'Receita',data:t10.map(s=>s.r),backgroundColor:'#3b82f6',borderRadius:4,stack:'s'},{label:'RetenÃ§Ã£o',data:t10.map(s=>s.r-s.l),backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'s'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:ax,y:{ticks:{color:'#7a7f8e',font:{size:10}},grid:{display:false},stacked:true}}}});
+  new Chart(document.getElementById('ch-sb'),{type:'bar',data:{labels:t10.map(s=>s.s.length>17?s.s.slice(0,15)+'…':s.s),datasets:[{label:'Receita',data:t10.map(s=>s.r),backgroundColor:'#3b82f6',borderRadius:4,stack:'s'},{label:'Retenção',data:t10.map(s=>s.r-s.l),backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'s'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:ax,y:{ticks:{color:'#7a7f8e',font:{size:10}},grid:{display:false},stacked:true}}}});
   const totSK=SK.reduce((a,s)=>a+s.r,0),outSK=totSK-SK.slice(0,7).reduce((a,s)=>a+s.r,0);
   new Chart(document.getElementById('ch-sp'),{type:'doughnut',data:{labels:[...SK.slice(0,7).map(s=>s.s),'Outros'],datasets:[{data:[...SK.slice(0,7).map(s=>s.r),outSK],backgroundColor:['#3b82f6','#00e5a0','#f59e0b','#f43f5e','#a78bfa','#1D9E75','#fb923c','#7a7f8e'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+f(ctx.parsed)}}}}});
   // Fornec
@@ -891,11 +891,11 @@ function rEst(){
     return 'background:rgba(0,229,160,.10);color:var(--g);border:1px solid rgba(0,229,160,.25)';
   };
   const statusLabel = e => {
-    if(e.zero&&e.v30>10) return 'âš  Urgente';
-    if(e.zero&&(e.ep||0)>0) return 'ReposiÃ§Ã£o';
+    if(e.zero&&e.v30>10) return 'Urgente';
+    if(e.zero&&(e.ep||0)>0) return 'Reposição';
     if(e.zero) return 'Zerado';
-    if(e.te==='Impulsionar') return 'âš¡ Impulsionar';
-    if(e.te.includes('1 semana')) return 'CrÃ­tico';
+    if(e.te==='Impulsionar') return 'Impulsionar';
+    if(e.te.includes('1 semana')) return 'Crítico';
     return 'OK';
   };
 
@@ -952,7 +952,7 @@ function fMarg(f,btn){
 function rMarg(){
   var fc=function(v){return 'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});};
   var fp=function(v){return (v>0?'+':'')+v.toFixed(1)+'%';};
-  var dash='<span style="color:var(--mu)">â€”</span>';
+  var dash='<span style="color:var(--mu)">—</span>';
   var gd=function(r){return margMes===-1?r.tot:r.m[margMes];};
   var comCusto=MARG.filter(function(r){return r.custo>0&&gd(r).rp>0;});
   var semCusto=MARG.filter(function(r){return r.custo===0||gd(r).rp===0;});
@@ -967,7 +967,7 @@ function rMarg(){
     '<div class="kc cg"><div class="kl">SKUs analisados</div><div class="kv">'+comCusto.length+'</div><div class="ks">'+semCusto.length+' sem custo</div></div>'+
     '<div class="kc cb"><div class="kl">Margem liquida media</div><div class="kv" style="color:'+(avgMgl>=0?'var(--g)':'var(--r)')+'">'+avgMgl.toFixed(1)+'%</div><div class="ks">'+mesLbl+'</div></div>'+
     '<div class="kc ca"><div class="kl">Capital imobilizado</div><div class="kv" style="color:var(--am)">'+fc(totalImob)+'</div><div class="ks">Custo estoque atual</div></div>'+
-    '<div class="kc cp"><div class="kl">Melhor ROI</div><div class="kv" style="color:var(--p)">'+(bestROI&&bestROI.roi>0?bestROI.roi.toFixed(1)+'%':'â€”')+'</div><div class="ks">'+(bestROI?bestROI.sku:'')+'</div></div>';
+    '<div class="kc cp"><div class="kl">Melhor ROI</div><div class="kv" style="color:var(--p)">'+(bestROI&&bestROI.roi>0?bestROI.roi.toFixed(1)+'%':'—')+'</div><div class="ks">'+(bestROI?bestROI.sku:'')+'</div></div>';
   var rows=MARG;
   if(margF==='ok')   rows=MARG.filter(function(r){return r.custo>0&&gd(r).rp>0&&gd(r).mgl>0;});
   else if(margF==='neg') rows=MARG.filter(function(r){return r.custo>0&&gd(r).rp>0&&gd(r).mgl<=0;});
@@ -990,9 +990,9 @@ function rMarg(){
       +'<td class="r" style="font-size:12px;font-family:var(--fm);color:var(--r)">'+(d.tar>0?fc(d.tar):dash)+'</td>'
       +'<td class="r" style="font-size:12px;font-family:var(--fm);color:var(--b)">'+(d.tot>0?fc(d.tot):dash)+'</td>'
       +'<td class="r" style="font-size:12px;font-family:var(--fm);color:var(--r)">'+(d.cmv>0?fc(d.cmv):dash)+'</td>'
-      +'<td class="r" style="font-size:11px"><span style="color:'+mgbC+';font-weight:600">'+(sem?'â€”':fp(d.mgb_p))+'</span>'
+      +'<td class="r" style="font-size:11px"><span style="color:'+mgbC+';font-weight:600">'+(sem?'—':fp(d.mgb_p))+'</span>'
         +'<br><span style="color:var(--mu);font-size:10px">'+(sem||d.mgb===0?'':d.mgb>0?'+'+fc(d.mgb):'-'+fc(Math.abs(d.mgb)))+'</span></td>'
-      +'<td class="r" style="font-size:11px"><span style="color:'+mglC+';font-weight:700">'+(sem?'â€”':fp(d.mgl_p))+'</span>'
+      +'<td class="r" style="font-size:11px"><span style="color:'+mglC+';font-weight:700">'+(sem?'—':fp(d.mgl_p))+'</span>'
         +'<br><span style="color:var(--mu);font-size:10px">'+(sem||d.mgl===0?'':d.mgl>0?'+'+fc(d.mgl):'-'+fc(Math.abs(d.mgl)))+'</span></td>'
       +'<td class="r" style="font-size:12px;font-family:var(--fm);color:var(--am)">'+(r.custo_est>0?fc(r.custo_est):dash)+'</td>'
       +'<td class="r" style="font-size:12px">'+(r.v30>0?r.v30:dash)+'</td>'
@@ -1010,43 +1010,43 @@ loadDB(); loadNFFromAPI();
 
 <!-- G-FINANCEIRO -->
 <div class="pg" id="page-g-financeiro">
-  <div class="sh"><div class="st">Dados Financeiros Mensais</div><span class="sb2">EditÃ¡vel â€” salva no banco</span></div>
+  <div class="sh"><div class="st">Dados Financeiros Mensais</div><span class="sb2">Editável — salva no banco</span></div>
   <div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:var(--rd);padding:12px 16px;margin-bottom:14px;font-size:12px;color:var(--mu);line-height:1.7">
-    Edite os valores mensais abaixo. Eles alimentam todos os grÃ¡ficos, DRE e KPIs do painel. <strong style="color:var(--b)">Salve ao terminar.</strong>
+    Edite os valores mensais abaixo. Eles alimentam todos os gráficos, DRE e KPIs do painel. <strong style="color:var(--b)">Salve ao terminar.</strong>
   </div>
   <div id="fin-tabs" style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px;margin-bottom:14px;width:fit-content">
     <button class="mt on" onclick="finTab('receitas',this)">Receitas</button>
     <button class="mt" onclick="finTab('cmv',this)">CMV</button>
     <button class="mt" onclick="finTab('desp',this)">Despesas</button>
-    <button class="mt" onclick="finTab('emp',this)">EmprÃ©stimos</button>
-    <button class="mt" onclick="finTab('debml',this)">DÃ©b. ML</button>
-    <button class="mt" onclick="finTab('meses',this)">PerÃ­odos</button>
+    <button class="mt" onclick="finTab('emp',this)">Empréstimos</button>
+    <button class="mt" onclick="finTab('debml',this)">Déb. ML</button>
+    <button class="mt" onclick="finTab('meses',this)">Períodos</button>
   </div>
   <div id="fin-body"></div>
   <div style="margin-top:14px;display:flex;gap:8px">
-    <button onclick="finSave()" class="cbtn">ðŸ’¾ Salvar dados financeiros</button>
+    <button onclick="finSave()" class="cbtn">Salvar dados financeiros</button>
   </div>
 </div>
 
 <!-- G-PRODUTOS -->
 <div class="pg" id="page-g-produtos">
-  <div class="sh"><div class="st">Produtos / Custos</div><span class="sb2" id="gp-count2">â€”</span></div>
+  <div class="sh"><div class="st">Produtos / Custos</div><span class="sb2" id="gp-count2">—</span></div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-bottom:14px">
     <div class="ct">Cadastrar / editar produto</div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">SKU</div><input id="gp-sku" class="dinp" placeholder="Nome do produto"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">DescriÃ§Ã£o detalhada</div><input id="gp-desc" class="dinp" placeholder="DescriÃ§Ã£o completa do item"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição detalhada</div><input id="gp-desc" class="dinp" placeholder="Descrição completa do item"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Embalagem</div><input id="gp-emb" class="dinp" placeholder="Ex: caixa com 12"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Quantidade</div><input id="gp-qt" type="number" class="dinp" placeholder="0"></div>
     </div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:1fr 1fr 1.5fr 1.5fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Custo unit. (R$)</div><input id="gp-custo" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Custo total (R$)</div><input id="gp-custo-total" type="number" step="0.01" class="dinp" placeholder="Auto: qtd x custo unit."></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Equivalente no catÃ¡logo</div><input id="gp-eq" class="dinp" placeholder="Produto equivalente"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Ref. / PÃ¡gina</div><input id="gp-ref" class="dinp" placeholder="Ex: CatÃ¡logo 2026 p.14"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Equivalente no catálogo</div><input id="gp-eq" class="dinp" placeholder="Produto equivalente"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Ref. / Página</div><input id="gp-ref" class="dinp" placeholder="Ex: Catálogo 2026 p.14"></div>
     </div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:12px">
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="gp-obs" class="dinp" placeholder="ObservaÃ§Ãµes do produto"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="gp-obs" class="dinp" placeholder="Observações do produto"></div>
       <div>
         <div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Foto (arquivo)</div>
         <input id="gp-foto-arq" type="file" accept="image/*" class="dinp" style="padding:6px">
@@ -1058,14 +1058,14 @@ loadDB(); loadNFFromAPI();
       <button onclick="gpSave()" class="cbtn">Salvar</button>
       <button onclick="gpClear()" style="padding:8px 14px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:13px;font-family:var(--fb)">Limpar</button>
       <label style="font-size:12px;color:var(--g);cursor:pointer;padding:8px 14px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.25);border-radius:var(--rs)">
-        ðŸ“¥ Importar Excel <input type="file" accept=".xlsx" id="gp-file" style="display:none" onchange="gpImport(this)">
+        Importar Excel <input type="file" accept=".xlsx" id="gp-file" style="display:none" onchange="gpImport(this)">
       </label>
     </div>
     <input type="hidden" id="gp-id">
   </div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
     <div style="overflow-x:auto"><table class="tb" style="min-width:1400px">
-      <thead><tr><th>#</th><th>SKU</th><th>DescriÃ§Ã£o detalhada</th><th>Embalagem</th><th class="r">Quantidade</th><th class="r">Custo Unit.</th><th class="r">Custo Total</th><th>Obs</th><th>Equivalente no catÃ¡logo</th><th>Ref. / PÃ¡gina</th><th>Foto</th><th class="r">V30</th><th class="r">AÃ§Ãµes</th></tr></thead>
+      <thead><tr><th>#</th><th>SKU</th><th>Descrição detalhada</th><th>Embalagem</th><th class="r">Quantidade</th><th class="r">Custo Unit.</th><th class="r">Custo Total</th><th>Obs</th><th>Equivalente no catálogo</th><th>Ref. / Página</th><th>Foto</th><th class="r">V30</th><th class="r">Ações</th></tr></thead>
       <tbody id="gp-tb"></tbody>
     </table></div>
   </div>
@@ -1075,10 +1075,10 @@ loadDB(); loadNFFromAPI();
 <div class="pg" id="page-g-notas">
   <div class="sh"><div class="st">Notas Fiscais</div></div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-bottom:14px">
-    <div class="ct">LanÃ§ar nova nota</div>
+    <div class="ct">Lançar nova nota</div>
     <div class="form-grid-3" style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="nf2-data" type="date" class="dinp"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">NÃºmero NF</div><input id="nf2-num" class="dinp" placeholder="Ex: 12534"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Número NF</div><input id="nf2-num" class="dinp" placeholder="Ex: 12534"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Fornecedor</div><input id="nf2-forn" class="dinp" placeholder="Nome do fornecedor"></div>
     </div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px">
@@ -1089,14 +1089,14 @@ loadDB(); loadNFFromAPI();
     </div>
     <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">ITEM</div><input id="nf2-item" class="dinp" placeholder="Nome do item"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">COD NCM</div><input id="nf2-ncm" class="dinp" placeholder="CÃ³digo NCM"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">COD NCM</div><input id="nf2-ncm" class="dinp" placeholder="Código NCM"></div>
     </div>
     <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">PDF da nota (opcional)</div><input id="nf2-pdf" type="file" accept="application/pdf,.pdf" class="dinp" style="padding:6px"></div>
-    <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">ObservaÃ§Ã£o</div><input id="nf2-obs" class="dinp" placeholder="Opcional"></div>
+    <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Observação</div><input id="nf2-obs" class="dinp" placeholder="Opcional"></div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <button onclick="nf2Save()" class="cbtn">LanÃ§ar nota</button>
+      <button onclick="nf2Save()" class="cbtn">Lançar nota</button>
       <label style="font-size:12px;color:var(--g);cursor:pointer;padding:8px 14px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.25);border-radius:var(--rs)">
-        ðŸ“¥ Importar ITEM + COD NCM (.xlsx)
+        Importar ITEM + COD NCM (.xlsx)
         <input type="file" accept=".xlsx" style="display:none" onchange="nf2ImportItemNcm(this)">
       </label>
     </div>
@@ -1107,48 +1107,48 @@ loadDB(); loadNFFromAPI();
       <button onclick="nf2Filter('cmv')" id="nf2f-cmv" class="mt">CMV</button>
       <button onclick="nf2Filter('desp')" id="nf2f-dp" class="mt">Despesas</button>
     </div>
-    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>NF</th><th>Fornecedor</th><th>ITEM</th><th>COD NCM</th><th class="r">Total</th><th class="r">c/Nota</th><th class="r">SN</th><th>Tipo</th><th>PDF</th><th>Obs</th><th class="r">AÃ§Ã£o</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
+    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>NF</th><th>Fornecedor</th><th>ITEM</th><th>COD NCM</th><th class="r">Total</th><th class="r">c/Nota</th><th class="r">SN</th><th>Tipo</th><th>PDF</th><th>Obs</th><th class="r">Ação</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
     <div id="nf2-ft" style="padding:9px 10px;text-align:right;font-size:12px;color:var(--mu);border-top:1px solid var(--bdr)"></div>
   </div>
 </div>
 
 <!-- G-APORTES -->
 <div class="pg" id="page-g-aportes">
-  <div class="sh"><div class="st">Aportes e EmprÃ©stimos</div></div>
+  <div class="sh"><div class="st">Aportes e Empréstimos</div></div>
   <div class="g2 sec">
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
       <div class="ct">Novo aporte de capital</div>
       <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">SÃ³cio</div><select id="ap-socio" class="dinp"><option value="Lucas Cristiano Pereira">Lucas</option></select></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Sócio</div><select id="ap-socio" class="dinp"><option value="Lucas Cristiano Pereira">Lucas</option></select></div>
         <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="ap-data" type="date" class="dinp"></div>
       </div>
       <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
         <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor (R$)</div><input id="ap-val" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
-        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Tipo</div><select id="ap-tipo" class="dinp"><option value="entrada">Entrada</option><option value="devolucao">DevoluÃ§Ã£o</option></select></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Tipo</div><select id="ap-tipo" class="dinp"><option value="entrada">Entrada</option><option value="devolucao">Devolução</option></select></div>
       </div>
-      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">DescriÃ§Ã£o / Obs</div><input id="ap-obs" class="dinp" placeholder="Ex: Pix recebido Â· 143..."></div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição / Obs</div><input id="ap-obs" class="dinp" placeholder="Ex: Pix recebido · 143..."></div>
       <button onclick="apSave()" class="cbtn">Salvar aporte</button>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
-      <div class="ct">Novo emprÃ©stimo</div>
+      <div class="ct">Novo empréstimo</div>
       <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="em-data" type="date" class="dinp"></div>
-      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">DescriÃ§Ã£o</div><input id="em-desc" class="dinp" placeholder="Ex: Dinheiro Express"></div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição</div><input id="em-desc" class="dinp" placeholder="Ex: Dinheiro Express"></div>
       <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
         <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor entrada (R$)</div><input id="em-val" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
         <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Total a pagar (R$)</div><input id="em-tot" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
       </div>
       <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="em-obs" class="dinp" placeholder="Ex: 20% de cada venda"></div>
-      <button onclick="emSave()" class="cbtn">Salvar emprÃ©stimo</button>
+      <button onclick="emSave()" class="cbtn">Salvar empréstimo</button>
     </div>
   </div>
   <div class="g2 sec">
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
       <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);font-size:11px;color:var(--mu)">Aportes cadastrados</div>
-      <table class="tb"><thead><tr><th>Data</th><th>SÃ³cio</th><th>DescriÃ§Ã£o</th><th class="r">Valor</th><th>Tipo</th><th class="r">AÃ§Ã£o</th></tr></thead><tbody id="ap-tb"></tbody></table>
+      <table class="tb"><thead><tr><th>Data</th><th>Sócio</th><th>Descrição</th><th class="r">Valor</th><th>Tipo</th><th class="r">Ação</th></tr></thead><tbody id="ap-tb"></tbody></table>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
-      <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);font-size:11px;color:var(--mu)">EmprÃ©stimos cadastrados</div>
-      <table class="tb"><thead><tr><th>Data</th><th>DescriÃ§Ã£o</th><th class="r">Entrada</th><th class="r">Total pagar</th><th class="r">AÃ§Ã£o</th></tr></thead><tbody id="em-tb"></tbody></table>
+      <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);font-size:11px;color:var(--mu)">Empréstimos cadastrados</div>
+      <table class="tb"><thead><tr><th>Data</th><th>Descrição</th><th class="r">Entrada</th><th class="r">Total pagar</th><th class="r">Ação</th></tr></thead><tbody id="em-tb"></tbody></table>
     </div>
   </div>
 </div>
@@ -1180,8 +1180,8 @@ loadDB(); loadNFFromAPI();
   </div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
     <div class="ct">Backup dos dados</div>
-    <p style="font-size:12px;color:var(--mu);margin-bottom:12px">FaÃ§a download de todos os dados do sistema em um arquivo .zip.</p>
-    <a href="/api/backup" class="cbtn" style="text-decoration:none;display:inline-flex">â¬‡ Baixar backup</a>
+    <p style="font-size:12px;color:var(--mu);margin-bottom:12px">Faça download de todos os dados do sistema em um arquivo .zip.</p>
+    <a href="/api/backup" class="cbtn" style="text-decoration:none;display:inline-flex">Baixar backup</a>
   </div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-top:12px">
     <div class="ct">Mercado Livre API</div>
@@ -1190,25 +1190,25 @@ loadDB(); loadNFFromAPI();
       <button onclick="mlSyncNow()" class="cbtn">Sincronizar agora</button>
       <button onclick="mlSyncStatus()" style="padding:8px 14px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:13px;font-family:var(--fb)">Ver status</button>
     </div>
-    <div id="ml-sync-status" style="font-size:11px;color:var(--mu)">Sem sincronizaÃ§Ã£o nesta sessÃ£o.</div>
+    <div id="ml-sync-status" style="font-size:11px;color:var(--mu)">Sem sincronização nesta sessão.</div>
   </div>
 </div>
 
 <!-- G-HISTORICO -->
 <div class="pg" id="page-g-historico">
-  <div class="sh"><div class="st">HistÃ³rico de AlteraÃ§Ãµes</div><button onclick="loadHist()" style="padding:5px 12px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:12px">â†» Atualizar</button></div>
+  <div class="sh"><div class="st">Histórico de Alterações</div><button onclick="loadHist()" style="padding:5px 12px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:12px">Atualizar</button></div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
-    <table class="tb"><thead><tr><th>Data/Hora</th><th>UsuÃ¡rio</th><th>AÃ§Ã£o</th><th>Detalhe</th></tr></thead><tbody id="hist-tb"></tbody></table>
+    <table class="tb"><thead><tr><th>Data/Hora</th><th>Usuário</th><th>Ação</th><th>Detalhe</th></tr></thead><tbody id="hist-tb"></tbody></table>
   </div>
 </div>
 
 <script>
-// â”€â”€ GestÃ£o helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Gestão helpers �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 const gAPI=async(m,u,b)=>{const o={method:m,headers:{'Content-Type':'application/json'}};if(b)o.body=JSON.stringify(b);return(await fetch(u,o)).json();};
 const fc2=v=>'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 function gToast(msg,err=false){const el=document.getElementById('g-toast');el.textContent=msg;el.style.borderColor=err?'var(--r)':'var(--g)';el.style.color=err?'var(--r)':'var(--g)';el.style.display='block';setTimeout(()=>el.style.display='none',3200);}
 
-// â”€â”€ Dados financeiros â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Dados financeiros �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 let finData={};
 let finTab_='receitas';
 
@@ -1246,22 +1246,22 @@ function finRender(){
   let html='';
 
   if(finTab_==='receitas'){
-    html='<div class="card sec"><div class="ct">Receitas e liquidaÃ§Ãµes ML</div>';
+    html='<div class="card sec"><div class="ct">Receitas e liquidações ML</div>';
     html+=finMonthGrid([
       ['Receita bruta (rp)', V2.rp],
-      ['AcrÃ©scimo parcelamento (ac)', V2.ac],
+      ['Acréscimo parcelamento (ac)', V2.ac],
       ['Taxa parcelamento (txa)', V2.txa],
       ['Tarifa venda+imp (tv)', V2.tv],
       ['Receita envio (re)', V2.re],
       ['Tarifa envio (te)', V2.te],
       ['Cancelamentos (ca)', V2.ca],
-      ['Descontos/bÃ´nus (db)', V2.db],
-      ['LÃ­quido ML (lq)', V2.lq],
+      ['Descontos/bônus (db)', V2.db],
+      ['Líquido ML (lq)', V2.lq],
       ['Pedidos (pd)', V2.pd],
     ]);
     html+='</div>';
   } else if(finTab_==='cmv'){
-    html='<div class="card sec"><div class="ct">CMV â€” Custo das Mercadorias Vendidas</div>';
+    html='<div class="card sec"><div class="ct">CMV �?" Custo das Mercadorias Vendidas</div>';
     html+=finMonthGrid([
       ['CMV Total', K2.map(k=>(fin.CMV||{})[k]||0)],
       ['CMV c/ Nota Fiscal', K2.map(k=>(fin.CMV_NF||{})[k]||0)],
@@ -1269,33 +1269,33 @@ function finRender(){
     ]);
     html+='</div>';
   } else if(finTab_==='desp'){
-    html='<div class="card sec"><div class="ct">Despesas operacionais por mÃªs</div>';
+    html='<div class="card sec"><div class="ct">Despesas operacionais por mês</div>';
     const dfields=['contab','pub','imp','tml','prolabore_lucas','prolabore_fellipe','galpao','frete'];
-    const dlabels={'contab':'Contabilidade','pub':'Publicidade','imp':'Impostos','tml':'Tarifas ML','prolabore_lucas':'PrÃ³-labore Lucas','prolabore_fellipe':'PrÃ³-labore Fellipe','galpao':'GalpÃ£o/Ã¡gua/luz','frete':'Frete/transporte'};
+    const dlabels={'contab':'Contabilidade','pub':'Publicidade','imp':'Impostos','tml':'Tarifas ML','prolabore_lucas':'Pró-labore Lucas','prolabore_fellipe':'Pró-labore Fellipe','galpao':'Galpão/água/luz','frete':'Frete/transporte'};
     html+=finMonthGrid(dfields.map(f=>[dlabels[f]||f, K2.map(k=>((DESP2[k]||{})[f])||0)]));
     html+='</div>';
   } else if(finTab_==='emp'){
-    html='<div class="card sec"><div class="ct">EmprÃ©stimos / Encargos por mÃªs</div>';
+    html='<div class="card sec"><div class="ct">Empréstimos / Encargos por mês</div>';
     html+=finMonthGrid([
       ['Encargos ML (ENC)', K2.map(k=>(fin.ENC||{})[k]||0)],
-      ['EmprÃ©stimo pago (EMP)', K2.map(k=>(fin.EMP||{})[k]||0)],
-      ['Entrada emprÃ©stimo', K2.map(k=>(fin.EMP_ENTRADA||{})[k]||0)],
+      ['Empréstimo pago (EMP)', K2.map(k=>(fin.EMP||{})[k]||0)],
+      ['Entrada empréstimo', K2.map(k=>(fin.EMP_ENTRADA||{})[k]||0)],
       ['Total contratual', K2.map(k=>(fin.EMP_TOTAL||{})[k]||0)],
-      ['Aportes sÃ³cios', K2.map(k=>(fin.APORTES||{})[k]||0)],
-      ['DevoluÃ§Ãµes aporte', K2.map(k=>(fin.DEV_APORTE||{})[k]||0)],
+      ['Aportes sócios', K2.map(k=>(fin.APORTES||{})[k]||0)],
+      ['Devoluções aporte', K2.map(k=>(fin.DEV_APORTE||{})[k]||0)],
     ]);
     html+='</div>';
   } else if(finTab_==='debml'){
-    html='<div class="card sec"><div class="ct">DÃ©bitos operacionais ML por mÃªs</div>';
+    html='<div class="card sec"><div class="ct">Débitos operacionais ML por mês</div>';
     html+=finMonthGrid([
-      ['DÃ©b. ReclamaÃ§Ãµes', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).recl||0)],
-      ['DÃ©b. Retido', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).retido||0)],
-      ['DÃ©b. DevoluÃ§Ãµes', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).devolv||0)],
-      ['DÃ©b. Envio', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).envio||0)],
+      ['Déb. Reclamações', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).recl||0)],
+      ['Déb. Retido', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).retido||0)],
+      ['Déb. Devoluções', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).devolv||0)],
+      ['Déb. Envio', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).envio||0)],
     ]);
     html+='</div>';
   } else if(finTab_==='meses'){
-    html='<div class="card sec"><div class="ct">PerÃ­odos (meses) do BI</div>';
+    html='<div class="card sec"><div class="ct">Períodos (meses) do BI</div>';
     html+='<p style="font-size:12px;color:var(--mu);margin-bottom:14px;line-height:1.7">Adicione novos meses. O formato da chave deve ser AAAA-MM (ex: 2026-04).</p>';
     html+='<div id="meses-list" style="margin-bottom:14px">';
     (load_meses||[]).forEach((m,i)=>{ html+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-family:var(--fm);font-size:12px;background:var(--bg3);padding:4px 10px;border-radius:5px">${m.key}</span><span style="font-size:12px">${m.label}</span></div>`; });
@@ -1303,7 +1303,7 @@ function finRender(){
     html+=`<div style="display:flex;gap:8px;margin-bottom:8px">
       <input id="nm-key" class="dinp" placeholder="2026-04" style="width:120px">
       <input id="nm-label" class="dinp" placeholder="Abr/2026" style="width:120px">
-      <button onclick="addMes()" class="cbtn">Adicionar mÃªs</button>
+      <button onclick="addMes()" class="cbtn">Adicionar mês</button>
     </div>`;
     html+='</div>';
   }
@@ -1323,20 +1323,20 @@ async function finSave(){
   // month arrays
   document.querySelectorAll('[data-arr]').forEach(inp=>{
     const arr=inp.dataset.arr, idx=parseInt(inp.dataset.idx), val=parseFloat(inp.value)||0;
-    const map={'Receita bruta (rp)':'rp','AcrÃ©scimo parcelamento (ac)':'ac','Taxa parcelamento (txa)':'txa','Tarifa venda+imp (tv)':'tv','Receita envio (re)':'re','Tarifa envio (te)':'te','Cancelamentos (ca)':'ca','Descontos/bÃ´nus (db)':'db','LÃ­quido ML (lq)':'lq','Pedidos (pd)':'pd'};
+    const map={'Receita bruta (rp)':'rp','Acréscimo parcelamento (ac)':'ac','Taxa parcelamento (txa)':'txa','Tarifa venda+imp (tv)':'tv','Receita envio (re)':'re','Tarifa envio (te)':'te','Cancelamentos (ca)':'ca','Descontos/bônus (db)':'db','Líquido ML (lq)':'lq','Pedidos (pd)':'pd'};
     const key=map[arr];
     if(key){if(!newFin.V)newFin.V={};if(!newFin.V[key])newFin.V[key]=[0,0,0];newFin.V[key][idx]=val;}
     // CMV
     const cmvMap={'CMV Total':'CMV','CMV c/ Nota Fiscal':'CMV_NF','CMV Simples Nacional':'CMV_SN'};
     if(cmvMap[arr]){const k2=K[idx];if(!newFin[cmvMap[arr]])newFin[cmvMap[arr]]={};newFin[cmvMap[arr]][k2]=val;}
     // DESP
-    const dlabels={'Contabilidade':'contab','Publicidade':'pub','Impostos':'imp','Tarifas ML':'tml','PrÃ³-labore Lucas':'prolabore_lucas','PrÃ³-labore Fellipe':'prolabore_fellipe','GalpÃ£o/Ã¡gua/luz':'galpao','Frete/transporte':'frete'};
+    const dlabels={'Contabilidade':'contab','Publicidade':'pub','Impostos':'imp','Tarifas ML':'tml','Pró-labore Lucas':'prolabore_lucas','Pró-labore Fellipe':'prolabore_fellipe','Galpão/água/luz':'galpao','Frete/transporte':'frete'};
     if(dlabels[arr]){const k2=K[idx];if(!newFin.DESP)newFin.DESP={};if(!newFin.DESP[k2])newFin.DESP[k2]={};newFin.DESP[k2][dlabels[arr]]=val;}
     // EMP/ENC
-    const empMap={'Encargos ML (ENC)':'ENC','EmprÃ©stimo pago (EMP)':'EMP','Entrada emprÃ©stimo':'EMP_ENTRADA','Total contratual':'EMP_TOTAL','Aportes sÃ³cios':'APORTES','DevoluÃ§Ãµes aporte':'DEV_APORTE'};
+    const empMap={'Encargos ML (ENC)':'ENC','Empréstimo pago (EMP)':'EMP','Entrada empréstimo':'EMP_ENTRADA','Total contratual':'EMP_TOTAL','Aportes sócios':'APORTES','Devoluções aporte':'DEV_APORTE'};
     if(empMap[arr]){const k2=K[idx];if(!newFin[empMap[arr]])newFin[empMap[arr]]={};newFin[empMap[arr]][k2]=val;}
     // DEB_ML
-    const debMap={'DÃ©b. ReclamaÃ§Ãµes':'recl','DÃ©b. Retido':'retido','DÃ©b. DevoluÃ§Ãµes':'devolv','DÃ©b. Envio':'envio'};
+    const debMap={'Déb. Reclamações':'recl','Déb. Retido':'retido','Déb. Devoluções':'devolv','Déb. Envio':'envio'};
     if(debMap[arr]){const k2=K[idx];if(!newFin.DEB_ML_DET)newFin.DEB_ML_DET={};if(!newFin.DEB_ML_DET[k2])newFin.DEB_ML_DET[k2]={recl:0,retido:0,devolv:0,envio:0};newFin.DEB_ML_DET[k2][debMap[arr]]=val;}
   });
   // rebuild DEB_ML totals
@@ -1350,32 +1350,32 @@ async function addMes(){
   const label=document.getElementById('nm-label').value.trim();
   if(!key||!label)return gToast('Preencha chave e label',true);
   const mesesAtuais=await fetch('/api/meses').then(r=>r.json());
-  if((mesesAtuais||[]).some(m=>m.key===key))return gToast('Esse mÃªs jÃ¡ existe',true);
+  if((mesesAtuais||[]).some(m=>m.key===key))return gToast('Esse mês já existe',true);
   const r=await gAPI('POST','/api/meses',[...(mesesAtuais||[]),{key,label}]);
-  if(r.ok){gToast('MÃªs adicionado! Recarregue.');document.getElementById('nm-key').value='';document.getElementById('nm-label').value='';}
+  if(r.ok){gToast('Mês adicionado! Recarregue.');document.getElementById('nm-key').value='';document.getElementById('nm-label').value='';}
   else gToast(r.error||'Erro',true);
 }
 
-// â”€â”€ Produtos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Produtos �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 let gpList=[], gpEditId=null;
 async function gpLoad(){
   gpList=await fetch('/api/produtos').then(r=>r.json());
   document.getElementById('gp-count2').textContent=gpList.length+' produtos';
   document.getElementById('gp-tb').innerHTML=gpList.length?gpList.map((p,i)=>`
     <tr><td class="dt">${i+1}</td><td style="font-size:12px;font-weight:500">${p.sku}</td>
-    <td style="font-size:11px;color:var(--mu);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.descricao_detalhada||''}">${p.descricao_detalhada||'â€”'}</td>
-    <td style="font-size:11px;color:var(--mu)">${p.embalagem||'â€”'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.descricao_detalhada||''}">${p.descricao_detalhada||'—'}</td>
+    <td style="font-size:11px;color:var(--mu)">${p.embalagem||'—'}</td>
     <td class="r">${(p.quantidade ?? p.estoque) || 0}</td>
     <td class="rp">${fc2(p.custo||0)}</td>
     <td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--am)">${fc2(p.custo_total ?? ((p.custo||0)*((p.quantidade ?? p.estoque)||0)))}</td>
-    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.obs||''}">${p.obs||'â€”'}</td>
-    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.equivalente_catalogo||''}">${p.equivalente_catalogo||'â€”'}</td>
-    <td style="font-size:11px;color:var(--mu)">${p.ref_pagina||'â€”'}</td>
-    <td style="font-size:11px">${(p.foto_b64||p.foto)?`<a href="${p.foto_b64?`data:${p.foto_mime||'image/*'};base64,${p.foto_b64}`:p.foto}" target="_blank" rel="noopener" style="color:var(--b)">Abrir</a>`:'â€”'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.obs||''}">${p.obs||'—'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.equivalente_catalogo||''}">${p.equivalente_catalogo||'—'}</td>
+    <td style="font-size:11px;color:var(--mu)">${p.ref_pagina||'—'}</td>
+    <td style="font-size:11px">${(p.foto_b64||p.foto)?`<a href="${p.foto_b64?`data:${p.foto_mime||'image/*'};base64,${p.foto_b64}`:p.foto}" target="_blank" rel="noopener" style="color:var(--b)">Abrir</a>`:'—'}</td>
     <td class="r">${p.v30||0}</td>
     <td style="text-align:right">
       <button onclick="gpEdit(${p.id})" style="padding:3px 8px;background:var(--bg3);color:var(--tx);border:1px solid var(--bdr);border-radius:5px;cursor:pointer;font-size:11px;margin-right:3px">Ed</button>
-      <button onclick="gpDel(${p.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">âœ•</button>
+      <button onclick="gpDel(${p.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">Excluir</button>
     </td></tr>`).join('')
     :'<tr><td colspan="13" style="text-align:center;color:var(--mu);padding:20px">Nenhum produto</td></tr>';
 }
@@ -1446,7 +1446,7 @@ function gpEdit(id){
   if(inp) inp.value='';
   document.getElementById('gp-v30').value=p.v30||'';
 }
-async function gpDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/produtos/'+id);gToast('ExcluÃ­do');gpLoad();}
+async function gpDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/produtos/'+id);gToast('Excluído');gpLoad();}
 function gpClear(){
   gpEditId=null;
   ['gp-sku','gp-desc','gp-emb','gp-qt','gp-custo','gp-custo-total','gp-obs','gp-eq','gp-ref','gp-v30'].forEach(id=>document.getElementById(id).value='');
@@ -1465,7 +1465,7 @@ document.addEventListener('change',(ev)=>{
 });
 async function gpImport(inp){const file=inp.files[0];if(!file)return;const form=new FormData();form.append('file',file);const r=await fetch('/api/import/produtos',{method:'POST',body:form});const d=await r.json();if(d.ok){gToast(`${d.added} adicionados, ${d.updated} atualizados`);gpLoad();}else gToast('Erro: '+d.error,true);inp.value='';}
 
-// â”€â”€ Notas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Notas �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 let nf2List=[], nf2F='all';
 async function nf2Load(){nf2List=await fetch('/api/notas').then(r=>r.json());nf2Render();}
 function nf2Render(){
@@ -1474,14 +1474,14 @@ function nf2Render(){
     <tr><td class="dt">${(n.data||'').slice(8)}/${(n.data||'').slice(5,7)}</td>
     <td style="font-family:var(--fm);font-size:11px">${n.numero||''}</td>
     <td style="font-size:12px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n.fornecedor||''}</td>
-    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${n.item||''}">${n.item||'â€”'}</td>
-    <td style="font-size:11px;color:var(--mu)">${n.cod_ncm||'â€”'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${n.item||''}">${n.item||'—'}</td>
+    <td style="font-size:11px;color:var(--mu)">${n.cod_ncm||'—'}</td>
     <td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--am)">${fc2(n.valor||0)}</td>
-    <td class="r">${n.valor_nf?fc2(n.valor_nf):'â€”'}</td><td class="r">${n.valor_sn?fc2(n.valor_sn):'â€”'}</td>
+    <td class="r">${n.valor_nf?fc2(n.valor_nf):'—'}</td><td class="r">${n.valor_sn?fc2(n.valor_sn):'—'}</td>
     <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;background:${n.tipo==='cmv'?'rgba(0,229,160,.12)':'rgba(245,158,11,.12)'};color:${n.tipo==='cmv'?'var(--g)':'var(--am)'}">${n.tipo==='cmv'?'CMV':'Desp'}</span></td>
-    <td>${n.has_pdf?`<button onclick="nf2OpenPdf(${n.id})" style="padding:3px 8px;background:rgba(59,130,246,.12);color:var(--b);border:1px solid rgba(59,130,246,.3);border-radius:5px;cursor:pointer;font-size:11px">Abrir</button>`:'â€”'}</td>
+    <td>${n.has_pdf?`<button onclick="nf2OpenPdf(${n.id})" style="padding:3px 8px;background:rgba(59,130,246,.12);color:var(--b);border:1px solid rgba(59,130,246,.3);border-radius:5px;cursor:pointer;font-size:11px">Abrir</button>`:'—'}</td>
     <td style="font-size:11px;color:var(--mu)">${n.obs||''}</td>
-    <td style="text-align:right"><button onclick="nf2Del(${n.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">âœ•</button></td></tr>`).join('')
+    <td style="text-align:right"><button onclick="nf2Del(${n.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">Excluir</button></td></tr>`).join('')
     :'<tr><td colspan="12" style="text-align:center;color:var(--mu);padding:20px">Nenhuma nota</td></tr>';
   const tot=lista.reduce((a,n)=>a+(n.valor||0),0);
   document.getElementById('nf2-ft').textContent=lista.length?`Total: R$ ${tot.toLocaleString('pt-BR',{minimumFractionDigits:2})} (${lista.length} notas)`:'';
@@ -1502,12 +1502,12 @@ async function nf2Save(){
   }else{
     await gAPI('POST','/api/notas',d);
   }
-  gToast('Nota lanÃ§ada!');
+  gToast('Nota lançada!');
   ['nf2-data','nf2-num','nf2-forn','nf2-val','nf2-nf','nf2-sn','nf2-item','nf2-ncm','nf2-obs'].forEach(id=>document.getElementById(id).value='');
   if(pdfInput)pdfInput.value='';
   nf2Load();
 }
-async function nf2Del(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/notas/'+id);gToast('ExcluÃ­da');nf2Load();}
+async function nf2Del(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/notas/'+id);gToast('Excluída');nf2Load();}
 function nf2OpenPdf(id){window.open('/api/notas/'+id+'/pdf','_blank');}
 function nf2Filter(f){nf2F=f;['all','cmv','dp'].forEach(k=>{const el=document.getElementById('nf2f-'+k);if(el)el.classList.toggle('on',k===f||(f==='desp'&&k==='dp'));});nf2Render();}
 async function nf2ImportItemNcm(inp){
@@ -1518,7 +1518,7 @@ async function nf2ImportItemNcm(inp){
   const r=await fetch('/api/import/notas_item_ncm',{method:'POST',body:form});
   const d=await r.json();
   if(d.ok){
-    gToast(`ImportaÃ§Ã£o concluÃ­da: ${d.added} novos, ${d.updated} atualizados`);
+    gToast(`Importação concluída: ${d.added} novos, ${d.updated} atualizados`);
     nf2Load();
   }else{
     gToast(d.error||'Erro ao importar ITEM/COD NCM',true);
@@ -1526,16 +1526,16 @@ async function nf2ImportItemNcm(inp){
   inp.value='';
 }
 
-// â”€â”€ Aportes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Aportes �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 let apList=[], emList=[];
 async function apLoad(){apList=await fetch('/api/aportes').then(r=>r.json());apRender();rApo();}
 function apRender(){
   document.getElementById('ap-tb').innerHTML=apList.length?apList.map(a=>`
     <tr><td class="dt">${a.data||''}</td><td style="font-size:12px">${(a.socio||'').split(' ')[0]}</td>
     <td style="font-size:11px;color:var(--mu)">${a.descricao||''}</td>
-    <td style="text-align:right;font-family:var(--fm);font-size:11px;color:${a.tipo==='devolucao'?'var(--r)':'var(--b)'}">${a.tipo==='devolucao'?'âˆ’ ':'+ '}${fc2(a.valor||0)}</td>
-    <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;background:${a.tipo==='entrada'?'rgba(59,130,246,.12)':'rgba(244,63,94,.12)'};color:${a.tipo==='entrada'?'var(--b)':'var(--r)'}">${a.tipo==='entrada'?'Entrada':'DevoluÃ§Ã£o'}</span></td>
-    <td style="text-align:right"><button onclick="apDel(${a.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">âœ•</button></td></tr>`).join('')
+    <td style="text-align:right;font-family:var(--fm);font-size:11px;color:${a.tipo==='devolucao'?'var(--r)':'var(--b)'}">${a.tipo==='devolucao'?'− ':'+ '}${fc2(a.valor||0)}</td>
+    <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;background:${a.tipo==='entrada'?'rgba(59,130,246,.12)':'rgba(244,63,94,.12)'};color:${a.tipo==='entrada'?'var(--b)':'var(--r)'}">${a.tipo==='entrada'?'Entrada':'Devolução'}</span></td>
+    <td style="text-align:right"><button onclick="apDel(${a.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">Excluir</button></td></tr>`).join('')
     :'<tr><td colspan="6" style="text-align:center;color:var(--mu);padding:16px">Nenhum aporte</td></tr>';
 }
 async function apSave(){
@@ -1545,26 +1545,26 @@ async function apSave(){
   ['ap-data','ap-val','ap-obs'].forEach(id=>document.getElementById(id).value='');
   apLoad();
 }
-async function apDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/aportes/'+id);gToast('ExcluÃ­do');apLoad();}
+async function apDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/aportes/'+id);gToast('Excluído');apLoad();}
 
 async function emLoad(){emList=await fetch('/api/emprestimos').then(r=>r.json());emRender();rApo();}
 function emRender(){
   document.getElementById('em-tb').innerHTML=emList.length?emList.map(e=>`
     <tr><td class="dt">${e.data||''}</td><td style="font-size:12px">${e.descricao||''}</td>
     <td class="rp">${fc2(e.valor||0)}</td><td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--o)">${fc2(e.total_pagar||0)}</td>
-    <td style="text-align:right"><button onclick="emDel(${e.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">âœ•</button></td></tr>`).join('')
-    :'<tr><td colspan="5" style="text-align:center;color:var(--mu);padding:16px">Nenhum emprÃ©stimo</td></tr>';
+    <td style="text-align:right"><button onclick="emDel(${e.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">Excluir</button></td></tr>`).join('')
+    :'<tr><td colspan="5" style="text-align:center;color:var(--mu);padding:16px">Nenhum empréstimo</td></tr>';
 }
 async function emSave(){
   const d={data:document.getElementById('em-data').value,descricao:document.getElementById('em-desc').value.trim(),valor:parseFloat(document.getElementById('em-val').value)||0,total_pagar:parseFloat(document.getElementById('em-tot').value)||0,obs:document.getElementById('em-obs').value.trim()};
   if(!d.valor)return gToast('Informe o valor',true);
-  await gAPI('POST','/api/emprestimos',d);gToast('EmprÃ©stimo salvo!');
+  await gAPI('POST','/api/emprestimos',d);gToast('Empréstimo salvo!');
   ['em-data','em-desc','em-val','em-tot','em-obs'].forEach(id=>document.getElementById(id).value='');
   emLoad();
 }
-async function emDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/emprestimos/'+id);gToast('ExcluÃ­do');emLoad();}
+async function emDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/emprestimos/'+id);gToast('Excluído');emLoad();}
 
-// â”€â”€ ImportaÃ§Ãµes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Importações �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 async function importSKUs(inp){const file=inp.files[0];if(!file)return;document.getElementById('skuimp-name').textContent=file.name;const form=new FormData();form.append('file',file);const r=await fetch('/api/import/skus',{method:'POST',body:form});const d=await r.json();if(d.ok)gToast(`${d.count} SKUs importados`);else gToast('Erro: '+d.error,true);inp.value='';}
 async function importProds(inp){const file=inp.files[0];if(!file)return;document.getElementById('prodimp-name').textContent=file.name;const form=new FormData();form.append('file',file);const r=await fetch('/api/import/produtos',{method:'POST',body:form});const d=await r.json();if(d.ok)gToast(`${d.added} add, ${d.updated} atualizados`);else gToast('Erro: '+d.error,true);inp.value='';}
 
@@ -1575,11 +1575,11 @@ async function mlSyncNow(){
   const d=await r.json();
   if(d.ok){
     const res=d.result||{};
-    if(el)el.textContent=`OK Â· pedidos: ${res.orders||0} Â· vendas: ${res.vendas||0} Â· SKUs: ${res.skus||0}`;
-    gToast('SincronizaÃ§Ã£o concluÃ­da!');
+    if(el)el.textContent=`OK · pedidos: ${res.orders||0} · vendas: ${res.vendas||0} · SKUs: ${res.skus||0}`;
+    gToast('Sincronização concluída!');
     loadDB();
   }else{
-    if(el)el.textContent='Erro: '+(d.error||'falha na sincronizaÃ§Ã£o');
+    if(el)el.textContent='Erro: '+(d.error||'falha na sincronização');
     gToast('Erro ao sincronizar: '+(d.error||'falha'),true);
   }
 }
@@ -1589,19 +1589,19 @@ async function mlSyncStatus(){
   const r=await fetch('/api/sync/ml/status');
   const d=await r.json();
   if(!d.ok){
-    if(el)el.textContent='NÃ£o foi possÃ­vel consultar status.';
+    if(el)el.textContent='Não foi possível consultar status.';
     return;
   }
   const runs=d.runs||[];
   if(!runs.length){
-    if(el)el.textContent='Ainda nÃ£o hÃ¡ sincronizaÃ§Ãµes registradas.';
+    if(el)el.textContent='Ainda não há sincronizações registradas.';
     return;
   }
   const last=runs[0];
-  if(el)el.textContent=`Ãšltima execuÃ§Ã£o: ${last.status} Â· ${last.created_at || ''}`;
+  if(el)el.textContent=`Última execução: ${last.status} · ${last.created_at || ''}`;
 }
 
-// â”€â”€ HistÃ³rico â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Histórico �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 async function loadHist(){
   const hist=await fetch('/api/historico').then(r=>r.json());
   document.getElementById('hist-tb').innerHTML=hist.length?hist.map(h=>`
@@ -1611,7 +1611,7 @@ async function loadHist(){
     :'<tr><td colspan="4" style="text-align:center;color:var(--mu);padding:20px">Sem registros</td></tr>';
 }
 
-// â”€â”€ Init gestÃ£o â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// �"?�"? Init gestão �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 function gLoad(){finLoad();gpLoad();nf2Load();apLoad();emLoad();loadHist();}
 </script>
 </div>
