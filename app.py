@@ -312,6 +312,37 @@ def _find_nota(notas: list, nid: int):
     return next((n for n in notas if n.get('id') == nid), None)
 
 
+def _sanitize_notas_remove_legacy(notas: list):
+    """Remove registros legados incorretos (fornecedor salvo no campo ITEM)."""
+    if not isinstance(notas, list):
+        return notas, 0
+
+    legacy_items = {
+        'KLOOS DISTRIBUIDORA DE MATERIAIS LTDA',
+        'MOHNISH IMPORTS LTDA',
+        'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',
+        'DYNASTY REAL UTILIDADES DOMESTICAS LTDA',
+        'ZEIN IMPORTACAO E COMERCIO LTDA',
+        'EDM SHOP LTDA',
+        'LEONARDO COVO RODRIGUES COMERCIO LTDA',
+        'ESCON - SERVICOS CONTABEIS LTDA',
+        'ATACADO APARECIDA "TELOS"',
+    }
+
+    def norm_txt(v):
+        return re.sub(r'\s+', ' ', str(v or '').strip()).upper()
+
+    clean = []
+    removed = 0
+    for n in notas:
+        item_norm = norm_txt((n or {}).get('item'))
+        if item_norm in legacy_items:
+            removed += 1
+            continue
+        clean.append(n)
+    return clean, removed
+
+
 def _build_skus_from_produtos():
     produtos = load('produtos', default=[])
     return [
@@ -458,6 +489,11 @@ def delete_produto(pid):
 @login_required
 def get_notas():
     notas = load('notas', default=[])
+    notas_clean, removed = _sanitize_notas_remove_legacy(notas)
+    if removed:
+        save('notas', notas_clean)
+        log_action('notas.cleanup_legacy', f'removidos={removed}')
+    notas = notas_clean
     return jsonify([_nota_public(n) for n in notas])
 
 @app.route('/api/notas', methods=['POST'])
