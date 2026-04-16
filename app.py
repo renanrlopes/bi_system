@@ -813,7 +813,8 @@ def import_notas_item_ncm():
 
         item_aliases = {
             'item', 'itens', 'produto', 'produtos', 'descricao',
-            'descricaoproduto', 'descricaodoproduto', 'itemdescricao'
+            'descricaoproduto', 'descricaodoproduto', 'itemdescricao',
+            'descricaoitem', 'itemdanota', 'descricaodaitem'
         }
         ncm_aliases = {
             'codncm', 'codigoncm', 'ncm', 'ncmsh', 'classificacaofiscal',
@@ -862,55 +863,14 @@ def import_notas_item_ncm():
         item_col = next((orig for nrm, orig in normalized_cols if nrm in item_aliases), None)
         ncm_col = next((orig for nrm, orig in normalized_cols if nrm in ncm_aliases), None)
 
-        # Fallback por conteudo: evita usar coluna de data como ITEM.
-        if (not item_col or not ncm_col) and len(df.columns) >= 2:
-            sample = df.head(200)
-            col_meta = []
-            for nrm, orig in normalized_cols:
-                vals = [_cell_text(v) for v in sample[orig].tolist()]
-                non_empty = [v for v in vals if v]
-                date_hits = sum(1 for v in non_empty if _looks_like_date_text(v))
-                ncm_hits = sum(1 for v in non_empty if _is_ncm_like(v))
-                text_hits = sum(1 for v in non_empty if any(ch.isalpha() for ch in v))
-                supplier_hits = sum(1 for v in non_empty if _looks_like_supplier_name(v))
-                col_meta.append({
-                    'orig': orig,
-                    'nrm': nrm,
-                    'non_empty': len(non_empty),
-                    'date_hits': date_hits,
-                    'ncm_hits': ncm_hits,
-                    'text_hits': text_hits,
-                    'supplier_hits': supplier_hits,
-                })
-
-            if not ncm_col:
-                cands = sorted(col_meta, key=lambda c: (c['ncm_hits'], c['non_empty']), reverse=True)
-                if cands and cands[0]['ncm_hits'] > 0:
-                    ncm_col = cands[0]['orig']
-
-            if not item_col:
-                item_cands = [
-                    c for c in col_meta
-                    if c['orig'] != ncm_col and c['nrm'] not in date_aliases and c['date_hits'] == 0
-                ]
-                item_cands = sorted(
-                    item_cands,
-                    key=lambda c: (c['text_hits'] - c['supplier_hits'], c['text_hits'], c['non_empty']),
-                    reverse=True,
-                )
-                if item_cands and item_cands[0]['text_hits'] > 0:
-                    item_col = item_cands[0]['orig']
-
-            # Ultimo fallback: duas primeiras nao-data.
-            if not item_col or not ncm_col:
-                non_date_cols = [orig for nrm, orig in normalized_cols if nrm not in date_aliases]
-                if len(non_date_cols) >= 2:
-                    item_col = item_col or non_date_cols[0]
-                    ncm_col = ncm_col or non_date_cols[1]
+        data_col = next((orig for nrm, orig in normalized_cols if nrm in date_aliases), None)
 
         if not item_col or not ncm_col:
             encontrados = ', '.join([str(c) for c in df.columns])
-            return jsonify({'ok': False, 'error': f'Não consegui identificar colunas de ITEM/NCM. Cabeçalhos encontrados: {encontrados}'}), 400
+            return jsonify({
+                'ok': False,
+                'error': f'Não consegui identificar ITEM e COD NCM de forma segura. Renomeie as colunas para ITEM e COD NCM. Cabeçalhos encontrados: {encontrados}',
+            }), 400
 
         # Sempre substitui para evitar mistura com base antiga em deploys com frontend defasado.
         replace_mode = True
@@ -924,47 +884,31 @@ def import_notas_item_ncm():
         def _extract_item_and_ncm(row):
             item = _cell_text(row.get(item_col))
             cod_ncm = _cell_text(row.get(ncm_col))
+            data_txt = _cell_text(row.get(data_col)) if data_col else ''
 
             if _looks_like_date_text(item):
                 item = ''
-            if _looks_like_supplier_name(item):
-                item = ''
-
-            # Fallback por linha: usa a primeira celula textual como item.
-            if not item:
-                for raw in row.tolist():
-                    t = _cell_text(raw)
-                    if not t:
-                        continue
-                    if _looks_like_date_text(t):
-                        continue
-                    if _is_ncm_like(t):
-                        continue
-                    if _looks_like_supplier_name(t):
-                        continue
-                    item = t
-                    break
-
-            # Fallback por linha: tenta localizar um NCM numerico em qualquer coluna.
-            if not cod_ncm:
-                for raw in row.tolist():
-                    t = _cell_text(raw)
-                    if not t:
-                        continue
-                    digits = _ncm_digits(t)
-                    if re.fullmatch(r'\d{6,10}', digits):
-                        cod_ncm = digits
-                        break
 
             # Mantem somente os digitos do NCM quando houver.
             if cod_ncm:
                 digits = re.sub(r'\D+', '', cod_ncm)
                 cod_ncm = digits or cod_ncm
 
-            return item, cod_ncm
+            # Normaliza data para AAAA-MM-DD quando possivel.
+            data_iso = ''
+            if data_txt:
+                m = re.fullmatch(r'(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})', data_txt)
+                if m:
+                    dd, mm, yy = m.groups()
+                    yy = ('20' + yy) if len(yy) == 2 else yy
+                    data_iso = f'{int(yy):04d}-{int(mm):02d}-{int(dd):02d}'
+                elif re.fullmatch(r'\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}(:\d{2})?)?', data_txt):
+                    data_iso = data_txt[:10]
+
+            return item, cod_ncm, data_iso
 
         for _, row in df.iterrows():
-            item, cod_ncm = _extract_item_and_ncm(row)
+            item, cod_ncm, data_iso = _extract_item_and_ncm(row)
 
             if not item and not cod_ncm:
                 continue
@@ -972,11 +916,17 @@ def import_notas_item_ncm():
             if not item:
                 continue
 
+            # Evita importar linha que parece fornecedor/observacao financeira no campo ITEM.
+            if _looks_like_supplier_name(item):
+                continue
+
             existing = next((n for n in notas if str(n.get('item') or '').strip().lower() == item.lower()), None)
             if existing:
                 before = (str(existing.get('cod_ncm') or '').strip(), str(existing.get('item') or '').strip())
                 existing['item'] = item
                 existing['cod_ncm'] = cod_ncm
+                if data_iso:
+                    existing['data'] = data_iso
                 if not str(existing.get('fornecedor') or '').strip():
                     existing['fornecedor'] = item
                 after = (str(existing.get('cod_ncm') or '').strip(), str(existing.get('item') or '').strip())
@@ -986,7 +936,7 @@ def import_notas_item_ncm():
 
             notas.append({
                 'id': int(datetime.now().timestamp() * 1000) + added,
-                'data': '',
+                'data': data_iso,
                 'numero': '',
                 'fornecedor': item,
                 'item': item,
@@ -1021,6 +971,7 @@ def import_notas_item_ncm():
             'final_count': len(notas),
             'item_col': str(item_col),
             'ncm_col': str(ncm_col),
+            'data_col': str(data_col) if data_col else '',
         })
     except Exception as e:
         return jsonify({'ok': False, 'error': str(e)}), 400
