@@ -864,7 +864,10 @@ def import_notas_item_ncm():
             encontrados = ', '.join([str(c) for c in df.columns])
             return jsonify({'ok': False, 'error': f'Não consegui identificar colunas de ITEM/NCM. Cabeçalhos encontrados: {encontrados}'}), 400
 
-        notas = load('notas', default=[])
+        replace_mode = str(request.form.get('replace') or '1').strip() not in ('0', 'false', 'False', 'no', 'NO')
+        notas_existing = load('notas', default=[])
+        previous_count = len(notas_existing) if isinstance(notas_existing, list) else 0
+        notas = [] if replace_mode else (notas_existing if isinstance(notas_existing, list) else [])
         added = 0
         updated = 0
         total_rows = int(len(df.index))
@@ -953,8 +956,17 @@ def import_notas_item_ncm():
             }), 400
 
         save('notas', notas)
-        log_action('import.notas_item_ncm', f'{added} add, {updated} upd')
-        return jsonify({'ok': True, 'added': added, 'updated': updated, 'total_rows': total_rows})
+        mode_txt = 'replace' if replace_mode else 'merge'
+        log_action('import.notas_item_ncm', f'{mode_txt} | prev={previous_count} | {added} add, {updated} upd')
+        return jsonify({
+            'ok': True,
+            'added': added,
+            'updated': updated,
+            'total_rows': total_rows,
+            'replaced': replace_mode,
+            'previous_count': previous_count,
+            'final_count': len(notas),
+        })
     except Exception as e:
         return jsonify({'ok': False, 'error': str(e)}), 400
 

@@ -1580,6 +1580,7 @@ async function nf2ImportItemNcm(inp){
     nf2SetImportStatus('Importando planilha...');
     const form=new FormData();
     form.append('file',file);
+    form.append('replace','1');
     const r=await fetch('/api/import/notas_item_ncm',{method:'POST',body:form});
     const text=await r.text();
     let d={};
@@ -1592,7 +1593,9 @@ async function nf2ImportItemNcm(inp){
       return;
     }
 
-    const okMsg=`Importação concluída: ${d.added} novas, ${d.updated} atualizadas`;
+    const okMsg=d.replaced
+      ?`Importação concluída: base substituída (${d.final_count} registros). ${d.added} novos, ${d.updated} consolidados.`
+      :`Importação concluída: ${d.added} novas, ${d.updated} atualizadas`;
     nf2Toast(okMsg);
     nf2SetImportStatus(okMsg);
     nf2Load();
