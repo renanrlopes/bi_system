@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>BI Gerencial — Mercado Livre</title>
+<title>BI Gerencial â€” Mercado Livre</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;500;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
@@ -126,29 +126,29 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 <body>
 <div class="app">
 <aside class="sb">
-  <div class="sbl"><div class="sbt">BI Gerencial</div><div class="sbs">Mercado Livre · 2026</div></div>
+  <div class="sbl"><div class="sbt">BI Gerencial</div><div class="sbs">Mercado Livre Â· 2026</div></div>
   <nav class="sbn">
-    <div class="nl">Análise</div>
-    <div class="ni on" onclick="sp('overview')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Visão geral</div>
+    <div class="nl">AnÃ¡lise</div>
+    <div class="ni on" onclick="sp('overview')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>VisÃ£o geral</div>
     <div class="ni" onclick="sp('dre')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M9 17H7a2 2 0 01-2-2V5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2h-2"/><rect x="9" y="13" width="6" height="8" rx="1"/></svg>DRE gerencial</div>
     <div class="ni" onclick="sp('aportes')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Aportes de capital</div>
     <div class="ni" onclick="sp('extrato')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Extrato ML</div>
-    <div class="ni" onclick="sp('evolucao')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>Evolução mensal</div>
+    <div class="ni" onclick="sp('evolucao')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>EvoluÃ§Ã£o mensal</div>
     <div class="ni" onclick="sp('produtos')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>Produtos / SKU</div>
     <div class="ni" onclick="sp('compras')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Notas de compra</div>
     <div class="ni" onclick="sp('fornec')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/><path d="M19 11l2 2 4-4"/></svg>Fornecedores</div>
     <div class="ni" onclick="sp('estoque')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8h4M6 11h8"/></svg>Estoque</div>
     <div class="ni" onclick="sp('margem')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Margem por SKU</div>
-    <div class="nl">Gestão</div>
+    <div class="nl">GestÃ£o</div>
     <div class="ni" onclick="sp('g-financeiro')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Dados financeiros</div>
     <div class="ni" onclick="sp('g-produtos')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4z"/></svg>Produtos / Custos</div>
     <div class="ni" onclick="sp('g-notas')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg>Notas fiscais</div>
-    <div class="ni" onclick="sp('g-aportes')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Aportes / Empréstimos</div>
+    <div class="ni" onclick="sp('g-aportes')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Aportes / EmprÃ©stimos</div>
     <div class="ni" onclick="sp('g-skus')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Importar dados</div>
-    <div class="ni" onclick="sp('g-historico')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Histórico</div>
+    <div class="ni" onclick="sp('g-historico')"><svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>HistÃ³rico</div>
   </nav>
   <div class="sbf">
-  <div style="display:flex;align-items:center;gap:6px"><span class="dot"></span><span id="sb-periodo">Período automático</span></div>
+  <div style="display:flex;align-items:center;gap:6px"><span class="dot"></span><span id="sb-periodo">PerÃ­odo automÃ¡tico</span></div>
   <div style="margin-top:8px;font-size:11px;color:var(--tx)">{{ user }} <span style="color:var(--mu);font-size:10px">({{ role }})</span></div>
   <a href="/logout" style="font-size:11px;color:var(--r);text-decoration:none;display:block;margin-top:4px">Sair</a>
 </div>
@@ -157,7 +157,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 
 <div class="main">
   <div class="top">
-    <div class="top-left"><button class="mob-nav-btn" onclick="toggleMobileNav()" aria-label="Abrir menu">☰</button><div><div class="tpt" id="pgt">Visão geral</div><div class="tps" id="top-sub">Período automático · 0 pedidos · Mercado Livre BR</div></div></div>
+    <div class="top-left"><button class="mob-nav-btn" onclick="toggleMobileNav()" aria-label="Abrir menu">â˜°</button><div><div class="tpt" id="pgt">VisÃ£o geral</div><div class="tps" id="top-sub">PerÃ­odo automÃ¡tico Â· 0 pedidos Â· Mercado Livre BR</div></div></div>
     <div class="mts" id="mts" style="display:none"></div>
   </div>
 
@@ -165,21 +165,21 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
   <div class="pg on" id="page-overview">
     <div class="kg" id="kpi-ov"></div>
     <div class="g32 sec">
-      <div class="card"><div class="ct">Receita bruta · Líquido ML · Resultado operacional</div><div class="cw" style="height:240px"><canvas id="ch-ov"></canvas></div></div>
-      <div class="card"><div class="ct">Composição retenções ML</div><div class="cw" style="height:240px"><canvas id="ch-rp"></canvas></div></div>
+      <div class="card"><div class="ct">Receita bruta Â· LÃ­quido ML Â· Resultado operacional</div><div class="cw" style="height:240px"><canvas id="ch-ov"></canvas></div></div>
+      <div class="card"><div class="ct">ComposiÃ§Ã£o retenÃ§Ãµes ML</div><div class="cw" style="height:240px"><canvas id="ch-rp"></canvas></div></div>
     </div>
     <div class="g2 sec">
-      <div class="card"><div class="ct">Pedidos por mês</div><div class="cw" style="height:160px"><canvas id="ch-pd"></canvas></div></div>
-      <div class="card"><div class="ct">Ticket médio (R$)</div><div class="cw" style="height:160px"><canvas id="ch-tk"></canvas></div></div>
+      <div class="card"><div class="ct">Pedidos por mÃªs</div><div class="cw" style="height:160px"><canvas id="ch-pd"></canvas></div></div>
+      <div class="card"><div class="ct">Ticket mÃ©dio (R$)</div><div class="cw" style="height:160px"><canvas id="ch-tk"></canvas></div></div>
     </div>
   </div>
 
   <!-- DRE -->
   <div class="pg" id="page-dre">
-    <div class="sh"><div class="st">DRE Gerencial</div><span class="sb2" id="dre-b">Total Jan–Mar/2026</span></div>
+    <div class="sh"><div class="st">DRE Gerencial</div><span class="sb2" id="dre-b">Total</span></div>
     <div class="dw" id="dre-body"></div>
     <div style="margin-top:16px">
-      <div class="st" style="margin-bottom:10px;font-size:13px">Lançar despesas adicionais</div>
+      <div class="st" style="margin-bottom:10px;font-size:13px">LanÃ§ar despesas adicionais</div>
       <div class="dg">
         <div class="dbox"><div class="dlb">Embalagens / Insumos</div><div class="drow"><span class="dpfx">R$</span><input class="dinp" id="d-e" type="number" placeholder="0,00"></div></div>
         <div class="dbox"><div class="dlb">Plataformas / SaaS</div><div class="drow"><span class="dpfx">R$</span><input class="dinp" id="d-s" type="number" placeholder="0,00"></div></div>
@@ -191,23 +191,23 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 
   <!-- APORTES -->
   <div class="pg" id="page-aportes">
-    <div class="sh"><div class="st">Aportes de capital — Extratos por sócio</div></div>
+    <div class="sh"><div class="st">Aportes de capital â€” Extratos por sÃ³cio</div></div>
     <div style="background:rgba(45,212,191,.05);border:1px solid rgba(45,212,191,.2);border-radius:var(--rd);padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--mu);line-height:1.7">
-      Aportes de capital <strong style="color:var(--tl)">não afetam o resultado operacional</strong> da DRE — são entradas de capital próprio dos sócios. Registrados individualmente por sócio para controle e transparência.
+      Aportes de capital <strong style="color:var(--tl)">nÃ£o afetam o resultado operacional</strong> da DRE â€” sÃ£o entradas de capital prÃ³prio dos sÃ³cios. Registrados individualmente por sÃ³cio para controle e transparÃªncia.
     </div>
     <div class="kg" id="kpi-apo"></div>
     <div class="g2 sec">
       <div class="card">
-        <div class="ct">Movimentação mensal de capital</div>
+        <div class="ct">MovimentaÃ§Ã£o mensal de capital</div>
         <div class="cw" style="height:180px"><canvas id="ch-apo"></canvas></div>
       </div>
       <div class="card">
         <div class="ct">Resumo</div>
         <div style="font-size:12px;color:var(--mu);line-height:1.8">
-          Os valores desta página são carregados em tempo real dos lançamentos de Aportes e Empréstimos.
+          Os valores desta pÃ¡gina sÃ£o carregados em tempo real dos lanÃ§amentos de Aportes e EmprÃ©stimos.
         </div>
         <div style="margin-top:10px;font-size:12px;color:var(--mu);line-height:1.8">
-          Para lançar novos registros, use o menu <strong style="color:var(--tl)">Aportes / Empréstimos</strong> na seção de gestão.
+          Para lanÃ§ar novos registros, use o menu <strong style="color:var(--tl)">Aportes / EmprÃ©stimos</strong> na seÃ§Ã£o de gestÃ£o.
         </div>
       </div>
     </div>
@@ -230,28 +230,28 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
     <div id="emp-hl"></div>
     <div class="kg" id="kpi-ext"></div>
     <div class="g2 sec">
-      <div class="card"><div class="ct">Entradas × Saídas por mês</div><div class="cw" style="height:190px"><canvas id="ch-eb"></canvas></div></div>
-      <div class="card"><div class="ct">Composição das saídas</div><div class="cw" style="height:190px"><canvas id="ch-ep"></canvas></div></div>
+      <div class="card"><div class="ct">Entradas Ã— SaÃ­das por mÃªs</div><div class="cw" style="height:190px"><canvas id="ch-eb"></canvas></div></div>
+      <div class="card"><div class="ct">ComposiÃ§Ã£o das saÃ­das</div><div class="cw" style="height:190px"><canvas id="ch-ep"></canvas></div></div>
     </div>
     <div class="card sec">
-      <div class="ct">Categorias por mês</div>
+      <div class="ct">Categorias por mÃªs</div>
       <table class="tb"><thead><tr><th>Categoria</th><th class="r">Jan/26</th><th class="r">Fev/26</th><th class="r">Mar/26</th><th class="r">Total</th></tr></thead><tbody id="ext-tb"></tbody></table>
     </div>
     <div class="card sec">
-      <div class="ct">Editar categorias por mês</div>
+      <div class="ct">Editar categorias por mÃªs</div>
       <div id="ext-edit-body"></div>
     </div>
   </div>
 
-  <!-- EVOLUÇÃO -->
+  <!-- EVOLUÃ‡ÃƒO -->
   <div class="pg" id="page-evolucao">
     <div class="card sec">
-      <div class="ct">Resultado operacional por mês (sem aportes)</div>
+      <div class="ct">Resultado operacional por mÃªs (sem aportes)</div>
       <div class="leg">
         <span class="li"><span class="lsq" style="background:#3b82f6"></span>Receita</span>
-        <span class="li"><span class="lsq" style="background:#00e5a0"></span>Líquido ML</span>
+        <span class="li"><span class="lsq" style="background:#00e5a0"></span>LÃ­quido ML</span>
         <span class="li"><span class="lsq" style="background:#f43f5e"></span>CMV</span>
-        <span class="li"><span class="lsq" style="background:#fb923c"></span>Empréstimo</span>
+        <span class="li"><span class="lsq" style="background:#fb923c"></span>EmprÃ©stimo</span>
         <span class="li"><span class="lsq" style="background:#1D9E75"></span>Resultado op.</span>
       </div>
       <div class="cw" style="height:275px"><canvas id="ch-ev"></canvas></div>
@@ -260,24 +260,24 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
       <div class="card">
         <div class="ct">Custos e despesas empilhados</div>
         <div class="leg">
-          <span class="li"><span class="lsq" style="background:#f43f5e"></span>Retenções ML</span>
+          <span class="li"><span class="lsq" style="background:#f43f5e"></span>RetenÃ§Ãµes ML</span>
           <span class="li"><span class="lsq" style="background:#f59e0b"></span>CMV</span>
           <span class="li"><span class="lsq" style="background:#a78bfa"></span>Desp. op.</span>
           <span class="li"><span class="lsq" style="background:#fb923c"></span>Enc. + Emp.</span>
         </div>
         <div class="cw" style="height:200px"><canvas id="ch-cs"></canvas></div>
       </div>
-      <div class="card"><div class="ct">Margem líquida (%)</div><div class="cw" style="height:200px"><canvas id="ch-mg"></canvas></div></div>
+      <div class="card"><div class="ct">Margem lÃ­quida (%)</div><div class="cw" style="height:200px"><canvas id="ch-mg"></canvas></div></div>
     </div>
   </div>
 
   <!-- PRODUTOS -->
   <div class="pg" id="page-produtos">
-    <div class="sh"><div class="st">Ranking de produtos</div><div class="sb2">Top 15 SKUs · acumulado</div></div>
+    <div class="sh"><div class="st">Ranking de produtos</div><div class="sb2">Top 15 SKUs Â· acumulado</div></div>
     <div class="card sec"><table class="tb" id="sku-tb"></table></div>
     <div class="g2 sec">
       <div class="card"><div class="ct">Receita por produto (top 10)</div><div class="cw" style="height:305px"><canvas id="ch-sb"></canvas></div></div>
-      <div class="card"><div class="ct">Participação na receita</div><div class="cw" style="height:305px"><canvas id="ch-sp"></canvas></div></div>
+      <div class="card"><div class="ct">ParticipaÃ§Ã£o na receita</div><div class="cw" style="height:305px"><canvas id="ch-sp"></canvas></div></div>
     </div>
   </div>
 
@@ -287,12 +287,7 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
     <div class="card sec">
       <div class="sh" style="margin-bottom:8px">
         <div class="st" style="font-size:13px">Notas fiscais de entrada</div>
-        <div style="display:flex;gap:4px">
-          <button class="mt on" id="nf-all" onclick="fn2('all')">Todas</button>
-          <button class="mt" id="nf-01" onclick="fn2('2026-01')">Jan</button>
-          <button class="mt" id="nf-02" onclick="fn2('2026-02')">Fev</button>
-          <button class="mt" id="nf-03" onclick="fn2('2026-03')">Mar</button>
-          <button class="mt" id="nf-04" onclick="fn2('2026-04')">Abr</button>
+        <div style="display:flex;gap:4px" id="nf-tabs">
         </div>
       </div>
       <table class="tb"><thead><tr><th>Data</th><th>NF</th><th>Fornecedor</th><th class="r">Valor c/ Nota</th><th class="r">Valor SN</th><th class="r">Total NF</th><th>Tipo</th></tr></thead><tbody id="nf-tb"></tbody></table>
@@ -304,11 +299,11 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
   <div class="pg" id="page-fornec">
     <div class="kg" id="kpi-fn"></div>
     <div class="g2 sec">
-      <div class="card"><div class="ct">Concentração por fornecedor</div><div id="fb-bars"></div></div>
-      <div class="card"><div class="ct">Distribuição percentual</div><div class="cw" style="height:265px"><canvas id="ch-fp"></canvas></div></div>
+      <div class="card"><div class="ct">ConcentraÃ§Ã£o por fornecedor</div><div id="fb-bars"></div></div>
+      <div class="card"><div class="ct">DistribuiÃ§Ã£o percentual</div><div class="cw" style="height:265px"><canvas id="ch-fp"></canvas></div></div>
     </div>
     <div class="card sec">
-      <div class="ct">Compras por fornecedor × mês</div>
+      <div class="ct">Compras por fornecedor Ã— mÃªs</div>
       <div class="leg"><span class="li"><span class="lsq" style="background:#3b82f6"></span>P&D Impex</span><span class="li"><span class="lsq" style="background:#00e5a0"></span>Kloos</span><span class="li"><span class="lsq" style="background:#f59e0b"></span>Dynasty</span><span class="li"><span class="lsq" style="background:#f43f5e"></span>Mohnish</span><span class="li"><span class="lsq" style="background:#a78bfa"></span>Outros</span></div>
       <div class="cw" style="height:190px"><canvas id="ch-fm"></canvas></div>
     </div>
@@ -317,12 +312,12 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
   <!-- ESTOQUE -->
   <div class="pg" id="page-estoque">
     <div class="sh">
-      <div class="st">Estoque Full — 06/04/2026</div>
+      <div class="st" id="est-title">Estoque Full</div>
       <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
         <div style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px" id="est-filter">
           <button class="mt on" onclick="fEst('all',this)">Todos</button>
           <button class="mt" onclick="fEst('ok',this)">Boa qualidade</button>
-          <button class="mt" onclick="fEst('imp',this)">⚡ Impulsionar</button>
+          <button class="mt" onclick="fEst('imp',this)">âš¡ Impulsionar</button>
         </div>
         <button class="cbtn" onclick="estSave()">Salvar estoque</button>
       </div>
@@ -351,18 +346,14 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
   <!-- MARGEM POR SKU -->
   <div class="pg" id="page-margem">
     <div class="sh">
-      <div class="st">Margem por SKU — Jan–Mar/2026</div>
+      <div class="st" id="mg-title">Margem por SKU</div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
         <div style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px" id="mg-mes-tabs">
-          <button class="mt" onclick="sMargMes(0,this)">Jan/26</button>
-          <button class="mt" onclick="sMargMes(1,this)">Fev/26</button>
-          <button class="mt" onclick="sMargMes(2,this)">Mar/26</button>
-          <button class="mt on" onclick="sMargMes(-1,this)">Total</button>
         </div>
         <div style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px">
           <button class="mt on" onclick="fMarg('all',this)">Todos</button>
-          <button class="mt" onclick="fMarg('ok',this)">✅ Positiva</button>
-          <button class="mt" onclick="fMarg('neg',this)">⚠ Negativa</button>
+          <button class="mt" onclick="fMarg('ok',this)">âœ… Positiva</button>
+          <button class="mt" onclick="fMarg('neg',this)">âš  Negativa</button>
           <button class="mt" onclick="fMarg('sem',this)">Sem custo</button>
         </div>
       </div>
@@ -378,10 +369,10 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
               <th class="r">Un.<br>vendidas</th>
               <th class="r">Receita<br>total</th>
               <th class="r">Tarifas<br>ML</th>
-              <th class="r">Líq. ML<br>total</th>
+              <th class="r">LÃ­q. ML<br>total</th>
               <th class="r">CMV<br>total</th>
               <th class="r">Mg. Bruta</th>
-              <th class="r">Mg. Líquida</th>
+              <th class="r">Mg. LÃ­quida</th>
               <th class="r">Custo<br>imob.</th>
               <th class="r">V30</th>
               <th class="r">Giro<br>(dias)</th>
@@ -396,11 +387,44 @@ body{background:var(--bg);color:var(--tx);font-family:var(--fb);font-size:14px}
 
 <script>
 
-// ── Dynamic data loader ───────────────────────────────────────
+// â”€â”€ Dynamic data loader â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let M=['Jan/2026','Fev/2026','Mar/2026'], K=['2026-01','2026-02','2026-03'];
 let V={rp:[0,0,0],ac:[0,0,0],txa:[0,0,0],tv:[0,0,0],re:[0,0,0],te:[0,0,0],ca:[0,0,0],db:[0,0,0],lq:[0,0,0],pd:[0,0,0]};
 let CMV={},CMV_NF={},CMV_SN={},DEB_ML={},DEB_ML_DET={},ENC={},EMP={},EMP_ENTRADA={},EMP_TOTAL={},APORTES={},DEV_APORTE={},DESP={},E={};
 let _dbReady=false;
+
+function shortMes(i){
+  const lbl=(M[i]||'').split('/')[0]||K[i]||`M${i+1}`;
+  return lbl.slice(0,3);
+}
+
+function periodoLabel(){
+  if(!M.length) return 'Sem periodo';
+  if(M.length===1) return M[0];
+  return `${M[0]} - ${M[M.length-1]}`;
+}
+
+function renderNfTabs(){
+  const host=document.getElementById('nf-tabs');
+  if(!host) return;
+  const months=K.map((k,i)=>({k,label:shortMes(i)}));
+  host.innerHTML=`<button class="mt ${nfF==='all'?'on':''}" data-k="all" onclick="fn2('all')">Todas</button>`+
+    months.map(m=>`<button class="mt ${nfF===m.k?'on':''}" data-k="${m.k}" onclick="fn2('${m.k}')">${m.label}</button>`).join('');
+}
+
+function renderMargMesTabs(){
+  const host=document.getElementById('mg-mes-tabs');
+  if(!host) return;
+  host.innerHTML=K.map((k,i)=>`<button class="mt ${margMes===i?'on':''}" onclick="sMargMes(${i},this)">${shortMes(i)}</button>`).join('')+
+    `<button class="mt ${margMes===-1?'on':''}" onclick="sMargMes(-1,this)">Total</button>`;
+}
+
+function updateSectionTitles(){
+  const est=document.getElementById('est-title');
+  if(est) est.textContent=`Estoque Full - ${periodoLabel()}`;
+  const mg=document.getElementById('mg-title');
+  if(mg) mg.textContent=`Margem por SKU - ${periodoLabel()}`;
+}
 
 async function loadDB(){
   try{
@@ -461,13 +485,16 @@ async function loadDB(){
     // update dynamic header/subtitle
     if(M.length){
       const first=M[0],last=M[M.length-1];
-      const periodo=first===last?first:first.split('/')[0]+'–'+last;
+      const periodo=first===last?first:first.split('/')[0]+'â€“'+last;
       const totalPedidos=(V.pd||[]).reduce((a,v)=>a+(parseInt(v||0)),0);
       const sb=document.getElementById('sb-periodo');
       if(sb) sb.textContent=periodo;
       const topSub=document.getElementById('top-sub');
-      if(topSub) topSub.textContent=`${periodo} · ${totalPedidos.toLocaleString('pt-BR')} pedidos · Mercado Livre BR`;
+      if(topSub) topSub.textContent=`${periodo} Â· ${totalPedidos.toLocaleString('pt-BR')} pedidos Â· Mercado Livre BR`;
     }
+    renderNfTabs();
+    renderMargMesTabs();
+    updateSectionTitles();
     _dbReady=true;
     rAll();rExt();rNF();rComp();rForn();rSKU();rApo();rEst();rMarg();buildCharts();
     gLoad();
@@ -481,43 +508,20 @@ async function loadNFFromAPI(){
   rNF();rComp();rForn();
 }
 
-const CP=[
-  {d:'09/01',n:'6318',f:'KLOOS DISTRIBUIDORA DE MATERIAIS LTDA',v:21421.08,m:'2026-01',t:'cmv',sn:0},
-  {d:'16/01',n:'23909',f:'MOHNISH IMPORTS LTDA',v:14862.30,m:'2026-01',t:'cmv',nf:7855.82,sn:7006.48},
-  {d:'16/01',n:'11840',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:25941.62,m:'2026-01',t:'cmv',nf:12970.81,sn:12970.81},
-  {d:'16/01',n:'52010',f:'DYNASTY REAL UTILIDADES DOMESTICAS LTDA',v:4146.00,m:'2026-01',t:'cmv',sn:0},
-  {d:'19/01',n:'221579',f:'ZEIN IMPORTACAO E COMERCIO LTDA',v:4026.21,m:'2026-01',t:'cmv',nf:846.58,sn:3179.63},
-  {d:'25/01',n:'36799',f:'EDM SHOP LTDA',v:114.00,m:'2026-01',t:'desp',sn:0},
-  {d:'04/02',n:'12003',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:17419.19,m:'2026-02',t:'cmv',nf:8546.40,sn:8872.79},
-  {d:'11/02',n:'12069',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:15961.20,m:'2026-02',t:'cmv',nf:8143.80,sn:7817.40},
-  {d:'13/02',n:'12112',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:7997.41,m:'2026-02',t:'cmv',sn:0,particular:true},
-  {d:'26/02',n:'52448',f:'DYNASTY REAL UTILIDADES DOMESTICAS LTDA',v:5560.00,m:'2026-02',t:'cmv',nf:2780.00,sn:2780.00},
-  {d:'26/02',n:'12185',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:7599.60,m:'2026-02',t:'cmv',nf:3799.80,sn:3799.80},
-  {d:'20/02',n:'58',f:'ESCON - SERVICOS CONTABEIS LTDA',v:370.00,m:'2026-02',t:'desp',sn:0},
-  {d:'06/03',n:'395775',f:'LEONARDO COVO RODRIGUES COMERCIO LTDA',v:116.38,m:'2026-03',t:'cmv',sn:0},
-  {d:'09/03',n:'12240',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:17552.81,m:'2026-03',t:'cmv',nf:8850.01,sn:8702.80},
-  {d:'13/03',n:'12359',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:16250.48,m:'2026-03',t:'cmv',nf:8125.49,sn:8124.99},
-  {d:'18/03',n:'12411',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:6768.00,m:'2026-03',t:'cmv',sn:0,particular:true},
-  {d:'18/03',n:'52656',f:'DYNASTY REAL UTILIDADES DOMESTICAS LTDA',v:3850.00,m:'2026-03',t:'cmv',nf:1925.00,sn:1925.00},
-  {d:'19/03',n:'225880',f:'ZEIN IMPORTACAO E COMERCIO LTDA',v:5906.07,m:'2026-03',t:'cmv',nf:1241.84,sn:4664.23},
-  {d:'25/03',n:'12482',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:24566.40,m:'2026-03',t:'cmv',nf:12283.20,sn:12283.20},
-  {d:'01/04',n:'12534',f:'P & D IMPEX IMPORTACAO E EXPORTACAO LTDA',v:13663.18,m:'2026-04',t:'cmv',nf:6831.59,sn:6831.59},
-  {d:'01/04',n:'52806',f:'DYNASTY REAL UTILIDADES DOMESTICAS LTDA',v:5425.00,m:'2026-04',t:'cmv',nf:2712.50,sn:2712.50},
-  {d:'01/04',n:'1',f:'ATACADO APARECIDA "TELOS"',v:5760.00,m:'2026-04',t:'cmv',nf:0,sn:5760.00}
-];
-const SK=[{s:'Rock Crawler Off-Road',p:379,u:390,r:20741.96,l:15530.08},{s:'Carrinho Maluco 360',p:344,u:372,r:11671.90,l:8403.21},{s:'Estojo 208 Unicornio',p:128,u:132,r:7612.38,l:5834.45},{s:'Sunday 60 Fps 200ml',p:208,u:372,r:6688.30,l:5320.00},{s:'Carrinho Speed',p:197,u:208,r:6432.72,l:4429.70},{s:'Laptop Infantil Rosa',p:149,u:156,r:6222.24,l:4574.11},{s:'Carrinho Jipe Barbie Rosa',p:79,u:81,r:6093.35,l:4286.21},{s:'Laptop Infantil Azul',p:138,u:143,r:6081.90,l:4473.05},{s:'Carrinho Stunt 360',p:114,u:121,r:4968.20,l:3723.28},{s:'Piano Animal',p:142,u:157,r:4952.85,l:3491.43},{s:'Carrinho Gibizinho Pick-up',p:107,u:110,r:3949.90,l:2987.75},{s:'Helicoptero Super',p:67,u:68,r:3864.42,l:2719.16},{s:'Nutriex 30fps 120ml',p:80,u:322,r:3773.22,l:2939.02},{s:'Sunday 30 Fps 200ml',p:67,u:270,r:3569.30,l:2788.14},{s:'Big Foot 01',p:55,u:56,r:3224.80,l:2229.04}];
+let CP=[];
+let SK=[];
 
 let cm=-1;
 const f=v=>'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const fn=v=>(v<0?'− ':'')+'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-const pct=(a,b)=>b?(Math.abs(a)/Math.abs(b)*100).toFixed(1)+'%':'—';
+const fn=v=>(v<0?'âˆ’ ':'')+'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const pct=(a,b)=>b?(Math.abs(a)/Math.abs(b)*100).toFixed(1)+'%':'â€”';
 const exD=()=>['d-e','d-s','d-o'].reduce((a,id)=>a+(parseFloat(document.getElementById(id)?.value)||0),0);
 
 function getD(i){
   if(i===-1){
     const sv=k=>V[k].reduce((a,v)=>a+v,0);
     const d=K.reduce((a,k)=>{const x=DESP[k];return{contab:a.contab+x.contab,pub:a.pub+x.pub,imp:a.imp+x.imp,tml:a.tml+x.tml,prolabore_lucas:a.prolabore_lucas+(x.prolabore_lucas||0),prolabore_fellipe:a.prolabore_fellipe+(x.prolabore_fellipe||0),galpao:a.galpao+x.galpao,frete:a.frete+(x.frete||0)}},{contab:0,pub:0,imp:0,tml:0,prolabore_lucas:0,prolabore_fellipe:0,galpao:0,frete:0});
-    return{rp:sv('rp'),ac:sv('ac'),txa:sv('txa'),tv:sv('tv'),re:sv('re'),te:sv('te'),ca:sv('ca'),db:sv('db'),lq:sv('lq'),pd:sv('pd'),cmv:K.reduce((a,k)=>a+CMV[k],0),cmv_nf:K.reduce((a,k)=>a+CMV_NF[k],0),cmv_sn:K.reduce((a,k)=>a+CMV_SN[k],0),deb_ml:K.reduce((a,k)=>a+DEB_ML[k],0),...d,enc:K.reduce((a,k)=>a+ENC[k],0),emp:K.reduce((a,k)=>a+EMP[k],0),emp_entrada:K.reduce((a,k)=>a+EMP_ENTRADA[k],0),emp_total:Math.max(...K.map(k=>EMP_TOTAL[k])),aporte:K.reduce((a,k)=>a+APORTES[k],0),dev_apo:K.reduce((a,k)=>a+DEV_APORTE[k],0),lbl:'Total Jan–Mar/2026'};
+    return{rp:sv('rp'),ac:sv('ac'),txa:sv('txa'),tv:sv('tv'),re:sv('re'),te:sv('te'),ca:sv('ca'),db:sv('db'),lq:sv('lq'),pd:sv('pd'),cmv:K.reduce((a,k)=>a+CMV[k],0),cmv_nf:K.reduce((a,k)=>a+CMV_NF[k],0),cmv_sn:K.reduce((a,k)=>a+CMV_SN[k],0),deb_ml:K.reduce((a,k)=>a+DEB_ML[k],0),...d,enc:K.reduce((a,k)=>a+ENC[k],0),emp:K.reduce((a,k)=>a+EMP[k],0),emp_entrada:K.reduce((a,k)=>a+EMP_ENTRADA[k],0),emp_total:Math.max(...K.map(k=>EMP_TOTAL[k])),aporte:K.reduce((a,k)=>a+APORTES[k],0),dev_apo:K.reduce((a,k)=>a+DEV_APORTE[k],0),lbl:`Total ${periodoLabel()}`};
   }
   const k=K[i],d=DESP[k];
   return{rp:V.rp[i],ac:V.ac[i],txa:V.txa[i],tv:V.tv[i],re:V.re[i],te:V.te[i],ca:V.ca[i],db:V.db[i],lq:V.lq[i],pd:V.pd[i],cmv:CMV[k],cmv_nf:CMV_NF[k],cmv_sn:CMV_SN[k],deb_ml:DEB_ML[k],...d,enc:ENC[k],emp:EMP[k],emp_entrada:EMP_ENTRADA[k],emp_total:EMP_TOTAL[k],aporte:APORTES[k],dev_apo:DEV_APORTE[k],lbl:M[i]};
@@ -543,7 +547,7 @@ function sp(p){
   document.querySelectorAll('.ni').forEach(el=>el.classList.remove('on'));
   document.getElementById('page-'+p).classList.add('on');
   const ps=['overview','dre','aportes','extrato','evolucao','produtos','compras','fornec','estoque','margem','g-financeiro','g-produtos','g-notas','g-aportes','g-skus','g-historico'];
-  const ts=['Visão geral','DRE Gerencial','Aportes de capital','Extrato ML','Evolução Mensal','Produtos / SKU','Notas de Compra','Fornecedores','Estoque Full','Margem por SKU','Dados Financeiros','Produtos / Custos','Notas Fiscais','Aportes / Empréstimos','Importar Dados','Histórico de Alterações'];
+  const ts=['VisÃ£o geral','DRE Gerencial','Aportes de capital','Extrato ML','EvoluÃ§Ã£o Mensal','Produtos / SKU','Notas de Compra','Fornecedores','Estoque Full','Margem por SKU','Dados Financeiros','Produtos / Custos','Notas Fiscais','Aportes / EmprÃ©stimos','Importar Dados','HistÃ³rico de AlteraÃ§Ãµes'];
   const idx=ps.indexOf(p);
   if(idx>=0)document.querySelectorAll('.ni')[idx].classList.add('on');
   document.getElementById('pgt').textContent=ts[idx]||p;
@@ -569,11 +573,11 @@ function rOV(){
   const saldoApo=d.aporte-d.dev_apo;
   document.getElementById('kpi-ov').innerHTML=`
     <div class="kc cb"><div class="kl">Receita bruta</div><div class="kv" style="color:var(--b)">${f(d.rp)}</div><div class="ks">${d.pd.toLocaleString('pt-BR')} pedidos</div></div>
-    <div class="kc cg"><div class="kl">Líquido ML</div><div class="kv" style="color:var(--g)">${f(d.lq)}</div><div class="ks">${pct(d.lq,d.rp)} da receita</div></div>
-    <div class="kc cr"><div class="kl">Retenções + Déb. ML</div><div class="kv" style="color:var(--r)">${fn(rt+d.deb_ml)}</div><div class="ks">${pct(rt+d.deb_ml,d.rp)} da receita</div></div>
+    <div class="kc cg"><div class="kl">LÃ­quido ML</div><div class="kv" style="color:var(--g)">${f(d.lq)}</div><div class="ks">${pct(d.lq,d.rp)} da receita</div></div>
+    <div class="kc cr"><div class="kl">RetenÃ§Ãµes + DÃ©b. ML</div><div class="kv" style="color:var(--r)">${fn(rt+d.deb_ml)}</div><div class="ks">${pct(rt+d.deb_ml,d.rp)} da receita</div></div>
     <div class="kc ca"><div class="kl">CMV (NFs compra)</div><div class="kv" style="color:var(--am)">${f(d.cmv)}</div><div class="ks">${pct(d.cmv,rc)} da receita</div></div>
     ${d.enc>0?`<div class="kc cr"><div class="kl">Encargos ML</div><div class="kv" style="color:var(--r);font-size:16px">${f(d.enc)}</div><div class="ks">Faturas vencidas</div></div>`:''}
-    ${d.emp>0?`<div class="kc co"><div class="kl">Empréstimo MP</div><div class="kv" style="color:var(--o)">${f(d.emp)}</div><div class="ks">Parcelamento ML</div></div>`:''}
+    ${d.emp>0?`<div class="kc co"><div class="kl">EmprÃ©stimo MP</div><div class="kv" style="color:var(--o)">${f(d.emp)}</div><div class="ks">Parcelamento ML</div></div>`:''}
     <div class="kc cp"><div class="kl">Resultado operacional</div><div class="kv" style="color:${res>=0?'var(--g)':'var(--r)'}">${fn(res)}</div><div class="ks">Margem ${mrg.toFixed(1)}%</div></div>
     ${saldoApo>0?`<div class="kc ct"><div class="kl">Aportes de capital (saldo)</div><div class="kv" style="color:var(--tl)">${f(saldoApo)}</div><div class="ks">Fora do resultado</div></div>`:''}`;
 }
@@ -591,78 +595,78 @@ function rDRE(){
   document.getElementById('dre-b').textContent=d.lbl;
 
   const apo_html=d.aporte>0||d.dev_apo>0?`
-    <div class="dr dh">MOVIMENTAÇÃO DE CAPITAL <span style="font-size:9px;opacity:.6">(fora do resultado operacional)</span></div>
-    ${d.aporte>0?`<div class="dr dsub dapo"><span style="color:var(--tl)">Aportes recebidos de sócios/investidores</span><span class="dv tl">+ ${f(d.aporte)}</span></div>`:''}
-    ${d.dev_apo>0?`<div class="dr dsub"><span>Devolução de aporte</span><span class="dv n">${fn(-d.dev_apo)}</span></div>`:''}
-    <div class="dr dtot"><span>= Saldo líquido de capital</span><span class="dv tl">${fn(d.aporte-d.dev_apo)}</span></div>`:'' ;
+    <div class="dr dh">MOVIMENTAÃ‡ÃƒO DE CAPITAL <span style="font-size:9px;opacity:.6">(fora do resultado operacional)</span></div>
+    ${d.aporte>0?`<div class="dr dsub dapo"><span style="color:var(--tl)">Aportes recebidos de sÃ³cios/investidores</span><span class="dv tl">+ ${f(d.aporte)}</span></div>`:''}
+    ${d.dev_apo>0?`<div class="dr dsub"><span>DevoluÃ§Ã£o de aporte</span><span class="dv n">${fn(-d.dev_apo)}</span></div>`:''}
+    <div class="dr dtot"><span>= Saldo lÃ­quido de capital</span><span class="dv tl">${fn(d.aporte-d.dev_apo)}</span></div>`:'' ;
 
   document.getElementById('dre-body').innerHTML=`
     <div class="dr dh">RECEITAS</div>
     <div class="dr dsub"><span>Receita por produtos</span><span class="dv p">${f(d.rp)}</span></div>
     <div class="dr dtot"><span>= Receita total bruta</span><span class="dv p">${f(d.rp)}</span></div>
-    <div class="dr dh">RETENÇÕES MERCADO LIVRE <span style="font-size:9px;opacity:.6">(relatório de vendas)</span></div>
-    ${d.ac>0?`<div class="dr dsub"><span>Acréscimo parcelamento <span style="font-size:10px;color:var(--mu)">(pago pelo comprador)</span></span><span class="dv p">+ ${f(d.ac)}</span></div>`:''}
-    ${d.txa<0?`<div class="dr dsub"><span>Taxa de parcelamento equivalente ao acréscimo</span><span class="dv n">${fn(d.txa)}</span></div>`:''}
+    <div class="dr dh">RETENÃ‡Ã•ES MERCADO LIVRE <span style="font-size:9px;opacity:.6">(relatÃ³rio de vendas)</span></div>
+    ${d.ac>0?`<div class="dr dsub"><span>AcrÃ©scimo parcelamento <span style="font-size:10px;color:var(--mu)">(pago pelo comprador)</span></span><span class="dv p">+ ${f(d.ac)}</span></div>`:''}
+    ${d.txa<0?`<div class="dr dsub"><span>Taxa de parcelamento equivalente ao acrÃ©scimo</span><span class="dv n">${fn(d.txa)}</span></div>`:''}
     <div class="dr dsub"><span>Tarifa de venda e impostos</span><span class="dv n">${fn(d.tv)}</span></div>
     <div class="dr dsub"><span>Cancelamentos e reembolsos</span><span class="dv n">${fn(d.ca)}</span></div>
     ${d.re>0?`<div class="dr dsub"><span>Receita por envio</span><span class="dv p">+ ${f(d.re)}</span></div>`:''}
     ${d.te<0?`<div class="dr dsub"><span>Tarifas de envio</span><span class="dv n">${fn(d.te)}</span></div>`:''}
-    ${d.db>0?`<div class="dr dsub"><span>Descontos e bônus</span><span class="dv p">+ ${f(d.db)}</span></div>`:''}
-    <div class="dr dtot"><span>= Total líquido retenções ML</span><span class="dv n">${fn(rt)}</span></div>
-    <div class="dr dtot" style="border-bottom:1px solid rgba(59,130,246,.2)"><span style="color:#93c5fd">= Líquido repassado ML</span><span class="dv bl">${f(d.lq)}</span></div>
-    <div class="dr dh">DÉBITOS OPERACIONAIS ML <span style="font-size:9px;opacity:.6">(extrato Mercado Pago)</span></div>
-    ${det.recl<0?`<div class="dr dsub"><span>Déb. reclamações no Mercado Livre</span><span class="dv n">${fn(det.recl)}</span></div>`:''}
-    ${det.retido<0?`<div class="dr dsub"><span>Dinheiro retido / déb. retido</span><span class="dv n">${fn(det.retido)}</span></div>`:''}
-    ${det.devolv<0?`<div class="dr dsub"><span>Déb. devoluções ML</span><span class="dv n">${fn(det.devolv)}</span></div>`:''}
-    ${det.envio<0?`<div class="dr dsub"><span>Déb. envio Mercado Livre</span><span class="dv n">${fn(det.envio)}</span></div>`:''}
-    <div class="dr dtot"><span>= Total débitos operacionais ML</span><span class="dv n">${fn(d.deb_ml)}</span></div>
-    <div class="dr dh">CMV — CUSTO DAS MERCADORIAS VENDIDAS</div>
+    ${d.db>0?`<div class="dr dsub"><span>Descontos e bÃ´nus</span><span class="dv p">+ ${f(d.db)}</span></div>`:''}
+    <div class="dr dtot"><span>= Total lÃ­quido retenÃ§Ãµes ML</span><span class="dv n">${fn(rt)}</span></div>
+    <div class="dr dtot" style="border-bottom:1px solid rgba(59,130,246,.2)"><span style="color:#93c5fd">= LÃ­quido repassado ML</span><span class="dv bl">${f(d.lq)}</span></div>
+    <div class="dr dh">DÃ‰BITOS OPERACIONAIS ML <span style="font-size:9px;opacity:.6">(extrato Mercado Pago)</span></div>
+    ${det.recl<0?`<div class="dr dsub"><span>DÃ©b. reclamaÃ§Ãµes no Mercado Livre</span><span class="dv n">${fn(det.recl)}</span></div>`:''}
+    ${det.retido<0?`<div class="dr dsub"><span>Dinheiro retido / dÃ©b. retido</span><span class="dv n">${fn(det.retido)}</span></div>`:''}
+    ${det.devolv<0?`<div class="dr dsub"><span>DÃ©b. devoluÃ§Ãµes ML</span><span class="dv n">${fn(det.devolv)}</span></div>`:''}
+    ${det.envio<0?`<div class="dr dsub"><span>DÃ©b. envio Mercado Livre</span><span class="dv n">${fn(det.envio)}</span></div>`:''}
+    <div class="dr dtot"><span>= Total dÃ©bitos operacionais ML</span><span class="dv n">${fn(d.deb_ml)}</span></div>
+    <div class="dr dh">CMV â€” CUSTO DAS MERCADORIAS VENDIDAS</div>
     <div class="dr dsub"><span>Notas fiscais de compra <span style="font-size:10px;color:var(--mu)">(NF)</span></span><span class="dv n">${fn(-d.cmv_nf)}</span></div>
     <div class="dr dsub" style="background:rgba(245,158,11,.05);border-left:2px solid rgba(245,158,11,.4)"><span>Compras pedido SN <span style="font-size:10px;font-weight:600;color:var(--am);background:rgba(245,158,11,.15);padding:1px 5px;border-radius:3px;margin-left:3px">SN</span></span><span class="dv am">${fn(-d.cmv_sn)}</span></div>
     <div class="dr dtot"><span>= Total CMV (NF + SN)</span><span class="dv n">${fn(-d.cmv)}</span></div>
     <div class="dr dtot"><span>= Lucro bruto</span><span class="dv ${lb>=0?'p':'n'}">${fn(lb)}</span></div>
     <div class="dr dh">DESPESAS OPERACIONAIS</div>
-    ${d.galpao>0?`<div class="dr dsub"><span>Galpão, água, luz e internet <span style="font-size:10px;color:var(--mu)">23/03/2026</span></span><span class="dv n">${fn(-d.galpao)}</span></div>`:''}
+    ${d.galpao>0?`<div class="dr dsub"><span>GalpÃ£o, Ã¡gua, luz e internet <span style="font-size:10px;color:var(--mu)">23/03/2026</span></span><span class="dv n">${fn(-d.galpao)}</span></div>`:''}
     ${d.frete>0?`<div class="dr dsub"><span>Frete / transporte <span style="font-size:10px;color:var(--mu)">28/03/2026</span></span><span class="dv n">${fn(-d.frete)}</span></div>`:''}
     ${d.contab>0?`<div class="dr dsub"><span>Contabilidade (ESCON)</span><span class="dv n">${fn(-d.contab)}</span></div>`:''}
-    ${d.pub>0?`<div class="dr dsub"><span>Publicidade / Plataformas (Google · AvantPro)</span><span class="dv n">${fn(-d.pub)}</span></div>`:''}
+    ${d.pub>0?`<div class="dr dsub"><span>Publicidade / Plataformas (Google Â· AvantPro)</span><span class="dv n">${fn(-d.pub)}</span></div>`:''}
     ${d.tml>0?`<div class="dr dsub"><span>Tarifas ML</span><span class="dv n">${fn(-d.tml)}</span></div>`:''}
-    ${ex>0?`<div class="dr dsub"><span>Despesas adicionais lançadas</span><span class="dv n">${fn(-ex)}</span></div>`:''}
-    <div class="dr dsub"><span style="color:var(--mu);font-style:italic">Embalagens / SaaS / Outras</span><span class="dv mu">${ex>0?'incluído acima':'lançar abaixo'}</span></div>
-    <div class="dr dh">PRÓ-LABORE <span style="font-size:9px;opacity:.6">(remuneração dos sócios)</span></div>
+    ${ex>0?`<div class="dr dsub"><span>Despesas adicionais lanÃ§adas</span><span class="dv n">${fn(-ex)}</span></div>`:''}
+    <div class="dr dsub"><span style="color:var(--mu);font-style:italic">Embalagens / SaaS / Outras</span><span class="dv mu">${ex>0?'incluÃ­do acima':'lanÃ§ar abaixo'}</span></div>
+    <div class="dr dh">PRÃ“-LABORE <span style="font-size:9px;opacity:.6">(remuneraÃ§Ã£o dos sÃ³cios)</span></div>
     <div class="dr dsub dpro" style="background:rgba(168,85,247,.05);border-left:2px solid rgba(168,85,247,.4)">
       <span>Lucas Cristiano Pereira</span>
-      <span class="dv pu">${d.prolabore_lucas>0?fn(-d.prolabore_lucas):'<span style="color:var(--mu);font-size:11px">— não lançado</span>'}</span>
+      <span class="dv pu">${d.prolabore_lucas>0?fn(-d.prolabore_lucas):'<span style="color:var(--mu);font-size:11px">â€” nÃ£o lanÃ§ado</span>'}</span>
     </div>
     <div class="dr dsub dpro" style="background:rgba(168,85,247,.05);border-left:2px solid rgba(168,85,247,.4)">
       <span>Fellipe Genestra Delfino <span style="font-size:10px;color:var(--mu)">${d.prolabore_fellipe>0?'11/03/2026':''}</span></span>
-      <span class="dv pu">${d.prolabore_fellipe>0?fn(-d.prolabore_fellipe):'<span style="color:var(--mu);font-size:11px">— não lançado</span>'}</span>
+      <span class="dv pu">${d.prolabore_fellipe>0?fn(-d.prolabore_fellipe):'<span style="color:var(--mu);font-size:11px">â€” nÃ£o lanÃ§ado</span>'}</span>
     </div>
-    ${prolabore>0?`<div class="dr dtot"><span>= Total pró-labore</span><span class="dv pu">${fn(-prolabore)}</span></div>`:''}
+    ${prolabore>0?`<div class="dr dtot"><span>= Total prÃ³-labore</span><span class="dv pu">${fn(-prolabore)}</span></div>`:''}
     <div class="dr dh">IMPOSTOS <span style="font-size:9px;opacity:.6">(guias pagas)</span></div>
     <div class="dr dsub" style="background:rgba(244,63,94,.04);border-left:2px solid rgba(244,63,94,.3)">
-      <span>Impostos federais / estaduais pagos</span><span class="dv n">${d.imp>0?fn(-d.imp):'—'}</span>
+      <span>Impostos federais / estaduais pagos</span><span class="dv n">${d.imp>0?fn(-d.imp):'â€”'}</span>
     </div>
-    <div class="dr dh">ENCARGOS ML — FATURAS VENCIDAS</div>
-    <div class="dr denc"><span>Débito faturas vencidas Mercado Livre</span><span class="dv n">${fn(-d.enc)}</span></div>
-    ${(()=>{const resAntesEmp=lb-despOp-prolabore-d.imp-d.enc;return`<div class="dr dtot" style="border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)"><span style="color:var(--mu);font-size:12px">= Lucro operacional líquido</span><span class="dv ${resAntesEmp>=0?'p':'n'}" style="font-size:12px">${fn(resAntesEmp)}</span></div>`})()}
-    <div class="dr dh">FINANCIAMENTO — EMPRÉSTIMO MERCADO PAGO</div>
-    ${d.emp_entrada>0?`<div class="dr dsub" style="background:rgba(251,146,60,.07);border-left:2px solid rgba(251,146,60,.5)"><span style="color:var(--o)">✚ Entrada empréstimo MP aprovado</span><span class="dv or">+ ${f(d.emp_entrada)}</span></div>`:''}
-    ${d.emp>0?`<div class="dr dsub"><span>Parcelas pagas no período</span><span class="dv n">${fn(-d.emp)}</span></div>`:(!d.emp_entrada?`<div class="dr dsub" style="opacity:.4"><span style="font-style:italic">Sem movimentação de empréstimo no período</span><span></span></div>`:'')}  
+    <div class="dr dh">ENCARGOS ML â€” FATURAS VENCIDAS</div>
+    <div class="dr denc"><span>DÃ©bito faturas vencidas Mercado Livre</span><span class="dv n">${fn(-d.enc)}</span></div>
+    ${(()=>{const resAntesEmp=lb-despOp-prolabore-d.imp-d.enc;return`<div class="dr dtot" style="border-top:1px solid rgba(255,255,255,.07);border-bottom:1px solid rgba(255,255,255,.07)"><span style="color:var(--mu);font-size:12px">= Lucro operacional lÃ­quido</span><span class="dv ${resAntesEmp>=0?'p':'n'}" style="font-size:12px">${fn(resAntesEmp)}</span></div>`})()}
+    <div class="dr dh">FINANCIAMENTO â€” EMPRÃ‰STIMO MERCADO PAGO</div>
+    ${d.emp_entrada>0?`<div class="dr dsub" style="background:rgba(251,146,60,.07);border-left:2px solid rgba(251,146,60,.5)"><span style="color:var(--o)">âœš Entrada emprÃ©stimo MP aprovado</span><span class="dv or">+ ${f(d.emp_entrada)}</span></div>`:''}
+    ${d.emp>0?`<div class="dr dsub"><span>Parcelas pagas no perÃ­odo</span><span class="dv n">${fn(-d.emp)}</span></div>`:(!d.emp_entrada?`<div class="dr dsub" style="opacity:.4"><span style="font-style:italic">Sem movimentaÃ§Ã£o de emprÃ©stimo no perÃ­odo</span><span></span></div>`:'')}  
     <div class="dr dh">RESULTADO OPERACIONAL</div>
     <div class="dr dres" style="background:${res>=0?'rgba(0,229,160,.06)':'rgba(244,63,94,.06)'};border-left:2px solid ${res>=0?'var(--g)':'var(--r)'}">
-      <span style="color:${res>=0?'var(--g)':'var(--r)'}">= Resultado líquido operacional</span>
+      <span style="color:${res>=0?'var(--g)':'var(--r)'}">= Resultado lÃ­quido operacional</span>
       <span class="dv ${res>=0?'p':'n'}" style="font-size:15px">${fn(res)}</span>
     </div>
-    <div class="dr" style="background:var(--bg3);font-size:11px;color:var(--mu)"><span>Margem líquida</span><span class="dv am">${mrg.toFixed(1)}%</span></div>
+    <div class="dr" style="background:var(--bg3);font-size:11px;color:var(--mu)"><span>Margem lÃ­quida</span><span class="dv am">${mrg.toFixed(1)}%</span></div>
     <div class="dr dh">NECESSIDADE DE CAPITAL</div>
-    <div class="dr dsub dapo"><span style="color:var(--tl)">Aportes de sócios no período</span><span class="dv tl">${d.aporte>0?'+ '+f(d.aporte):'—'}</span></div>
-    <div class="dr dsub" style="${d.dev_apo>0?'':'opacity:.4'}"><span>Devoluções de aporte</span><span class="dv n">${d.dev_apo>0?fn(-d.dev_apo):'—'}</span></div>
+    <div class="dr dsub dapo"><span style="color:var(--tl)">Aportes de sÃ³cios no perÃ­odo</span><span class="dv tl">${d.aporte>0?'+ '+f(d.aporte):'â€”'}</span></div>
+    <div class="dr dsub" style="${d.dev_apo>0?'':'opacity:.4'}"><span>DevoluÃ§Ãµes de aporte</span><span class="dv n">${d.dev_apo>0?fn(-d.dev_apo):'â€”'}</span></div>
     ${(() => { const resFinal = res + d.aporte - d.dev_apo; return `<div class="dr dres" style="background:${resFinal>=0?'rgba(45,212,191,.07)':'rgba(244,63,94,.08)'};border-left:2px solid ${resFinal>=0?'var(--tl)':'var(--r)'}">
-      <span style="color:${resFinal>=0?'var(--tl)':'var(--r)'}">= Posição de caixa (operacional + capital)</span>
+      <span style="color:${resFinal>=0?'var(--tl)':'var(--r)'}">= PosiÃ§Ã£o de caixa (operacional + capital)</span>
       <span class="dv ${resFinal>=0?'tl':'n'}" style="font-size:15px">${fn(resFinal)}</span>
     </div>`; })()}
-    <div class="dr" style="background:var(--bg3);font-size:11px;color:var(--mu)"><span style="color:var(--mu);font-style:italic">Positivo = operação sustentável · Negativo = capital injetado foi consumido</span><span></span></div>`;
+    <div class="dr" style="background:var(--bg3);font-size:11px;color:var(--mu)"><span style="color:var(--mu);font-style:italic">Positivo = operaÃ§Ã£o sustentÃ¡vel Â· Negativo = capital injetado foi consumido</span><span></span></div>`;
 }
 function rc(){rDRE();rOV();}
 
@@ -670,7 +674,7 @@ function rc(){rDRE();rOV();}
 function rApo(){
   const socios={};
   (apList||[]).forEach(a=>{
-    const nome=(a.socio||'Não informado').trim()||'Não informado';
+    const nome=(a.socio||'NÃ£o informado').trim()||'NÃ£o informado';
     const val=Number(a.valor||0);
     if(!socios[nome]) socios[nome]={ent:0,dev:0};
     if(a.tipo==='devolucao') socios[nome].dev+=val;
@@ -679,33 +683,33 @@ function rApo(){
   const saldoSocios=Object.entries(socios)
     .map(([nome,s])=>({nome,saldo:s.ent-s.dev}))
     .sort((a,b)=>Math.abs(b.saldo)-Math.abs(a.saldo));
-  const top1=saldoSocios[0]||{nome:'Sem lançamentos',saldo:0};
-  const top2=saldoSocios[1]||{nome:'Sem lançamentos',saldo:0};
+  const top1=saldoSocios[0]||{nome:'Sem lanÃ§amentos',saldo:0};
+  const top2=saldoSocios[1]||{nome:'Sem lanÃ§amentos',saldo:0};
   const empEntrada=(emList||[]).reduce((a,e)=>a+Number(e.valor||0),0);
   const totalAportes=(apList||[]).reduce((a,x)=>a+(x.tipo==='devolucao'?-1:1)*Number(x.valor||0),0);
 
   document.getElementById('kpi-apo').innerHTML=`
-    <div class="kc cb"><div class="kl">${top1.nome}</div><div class="kv" style="color:var(--b)">${fn(top1.saldo)}</div><div class="ks">Saldo líquido de aportes</div></div>
-    <div class="kc cp"><div class="kl">${top2.nome}</div><div class="kv" style="color:var(--p)">${fn(top2.saldo)}</div><div class="ks">Saldo líquido de aportes</div></div>
-    <div class="kc co"><div class="kl">Entradas de empréstimo</div><div class="kv" style="color:var(--o)">${f(empEntrada)}</div><div class="ks">Total dos lançamentos</div></div>
-    <div class="kc ct"><div class="kl">Capital líquido injetado</div><div class="kv" style="color:var(--tl)">${fn(totalAportes)}</div><div class="ks">Aportes - devoluções</div></div>`;
+    <div class="kc cb"><div class="kl">${top1.nome}</div><div class="kv" style="color:var(--b)">${fn(top1.saldo)}</div><div class="ks">Saldo lÃ­quido de aportes</div></div>
+    <div class="kc cp"><div class="kl">${top2.nome}</div><div class="kv" style="color:var(--p)">${fn(top2.saldo)}</div><div class="ks">Saldo lÃ­quido de aportes</div></div>
+    <div class="kc co"><div class="kl">Entradas de emprÃ©stimo</div><div class="kv" style="color:var(--o)">${f(empEntrada)}</div><div class="ks">Total dos lanÃ§amentos</div></div>
+    <div class="kc ct"><div class="kl">Capital lÃ­quido injetado</div><div class="kv" style="color:var(--tl)">${fn(totalAportes)}</div><div class="ks">Aportes - devoluÃ§Ãµes</div></div>`;
 }
 
 // EXTRATO
-const ECAT=[{k:'lib',l:'Liberação de dinheiro',t:'p'},{k:'dr',l:'Dinheiro recebido',t:'p'},{k:'em',l:'Entrada de dinheiro',t:'p'},{k:'rb',l:'Reembolsos',t:'p'},{k:'ee',l:'Entrada empréstimo ML',t:'p'},{k:'drc',l:'Débito reclamações ML',t:'n'},{k:'drt',l:'Retido / déb. retido',t:'n'},{k:'ddv',l:'Débito devoluções ML',t:'n'},{k:'denv',l:'Débito envio ML',t:'n'},{k:'demp',l:'⚠ Débito Empréstimo Mercado Pago',t:'o'},{k:'dft',l:'Débito faturas vencidas ML',t:'n'},{k:'ddf',l:'Débito DIFAL',t:'n'},{k:'pub',l:'Publicidade',t:'n'},{k:'imp',l:'Impostos',t:'n'},{k:'tml',l:'Tarifas ML',t:'n'}];
+const ECAT=[{k:'lib',l:'LiberaÃ§Ã£o de dinheiro',t:'p'},{k:'dr',l:'Dinheiro recebido',t:'p'},{k:'em',l:'Entrada de dinheiro',t:'p'},{k:'rb',l:'Reembolsos',t:'p'},{k:'ee',l:'Entrada emprÃ©stimo ML',t:'p'},{k:'drc',l:'DÃ©bito reclamaÃ§Ãµes ML',t:'n'},{k:'drt',l:'Retido / dÃ©b. retido',t:'n'},{k:'ddv',l:'DÃ©bito devoluÃ§Ãµes ML',t:'n'},{k:'denv',l:'DÃ©bito envio ML',t:'n'},{k:'demp',l:'âš  DÃ©bito EmprÃ©stimo Mercado Pago',t:'o'},{k:'dft',l:'DÃ©bito faturas vencidas ML',t:'n'},{k:'ddf',l:'DÃ©bito DIFAL',t:'n'},{k:'pub',l:'Publicidade',t:'n'},{k:'imp',l:'Impostos',t:'n'},{k:'tml',l:'Tarifas ML',t:'n'}];
 let extF='all';
 function fe(f2,btn){extF=f2;document.querySelectorAll('#ext-tabs .mt').forEach(el=>el.classList.remove('on'));if(btn)btn.classList.add('on');rExt();}
 function rExt(){
   const ks=extF==='all'?K:[extF];
   const empT=ks.reduce((a,k)=>a+Math.abs(E[k].demp||0),0);
-  document.getElementById('emp-hl').innerHTML=empT>0?`<div class="emp-box"><div><div class="eb-l">Empréstimo Mercado Pago — separado na DRE</div><div class="eb-s">394 lançamentos em Fev/26 · Parcelamento automático diário</div></div><div class="eb-v">${fn(-empT)}</div></div>`:'';
+  document.getElementById('emp-hl').innerHTML=empT>0?`<div class="emp-box"><div><div class="eb-l">EmprÃ©stimo Mercado Pago â€” separado na DRE</div><div class="eb-s">394 lanÃ§amentos em Fev/26 Â· Parcelamento automÃ¡tico diÃ¡rio</div></div><div class="eb-v">${fn(-empT)}</div></div>`:'';
   const ent=ks.reduce((a,k)=>{const e=E[k];return a+e.lib+e.dr+e.em+e.rb+e.ee+(e.pc||0)},0);
   const sai=ks.reduce((a,k)=>{const e=E[k];return a+e.demp+e.drc+e.drt+(e.ddv||0)+e.denv+(e.dec||0)+e.dft+(e.ddf||0)+e.pub+e.imp+e.tml},0);
   document.getElementById('kpi-ext').innerHTML=`
-    <div class="kc cg"><div class="kl">Total entradas</div><div class="kv" style="color:var(--g)">${f(ent)}</div><div class="ks">Liberações + reembolsos</div></div>
-    <div class="kc cr"><div class="kl">Total saídas</div><div class="kv" style="color:var(--r)">${fn(sai)}</div><div class="ks">Débitos e deduções</div></div>
-    <div class="kc co"><div class="kl">Empréstimo MP</div><div class="kv" style="color:var(--o)">${f(empT)}</div><div class="ks">Separado na DRE</div></div>`;
-  const f2v=v=>v===0?'<span style="color:var(--mu)">—</span>':fn(v);
+    <div class="kc cg"><div class="kl">Total entradas</div><div class="kv" style="color:var(--g)">${f(ent)}</div><div class="ks">LiberaÃ§Ãµes + reembolsos</div></div>
+    <div class="kc cr"><div class="kl">Total saÃ­das</div><div class="kv" style="color:var(--r)">${fn(sai)}</div><div class="ks">DÃ©bitos e deduÃ§Ãµes</div></div>
+    <div class="kc co"><div class="kl">EmprÃ©stimo MP</div><div class="kv" style="color:var(--o)">${f(empT)}</div><div class="ks">Separado na DRE</div></div>`;
+  const f2v=v=>v===0?'<span style="color:var(--mu)">â€”</span>':fn(v);
   let html='';
   ECAT.forEach(c=>{
     const vs=K.map(k=>E[k][c.k]||0);
@@ -724,7 +728,7 @@ function extRenderEditor(){
   ECAT.forEach(c=>{
     html+=`<tr><td style="font-size:12px">${c.l}</td>${months.map(m=>`<td class="r"><input data-ext-k="${c.k}" data-ext-m="${m.key}" type="number" step="0.01" value="${((E[m.key]||{})[c.k]||0)}" class="dinp" style="font-family:var(--fm);font-size:11px;text-align:right;max-width:110px"></td>`).join('')}</tr>`;
   });
-  html+='</tbody></table></div><div style="margin-top:10px;font-size:11px;color:var(--mu)">Dica: entradas positivas e débitos negativos.</div>';
+  html+='</tbody></table></div><div style="margin-top:10px;font-size:11px;color:var(--mu)">Dica: entradas positivas e dÃ©bitos negativos.</div>';
   document.getElementById('ext-edit-body').innerHTML=html;
 }
 
@@ -749,7 +753,11 @@ async function extSave(){
 }
 
 let nfF='all';
-function fn2(f){nfF=f;['all','01','02','03','04'].forEach(k=>{const el=document.getElementById('nf-'+k);if(el)el.classList.toggle('on',k===f||('2026-'+k)===f)});rNF();}
+function fn2(f){
+  nfF=f;
+  document.querySelectorAll('#nf-tabs [data-k]').forEach(el=>el.classList.toggle('on',el.dataset.k===f));
+  rNF();
+}
 function rNF(){
   const rows=nfF==='all'?CP:CP.filter(c=>c.m===nfF);
   const cmv=rows.filter(c=>c.t==='cmv').reduce((a,c)=>a+c.v,0),desp=rows.filter(c=>c.t==='desp').reduce((a,c)=>a+c.v,0);
@@ -761,7 +769,7 @@ function rNF(){
     const total = c.v;
     const snCell = valSN>0
       ? `<td class="ro" style="font-weight:500">+ ${f(valSN)}</td>`
-      : `<td class="r" style="color:var(--mu)">—</td>`;
+      : `<td class="r" style="color:var(--mu)">â€”</td>`;
     const totalStyle = valSN>0 ? 'color:var(--am);font-weight:500' : 'color:var(--mu)';
     html+=`<tr>
       <td class="dt">${c.d}</td>
@@ -789,21 +797,21 @@ function rComp(){
     <div class="kc ca"><div class="kl">Total NFs entrada</div><div class="kv">${f(tot)}</div><div class="ks">${cpOp.length} notas fiscais</div></div>
     <div class="kc cg"><div class="kl">CMV mercadorias</div><div class="kv" style="color:var(--g)">${f(cmv)}</div><div class="ks">${pct(cmv,tot)} do total</div></div>
     <div class="kc cp"><div class="kl">Despesas operac.</div><div class="kv" style="color:var(--p)">${f(desp)}</div><div class="ks">${pct(desp,tot)} do total</div></div>
-    <div class="kc ca"><div class="kl">NFs particulares</div><div class="kv" style="color:var(--am);font-size:16px">${f(totPart)}</div><div class="ks">Incluídas no CMV da DRE</div></div>`;
+    <div class="kc ca"><div class="kl">NFs particulares</div><div class="kv" style="color:var(--am);font-size:16px">${f(totPart)}</div><div class="ks">IncluÃ­das no CMV da DRE</div></div>`;
 }
 
 function rForn(){
   const mp={};CP.forEach(c=>{mp[c.f]=(mp[c.f]||0)+c.v;});
   const sorted=Object.entries(mp).sort((a,b)=>b[1]-a[1]),tot=sorted.reduce((a,v)=>a+v[1],0),conc=sorted[0][1]/tot*100;
-  document.getElementById('kpi-fn').innerHTML=`<div class="kc cb"><div class="kl">Total comprado</div><div class="kv">${f(tot)}</div><div class="ks">${sorted.length} fornecedores</div></div><div class="kc ca"><div class="kl">Maior fornecedor</div><div class="kv" style="font-size:13px;color:var(--am)">P&D Impex</div><div class="ks">${f(sorted[0][1])} · ${conc.toFixed(0)}%</div></div><div class="kc ${conc>60?'cr':'cg'}"><div class="kl">Concentração</div><div class="kv" style="color:${conc>60?'var(--r)':'var(--g)'}">${conc.toFixed(0)}%</div><div class="ks">${conc>60?'Alta — risco':'Saudável'}</div></div>`;
+  document.getElementById('kpi-fn').innerHTML=`<div class="kc cb"><div class="kl">Total comprado</div><div class="kv">${f(tot)}</div><div class="ks">${sorted.length} fornecedores</div></div><div class="kc ca"><div class="kl">Maior fornecedor</div><div class="kv" style="font-size:13px;color:var(--am)">P&D Impex</div><div class="ks">${f(sorted[0][1])} Â· ${conc.toFixed(0)}%</div></div><div class="kc ${conc>60?'cr':'cg'}"><div class="kl">ConcentraÃ§Ã£o</div><div class="kv" style="color:${conc>60?'var(--r)':'var(--g)'}">${conc.toFixed(0)}%</div><div class="ks">${conc>60?'Alta â€” risco':'SaudÃ¡vel'}</div></div>`;
   const cls=['#3b82f6','#00e5a0','#f59e0b','#f43f5e','#a78bfa','#1D9E75','#fb923c','#7a7f8e'];
   document.getElementById('fb-bars').innerHTML=sorted.map((s,i)=>`<div class="fbr"><div class="fbn" title="${s[0]}">${s[0].split(' ').slice(0,3).join(' ')}</div><div class="fbbw"><div class="fbbar" style="width:${(s[1]/sorted[0][1]*100).toFixed(0)}%;background:${cls[i%cls.length]}"></div></div><div class="fbv">${f(s[1])}</div><div class="fbp">${(s[1]/tot*100).toFixed(1)}%</div></div>`).join('');
 }
 
 function rSKU(){
   const mxR=Math.max(...SK.map(s=>s.r)),totR=SK.reduce((a,s)=>a+s.r,0);
-  let h='<thead><tr><th style="width:24px"></th><th>Produto</th><th class="r">Pedidos</th><th class="r">Receita bruta</th><th class="r">Líquido ML</th><th class="r">Retenção</th><th class="r">% Total</th></tr></thead><tbody>';
-  SK.forEach((s,i)=>{const ret=s.r-s.l,retP=(ret/s.r*100).toFixed(0),sh=(s.r/totR*100).toFixed(1),bw=Math.round(s.r/mxR*100);h+=`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><div>${s.s}</div><div class="bsp" style="width:${bw}%"></div></td><td class="r">${s.p}</td><td class="rp">${f(s.r)}</td><td class="r" style="color:var(--g)">${f(s.l)}</td><td class="rn">−${retP}%</td><td class="r">${sh}%</td></tr>`;});
+  let h='<thead><tr><th style="width:24px"></th><th>Produto</th><th class="r">Pedidos</th><th class="r">Receita bruta</th><th class="r">LÃ­quido ML</th><th class="r">RetenÃ§Ã£o</th><th class="r">% Total</th></tr></thead><tbody>';
+  SK.forEach((s,i)=>{const ret=s.r-s.l,retP=(ret/s.r*100).toFixed(0),sh=(s.r/totR*100).toFixed(1),bw=Math.round(s.r/mxR*100);h+=`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><div>${s.s}</div><div class="bsp" style="width:${bw}%"></div></td><td class="r">${s.p}</td><td class="rp">${f(s.r)}</td><td class="r" style="color:var(--g)">${f(s.l)}</td><td class="rn">âˆ’${retP}%</td><td class="r">${sh}%</td></tr>`;});
   document.getElementById('sku-tb').innerHTML=h+'</tbody>';
 }
 
@@ -820,26 +828,26 @@ function buildCharts(){
   const retTot=V.tv.map((v,i)=>Math.abs(v)+Math.abs(V.ca[i]));
   const dml=K.map(k=>Math.abs(DEB_ML[k]));
 
-  new Chart(document.getElementById('ch-ov'),{type:'bar',data:{labels:M,datasets:[{label:'Receita bruta',data:rt,backgroundColor:'#3b82f6',borderRadius:4},{label:'Líquido ML',data:V.lq,backgroundColor:'#00e5a0',borderRadius:4},{label:'Resultado',data:lcs,backgroundColor:lcs.map(v=>v>=0?'#1D9E75':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
+  new Chart(document.getElementById('ch-ov'),{type:'bar',data:{labels:M,datasets:[{label:'Receita bruta',data:rt,backgroundColor:'#3b82f6',borderRadius:4},{label:'LÃ­quido ML',data:V.lq,backgroundColor:'#00e5a0',borderRadius:4},{label:'Resultado',data:lcs,backgroundColor:lcs.map(v=>v>=0?'#1D9E75':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
   const rvT=Math.abs(V.tv.reduce((a,v)=>a+v,0)),reT=Math.abs(V.te.reduce((a,v)=>a+v,0)),rcT=Math.abs(V.ca.reduce((a,v)=>a+v,0));
   new Chart(document.getElementById('ch-rp'),{type:'doughnut',data:{labels:['Tarifa venda','Tarifa envio','Cancelamentos'],datasets:[{data:[rvT,reT,rcT],backgroundColor:['#f43f5e','#f59e0b','#a78bfa'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+f(ctx.parsed)}}}}});
   new Chart(document.getElementById('ch-pd'),{type:'bar',data:{labels:M,datasets:[{label:'Pedidos',data:V.pd,backgroundColor:'#3b82f6',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y+' pedidos'}}},scales:{x:axX,y:{ticks:{color:'#7a7f8e',font:{size:10}},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   new Chart(document.getElementById('ch-tk'),{type:'line',data:{labels:M,datasets:[{label:'Ticket',data:V.rp.map((v,i)=>+(v/V.pd[i]).toFixed(2)),borderColor:'#00e5a0',backgroundColor:'rgba(0,229,160,0.08)',tension:0.4,fill:true,pointBackgroundColor:'#00e5a0',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>f(ctx.parsed.y)}}},scales:{x:axX,y:{...ax,ticks:{...ax.ticks,callback:v=>'R$'+v}}}}});
-  new Chart(document.getElementById('ch-ev'),{type:'bar',data:{labels:M,datasets:[{label:'Receita bruta',data:rt,backgroundColor:'#3b82f6',borderRadius:4},{label:'Líquido ML',data:V.lq,backgroundColor:'#00e5a0',borderRadius:4},{label:'CMV',data:cvs,backgroundColor:'#f43f5e',borderRadius:4},{label:'Empréstimo',data:emps,backgroundColor:'#fb923c',borderRadius:4},{label:'Resultado',data:lcs,backgroundColor:lcs.map(v=>v>=0?'#1D9E75':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
-  new Chart(document.getElementById('ch-cs'),{type:'bar',data:{labels:M,datasets:[{label:'Retenções ML',data:retTot,backgroundColor:'#f43f5e',borderRadius:4,stack:'s'},{label:'Déb. op. ML',data:dml,backgroundColor:'rgba(244,63,94,0.4)',borderRadius:4,stack:'s'},{label:'CMV',data:cvs,backgroundColor:'#f59e0b',borderRadius:4,stack:'s'},{label:'Desp. op.',data:despOp,backgroundColor:'#a78bfa',borderRadius:4,stack:'s'},{label:'Enc.+Emp.',data:encs.map((v,i)=>v+emps[i]),backgroundColor:'#fb923c',borderRadius:4,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:{...axX,stacked:true},y:{...ax,stacked:true}}}});
+  new Chart(document.getElementById('ch-ev'),{type:'bar',data:{labels:M,datasets:[{label:'Receita bruta',data:rt,backgroundColor:'#3b82f6',borderRadius:4},{label:'LÃ­quido ML',data:V.lq,backgroundColor:'#00e5a0',borderRadius:4},{label:'CMV',data:cvs,backgroundColor:'#f43f5e',borderRadius:4},{label:'EmprÃ©stimo',data:emps,backgroundColor:'#fb923c',borderRadius:4},{label:'Resultado',data:lcs,backgroundColor:lcs.map(v=>v>=0?'#1D9E75':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
+  new Chart(document.getElementById('ch-cs'),{type:'bar',data:{labels:M,datasets:[{label:'RetenÃ§Ãµes ML',data:retTot,backgroundColor:'#f43f5e',borderRadius:4,stack:'s'},{label:'DÃ©b. op. ML',data:dml,backgroundColor:'rgba(244,63,94,0.4)',borderRadius:4,stack:'s'},{label:'CMV',data:cvs,backgroundColor:'#f59e0b',borderRadius:4,stack:'s'},{label:'Desp. op.',data:despOp,backgroundColor:'#a78bfa',borderRadius:4,stack:'s'},{label:'Enc.+Emp.',data:encs.map((v,i)=>v+emps[i]),backgroundColor:'#fb923c',borderRadius:4,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:{...axX,stacked:true},y:{...ax,stacked:true}}}});
   const mrgs=rt.map((r,i)=>(lcs[i]/r*100).toFixed(1));
   new Chart(document.getElementById('ch-mg'),{type:'bar',data:{labels:M,datasets:[{label:'Margem',data:mrgs,backgroundColor:mrgs.map(v=>v>=0?'rgba(0,229,160,0.7)':'rgba(244,63,94,0.7)'),borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y+'%'}}},scales:{x:axX,y:{ticks:{color:'#7a7f8e',font:{size:10},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,0.05)'}}}}});
   // Aportes chart
   const apRec=K.map(k=>Number(APORTES[k]||0));
   const apDev=K.map(k=>-Math.abs(Number(DEV_APORTE[k]||0)));
-  new Chart(document.getElementById('ch-apo'),{type:'bar',data:{labels:M,datasets:[{label:'Aportes',data:apRec,backgroundColor:'rgba(59,130,246,0.6)',borderRadius:4,stack:'apo'},{label:'Devoluções',data:apDev,backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'apo'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fn(ctx.parsed.y)}}},scales:{x:axX,y:ax}}});
+  new Chart(document.getElementById('ch-apo'),{type:'bar',data:{labels:M,datasets:[{label:'Aportes',data:apRec,backgroundColor:'rgba(59,130,246,0.6)',borderRadius:4,stack:'apo'},{label:'DevoluÃ§Ãµes',data:apDev,backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'apo'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>fn(ctx.parsed.y)}}},scales:{x:axX,y:ax}}});
   // Extrato charts
-  new Chart(document.getElementById('ch-eb'),{type:'bar',data:{labels:M,datasets:[{label:'Entradas',data:K.map(k=>{const e=E[k];return e.lib+e.dr+e.em+e.rb+e.ee}),backgroundColor:'#00e5a0',borderRadius:4},{label:'Saídas',data:K.map(k=>{const e=E[k];return Math.abs(e.demp+e.drc+e.drt+(e.ddv||0)+e.denv+(e.dec||0)+e.dft+(e.ddf||0)+e.pub+e.imp+e.tml)}),backgroundColor:'#f43f5e',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
+  new Chart(document.getElementById('ch-eb'),{type:'bar',data:{labels:M,datasets:[{label:'Entradas',data:K.map(k=>{const e=E[k];return e.lib+e.dr+e.em+e.rb+e.ee}),backgroundColor:'#00e5a0',borderRadius:4},{label:'SaÃ­das',data:K.map(k=>{const e=E[k];return Math.abs(e.demp+e.drc+e.drt+(e.ddv||0)+e.denv+(e.dec||0)+e.dft+(e.ddf||0)+e.pub+e.imp+e.tml)}),backgroundColor:'#f43f5e',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:axX,y:ax}}});
   const sd=K.reduce((a,k)=>({emp:a.emp+Math.abs(E[k].demp||0),rc:a.rc+Math.abs(E[k].drc)+Math.abs(E[k].drt)+Math.abs(E[k].ddv||0),env:a.env+Math.abs(E[k].denv),fat:a.fat+Math.abs(E[k].dft)+Math.abs(E[k].ddf||0),imp:a.imp+Math.abs(E[k].imp),pub:a.pub+Math.abs(E[k].pub)}),{emp:0,rc:0,env:0,fat:0,imp:0,pub:0});
-  new Chart(document.getElementById('ch-ep'),{type:'doughnut',data:{labels:['Empréstimo MP','Reclamações/Dev.','Envio','Faturas','Impostos','Publicidade'],datasets:[{data:[sd.emp,sd.rc,sd.env,sd.fat,sd.imp,sd.pub],backgroundColor:['#fb923c','#f43f5e','#f59e0b','#a78bfa','#3b82f6','#7a7f8e'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+f(ctx.parsed)}}}}});
+  new Chart(document.getElementById('ch-ep'),{type:'doughnut',data:{labels:['EmprÃ©stimo MP','ReclamaÃ§Ãµes/Dev.','Envio','Faturas','Impostos','Publicidade'],datasets:[{data:[sd.emp,sd.rc,sd.env,sd.fat,sd.imp,sd.pub],backgroundColor:['#fb923c','#f43f5e','#f59e0b','#a78bfa','#3b82f6','#7a7f8e'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'60%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+f(ctx.parsed)}}}}});
   // SKU
   const t10=SK.slice(0,10);
-  new Chart(document.getElementById('ch-sb'),{type:'bar',data:{labels:t10.map(s=>s.s.length>17?s.s.slice(0,15)+'…':s.s),datasets:[{label:'Receita',data:t10.map(s=>s.r),backgroundColor:'#3b82f6',borderRadius:4,stack:'s'},{label:'Retenção',data:t10.map(s=>s.r-s.l),backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'s'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:ax,y:{ticks:{color:'#7a7f8e',font:{size:10}},grid:{display:false},stacked:true}}}});
+  new Chart(document.getElementById('ch-sb'),{type:'bar',data:{labels:t10.map(s=>s.s.length>17?s.s.slice(0,15)+'â€¦':s.s),datasets:[{label:'Receita',data:t10.map(s=>s.r),backgroundColor:'#3b82f6',borderRadius:4,stack:'s'},{label:'RetenÃ§Ã£o',data:t10.map(s=>s.r-s.l),backgroundColor:'rgba(244,63,94,0.6)',borderRadius:4,stack:'s'}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:ax,y:{ticks:{color:'#7a7f8e',font:{size:10}},grid:{display:false},stacked:true}}}});
   const totSK=SK.reduce((a,s)=>a+s.r,0),outSK=totSK-SK.slice(0,7).reduce((a,s)=>a+s.r,0);
   new Chart(document.getElementById('ch-sp'),{type:'doughnut',data:{labels:[...SK.slice(0,7).map(s=>s.s),'Outros'],datasets:[{data:[...SK.slice(0,7).map(s=>s.r),outSK],backgroundColor:['#3b82f6','#00e5a0','#f59e0b','#f43f5e','#a78bfa','#1D9E75','#fb923c','#7a7f8e'],borderWidth:0,hoverOffset:6}]},options:{responsive:true,maintainAspectRatio:false,cutout:'55%',plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label+': '+f(ctx.parsed)}}}}});
   // Fornec
@@ -851,92 +859,7 @@ function buildCharts(){
   new Chart(document.getElementById('ch-fm'),{type:'bar',data:{labels:M,datasets:[{label:'P&D Impex',data:K.map(k=>fBM('P & D',k)),backgroundColor:'#3b82f6',borderRadius:4,stack:'s'},{label:'Kloos',data:K.map(k=>fBM('KLOOS',k)),backgroundColor:'#00e5a0',borderRadius:4,stack:'s'},{label:'Dynasty',data:K.map(k=>fBM('DYNASTY',k)),backgroundColor:'#f59e0b',borderRadius:4,stack:'s'},{label:'Mohnish',data:K.map(k=>fBM('MOHNISH',k)),backgroundColor:'#f43f5e',borderRadius:4,stack:'s'},{label:'Outros',data:outs2,backgroundColor:'#a78bfa',borderRadius:4,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tt},scales:{x:{...axX,stacked:true},y:{...ax,stacked:true}}}});
 }
 
-const EST=[
-  {sku:'Mini Jeep',nome:'Carrinho Controle Remoto 4x4 Brinquedo Jeep Veloz Radical Azul Jeep',bq:11,ep:0,v30:3,te:'Até 8 semanas',zero:false},
-  {sku:'Carrinho Rockinho Luz',nome:'Carrinho Controle Remoto 4x4 Off-road Recarregável Luz Veloz Preto Off',bq:52,ep:0,v30:1,te:'Boa qualidade',zero:false},
-  {sku:'Big Foot 01',nome:'Carrinho Controle Remoto 4x4 - Buggy Monster Truck (28cm) Preto',bq:0,ep:0,v30:36,te:'Sem estoque',zero:true},
-  {sku:'Carrinho Stunt 360',nome:'Carrinho Controle Remoto 360 Luzes Brinquedo Drift Manobra Vermelho St',bq:57,ep:0,v30:14,te:'Até 8 semanas',zero:false},
-  {sku:'Carrinho Speed',nome:'Carrinho Controle Remoto Brinquedo Corrida Veloz Presente Azul',bq:32,ep:0,v30:0,te:'Até 7 semanas',zero:false},
-  {sku:'Carrinho Stunt 360',nome:'Carrinho Controle Remoto 360 Luzes Brinquedo Drift Manobra Verde Stunt',bq:51,ep:0,v30:37,te:'Até 6 semanas',zero:false},
-  {sku:'Carrinho Rally',nome:'Carrinho Controle Remoto Brinquedo Recarregável 4x4 Radical Laranja Ra',bq:10,ep:0,v30:1,te:'Até 12 semanas',zero:false},
-  {sku:'Lousa Magnetica 118pçs',nome:'Lousa Magnética 118pçs Educativa Animais Brinquedo Infantil Branco',bq:0,ep:0,v30:0,te:'Até 7 semanas',zero:true},
-  {sku:'Drift Funçoes',nome:'Carrinho Controle Remoto Luz Led Drift 360 Brinquedo Radical Cor Preto',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Tanque Bolinha Gel',nome:'Carrinho Controle Remoto Recarregável Tanque Som Bolinha Gel Vermelho ',bq:3,ep:0,v30:15,te:'Até 1 semana',zero:false},
-  {sku:'Estojo 150 peças',nome:'Kit Maleta Pintura Estojo 150 Peças Unicórnio Colorir Escola',bq:16,ep:0,v30:16,te:'Até 3 semanas',zero:false},
-  {sku:'Sunday 30 Fps 200ml',nome:'Protetor Solar 30fps Bloqueador Corporal Facial 200ml Sunday',bq:193,ep:0,v30:103,te:'Até 7 semanas',zero:false},
-  {sku:'Laptop Infantil Azul',nome:'Laptop Infantil Educativo Bilingue Inglês Português Notebook Azul',bq:146,ep:0,v30:85,te:'Até 12 semanas',zero:false},
-  {sku:'Estojo Rosa 68 Unicornio',nome:'Maleta Pintura 68 Peças Infantil Estojo Escolar Unicórnio Rosa Unicórn',bq:103,ep:0,v30:32,te:'Até 12 semanas',zero:false},
-  {sku:'Caminhonete Policial',nome:'Carrinho Controle Remoto Brinquedo Policial Caminhonete Luz Preto Poli',bq:92,ep:0,v30:0,te:'Sem estoque',zero:false},
-  {sku:'Estojo 208 Unicornio',nome:'Maleta Pintura Estojo Infantil 208 Peças Coloridas Unicórnio',bq:26,ep:50,v30:67,te:'Até 2 semanas',zero:false},
-  {sku:'Robo Rosa 02',nome:'Robô Lady Face Digital Infantil Dançante Som Luz Menina Cor Colorido P',bq:0,ep:0,v30:80,te:'Sem estoque',zero:true},
-  {sku:'Lousa Magnetica 118pçs',nome:'Lousa Magnética 118pçs Educativa Animais Brinquedo Infantil Cinza',bq:0,ep:0,v30:0,te:'Até 7 semanas',zero:true},
-  {sku:'Carrinho Drift Metalico',nome:'Carrinho Controle Remoto Drift Fumaça Brinquedo Veloz Metálica Metálic',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Nutriex 30 fps 120ml',nome:'Protetor Solar 30fps Corpo Rosto 120ml Nutriex Profissional',bq:138,ep:0,v30:130,te:'Até 5 semanas',zero:false},
-  {sku:'Rock Crawler Off-Road',nome:'Carrinho Controle Remoto 4x4 Recarregável Brinquedo Radical Vermelho O',bq:26,ep:24,v30:123,te:'Até 2 semanas',zero:false},
-  {sku:'Drift Funçoes',nome:'Carrinho Recarregável De Controle Remoto 9 Funções 4x4 Drift Acrobátic',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Laptop Rosa Feio',nome:'Laptop Infantil Educativo Desenho Tela Carrossel Som Musica Rosa',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Mini Jeep',nome:'Carrinho Controle Remoto 4x4 Brinquedo Jeep Veloz Radical Amarelo Jeep',bq:11,ep:0,v30:5,te:'Até 8 semanas',zero:false},
-  {sku:'Robo Aranha Rosa',nome:'Robô Lady Face Digital Infantil Dançante Som Luz Menina Cor Colorido P',bq:38,ep:60,v30:55,te:'Até 4 semanas',zero:false},
-  {sku:'Lousa Magnetica 118pçs',nome:'Lousa Magnética 118pçs Educativa Animais Brinquedo Infantil Laranja',bq:0,ep:0,v30:0,te:'Até 8 semanas',zero:true},
-  {sku:'Carrinho Boost',nome:'Carrinho Controle Remoto 4x4 Off Road Brinquedo Radical Luz Verde',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Carrinho Dinossauro Iluminado',nome:'Carrinho Controle Remoto Brinquedo Iluminado Dinossauro Rex Verde Dino',bq:17,ep:0,v30:12,te:'Até 5 semanas',zero:false},
-  {sku:'Carrinho Rally',nome:'Carrinho Controle Remoto Brinquedo Recarregável 4x4 Radical Azul Rally',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Lousa Magnetica 118pçs',nome:'Lousa Magnética 118pçs Educativa Animais Brinquedo Infantil Vermelho',bq:0,ep:0,v30:2,te:'Até 8 semanas',zero:true},
-  {sku:'Carrinho Batman',nome:'Carrinho Controle Remoto Batman Solta Fumaça Batmóvel Veloz Azul Batma',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Carrinho Rockinho Luz',nome:'Carrinho Controle Remoto 4x4 Off-road Recarregável Luz Veloz Dourado O',bq:50,ep:0,v30:3,te:'Até 8 semanas',zero:false},
-  {sku:'Lousa Magnetica 118pçs',nome:'Lousa Magnética 118pçs Educativa Animais Brinquedo Infantil Amarelo',bq:0,ep:0,v30:0,te:'Até 8 semanas',zero:true},
-  {sku:'Carrinho Maluco 360',nome:'Carrinho Controle Remoto Brinquedo Maluco Veloz Gira360 Luz Colorido C',bq:91,ep:0,v30:115,te:'Até 5 semanas',zero:false},
-  {sku:'Carrinho Jipe Barbie Rosa',nome:'Carrinho Controle Remoto Recarregável Barbie Amazing Luz Led Rosa Barb',bq:49,ep:0,v30:34,te:'Até 8 semanas',zero:false},
-  {sku:'Carrinho Boost',nome:'Carrinho Controle Remoto 4x4 Off Road Brinquedo Radical Luz Verde',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Helicoptero Super',nome:'Helicóptero Controle Remoto Brinquedo Recarregável Super Luz Azul-petr',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Laptop Infantil Rosa',nome:'Laptop Infantil Educativo Bilingue Inglês Português Notebook Rosa',bq:86,ep:0,v30:55,te:'Até 7 semanas',zero:false},
-  {sku:'Carrinho Gibizinho Pick-up',nome:'Carrinho Controle Remoto Luz Recarregável Iluminado Veloz Azul Pick-up',bq:0,ep:0,v30:26,te:'Sem estoque',zero:true},
-  {sku:'Carrinho 4x4 Speed',nome:'Carrinho Controle Remoto 4x4 Recarregável Luz Speed Radical Laranja Sp',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Carrinho Batman',nome:'Carrinho Controle Remoto Batman Solta Fumaça Batmóvel Veloz Verde Batm',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Laptop Azul Feio',nome:'Laptop Infantil Educativo Desenho Tela Carrossel Som Musica Azul',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Carrinho Speed',nome:'Carrinho Controle Remoto Brinquedo Corrida Veloz Presente Amarelo',bq:55,ep:0,v30:16,te:'Até 8 semanas',zero:false},
-  {sku:'Formula 1 Gibi',nome:'Carrinho Controle Remoto Fórmula 1 Brinquedo Veloz Divertido Branco Ci',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Maleta Medica',nome:'Kit Médico Infantil Maleta Brinquedo Educativo 10 Pçs Doutor Azul',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Drift Funçoes',nome:'Carrinho Controle Remoto Luz Led Drift 360 Brinquedo Radical Cor Azul ',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Carrinho Boost',nome:'Carrinho Controle Remoto 4x4 Off Road Brinquedo Radical Luz Verde',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Rock Crawler Off-Road',nome:'Carrinho Controle Remoto 4x4 Recarregável Brinquedo Radical Preto Off-',bq:25,ep:24,v30:136,te:'Até 3 semanas',zero:false},
-  {sku:'Pista Dino Tunel',nome:'Pista Túnel Dinossauro Brinquedo Educativo Luz Som Rugido Dinossauro',bq:22,ep:48,v30:23,te:'Até 2 semanas',zero:false},
-  {sku:'Lousa Magnetica 118pçs',nome:'Lousa Magnética 118pçs Educativa Animais Brinquedo Infantil Verde',bq:0,ep:0,v30:1,te:'Até 8 semanas',zero:true},
-  {sku:'Dino Cyber',nome:'Dinossauro Robô Brinquedo Anda Som Luz Cyber Dino Criança Cyber Dino B',bq:34,ep:0,v30:3,te:'Até 6 semanas',zero:false},
-  {sku:'Carrinho Rosa',nome:'Carrinho Controle Remoto Recarregável Brinquedo Veloz Luz Rosa Menina',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Carrinho Speed',nome:'Carrinho Controle Remoto Brinquedo Corrida Veloz Presente Preto/azul C',bq:38,ep:0,v30:3,te:'Até 8 semanas',zero:false},
-  {sku:'Formula 1 Gibi',nome:'Carrinho Controle Remoto Fórmula 1 Brinquedo Veloz Divertido Vermelho ',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Teclado Preto 37',nome:'Teclado Musical Educativo Infantil 37 Teclas S/fio Microfone Preto 1.5',bq:36,ep:0,v30:0,te:'Boa qualidade',zero:false},
-  {sku:'Carrinho Rally',nome:'Carrinho Controle Remoto Brinquedo Recarregável 4x4 Radical Vermelho R',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Carrinho Gibizinho',nome:'Carrinho Controle Remoto Recarregável Luz Iluminado Veloz Amarelo Azul',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Ambulancia',nome:'Carrinho Ambulância Samu Brinquedo Bate Volta Som Luz Sirene Ambulânci',bq:0,ep:144,v30:72,te:'Sem estoque',zero:false},
-  {sku:'Carrinho Gibizinho',nome:'Carrinho Controle Remoto Recarregável Luz Iluminado Veloz Laranja Azul',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Patinete Cestinha',nome:'Patinete Infantil 3 Rodas Ajustável Cestinha Luz Led Musical Rosa Pati',bq:0,ep:10,v30:13,te:'Sem estoque',zero:false},
-  {sku:'Estojo 150 Peças Dinossauro',nome:'Kit Maleta Pintura Escolar Estojo 150 Peças Dinossauro Color',bq:58,ep:0,v30:40,te:'Até 5 semanas',zero:false},
-  {sku:'Carrinho 4x4 Speed',nome:'Carrinho Controle Remoto 4x4 Recarregável Luz Speed Radical Preto Spee',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Mini Jeep',nome:'Carrinho Controle Remoto 4x4 Brinquedo Jeep Veloz Radical Laranja Velo',bq:14,ep:0,v30:5,te:'Até 9 semanas',zero:false},
-  {sku:'Estojo 208 Dinossáuro',nome:'Estojo Maleta Escolar Dinossauro 208 Peças Colorir Infantil',bq:33,ep:0,v30:13,te:'Até 7 semanas',zero:false},
-  {sku:'Patinete Cestinha',nome:'Patinete Infantil 3 Rodas Ajustável Cestinha Luz Led Musical Azul Pati',bq:3,ep:6,v30:5,te:'Até 2 semanas',zero:false},
-  {sku:'Helicoptero Super',nome:'Helicóptero Controle Remoto Brinquedo Recarregável Super Luz Vermelho',bq:1,ep:0,v30:0,te:'Até 1 semana',zero:false},
-  {sku:'Mini Jeep',nome:'Carrinho Controle Remoto 4x4 Brinquedo Jeep Veloz Radical Violeta-escu',bq:9,ep:0,v30:6,te:'Até 5 semanas',zero:false},
-  {sku:'Tanque Bolinha Gel',nome:'Carrinho Controle Remoto Recarregável Tanque Som Bolinha Gel Laranja T',bq:0,ep:0,v30:17,te:'Sem estoque',zero:true},
-  {sku:'Helicoptero super',nome:'Helicóptero Controle Remoto Brinquedo Recarregável Super Luz Dourado',bq:0,ep:0,v30:2,te:'Sem estoque',zero:true},
-  {sku:'Maleta Medica',nome:'Kit Médico Infantil Maleta Brinquedo Educativo 10 Pçs Doutor Rosa',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Mini Jeep',nome:'Carrinho Controle Remoto 4x4 Brinquedo Jeep Veloz Radical Azul-marinho',bq:1,ep:0,v30:6,te:'Até 1 semana',zero:false},
-  {sku:'Carrinho Rally',nome:'Carrinho Controle Remoto Brinquedo Recarregável 4x4 Radical Verde Rall',bq:7,ep:0,v30:0,te:'Até 8 semanas',zero:false},
-  {sku:'Carrinho Gibizinho Pick-up',nome:'Carrinho Controle Remoto Luz Recarregável Iluminado Veloz Laranja Pick',bq:14,ep:0,v30:27,te:'Até 2 semanas',zero:false},
-  {sku:'Estojo 68 preto Dino',nome:'Estojo Maleta 68 Peças Pintura Desenho Infantil Dinossauro Preto Dinos',bq:49,ep:0,v30:28,te:'Até 8 semanas',zero:false},
-  {sku:'Carrinho Ferrari Sport',nome:'Carrinho Controle Remoto Ferrari Speed Veloz Solta Fumaça Amarelo Ferr',bq:0,ep:0,v30:10,te:'Sem estoque',zero:true},
-  {sku:'Dinossauro Pequeno',nome:'Dinossauro Brinquedo T-rex Rugido Anda Solta Fumaça Luz Som Dinossauro',bq:27,ep:1,v30:116,te:'Até 5 semanas',zero:false},
-  {sku:'Carrinho 4x4 Speed',nome:'Carrinho Controle Remoto 4x4 Recarregável Luz Speed Radical Vermelho S',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Sunday 60 Fps 200ml',nome:'Protetor Solar 60 Fps Corpo Rosto Alta Proteção Sunday 200ml',bq:143,ep:0,v30:139,te:'Até 4 semanas',zero:false},
-  {sku:'Carrinho Speed',nome:'Carrinho Controle Remoto Brinquedo Corrida Veloz Presente Preto/azul C',bq:48,ep:0,v30:5,te:'Até 5 semanas',zero:false},
-  {sku:'Carrinho Ferrari Sport',nome:'Carrinho Controle Remoto Ferrari Speed Veloz Solta Fumaça Vermelho Fer',bq:0,ep:0,v30:0,te:'Sem estoque',zero:true},
-  {sku:'Sunday 60 Fps 120ml',nome:'Protetor Solar 60fps Bloqueador Facial Corporal 120ml Sunday',bq:63,ep:0,v30:179,te:'Até 2 semanas',zero:false},
-  {sku:'Mini Jeep',nome:'Carrinho Controle Remoto 4x4 Brinquedo Jeep Veloz Radical Vermelho Jee',bq:3,ep:0,v30:3,te:'Até 2 semanas',zero:false},
-  {sku:'Piano Animal',nome:'Teclado Infantil Piano Musical Som Animais 12 Teclas Branco Branco 1.2',bq:77,ep:100,v30:40,te:'Até 9 semanas',zero:false}
-];
-
+let EST=[];
 // ESTOQUE
 let estF='all';
 function fEst(fil,btn){
@@ -949,8 +872,9 @@ function rEst(){
   const tot=EST.length, semEst=EST.filter(e=>e.zero).length, comEst=tot-semEst;
   const urg=EST.filter(e=>e.zero&&e.v30>10).length;
   const totalBQ=EST.reduce((a,e)=>a+e.bq,0), totalEP=EST.reduce((a,e)=>a+(e.ep||0),0);
+  const ultMes=M.length?M[M.length-1]:'Periodo atual';
   document.getElementById('kpi-est').innerHTML=`
-    <div class="kc cg"><div class="kl">Total SKUs</div><div class="kv">${tot}</div><div class="ks">06/04/2026</div></div>
+    <div class="kc cg"><div class="kl">Total SKUs</div><div class="kv">${tot}</div><div class="ks">${ultMes}</div></div>
     <div class="kc cb"><div class="kl">Boa qualidade (estoque)</div><div class="kv" style="color:var(--b)">${totalBQ.toLocaleString('pt-BR')}</div><div class="ks">${comEst} SKUs com saldo</div></div>
     <div class="kc ca"><div class="kl">Entrada pendente</div><div class="kv" style="color:var(--am)">${totalEP.toLocaleString('pt-BR')}</div><div class="ks">A caminho do Full</div></div>
     <div class="kc cr"><div class="kl">Sem estoque</div><div class="kv" style="color:var(--r)">${semEst}</div><div class="ks">${urg} urgentes (vendas > 10/30d)</div>`;
@@ -967,11 +891,11 @@ function rEst(){
     return 'background:rgba(0,229,160,.10);color:var(--g);border:1px solid rgba(0,229,160,.25)';
   };
   const statusLabel = e => {
-    if(e.zero&&e.v30>10) return '⚠ Urgente';
-    if(e.zero&&(e.ep||0)>0) return 'Reposição';
+    if(e.zero&&e.v30>10) return 'âš  Urgente';
+    if(e.zero&&(e.ep||0)>0) return 'ReposiÃ§Ã£o';
     if(e.zero) return 'Zerado';
-    if(e.te==='Impulsionar') return '⚡ Impulsionar';
-    if(e.te.includes('1 semana')) return 'Crítico';
+    if(e.te==='Impulsionar') return 'âš¡ Impulsionar';
+    if(e.te.includes('1 semana')) return 'CrÃ­tico';
     return 'OK';
   };
 
@@ -1010,57 +934,7 @@ async function estSave(){
   }
 }
 
-const MARG=[
-  {sku:"Carrinho Drift Metalico",prod:"Carrinho Controle Remoto Drift Fumaça Brinquedo Veloz Metáli",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Lousa Magnetica 118pçs",prod:"Lousa Magnética 118pçs Educativa Animais Brinquedo Infantil ",custo:38.0,un_est:106,v30:4,custo_est:4028.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:3148.2,tv:672.66,te:124.4,tot:2435.34,un:46,tar:797.06,cmv:1748.0,mgb:1400.2,mgb_p:44.5,mgl:687.34,mgl_p:21.8},{mes:"mar",rp:1230.6,tv:202.31,te:122.01,tot:876.58,un:18,tar:324.32,cmv:684.0,mgb:546.6,mgb_p:44.4,mgl:192.58,mgl_p:15.6}],tot:{rp:4378.8,tv:874.97,te:246.41,tot:3311.92,un:64,tar:1121.38,cmv:2432.0,mgb:1946.8,mgb_p:44.5,mgl:879.92,mgl_p:20.1}},
-  {sku:"Sunday 30 Fps 200ml",prod:"Protetor Solar 30fps Bloqueador Corporal Facial 200ml Sunday",custo:9.79,un_est:192,v30:104,custo_est:1879.68,m:[{mes:"jan",rp:464.0,tv:96.96,te:66.62,tot:367.04,un:32,tar:163.58,cmv:313.28,mgb:150.72,mgb_p:32.5,mgl:53.76,mgl_p:11.6},{mes:"fev",rp:2002.2,tv:400.6,te:339.8,tot:1549.8,un:120,tar:740.4,cmv:1174.8,mgb:827.4,mgb_p:41.3,mgl:375.0,mgl_p:18.7},{mes:"mar",rp:2383.1,tv:335.25,te:482.75,tot:1884.35,un:134,tar:818.0,cmv:1311.86,mgb:1071.24,mgb_p:45.0,mgl:572.49,mgl_p:24.0}],tot:{rp:4849.3,tv:832.81,te:889.17,tot:3801.19,un:286,tar:1721.98,cmv:2799.94,mgb:2049.36,mgb_p:42.3,mgl:1001.25,mgl_p:20.6}},
-  {sku:"Laptop Infantil Azul",prod:"Laptop Infantil Educativo Bilingue Inglês Português Notebook",custo:25.35,un_est:146,v30:89,custo_est:3701.1,m:[{mes:"jan",rp:2900.0,tv:674.65,te:208.8,tot:2134.59,un:50,tar:883.45,cmv:1267.5,mgb:1632.5,mgb_p:56.3,mgl:867.09,mgl_p:29.9},{mes:"fev",rp:1930.0,tv:462.59,te:104.93,tot:1422.03,un:36,tar:567.52,cmv:912.6,mgb:1017.4,mgb_p:52.7,mgl:509.43,mgl_p:26.4},{mes:"mar",rp:3997.15,tv:526.97,te:682.74,tot:2974.8,un:72,tar:1209.71,cmv:1825.2,mgb:2171.95,mgb_p:54.3,mgl:1149.6,mgl_p:28.8}],tot:{rp:8827.15,tv:1664.21,te:996.47,tot:6531.42,un:158,tar:2660.68,cmv:4005.3,mgb:4821.85,mgb_p:54.6,mgl:2526.12,mgl_p:28.6}},
-  {sku:"Mini Jeep",prod:"Carrinho Controle Remoto 4x4 Brinquedo Jeep Veloz Radical La",custo:22.8,un_est:46,v30:34,custo_est:1048.8,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:1142.7,tv:280.94,te:85.94,tot:861.76,un:23,tar:366.88,cmv:524.4,mgb:618.3,mgb_p:54.1,mgl:337.36,mgl_p:29.5},{mes:"mar",rp:1506.8,tv:186.33,te:278.45,tot:1024.0,un:32,tar:464.78,cmv:729.6,mgb:777.2,mgb_p:51.6,mgl:294.4,mgl_p:19.5}],tot:{rp:2649.5,tv:467.27,te:364.39,tot:1885.76,un:55,tar:831.66,cmv:1254.0,mgb:1395.5,mgb_p:52.7,mgl:631.76,mgl_p:23.8}},
-  {sku:"Carrinho Speed",prod:"Carrinho Controle Remoto Brinquedo Corrida Veloz Presente Am",custo:19.58,un_est:178,v30:26,custo_est:3485.24,m:[{mes:"jan",rp:2743.44,tv:685.61,te:220.38,tot:1856.46,un:56,tar:905.99,cmv:1096.48,mgb:1646.96,mgb_p:60.0,mgl:759.98,mgl_p:27.7},{mes:"fev",rp:4808.83,tv:1386.64,te:277.76,tot:3273.2,un:124,tar:1664.4,cmv:2427.92,mgb:2380.91,mgb_p:49.5,mgl:845.28,mgl_p:17.6},{mes:"mar",rp:917.7,tv:131.57,te:141.84,tot:655.28,un:23,tar:273.41,cmv:450.34,mgb:467.36,mgb_p:50.9,mgl:204.94,mgl_p:22.3}],tot:{rp:8469.97,tv:2203.82,te:639.98,tot:5784.94,un:203,tar:2843.8,cmv:3974.74,mgb:4495.23,mgb_p:53.1,mgl:1810.2,mgl_p:21.4}},
-  {sku:"Estojo 208 Dinossáuro",prod:"Estojo Maleta Escolar Dinossauro 208 Peças Colorir Infantil",custo:45.5,un_est:32,v30:14,custo_est:1456.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:1385.0,tv:294.23,te:60.62,tot:1090.77,un:20,tar:354.85,cmv:910.0,mgb:475.0,mgb_p:34.3,mgl:180.77,mgl_p:13.1},{mes:"mar",rp:850.66,tv:104.56,te:134.46,tot:683.48,un:11,tar:239.02,cmv:500.5,mgb:350.16,mgb_p:41.2,mgl:182.98,mgl_p:21.5}],tot:{rp:2235.66,tv:398.79,te:195.08,tot:1774.25,un:31,tar:593.87,cmv:1410.5,mgb:825.16,mgb_p:36.9,mgl:363.75,mgl_p:16.3}},
-  {sku:"Estojo Rosa 68 Unicornio",prod:"Maleta Pintura 68 Peças Infantil Estojo Escolar Unicórnio Ro",custo:16.0,un_est:101,v30:37,custo_est:1616.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:1262.9,tv:411.75,te:15.98,tot:851.15,un:41,tar:427.73,cmv:656.0,mgb:606.9,mgb_p:48.1,mgl:195.15,mgl_p:15.5},{mes:"mar",rp:639.0,tv:80.0,te:179.8,tot:405.06,un:20,tar:259.8,cmv:320.0,mgb:319.0,mgb_p:49.9,mgl:85.06,mgl_p:13.3}],tot:{rp:1901.9,tv:491.75,te:195.78,tot:1256.21,un:61,tar:687.53,cmv:976.0,mgb:925.9,mgb_p:48.7,mgl:280.21,mgl_p:14.7}},
-  {sku:"Ambulancia",prod:"Carrinho Ambulância Samu Brinquedo Bate Volta Som Luz Sirene",custo:17.08,un_est:0,v30:72,custo_est:0.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:2265.2,tv:260.32,te:633.78,tot:1538.92,un:68,tar:894.1,cmv:1161.44,mgb:1103.76,mgb_p:48.7,mgl:377.48,mgl_p:16.7}],tot:{rp:2265.2,tv:260.32,te:633.78,tot:1538.92,un:68,tar:894.1,cmv:1161.44,mgb:1103.76,mgb_p:48.7,mgl:377.48,mgl_p:16.7}},
-  {sku:"Tanque Bolinha Gel",prod:"Carrinho Controle Remoto Recarregável Tanque Som Bolinha Gel",custo:50.04,un_est:0,v30:35,custo_est:0.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:2797.1,tv:353.11,te:481.74,tot:1932.45,un:29,tar:834.85,cmv:1451.16,mgb:1345.94,mgb_p:48.1,mgl:481.29,mgl_p:17.2}],tot:{rp:2797.1,tv:353.11,te:481.74,tot:1932.45,un:29,tar:834.85,cmv:1451.16,mgb:1345.94,mgb_p:48.1,mgl:481.29,mgl_p:17.2}},
-  {sku:"Carrinho Maluco 360",prod:"Carrinho Controle Remoto Brinquedo Maluco Veloz Gira360 Luz ",custo:21.5,un_est:175,v30:107,custo_est:3762.5,m:[{mes:"jan",rp:119.7,tv:33.27,te:10.99,tot:86.43,un:3,tar:44.26,cmv:64.5,mgb:55.2,mgb_p:46.1,mgl:21.93,mgl_p:18.3},{mes:"fev",rp:8389.9,tv:2270.94,te:302.24,tot:6073.41,un:201,tar:2573.18,cmv:4321.5,mgb:4068.4,mgb_p:48.5,mgl:1751.91,mgl_p:20.9},{mes:"mar",rp:8298.3,tv:1132.08,te:1417.48,tot:5806.6,un:187,tar:2549.56,cmv:4020.5,mgb:4277.8,mgb_p:51.6,mgl:1786.1,mgl_p:21.5}],tot:{rp:16807.9,tv:3436.29,te:1730.71,tot:11966.44,un:391,tar:5167.0,cmv:8406.5,mgb:8401.4,mgb_p:50.0,mgl:3559.94,mgl_p:21.2}},
-  {sku:"Carrinho Gibizinho Pick-up",prod:"Carrinho Controle Remoto Luz Recarregável Iluminado Veloz Az",custo:27.71,un_est:14,v30:49,custo_est:387.94,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:2540.2,tv:616.08,te:42.47,tot:1898.7,un:49,tar:658.55,cmv:1357.79,mgb:1182.41,mgb_p:46.5,mgl:540.91,mgl_p:21.3},{mes:"mar",rp:4075.4,tv:563.11,te:557.78,tot:3008.5,un:71,tar:1120.89,cmv:1967.41,mgb:2107.99,mgb_p:51.7,mgl:1041.09,mgl_p:25.5}],tot:{rp:6615.6,tv:1179.19,te:600.25,tot:4907.2,un:120,tar:1779.44,cmv:3325.2,mgb:3290.4,mgb_p:49.7,mgl:1582.0,mgl_p:23.9}},
-  {sku:"Carrinho Dinossauro Iluminado",prod:"Carrinho Controle Remoto Brinquedo Iluminado Dinossauro Rex ",custo:43.0,un_est:17,v30:10,custo_est:731.0,m:[{mes:"jan",rp:394.5,tv:79.1,te:0,tot:252.32,un:5,tar:79.1,cmv:215.0,mgb:179.5,mgb_p:45.5,mgl:37.32,mgl_p:9.5},{mes:"fev",rp:1025.7,tv:205.66,te:48.96,tot:820.04,un:13,tar:254.62,cmv:559.0,mgb:466.7,mgb_p:45.5,mgl:261.04,mgl_p:25.4},{mes:"mar",rp:934.8,tv:107.46,te:182.34,tot:731.94,un:12,tar:289.8,cmv:516.0,mgb:418.8,mgb_p:44.8,mgl:215.94,mgl_p:23.1}],tot:{rp:2355.0,tv:392.22,te:231.3,tot:1804.3,un:30,tar:623.52,cmv:1290.0,mgb:1065.0,mgb_p:45.2,mgl:514.3,mgl_p:21.8}},
-  {sku:"Laptop Rosa Feio",prod:"Laptop Infantil Educativo Desenho Tela Carrossel Som Musica ",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Dinossauro Pequeno",prod:"Dinossauro Brinquedo T-rex Rugido Anda Solta Fumaça Luz Som ",custo:24.03,un_est:122,v30:128,custo_est:2931.66,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:4124.5,tv:474.07,te:785.53,tot:2897.64,un:95,tar:1259.6,cmv:2282.85,mgb:1841.65,mgb_p:44.7,mgl:614.79,mgl_p:14.9}],tot:{rp:4124.5,tv:474.07,te:785.53,tot:2897.64,un:95,tar:1259.6,cmv:2282.85,mgb:1841.65,mgb_p:44.7,mgl:614.79,mgl_p:14.9}},
-  {sku:"Carrinho Rockinho Luz",prod:"Carrinho Controle Remoto 4x4 Off-road Recarregável Luz Veloz",custo:42.78,un_est:99,v30:7,custo_est:4235.22,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0}},
-  {sku:"Laptop Azul Feio",prod:"Laptop Infantil Educativo Desenho Tela Carrossel Som Musica ",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Robo Rosa 02",prod:"Robô Lady Face Digital Infantil Dançante Som Luz Menina Cor ",custo:28.0,un_est:0,v30:78,custo_est:0.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:3639.4,tv:418.56,te:790.29,tot:2690.51,un:80,tar:1208.85,cmv:2240.0,mgb:1399.4,mgb_p:38.5,mgl:450.51,mgl_p:12.4}],tot:{rp:3639.4,tv:418.56,te:790.29,tot:2690.51,un:80,tar:1208.85,cmv:2240.0,mgb:1399.4,mgb_p:38.5,mgl:450.51,mgl_p:12.4}},
-  {sku:"Patinete Cestinha",prod:"Patinete Infantil 3 Rodas Ajustável Cestinha Luz Led Musical",custo:51.74,un_est:2,v30:20,custo_est:103.48,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:1625.5,tv:186.89,te:317.05,tot:1048.5,un:15,tar:503.94,cmv:776.1,mgb:849.4,mgb_p:52.3,mgl:272.4,mgl_p:16.8}],tot:{rp:1625.5,tv:186.89,te:317.05,tot:1048.5,un:15,tar:503.94,cmv:776.1,mgb:849.4,mgb_p:52.3,mgl:272.4,mgl_p:16.8}},
-  {sku:"Carrinho Batman",prod:"Carrinho Controle Remoto Batman Solta Fumaça Batmóvel Veloz ",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:78.9,tv:41.52,te:0,tot:-25.7,un:1,tar:41.52,cmv:0,mgb:78.9,mgb_p:100.0,mgl:-25.7,mgl_p:-32.6},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:78.9,tv:41.52,te:0,tot:-25.7,un:1,tar:41.52,cmv:0,mgb:78.9,mgb_p:100.0,mgl:-25.7,mgl_p:-32.6}},
-  {sku:"Carrinho 4x4 Speed",prod:"Carrinho Controle Remoto 4x4 Recarregável Luz Speed Radical ",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:229.59,tv:57.15,te:0,tot:111.46,un:3,tar:57.15,cmv:0,mgb:229.59,mgb_p:100.0,mgl:111.46,mgl_p:48.5},{mes:"fev",rp:153.8,tv:31.18,te:0,tot:122.62,un:2,tar:31.18,cmv:0,mgb:153.8,mgb_p:100.0,mgl:122.62,mgl_p:79.7},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:383.39,tv:88.33,te:0,tot:234.08,un:5,tar:88.33,cmv:0,mgb:383.39,mgb_p:100.0,mgl:234.08,mgl_p:61.1}},
-  {sku:"Carrinho Ferrari Sport",prod:"Carrinho Controle Remoto Ferrari Speed Veloz Solta Fumaça Am",custo:0,un_est:0,v30:9,custo_est:0,m:[{mes:"jan",rp:1572.48,tv:363.04,te:108.43,tot:1262.82,un:27,tar:471.47,cmv:0,mgb:1572.48,mgb_p:100.0,mgl:1262.82,mgl_p:80.3},{mes:"fev",rp:174.93,tv:40.36,te:0,tot:137.84,un:3,tar:40.36,cmv:0,mgb:174.93,mgb_p:100.0,mgl:137.84,mgl_p:78.8},{mes:"mar",rp:537.7,tv:68.35,te:117.67,tot:355.29,un:13,tar:186.02,cmv:0,mgb:537.7,mgb_p:100.0,mgl:355.29,mgl_p:66.1}],tot:{rp:2285.11,tv:471.75,te:226.1,tot:1755.95,un:43,tar:697.85,cmv:0,mgb:2285.11,mgb_p:100.0,mgl:1755.95,mgl_p:76.8}},
-  {sku:"Estojo 150 peças",prod:"Kit Maleta Pintura Estojo 150 Peças Unicórnio Colorir Escola",custo:26.25,un_est:16,v30:18,custo_est:420.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:612.5,tv:69.54,te:130.22,tot:434.15,un:15,tar:199.76,cmv:393.75,mgb:218.75,mgb_p:35.7,mgl:40.4,mgl_p:6.6}],tot:{rp:612.5,tv:69.54,te:130.22,tot:434.15,un:15,tar:199.76,cmv:393.75,mgb:218.75,mgb_p:35.7,mgl:40.4,mgl_p:6.6}},
-  {sku:"Carrinho Gibizinho",prod:"Carrinho Controle Remoto Recarregável Luz Iluminado Veloz Am",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Estojo 208 Unicornio",prod:"Maleta Pintura Estojo Infantil 208 Peças Coloridas Unicórnio",custo:45.5,un_est:18,v30:80,custo_est:819.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:5857.1,tv:1206.58,te:170.86,tot:4468.37,un:79,tar:1377.44,cmv:3594.5,mgb:2262.6,mgb_p:38.6,mgl:873.87,mgl_p:14.9},{mes:"mar",rp:4015.28,tv:461.59,te:591.4,tot:3090.3,un:51,tar:1052.99,cmv:2320.5,mgb:1694.78,mgb_p:42.2,mgl:769.8,mgl_p:19.2}],tot:{rp:9872.38,tv:1668.17,te:762.26,tot:7558.67,un:130,tar:2430.43,cmv:5915.0,mgb:3957.38,mgb_p:40.1,mgl:1643.67,mgl_p:16.6}},
-  {sku:"Caminhonete Policial",prod:"Carrinho Controle Remoto Brinquedo Policial Caminhonete Luz ",custo:27.23,un_est:239,v30:1,custo_est:6507.97,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0}},
-  {sku:"Nutriex 30 fps 120ml",prod:"Protetor Solar 30fps Corpo Rosto 120ml Nutriex Profissional",custo:7.29,un_est:136,v30:125,custo_est:991.44,m:[{mes:"jan",rp:367.0,tv:77.38,te:38.64,tot:289.62,un:26,tar:116.02,cmv:189.54,mgb:177.46,mgb_p:48.4,mgl:100.08,mgl_p:27.3},{mes:"fev",rp:2239.78,tv:478.49,te:475.97,tot:1761.29,un:165,tar:954.46,cmv:1202.85,mgb:1036.93,mgb_p:46.3,mgl:558.44,mgl_p:24.9},{mes:"mar",rp:2253.08,tv:344.68,te:512.56,tot:1729.14,un:157,tar:857.24,cmv:1144.53,mgb:1108.55,mgb_p:49.2,mgl:584.61,mgl_p:25.9}],tot:{rp:4859.86,tv:900.55,te:1027.17,tot:3780.05,un:348,tar:1927.72,cmv:2536.92,mgb:2322.94,mgb_p:47.8,mgl:1243.13,mgl_p:25.6}},
-  {sku:"Big Foot 01",prod:"Carrinho Controle Remoto 4x4 - Buggy Monster Truck (28cm) Pr",custo:47.49,un_est:0,v30:33,custo_est:0.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:1567.9,tv:315.24,te:69.98,tot:1126.5,un:20,tar:385.22,cmv:949.8,mgb:618.1,mgb_p:39.4,mgl:176.7,mgl_p:11.3},{mes:"mar",rp:3945.0,tv:521.61,te:588.7,tot:2771.83,un:50,tar:1110.31,cmv:2374.5,mgb:1570.5,mgb_p:39.8,mgl:397.33,mgl_p:10.1}],tot:{rp:5512.9,tv:836.85,te:658.68,tot:3898.33,un:70,tar:1495.53,cmv:3324.3,mgb:2188.6,mgb_p:39.7,mgl:574.03,mgl_p:10.4}},
-  {sku:"Teclado Preto 37",prod:"Teclado Musical Educativo Infantil 37 Teclas S/fio Microfone",custo:35.96,un_est:36,v30:0,custo_est:1294.56,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0}},
-  {sku:"Estojo 68 preto Dino",prod:"Estojo Maleta 68 Peças Pintura Desenho Infantil Dinossauro P",custo:14.96,un_est:47,v30:31,custo_est:703.12,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:1216.1,tv:393.35,te:0,tot:798.36,un:39,tar:393.35,cmv:583.44,mgb:632.66,mgb_p:52.0,mgl:214.92,mgl_p:17.7},{mes:"mar",rp:784.0,tv:90.2,te:207.72,tot:533.26,un:25,tar:297.92,cmv:374.0,mgb:410.0,mgb_p:52.3,mgl:159.26,mgl_p:20.3}],tot:{rp:2000.1,tv:483.55,te:207.72,tot:1331.62,un:64,tar:691.27,cmv:957.44,mgb:1042.66,mgb_p:52.1,mgl:374.18,mgl_p:18.7}},
-  {sku:"Sunday 60 Fps 120ml",prod:"Protetor Solar 60fps Bloqueador Facial Corporal 120ml Sunday",custo:9.29,un_est:56,v30:188,custo_est:520.24,m:[{mes:"jan",rp:368.03,tv:75.62,te:98.25,tot:293.36,un:24,tar:173.87,cmv:222.96,mgb:145.07,mgb_p:39.4,mgl:70.4,mgl_p:19.1},{mes:"fev",rp:2839.97,tv:582.2,te:500.4,tot:2190.12,un:184,tar:1082.6,cmv:1709.36,mgb:1130.61,mgb_p:39.8,mgl:480.76,mgl_p:16.9},{mes:"mar",rp:2505.6,tv:351.73,te:614.35,tot:1976.12,un:142,tar:966.08,cmv:1319.18,mgb:1186.42,mgb_p:47.4,mgl:656.94,mgl_p:26.2}],tot:{rp:5713.6,tv:1009.55,te:1213.0,tot:4459.6,un:350,tar:2222.55,cmv:3251.5,mgb:2462.1,mgb_p:43.1,mgl:1208.1,mgl_p:21.1}},
-  {sku:"Carrinho Jipe Barbie Rosa",prod:"Carrinho Controle Remoto Recarregável Barbie Amazing Luz Led",custo:53.05,un_est:74,v30:36,custo_est:3925.7,m:[{mes:"jan",rp:99.9,tv:58.39,te:14.07,tot:-60.97,un:1,tar:72.46,cmv:53.05,mgb:46.85,mgb_p:46.9,mgl:-114.02,mgl_p:-114.1},{mes:"fev",rp:5478.9,tv:630.14,te:849.83,tot:3814.48,un:51,tar:1479.97,cmv:2705.55,mgb:2773.35,mgb_p:50.6,mgl:1108.93,mgl_p:20.2},{mes:"mar",rp:4141.17,tv:475.56,te:632.69,tot:3059.4,un:40,tar:1108.25,cmv:2122.0,mgb:2019.17,mgb_p:48.8,mgl:937.4,mgl_p:22.6}],tot:{rp:9719.97,tv:1164.09,te:1496.59,tot:6812.91,un:92,tar:2660.68,cmv:4880.6,mgb:4839.37,mgb_p:49.8,mgl:1932.31,mgl_p:19.9}},
-  {sku:"Carrinho Boost",prod:"Carrinho Controle Remoto 4x4 Off Road Brinquedo Radical Luz ",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Sunday 60 Fps 200ml",prod:"Protetor Solar 60 Fps Corpo Rosto Alta Proteção Sunday 200ml",custo:16.19,un_est:134,v30:137,custo_est:2169.46,m:[{mes:"jan",rp:484.0,tv:94.3,te:84.95,tot:363.41,un:20,tar:179.25,cmv:323.8,mgb:160.2,mgb_p:33.1,mgl:39.61,mgl_p:8.2},{mes:"fev",rp:4840.05,tv:879.31,te:1091.3,tot:3880.82,un:201,tar:1970.61,cmv:3254.19,mgb:1585.86,mgb_p:32.8,mgl:626.63,mgl_p:12.9},{mes:"mar",rp:4661.6,tv:669.2,te:1265.34,tot:3673.59,un:182,tar:1934.54,cmv:2946.58,mgb:1715.02,mgb_p:36.8,mgl:727.01,mgl_p:15.6}],tot:{rp:9985.65,tv:1642.81,te:2441.59,tot:7917.82,un:403,tar:4084.4,cmv:6524.57,mgb:3461.08,mgb_p:34.7,mgl:1393.25,mgl_p:14.0}},
-  {sku:"Carrinho Rosa",prod:"Carrinho Controle Remoto Recarregável Brinquedo Veloz Luz Ro",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Piano Animal",prod:"Teclado Infantil Piano Musical Som Animais 12 Teclas Branco ",custo:20.09,un_est:70,v30:45,custo_est:1406.3,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:4840.5,tv:1355.73,te:158.34,tot:3504.92,un:121,tar:1514.07,cmv:2430.89,mgb:2409.61,mgb_p:49.8,mgl:1074.03,mgl_p:22.2},{mes:"mar",rp:1585.65,tv:205.17,te:250.39,tot:1071.15,un:41,tar:455.56,cmv:823.69,mgb:761.96,mgb_p:48.1,mgl:247.46,mgl_p:15.6}],tot:{rp:6426.15,tv:1560.9,te:408.73,tot:4576.07,un:162,tar:1969.63,cmv:3254.58,mgb:3171.57,mgb_p:49.4,mgl:1321.49,mgl_p:20.6}},
-  {sku:"Carrinho Stunt 360",prod:"Carrinho Controle Remoto 360 Luzes Brinquedo Drift Manobra V",custo:32.86,un_est:105,v30:46,custo_est:3450.3,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:2864.5,tv:694.48,te:110.42,tot:2096.72,un:55,tar:804.9,cmv:1807.3,mgb:1057.2,mgb_p:36.9,mgl:289.42,mgl_p:10.1},{mes:"mar",rp:4133.42,tv:538.46,te:570.9,tot:2999.48,un:68,tar:1109.36,cmv:2234.48,mgb:1898.94,mgb_p:45.9,mgl:765.0,mgl_p:18.5}],tot:{rp:6997.92,tv:1232.94,te:681.32,tot:5096.2,un:123,tar:1914.26,cmv:4041.78,mgb:2956.14,mgb_p:42.2,mgl:1054.42,mgl_p:15.1}},
-  {sku:"Helicoptero Super",prod:"Helicóptero Controle Remoto Brinquedo Recarregável Super Luz",custo:45.07,un_est:1,v30:0,custo_est:45.07,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:4421.46,tv:1023.38,te:142.87,tot:3160.22,un:57,tar:1166.25,cmv:2568.99,mgb:1852.47,mgb_p:41.9,mgl:591.23,mgl_p:13.4},{mes:"mar",rp:841.83,tv:148.66,te:113.71,tot:582.78,un:11,tar:262.37,cmv:495.77,mgb:346.06,mgb_p:41.1,mgl:87.01,mgl_p:10.3}],tot:{rp:5263.29,tv:1172.04,te:256.58,tot:3743.0,un:68,tar:1428.62,cmv:3064.76,mgb:2198.53,mgb_p:41.8,mgl:678.24,mgl_p:12.9}},
-  {sku:"Laptop Infantil Rosa",prod:"Laptop Infantil Educativo Bilingue Inglês Português Notebook",custo:25.35,un_est:73,v30:71,custo_est:1850.55,m:[{mes:"jan",rp:58.9,tv:13.52,te:16.99,tot:45.38,un:1,tar:30.51,cmv:25.35,mgb:33.55,mgb_p:57.0,mgl:20.03,mgl_p:34.0},{mes:"fev",rp:4192.85,tv:1010.99,te:178.82,tot:3140.02,un:77,tar:1189.81,cmv:1951.95,mgb:2240.9,mgb_p:53.4,mgl:1188.07,mgl_p:28.3},{mes:"mar",rp:5392.29,tv:860.16,te:700.37,tot:3841.04,un:96,tar:1560.53,cmv:2433.6,mgb:2958.69,mgb_p:54.9,mgl:1407.44,mgl_p:26.1}],tot:{rp:9644.04,tv:1884.67,te:896.18,tot:7026.44,un:174,tar:2780.85,cmv:4410.9,mgb:5233.14,mgb_p:54.3,mgl:2615.54,mgl_p:27.1}},
-  {sku:"Helicoptero super",prod:"Helicóptero Controle Remoto Brinquedo Recarregável Super Luz",custo:45.07,un_est:0,v30:1,custo_est:0.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:1609.5,tv:357.21,te:108.9,tot:1203.38,un:21,tar:466.11,cmv:946.47,mgb:663.03,mgb_p:41.2,mgl:256.91,mgl_p:16.0},{mes:"mar",rp:1088.01,tv:178.38,te:151.05,tot:599.48,un:14,tar:329.43,cmv:630.98,mgb:457.03,mgb_p:42.0,mgl:-31.5,mgl_p:-2.9}],tot:{rp:2697.51,tv:535.59,te:259.95,tot:1802.86,un:35,tar:795.54,cmv:1577.45,mgb:1120.06,mgb_p:41.5,mgl:225.41,mgl_p:8.4}},
-  {sku:"Maleta Medica",prod:"Kit Médico Infantil Maleta Brinquedo Educativo 10 Pçs Doutor",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Drift Funçoes",prod:"Carrinho Controle Remoto Luz Led Drift 360 Brinquedo Radical",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Formula 1 Gibi",prod:"Carrinho Controle Remoto Fórmula 1 Brinquedo Veloz Divertido",custo:0,un_est:0,v30:0,custo_est:0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0},{mes:"mar",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}],tot:{rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0,mgb:0,mgb_p:0,mgl:0,mgl_p:0}},
-  {sku:"Carrinho Rally",prod:"Carrinho Controle Remoto Brinquedo Recarregável 4x4 Radical ",custo:57.0,un_est:17,v30:1,custo_est:969.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:2932.7,tv:387.09,te:431.25,tot:2068.55,un:25,tar:818.34,cmv:1425.0,mgb:1507.7,mgb_p:51.4,mgl:643.55,mgl_p:21.9},{mes:"mar",rp:116.3,tv:13.37,te:16.85,tot:89.44,un:1,tar:30.22,cmv:57.0,mgb:59.3,mgb_p:51.0,mgl:32.44,mgl_p:27.9}],tot:{rp:3049.0,tv:400.46,te:448.1,tot:2157.99,un:26,tar:848.56,cmv:1482.0,mgb:1567.0,mgb_p:51.4,mgl:675.99,mgl_p:22.2}},
-  {sku:"Pista Dino Tunel",prod:"Pista Túnel Dinossauro Brinquedo Educativo Luz Som Rugido Di",custo:23.94,un_est:22,v30:26,custo_est:526.68,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:779.1,tv:89.59,te:138.69,tot:554.31,un:19,tar:228.28,cmv:454.86,mgb:324.24,mgb_p:41.6,mgl:99.45,mgl_p:12.8}],tot:{rp:779.1,tv:89.59,te:138.69,tot:554.31,un:19,tar:228.28,cmv:454.86,mgb:324.24,mgb_p:41.6,mgl:99.45,mgl_p:12.8}},
-  {sku:"Dino Cyber",prod:"Dinossauro Robô Brinquedo Anda Som Luz Cyber Dino Criança Cy",custo:19.23,un_est:32,v30:5,custo_est:615.36,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:1662.1,tv:477.12,te:111.55,tot:1127.36,un:44,tar:588.67,cmv:846.12,mgb:815.98,mgb_p:49.1,mgl:281.24,mgl_p:16.9},{mes:"mar",rp:638.4,tv:125.44,te:55.6,tot:457.36,un:16,tar:181.04,cmv:307.68,mgb:330.72,mgb_p:51.8,mgl:149.68,mgl_p:23.4}],tot:{rp:2300.5,tv:602.56,te:167.15,tot:1584.72,un:60,tar:769.71,cmv:1153.8,mgb:1146.7,mgb_p:49.8,mgl:430.92,mgl_p:18.7}},
-  {sku:"Estojo 150 Peças Dinossauro",prod:"Kit Maleta Pintura Escolar Estojo 150 Peças Dinossauro Color",custo:26.25,un_est:57,v30:41,custo_est:1496.25,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"mar",rp:1762.0,tv:202.6,te:357.91,tot:1253.77,un:40,tar:560.51,cmv:1050.0,mgb:712.0,mgb_p:40.4,mgl:203.77,mgl_p:11.6}],tot:{rp:1762.0,tv:202.6,te:357.91,tot:1253.77,un:40,tar:560.51,cmv:1050.0,mgb:712.0,mgb_p:40.4,mgl:203.77,mgl_p:11.6}},
-  {sku:"Robo Aranha Rosa",prod:"Robô Lady Face Digital Infantil Dançante Som Luz Menina Cor ",custo:28.0,un_est:34,v30:64,custo_est:952.0,m:[{mes:"jan",rp:0,tv:0,te:0,tot:0,un:0,tar:0,cmv:0.0,mgb:0.0,mgb_p:0,mgl:0.0,mgl_p:0},{mes:"fev",rp:2036.58,tv:507.21,te:187.34,tot:1531.26,un:42,tar:694.55,cmv:1176.0,mgb:860.58,mgb_p:42.3,mgl:355.26,mgl_p:17.4},{mes:"mar",rp:2775.03,tv:345.34,te:548.67,tot:2019.5,un:58,tar:894.01,cmv:1624.0,mgb:1151.03,mgb_p:41.5,mgl:395.5,mgl_p:14.3}],tot:{rp:4811.61,tv:852.55,te:736.01,tot:3550.76,un:100,tar:1588.56,cmv:2800.0,mgb:2011.61,mgb_p:41.8,mgl:750.76,mgl_p:15.6}},
-  {sku:"Rock Crawler Off-Road",prod:"Carrinho Controle Remoto 4x4 Recarregável Brinquedo Radical ",custo:33.33,un_est:66,v30:270,custo_est:2199.78,m:[{mes:"jan",rp:64.9,tv:14.21,te:0,tot:50.69,un:1,tar:14.21,cmv:33.33,mgb:31.57,mgb_p:48.6,mgl:17.36,mgl_p:26.7},{mes:"fev",rp:14065.5,tv:2956.17,te:807.95,tot:10668.32,un:193,tar:3764.12,cmv:6432.69,mgb:7632.81,mgb_p:54.3,mgl:4235.63,mgl_p:30.1},{mes:"mar",rp:19499.01,tv:2514.3,te:2792.38,tot:14709.6,un:265,tar:5306.68,cmv:8832.45,mgb:10666.56,mgb_p:54.7,mgl:5877.15,mgl_p:30.1}],tot:{rp:33629.41,tv:5484.68,te:3600.33,tot:25428.61,un:459,tar:9085.01,cmv:15298.47,mgb:18330.94,mgb_p:54.5,mgl:10130.14,mgl_p:30.1}}
-];
+let MARG=[];
 
 let margF='all', margMes=-1;
 function sMargMes(i,btn){
@@ -1078,13 +952,13 @@ function fMarg(f,btn){
 function rMarg(){
   var fc=function(v){return 'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});};
   var fp=function(v){return (v>0?'+':'')+v.toFixed(1)+'%';};
-  var dash='<span style="color:var(--mu)">—</span>';
+  var dash='<span style="color:var(--mu)">â€”</span>';
   var gd=function(r){return margMes===-1?r.tot:r.m[margMes];};
   var comCusto=MARG.filter(function(r){return r.custo>0&&gd(r).rp>0;});
   var semCusto=MARG.filter(function(r){return r.custo===0||gd(r).rp===0;});
   var totalImob=MARG.filter(function(r){return r.custo>0;}).reduce(function(a,r){return a+r.custo_est;},0);
   var avgMgl=comCusto.length?comCusto.reduce(function(a,r){return a+gd(r).mgl_p;},0)/comCusto.length:0;
-  var mesLbl=margMes===-1?'Jan-Mar/2026':['Janeiro','Fevereiro','Marco'][margMes]+'/2026';
+  var mesLbl=margMes===-1?periodoLabel():(M[margMes]||K[margMes]||'Mes atual');
   var bestROI=comCusto.filter(function(r){return r.v30>0&&r.custo_est>0&&gd(r).mgl>0;}).map(function(r){
     var mgl=gd(r).mgl; var roi=r.v30>0&&r.custo_est>0?Math.round(mgl*r.v30/r.custo_est*1000)/10:0;
     return {sku:r.sku,roi:roi};
@@ -1093,7 +967,7 @@ function rMarg(){
     '<div class="kc cg"><div class="kl">SKUs analisados</div><div class="kv">'+comCusto.length+'</div><div class="ks">'+semCusto.length+' sem custo</div></div>'+
     '<div class="kc cb"><div class="kl">Margem liquida media</div><div class="kv" style="color:'+(avgMgl>=0?'var(--g)':'var(--r)')+'">'+avgMgl.toFixed(1)+'%</div><div class="ks">'+mesLbl+'</div></div>'+
     '<div class="kc ca"><div class="kl">Capital imobilizado</div><div class="kv" style="color:var(--am)">'+fc(totalImob)+'</div><div class="ks">Custo estoque atual</div></div>'+
-    '<div class="kc cp"><div class="kl">Melhor ROI</div><div class="kv" style="color:var(--p)">'+(bestROI&&bestROI.roi>0?bestROI.roi.toFixed(1)+'%':'—')+'</div><div class="ks">'+(bestROI?bestROI.sku:'')+'</div></div>';
+    '<div class="kc cp"><div class="kl">Melhor ROI</div><div class="kv" style="color:var(--p)">'+(bestROI&&bestROI.roi>0?bestROI.roi.toFixed(1)+'%':'â€”')+'</div><div class="ks">'+(bestROI?bestROI.sku:'')+'</div></div>';
   var rows=MARG;
   if(margF==='ok')   rows=MARG.filter(function(r){return r.custo>0&&gd(r).rp>0&&gd(r).mgl>0;});
   else if(margF==='neg') rows=MARG.filter(function(r){return r.custo>0&&gd(r).rp>0&&gd(r).mgl<=0;});
@@ -1116,9 +990,9 @@ function rMarg(){
       +'<td class="r" style="font-size:12px;font-family:var(--fm);color:var(--r)">'+(d.tar>0?fc(d.tar):dash)+'</td>'
       +'<td class="r" style="font-size:12px;font-family:var(--fm);color:var(--b)">'+(d.tot>0?fc(d.tot):dash)+'</td>'
       +'<td class="r" style="font-size:12px;font-family:var(--fm);color:var(--r)">'+(d.cmv>0?fc(d.cmv):dash)+'</td>'
-      +'<td class="r" style="font-size:11px"><span style="color:'+mgbC+';font-weight:600">'+(sem?'—':fp(d.mgb_p))+'</span>'
+      +'<td class="r" style="font-size:11px"><span style="color:'+mgbC+';font-weight:600">'+(sem?'â€”':fp(d.mgb_p))+'</span>'
         +'<br><span style="color:var(--mu);font-size:10px">'+(sem||d.mgb===0?'':d.mgb>0?'+'+fc(d.mgb):'-'+fc(Math.abs(d.mgb)))+'</span></td>'
-      +'<td class="r" style="font-size:11px"><span style="color:'+mglC+';font-weight:700">'+(sem?'—':fp(d.mgl_p))+'</span>'
+      +'<td class="r" style="font-size:11px"><span style="color:'+mglC+';font-weight:700">'+(sem?'â€”':fp(d.mgl_p))+'</span>'
         +'<br><span style="color:var(--mu);font-size:10px">'+(sem||d.mgl===0?'':d.mgl>0?'+'+fc(d.mgl):'-'+fc(Math.abs(d.mgl)))+'</span></td>'
       +'<td class="r" style="font-size:12px;font-family:var(--fm);color:var(--am)">'+(r.custo_est>0?fc(r.custo_est):dash)+'</td>'
       +'<td class="r" style="font-size:12px">'+(r.v30>0?r.v30:dash)+'</td>'
@@ -1136,43 +1010,43 @@ loadDB(); loadNFFromAPI();
 
 <!-- G-FINANCEIRO -->
 <div class="pg" id="page-g-financeiro">
-  <div class="sh"><div class="st">Dados Financeiros Mensais</div><span class="sb2">Editável — salva no banco</span></div>
+  <div class="sh"><div class="st">Dados Financeiros Mensais</div><span class="sb2">EditÃ¡vel â€” salva no banco</span></div>
   <div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:var(--rd);padding:12px 16px;margin-bottom:14px;font-size:12px;color:var(--mu);line-height:1.7">
-    Edite os valores mensais abaixo. Eles alimentam todos os gráficos, DRE e KPIs do painel. <strong style="color:var(--b)">Salve ao terminar.</strong>
+    Edite os valores mensais abaixo. Eles alimentam todos os grÃ¡ficos, DRE e KPIs do painel. <strong style="color:var(--b)">Salve ao terminar.</strong>
   </div>
   <div id="fin-tabs" style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px;margin-bottom:14px;width:fit-content">
     <button class="mt on" onclick="finTab('receitas',this)">Receitas</button>
     <button class="mt" onclick="finTab('cmv',this)">CMV</button>
     <button class="mt" onclick="finTab('desp',this)">Despesas</button>
-    <button class="mt" onclick="finTab('emp',this)">Empréstimos</button>
-    <button class="mt" onclick="finTab('debml',this)">Déb. ML</button>
-    <button class="mt" onclick="finTab('meses',this)">Períodos</button>
+    <button class="mt" onclick="finTab('emp',this)">EmprÃ©stimos</button>
+    <button class="mt" onclick="finTab('debml',this)">DÃ©b. ML</button>
+    <button class="mt" onclick="finTab('meses',this)">PerÃ­odos</button>
   </div>
   <div id="fin-body"></div>
   <div style="margin-top:14px;display:flex;gap:8px">
-    <button onclick="finSave()" class="cbtn">💾 Salvar dados financeiros</button>
+    <button onclick="finSave()" class="cbtn">ðŸ’¾ Salvar dados financeiros</button>
   </div>
 </div>
 
 <!-- G-PRODUTOS -->
 <div class="pg" id="page-g-produtos">
-  <div class="sh"><div class="st">Produtos / Custos</div><span class="sb2" id="gp-count2">—</span></div>
+  <div class="sh"><div class="st">Produtos / Custos</div><span class="sb2" id="gp-count2">â€”</span></div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-bottom:14px">
     <div class="ct">Cadastrar / editar produto</div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">SKU</div><input id="gp-sku" class="dinp" placeholder="Nome do produto"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição detalhada</div><input id="gp-desc" class="dinp" placeholder="Descrição completa do item"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">DescriÃ§Ã£o detalhada</div><input id="gp-desc" class="dinp" placeholder="DescriÃ§Ã£o completa do item"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Embalagem</div><input id="gp-emb" class="dinp" placeholder="Ex: caixa com 12"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Quantidade</div><input id="gp-qt" type="number" class="dinp" placeholder="0"></div>
     </div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:1fr 1fr 1.5fr 1.5fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Custo unit. (R$)</div><input id="gp-custo" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Custo total (R$)</div><input id="gp-custo-total" type="number" step="0.01" class="dinp" placeholder="Auto: qtd x custo unit."></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Equivalente no catálogo</div><input id="gp-eq" class="dinp" placeholder="Produto equivalente"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Ref. / Página</div><input id="gp-ref" class="dinp" placeholder="Ex: Catálogo 2026 p.14"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Equivalente no catÃ¡logo</div><input id="gp-eq" class="dinp" placeholder="Produto equivalente"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Ref. / PÃ¡gina</div><input id="gp-ref" class="dinp" placeholder="Ex: CatÃ¡logo 2026 p.14"></div>
     </div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:12px">
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="gp-obs" class="dinp" placeholder="Observações do produto"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="gp-obs" class="dinp" placeholder="ObservaÃ§Ãµes do produto"></div>
       <div>
         <div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Foto (arquivo)</div>
         <input id="gp-foto-arq" type="file" accept="image/*" class="dinp" style="padding:6px">
@@ -1184,14 +1058,14 @@ loadDB(); loadNFFromAPI();
       <button onclick="gpSave()" class="cbtn">Salvar</button>
       <button onclick="gpClear()" style="padding:8px 14px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:13px;font-family:var(--fb)">Limpar</button>
       <label style="font-size:12px;color:var(--g);cursor:pointer;padding:8px 14px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.25);border-radius:var(--rs)">
-        📥 Importar Excel <input type="file" accept=".xlsx" id="gp-file" style="display:none" onchange="gpImport(this)">
+        ðŸ“¥ Importar Excel <input type="file" accept=".xlsx" id="gp-file" style="display:none" onchange="gpImport(this)">
       </label>
     </div>
     <input type="hidden" id="gp-id">
   </div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
     <div style="overflow-x:auto"><table class="tb" style="min-width:1400px">
-      <thead><tr><th>#</th><th>SKU</th><th>Descrição detalhada</th><th>Embalagem</th><th class="r">Quantidade</th><th class="r">Custo Unit.</th><th class="r">Custo Total</th><th>Obs</th><th>Equivalente no catálogo</th><th>Ref. / Página</th><th>Foto</th><th class="r">V30</th><th class="r">Ações</th></tr></thead>
+      <thead><tr><th>#</th><th>SKU</th><th>DescriÃ§Ã£o detalhada</th><th>Embalagem</th><th class="r">Quantidade</th><th class="r">Custo Unit.</th><th class="r">Custo Total</th><th>Obs</th><th>Equivalente no catÃ¡logo</th><th>Ref. / PÃ¡gina</th><th>Foto</th><th class="r">V30</th><th class="r">AÃ§Ãµes</th></tr></thead>
       <tbody id="gp-tb"></tbody>
     </table></div>
   </div>
@@ -1201,10 +1075,10 @@ loadDB(); loadNFFromAPI();
 <div class="pg" id="page-g-notas">
   <div class="sh"><div class="st">Notas Fiscais</div></div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-bottom:14px">
-    <div class="ct">Lançar nova nota</div>
+    <div class="ct">LanÃ§ar nova nota</div>
     <div class="form-grid-3" style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="nf2-data" type="date" class="dinp"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Número NF</div><input id="nf2-num" class="dinp" placeholder="Ex: 12534"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">NÃºmero NF</div><input id="nf2-num" class="dinp" placeholder="Ex: 12534"></div>
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Fornecedor</div><input id="nf2-forn" class="dinp" placeholder="Nome do fornecedor"></div>
     </div>
     <div class="form-grid-4" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px">
@@ -1215,14 +1089,14 @@ loadDB(); loadNFFromAPI();
     </div>
     <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
       <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">ITEM</div><input id="nf2-item" class="dinp" placeholder="Nome do item"></div>
-      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">COD NCM</div><input id="nf2-ncm" class="dinp" placeholder="Código NCM"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">COD NCM</div><input id="nf2-ncm" class="dinp" placeholder="CÃ³digo NCM"></div>
     </div>
     <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">PDF da nota (opcional)</div><input id="nf2-pdf" type="file" accept="application/pdf,.pdf" class="dinp" style="padding:6px"></div>
-    <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Observação</div><input id="nf2-obs" class="dinp" placeholder="Opcional"></div>
+    <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">ObservaÃ§Ã£o</div><input id="nf2-obs" class="dinp" placeholder="Opcional"></div>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <button onclick="nf2Save()" class="cbtn">Lançar nota</button>
+      <button onclick="nf2Save()" class="cbtn">LanÃ§ar nota</button>
       <label style="font-size:12px;color:var(--g);cursor:pointer;padding:8px 14px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.25);border-radius:var(--rs)">
-        📥 Importar ITEM + COD NCM (.xlsx)
+        ðŸ“¥ Importar ITEM + COD NCM (.xlsx)
         <input type="file" accept=".xlsx" style="display:none" onchange="nf2ImportItemNcm(this)">
       </label>
     </div>
@@ -1233,48 +1107,48 @@ loadDB(); loadNFFromAPI();
       <button onclick="nf2Filter('cmv')" id="nf2f-cmv" class="mt">CMV</button>
       <button onclick="nf2Filter('desp')" id="nf2f-dp" class="mt">Despesas</button>
     </div>
-    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>NF</th><th>Fornecedor</th><th>ITEM</th><th>COD NCM</th><th class="r">Total</th><th class="r">c/Nota</th><th class="r">SN</th><th>Tipo</th><th>PDF</th><th>Obs</th><th class="r">Ação</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
+    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>NF</th><th>Fornecedor</th><th>ITEM</th><th>COD NCM</th><th class="r">Total</th><th class="r">c/Nota</th><th class="r">SN</th><th>Tipo</th><th>PDF</th><th>Obs</th><th class="r">AÃ§Ã£o</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
     <div id="nf2-ft" style="padding:9px 10px;text-align:right;font-size:12px;color:var(--mu);border-top:1px solid var(--bdr)"></div>
   </div>
 </div>
 
 <!-- G-APORTES -->
 <div class="pg" id="page-g-aportes">
-  <div class="sh"><div class="st">Aportes e Empréstimos</div></div>
+  <div class="sh"><div class="st">Aportes e EmprÃ©stimos</div></div>
   <div class="g2 sec">
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
       <div class="ct">Novo aporte de capital</div>
       <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
-        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Sócio</div><select id="ap-socio" class="dinp"><option value="Lucas Cristiano Pereira">Lucas</option></select></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">SÃ³cio</div><select id="ap-socio" class="dinp"><option value="Lucas Cristiano Pereira">Lucas</option></select></div>
         <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="ap-data" type="date" class="dinp"></div>
       </div>
       <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
         <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor (R$)</div><input id="ap-val" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
-        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Tipo</div><select id="ap-tipo" class="dinp"><option value="entrada">Entrada</option><option value="devolucao">Devolução</option></select></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Tipo</div><select id="ap-tipo" class="dinp"><option value="entrada">Entrada</option><option value="devolucao">DevoluÃ§Ã£o</option></select></div>
       </div>
-      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição / Obs</div><input id="ap-obs" class="dinp" placeholder="Ex: Pix recebido · 143..."></div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">DescriÃ§Ã£o / Obs</div><input id="ap-obs" class="dinp" placeholder="Ex: Pix recebido Â· 143..."></div>
       <button onclick="apSave()" class="cbtn">Salvar aporte</button>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
-      <div class="ct">Novo empréstimo</div>
+      <div class="ct">Novo emprÃ©stimo</div>
       <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="em-data" type="date" class="dinp"></div>
-      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição</div><input id="em-desc" class="dinp" placeholder="Ex: Dinheiro Express"></div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">DescriÃ§Ã£o</div><input id="em-desc" class="dinp" placeholder="Ex: Dinheiro Express"></div>
       <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
         <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor entrada (R$)</div><input id="em-val" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
         <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Total a pagar (R$)</div><input id="em-tot" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
       </div>
       <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="em-obs" class="dinp" placeholder="Ex: 20% de cada venda"></div>
-      <button onclick="emSave()" class="cbtn">Salvar empréstimo</button>
+      <button onclick="emSave()" class="cbtn">Salvar emprÃ©stimo</button>
     </div>
   </div>
   <div class="g2 sec">
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
       <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);font-size:11px;color:var(--mu)">Aportes cadastrados</div>
-      <table class="tb"><thead><tr><th>Data</th><th>Sócio</th><th>Descrição</th><th class="r">Valor</th><th>Tipo</th><th class="r">Ação</th></tr></thead><tbody id="ap-tb"></tbody></table>
+      <table class="tb"><thead><tr><th>Data</th><th>SÃ³cio</th><th>DescriÃ§Ã£o</th><th class="r">Valor</th><th>Tipo</th><th class="r">AÃ§Ã£o</th></tr></thead><tbody id="ap-tb"></tbody></table>
     </div>
     <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
-      <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);font-size:11px;color:var(--mu)">Empréstimos cadastrados</div>
-      <table class="tb"><thead><tr><th>Data</th><th>Descrição</th><th class="r">Entrada</th><th class="r">Total pagar</th><th class="r">Ação</th></tr></thead><tbody id="em-tb"></tbody></table>
+      <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);font-size:11px;color:var(--mu)">EmprÃ©stimos cadastrados</div>
+      <table class="tb"><thead><tr><th>Data</th><th>DescriÃ§Ã£o</th><th class="r">Entrada</th><th class="r">Total pagar</th><th class="r">AÃ§Ã£o</th></tr></thead><tbody id="em-tb"></tbody></table>
     </div>
   </div>
 </div>
@@ -1306,8 +1180,8 @@ loadDB(); loadNFFromAPI();
   </div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
     <div class="ct">Backup dos dados</div>
-    <p style="font-size:12px;color:var(--mu);margin-bottom:12px">Faça download de todos os dados do sistema em um arquivo .zip.</p>
-    <a href="/api/backup" class="cbtn" style="text-decoration:none;display:inline-flex">⬇ Baixar backup</a>
+    <p style="font-size:12px;color:var(--mu);margin-bottom:12px">FaÃ§a download de todos os dados do sistema em um arquivo .zip.</p>
+    <a href="/api/backup" class="cbtn" style="text-decoration:none;display:inline-flex">â¬‡ Baixar backup</a>
   </div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-top:12px">
     <div class="ct">Mercado Livre API</div>
@@ -1316,25 +1190,25 @@ loadDB(); loadNFFromAPI();
       <button onclick="mlSyncNow()" class="cbtn">Sincronizar agora</button>
       <button onclick="mlSyncStatus()" style="padding:8px 14px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:13px;font-family:var(--fb)">Ver status</button>
     </div>
-    <div id="ml-sync-status" style="font-size:11px;color:var(--mu)">Sem sincronização nesta sessão.</div>
+    <div id="ml-sync-status" style="font-size:11px;color:var(--mu)">Sem sincronizaÃ§Ã£o nesta sessÃ£o.</div>
   </div>
 </div>
 
 <!-- G-HISTORICO -->
 <div class="pg" id="page-g-historico">
-  <div class="sh"><div class="st">Histórico de Alterações</div><button onclick="loadHist()" style="padding:5px 12px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:12px">↻ Atualizar</button></div>
+  <div class="sh"><div class="st">HistÃ³rico de AlteraÃ§Ãµes</div><button onclick="loadHist()" style="padding:5px 12px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:12px">â†» Atualizar</button></div>
   <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
-    <table class="tb"><thead><tr><th>Data/Hora</th><th>Usuário</th><th>Ação</th><th>Detalhe</th></tr></thead><tbody id="hist-tb"></tbody></table>
+    <table class="tb"><thead><tr><th>Data/Hora</th><th>UsuÃ¡rio</th><th>AÃ§Ã£o</th><th>Detalhe</th></tr></thead><tbody id="hist-tb"></tbody></table>
   </div>
 </div>
 
 <script>
-// ── Gestão helpers ────────────────────────────────────────────
+// â”€â”€ GestÃ£o helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const gAPI=async(m,u,b)=>{const o={method:m,headers:{'Content-Type':'application/json'}};if(b)o.body=JSON.stringify(b);return(await fetch(u,o)).json();};
 const fc2=v=>'R$\u00a0'+Math.abs(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 function gToast(msg,err=false){const el=document.getElementById('g-toast');el.textContent=msg;el.style.borderColor=err?'var(--r)':'var(--g)';el.style.color=err?'var(--r)':'var(--g)';el.style.display='block';setTimeout(()=>el.style.display='none',3200);}
 
-// ── Dados financeiros ─────────────────────────────────────────
+// â”€â”€ Dados financeiros â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let finData={};
 let finTab_='receitas';
 
@@ -1372,22 +1246,22 @@ function finRender(){
   let html='';
 
   if(finTab_==='receitas'){
-    html='<div class="card sec"><div class="ct">Receitas e liquidações ML</div>';
+    html='<div class="card sec"><div class="ct">Receitas e liquidaÃ§Ãµes ML</div>';
     html+=finMonthGrid([
       ['Receita bruta (rp)', V2.rp],
-      ['Acréscimo parcelamento (ac)', V2.ac],
+      ['AcrÃ©scimo parcelamento (ac)', V2.ac],
       ['Taxa parcelamento (txa)', V2.txa],
       ['Tarifa venda+imp (tv)', V2.tv],
       ['Receita envio (re)', V2.re],
       ['Tarifa envio (te)', V2.te],
       ['Cancelamentos (ca)', V2.ca],
-      ['Descontos/bônus (db)', V2.db],
-      ['Líquido ML (lq)', V2.lq],
+      ['Descontos/bÃ´nus (db)', V2.db],
+      ['LÃ­quido ML (lq)', V2.lq],
       ['Pedidos (pd)', V2.pd],
     ]);
     html+='</div>';
   } else if(finTab_==='cmv'){
-    html='<div class="card sec"><div class="ct">CMV — Custo das Mercadorias Vendidas</div>';
+    html='<div class="card sec"><div class="ct">CMV â€” Custo das Mercadorias Vendidas</div>';
     html+=finMonthGrid([
       ['CMV Total', K2.map(k=>(fin.CMV||{})[k]||0)],
       ['CMV c/ Nota Fiscal', K2.map(k=>(fin.CMV_NF||{})[k]||0)],
@@ -1395,33 +1269,33 @@ function finRender(){
     ]);
     html+='</div>';
   } else if(finTab_==='desp'){
-    html='<div class="card sec"><div class="ct">Despesas operacionais por mês</div>';
+    html='<div class="card sec"><div class="ct">Despesas operacionais por mÃªs</div>';
     const dfields=['contab','pub','imp','tml','prolabore_lucas','prolabore_fellipe','galpao','frete'];
-    const dlabels={'contab':'Contabilidade','pub':'Publicidade','imp':'Impostos','tml':'Tarifas ML','prolabore_lucas':'Pró-labore Lucas','prolabore_fellipe':'Pró-labore Fellipe','galpao':'Galpão/água/luz','frete':'Frete/transporte'};
+    const dlabels={'contab':'Contabilidade','pub':'Publicidade','imp':'Impostos','tml':'Tarifas ML','prolabore_lucas':'PrÃ³-labore Lucas','prolabore_fellipe':'PrÃ³-labore Fellipe','galpao':'GalpÃ£o/Ã¡gua/luz','frete':'Frete/transporte'};
     html+=finMonthGrid(dfields.map(f=>[dlabels[f]||f, K2.map(k=>((DESP2[k]||{})[f])||0)]));
     html+='</div>';
   } else if(finTab_==='emp'){
-    html='<div class="card sec"><div class="ct">Empréstimos / Encargos por mês</div>';
+    html='<div class="card sec"><div class="ct">EmprÃ©stimos / Encargos por mÃªs</div>';
     html+=finMonthGrid([
       ['Encargos ML (ENC)', K2.map(k=>(fin.ENC||{})[k]||0)],
-      ['Empréstimo pago (EMP)', K2.map(k=>(fin.EMP||{})[k]||0)],
-      ['Entrada empréstimo', K2.map(k=>(fin.EMP_ENTRADA||{})[k]||0)],
+      ['EmprÃ©stimo pago (EMP)', K2.map(k=>(fin.EMP||{})[k]||0)],
+      ['Entrada emprÃ©stimo', K2.map(k=>(fin.EMP_ENTRADA||{})[k]||0)],
       ['Total contratual', K2.map(k=>(fin.EMP_TOTAL||{})[k]||0)],
-      ['Aportes sócios', K2.map(k=>(fin.APORTES||{})[k]||0)],
-      ['Devoluções aporte', K2.map(k=>(fin.DEV_APORTE||{})[k]||0)],
+      ['Aportes sÃ³cios', K2.map(k=>(fin.APORTES||{})[k]||0)],
+      ['DevoluÃ§Ãµes aporte', K2.map(k=>(fin.DEV_APORTE||{})[k]||0)],
     ]);
     html+='</div>';
   } else if(finTab_==='debml'){
-    html='<div class="card sec"><div class="ct">Débitos operacionais ML por mês</div>';
+    html='<div class="card sec"><div class="ct">DÃ©bitos operacionais ML por mÃªs</div>';
     html+=finMonthGrid([
-      ['Déb. Reclamações', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).recl||0)],
-      ['Déb. Retido', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).retido||0)],
-      ['Déb. Devoluções', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).devolv||0)],
-      ['Déb. Envio', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).envio||0)],
+      ['DÃ©b. ReclamaÃ§Ãµes', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).recl||0)],
+      ['DÃ©b. Retido', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).retido||0)],
+      ['DÃ©b. DevoluÃ§Ãµes', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).devolv||0)],
+      ['DÃ©b. Envio', K2.map(k=>((fin.DEB_ML_DET||{})[k]||{}).envio||0)],
     ]);
     html+='</div>';
   } else if(finTab_==='meses'){
-    html='<div class="card sec"><div class="ct">Períodos (meses) do BI</div>';
+    html='<div class="card sec"><div class="ct">PerÃ­odos (meses) do BI</div>';
     html+='<p style="font-size:12px;color:var(--mu);margin-bottom:14px;line-height:1.7">Adicione novos meses. O formato da chave deve ser AAAA-MM (ex: 2026-04).</p>';
     html+='<div id="meses-list" style="margin-bottom:14px">';
     (load_meses||[]).forEach((m,i)=>{ html+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-family:var(--fm);font-size:12px;background:var(--bg3);padding:4px 10px;border-radius:5px">${m.key}</span><span style="font-size:12px">${m.label}</span></div>`; });
@@ -1429,7 +1303,7 @@ function finRender(){
     html+=`<div style="display:flex;gap:8px;margin-bottom:8px">
       <input id="nm-key" class="dinp" placeholder="2026-04" style="width:120px">
       <input id="nm-label" class="dinp" placeholder="Abr/2026" style="width:120px">
-      <button onclick="addMes()" class="cbtn">Adicionar mês</button>
+      <button onclick="addMes()" class="cbtn">Adicionar mÃªs</button>
     </div>`;
     html+='</div>';
   }
@@ -1449,20 +1323,20 @@ async function finSave(){
   // month arrays
   document.querySelectorAll('[data-arr]').forEach(inp=>{
     const arr=inp.dataset.arr, idx=parseInt(inp.dataset.idx), val=parseFloat(inp.value)||0;
-    const map={'Receita bruta (rp)':'rp','Acréscimo parcelamento (ac)':'ac','Taxa parcelamento (txa)':'txa','Tarifa venda+imp (tv)':'tv','Receita envio (re)':'re','Tarifa envio (te)':'te','Cancelamentos (ca)':'ca','Descontos/bônus (db)':'db','Líquido ML (lq)':'lq','Pedidos (pd)':'pd'};
+    const map={'Receita bruta (rp)':'rp','AcrÃ©scimo parcelamento (ac)':'ac','Taxa parcelamento (txa)':'txa','Tarifa venda+imp (tv)':'tv','Receita envio (re)':'re','Tarifa envio (te)':'te','Cancelamentos (ca)':'ca','Descontos/bÃ´nus (db)':'db','LÃ­quido ML (lq)':'lq','Pedidos (pd)':'pd'};
     const key=map[arr];
     if(key){if(!newFin.V)newFin.V={};if(!newFin.V[key])newFin.V[key]=[0,0,0];newFin.V[key][idx]=val;}
     // CMV
     const cmvMap={'CMV Total':'CMV','CMV c/ Nota Fiscal':'CMV_NF','CMV Simples Nacional':'CMV_SN'};
     if(cmvMap[arr]){const k2=K[idx];if(!newFin[cmvMap[arr]])newFin[cmvMap[arr]]={};newFin[cmvMap[arr]][k2]=val;}
     // DESP
-    const dlabels={'Contabilidade':'contab','Publicidade':'pub','Impostos':'imp','Tarifas ML':'tml','Pró-labore Lucas':'prolabore_lucas','Pró-labore Fellipe':'prolabore_fellipe','Galpão/água/luz':'galpao','Frete/transporte':'frete'};
+    const dlabels={'Contabilidade':'contab','Publicidade':'pub','Impostos':'imp','Tarifas ML':'tml','PrÃ³-labore Lucas':'prolabore_lucas','PrÃ³-labore Fellipe':'prolabore_fellipe','GalpÃ£o/Ã¡gua/luz':'galpao','Frete/transporte':'frete'};
     if(dlabels[arr]){const k2=K[idx];if(!newFin.DESP)newFin.DESP={};if(!newFin.DESP[k2])newFin.DESP[k2]={};newFin.DESP[k2][dlabels[arr]]=val;}
     // EMP/ENC
-    const empMap={'Encargos ML (ENC)':'ENC','Empréstimo pago (EMP)':'EMP','Entrada empréstimo':'EMP_ENTRADA','Total contratual':'EMP_TOTAL','Aportes sócios':'APORTES','Devoluções aporte':'DEV_APORTE'};
+    const empMap={'Encargos ML (ENC)':'ENC','EmprÃ©stimo pago (EMP)':'EMP','Entrada emprÃ©stimo':'EMP_ENTRADA','Total contratual':'EMP_TOTAL','Aportes sÃ³cios':'APORTES','DevoluÃ§Ãµes aporte':'DEV_APORTE'};
     if(empMap[arr]){const k2=K[idx];if(!newFin[empMap[arr]])newFin[empMap[arr]]={};newFin[empMap[arr]][k2]=val;}
     // DEB_ML
-    const debMap={'Déb. Reclamações':'recl','Déb. Retido':'retido','Déb. Devoluções':'devolv','Déb. Envio':'envio'};
+    const debMap={'DÃ©b. ReclamaÃ§Ãµes':'recl','DÃ©b. Retido':'retido','DÃ©b. DevoluÃ§Ãµes':'devolv','DÃ©b. Envio':'envio'};
     if(debMap[arr]){const k2=K[idx];if(!newFin.DEB_ML_DET)newFin.DEB_ML_DET={};if(!newFin.DEB_ML_DET[k2])newFin.DEB_ML_DET[k2]={recl:0,retido:0,devolv:0,envio:0};newFin.DEB_ML_DET[k2][debMap[arr]]=val;}
   });
   // rebuild DEB_ML totals
@@ -1476,32 +1350,32 @@ async function addMes(){
   const label=document.getElementById('nm-label').value.trim();
   if(!key||!label)return gToast('Preencha chave e label',true);
   const mesesAtuais=await fetch('/api/meses').then(r=>r.json());
-  if((mesesAtuais||[]).some(m=>m.key===key))return gToast('Esse mês já existe',true);
+  if((mesesAtuais||[]).some(m=>m.key===key))return gToast('Esse mÃªs jÃ¡ existe',true);
   const r=await gAPI('POST','/api/meses',[...(mesesAtuais||[]),{key,label}]);
-  if(r.ok){gToast('Mês adicionado! Recarregue.');document.getElementById('nm-key').value='';document.getElementById('nm-label').value='';}
+  if(r.ok){gToast('MÃªs adicionado! Recarregue.');document.getElementById('nm-key').value='';document.getElementById('nm-label').value='';}
   else gToast(r.error||'Erro',true);
 }
 
-// ── Produtos ──────────────────────────────────────────────────
+// â”€â”€ Produtos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let gpList=[], gpEditId=null;
 async function gpLoad(){
   gpList=await fetch('/api/produtos').then(r=>r.json());
   document.getElementById('gp-count2').textContent=gpList.length+' produtos';
   document.getElementById('gp-tb').innerHTML=gpList.length?gpList.map((p,i)=>`
     <tr><td class="dt">${i+1}</td><td style="font-size:12px;font-weight:500">${p.sku}</td>
-    <td style="font-size:11px;color:var(--mu);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.descricao_detalhada||''}">${p.descricao_detalhada||'—'}</td>
-    <td style="font-size:11px;color:var(--mu)">${p.embalagem||'—'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.descricao_detalhada||''}">${p.descricao_detalhada||'â€”'}</td>
+    <td style="font-size:11px;color:var(--mu)">${p.embalagem||'â€”'}</td>
     <td class="r">${(p.quantidade ?? p.estoque) || 0}</td>
     <td class="rp">${fc2(p.custo||0)}</td>
     <td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--am)">${fc2(p.custo_total ?? ((p.custo||0)*((p.quantidade ?? p.estoque)||0)))}</td>
-    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.obs||''}">${p.obs||'—'}</td>
-    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.equivalente_catalogo||''}">${p.equivalente_catalogo||'—'}</td>
-    <td style="font-size:11px;color:var(--mu)">${p.ref_pagina||'—'}</td>
-    <td style="font-size:11px">${(p.foto_b64||p.foto)?`<a href="${p.foto_b64?`data:${p.foto_mime||'image/*'};base64,${p.foto_b64}`:p.foto}" target="_blank" rel="noopener" style="color:var(--b)">Abrir</a>`:'—'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.obs||''}">${p.obs||'â€”'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.equivalente_catalogo||''}">${p.equivalente_catalogo||'â€”'}</td>
+    <td style="font-size:11px;color:var(--mu)">${p.ref_pagina||'â€”'}</td>
+    <td style="font-size:11px">${(p.foto_b64||p.foto)?`<a href="${p.foto_b64?`data:${p.foto_mime||'image/*'};base64,${p.foto_b64}`:p.foto}" target="_blank" rel="noopener" style="color:var(--b)">Abrir</a>`:'â€”'}</td>
     <td class="r">${p.v30||0}</td>
     <td style="text-align:right">
       <button onclick="gpEdit(${p.id})" style="padding:3px 8px;background:var(--bg3);color:var(--tx);border:1px solid var(--bdr);border-radius:5px;cursor:pointer;font-size:11px;margin-right:3px">Ed</button>
-      <button onclick="gpDel(${p.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">✕</button>
+      <button onclick="gpDel(${p.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">âœ•</button>
     </td></tr>`).join('')
     :'<tr><td colspan="13" style="text-align:center;color:var(--mu);padding:20px">Nenhum produto</td></tr>';
 }
@@ -1572,7 +1446,7 @@ function gpEdit(id){
   if(inp) inp.value='';
   document.getElementById('gp-v30').value=p.v30||'';
 }
-async function gpDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/produtos/'+id);gToast('Excluído');gpLoad();}
+async function gpDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/produtos/'+id);gToast('ExcluÃ­do');gpLoad();}
 function gpClear(){
   gpEditId=null;
   ['gp-sku','gp-desc','gp-emb','gp-qt','gp-custo','gp-custo-total','gp-obs','gp-eq','gp-ref','gp-v30'].forEach(id=>document.getElementById(id).value='');
@@ -1591,7 +1465,7 @@ document.addEventListener('change',(ev)=>{
 });
 async function gpImport(inp){const file=inp.files[0];if(!file)return;const form=new FormData();form.append('file',file);const r=await fetch('/api/import/produtos',{method:'POST',body:form});const d=await r.json();if(d.ok){gToast(`${d.added} adicionados, ${d.updated} atualizados`);gpLoad();}else gToast('Erro: '+d.error,true);inp.value='';}
 
-// ── Notas ─────────────────────────────────────────────────────
+// â”€â”€ Notas â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let nf2List=[], nf2F='all';
 async function nf2Load(){nf2List=await fetch('/api/notas').then(r=>r.json());nf2Render();}
 function nf2Render(){
@@ -1600,14 +1474,14 @@ function nf2Render(){
     <tr><td class="dt">${(n.data||'').slice(8)}/${(n.data||'').slice(5,7)}</td>
     <td style="font-family:var(--fm);font-size:11px">${n.numero||''}</td>
     <td style="font-size:12px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n.fornecedor||''}</td>
-    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${n.item||''}">${n.item||'—'}</td>
-    <td style="font-size:11px;color:var(--mu)">${n.cod_ncm||'—'}</td>
+    <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${n.item||''}">${n.item||'â€”'}</td>
+    <td style="font-size:11px;color:var(--mu)">${n.cod_ncm||'â€”'}</td>
     <td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--am)">${fc2(n.valor||0)}</td>
-    <td class="r">${n.valor_nf?fc2(n.valor_nf):'—'}</td><td class="r">${n.valor_sn?fc2(n.valor_sn):'—'}</td>
+    <td class="r">${n.valor_nf?fc2(n.valor_nf):'â€”'}</td><td class="r">${n.valor_sn?fc2(n.valor_sn):'â€”'}</td>
     <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;background:${n.tipo==='cmv'?'rgba(0,229,160,.12)':'rgba(245,158,11,.12)'};color:${n.tipo==='cmv'?'var(--g)':'var(--am)'}">${n.tipo==='cmv'?'CMV':'Desp'}</span></td>
-    <td>${n.has_pdf?`<button onclick="nf2OpenPdf(${n.id})" style="padding:3px 8px;background:rgba(59,130,246,.12);color:var(--b);border:1px solid rgba(59,130,246,.3);border-radius:5px;cursor:pointer;font-size:11px">Abrir</button>`:'—'}</td>
+    <td>${n.has_pdf?`<button onclick="nf2OpenPdf(${n.id})" style="padding:3px 8px;background:rgba(59,130,246,.12);color:var(--b);border:1px solid rgba(59,130,246,.3);border-radius:5px;cursor:pointer;font-size:11px">Abrir</button>`:'â€”'}</td>
     <td style="font-size:11px;color:var(--mu)">${n.obs||''}</td>
-    <td style="text-align:right"><button onclick="nf2Del(${n.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">✕</button></td></tr>`).join('')
+    <td style="text-align:right"><button onclick="nf2Del(${n.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">âœ•</button></td></tr>`).join('')
     :'<tr><td colspan="12" style="text-align:center;color:var(--mu);padding:20px">Nenhuma nota</td></tr>';
   const tot=lista.reduce((a,n)=>a+(n.valor||0),0);
   document.getElementById('nf2-ft').textContent=lista.length?`Total: R$ ${tot.toLocaleString('pt-BR',{minimumFractionDigits:2})} (${lista.length} notas)`:'';
@@ -1628,12 +1502,12 @@ async function nf2Save(){
   }else{
     await gAPI('POST','/api/notas',d);
   }
-  gToast('Nota lançada!');
+  gToast('Nota lanÃ§ada!');
   ['nf2-data','nf2-num','nf2-forn','nf2-val','nf2-nf','nf2-sn','nf2-item','nf2-ncm','nf2-obs'].forEach(id=>document.getElementById(id).value='');
   if(pdfInput)pdfInput.value='';
   nf2Load();
 }
-async function nf2Del(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/notas/'+id);gToast('Excluída');nf2Load();}
+async function nf2Del(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/notas/'+id);gToast('ExcluÃ­da');nf2Load();}
 function nf2OpenPdf(id){window.open('/api/notas/'+id+'/pdf','_blank');}
 function nf2Filter(f){nf2F=f;['all','cmv','dp'].forEach(k=>{const el=document.getElementById('nf2f-'+k);if(el)el.classList.toggle('on',k===f||(f==='desp'&&k==='dp'));});nf2Render();}
 async function nf2ImportItemNcm(inp){
@@ -1644,7 +1518,7 @@ async function nf2ImportItemNcm(inp){
   const r=await fetch('/api/import/notas_item_ncm',{method:'POST',body:form});
   const d=await r.json();
   if(d.ok){
-    gToast(`Importação concluída: ${d.added} novos, ${d.updated} atualizados`);
+    gToast(`ImportaÃ§Ã£o concluÃ­da: ${d.added} novos, ${d.updated} atualizados`);
     nf2Load();
   }else{
     gToast(d.error||'Erro ao importar ITEM/COD NCM',true);
@@ -1652,16 +1526,16 @@ async function nf2ImportItemNcm(inp){
   inp.value='';
 }
 
-// ── Aportes ───────────────────────────────────────────────────
+// â”€â”€ Aportes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let apList=[], emList=[];
 async function apLoad(){apList=await fetch('/api/aportes').then(r=>r.json());apRender();rApo();}
 function apRender(){
   document.getElementById('ap-tb').innerHTML=apList.length?apList.map(a=>`
     <tr><td class="dt">${a.data||''}</td><td style="font-size:12px">${(a.socio||'').split(' ')[0]}</td>
     <td style="font-size:11px;color:var(--mu)">${a.descricao||''}</td>
-    <td style="text-align:right;font-family:var(--fm);font-size:11px;color:${a.tipo==='devolucao'?'var(--r)':'var(--b)'}">${a.tipo==='devolucao'?'− ':'+ '}${fc2(a.valor||0)}</td>
-    <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;background:${a.tipo==='entrada'?'rgba(59,130,246,.12)':'rgba(244,63,94,.12)'};color:${a.tipo==='entrada'?'var(--b)':'var(--r)'}">${a.tipo==='entrada'?'Entrada':'Devolução'}</span></td>
-    <td style="text-align:right"><button onclick="apDel(${a.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">✕</button></td></tr>`).join('')
+    <td style="text-align:right;font-family:var(--fm);font-size:11px;color:${a.tipo==='devolucao'?'var(--r)':'var(--b)'}">${a.tipo==='devolucao'?'âˆ’ ':'+ '}${fc2(a.valor||0)}</td>
+    <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;background:${a.tipo==='entrada'?'rgba(59,130,246,.12)':'rgba(244,63,94,.12)'};color:${a.tipo==='entrada'?'var(--b)':'var(--r)'}">${a.tipo==='entrada'?'Entrada':'DevoluÃ§Ã£o'}</span></td>
+    <td style="text-align:right"><button onclick="apDel(${a.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">âœ•</button></td></tr>`).join('')
     :'<tr><td colspan="6" style="text-align:center;color:var(--mu);padding:16px">Nenhum aporte</td></tr>';
 }
 async function apSave(){
@@ -1671,26 +1545,26 @@ async function apSave(){
   ['ap-data','ap-val','ap-obs'].forEach(id=>document.getElementById(id).value='');
   apLoad();
 }
-async function apDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/aportes/'+id);gToast('Excluído');apLoad();}
+async function apDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/aportes/'+id);gToast('ExcluÃ­do');apLoad();}
 
 async function emLoad(){emList=await fetch('/api/emprestimos').then(r=>r.json());emRender();rApo();}
 function emRender(){
   document.getElementById('em-tb').innerHTML=emList.length?emList.map(e=>`
     <tr><td class="dt">${e.data||''}</td><td style="font-size:12px">${e.descricao||''}</td>
     <td class="rp">${fc2(e.valor||0)}</td><td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--o)">${fc2(e.total_pagar||0)}</td>
-    <td style="text-align:right"><button onclick="emDel(${e.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">✕</button></td></tr>`).join('')
-    :'<tr><td colspan="5" style="text-align:center;color:var(--mu);padding:16px">Nenhum empréstimo</td></tr>';
+    <td style="text-align:right"><button onclick="emDel(${e.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">âœ•</button></td></tr>`).join('')
+    :'<tr><td colspan="5" style="text-align:center;color:var(--mu);padding:16px">Nenhum emprÃ©stimo</td></tr>';
 }
 async function emSave(){
   const d={data:document.getElementById('em-data').value,descricao:document.getElementById('em-desc').value.trim(),valor:parseFloat(document.getElementById('em-val').value)||0,total_pagar:parseFloat(document.getElementById('em-tot').value)||0,obs:document.getElementById('em-obs').value.trim()};
   if(!d.valor)return gToast('Informe o valor',true);
-  await gAPI('POST','/api/emprestimos',d);gToast('Empréstimo salvo!');
+  await gAPI('POST','/api/emprestimos',d);gToast('EmprÃ©stimo salvo!');
   ['em-data','em-desc','em-val','em-tot','em-obs'].forEach(id=>document.getElementById(id).value='');
   emLoad();
 }
-async function emDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/emprestimos/'+id);gToast('Excluído');emLoad();}
+async function emDel(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/emprestimos/'+id);gToast('ExcluÃ­do');emLoad();}
 
-// ── Importações ───────────────────────────────────────────────
+// â”€â”€ ImportaÃ§Ãµes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 async function importSKUs(inp){const file=inp.files[0];if(!file)return;document.getElementById('skuimp-name').textContent=file.name;const form=new FormData();form.append('file',file);const r=await fetch('/api/import/skus',{method:'POST',body:form});const d=await r.json();if(d.ok)gToast(`${d.count} SKUs importados`);else gToast('Erro: '+d.error,true);inp.value='';}
 async function importProds(inp){const file=inp.files[0];if(!file)return;document.getElementById('prodimp-name').textContent=file.name;const form=new FormData();form.append('file',file);const r=await fetch('/api/import/produtos',{method:'POST',body:form});const d=await r.json();if(d.ok)gToast(`${d.added} add, ${d.updated} atualizados`);else gToast('Erro: '+d.error,true);inp.value='';}
 
@@ -1701,11 +1575,11 @@ async function mlSyncNow(){
   const d=await r.json();
   if(d.ok){
     const res=d.result||{};
-    if(el)el.textContent=`OK · pedidos: ${res.orders||0} · vendas: ${res.vendas||0} · SKUs: ${res.skus||0}`;
-    gToast('Sincronização concluída!');
+    if(el)el.textContent=`OK Â· pedidos: ${res.orders||0} Â· vendas: ${res.vendas||0} Â· SKUs: ${res.skus||0}`;
+    gToast('SincronizaÃ§Ã£o concluÃ­da!');
     loadDB();
   }else{
-    if(el)el.textContent='Erro: '+(d.error||'falha na sincronização');
+    if(el)el.textContent='Erro: '+(d.error||'falha na sincronizaÃ§Ã£o');
     gToast('Erro ao sincronizar: '+(d.error||'falha'),true);
   }
 }
@@ -1715,19 +1589,19 @@ async function mlSyncStatus(){
   const r=await fetch('/api/sync/ml/status');
   const d=await r.json();
   if(!d.ok){
-    if(el)el.textContent='Não foi possível consultar status.';
+    if(el)el.textContent='NÃ£o foi possÃ­vel consultar status.';
     return;
   }
   const runs=d.runs||[];
   if(!runs.length){
-    if(el)el.textContent='Ainda não há sincronizações registradas.';
+    if(el)el.textContent='Ainda nÃ£o hÃ¡ sincronizaÃ§Ãµes registradas.';
     return;
   }
   const last=runs[0];
-  if(el)el.textContent=`Última execução: ${last.status} · ${last.created_at || ''}`;
+  if(el)el.textContent=`Ãšltima execuÃ§Ã£o: ${last.status} Â· ${last.created_at || ''}`;
 }
 
-// ── Histórico ─────────────────────────────────────────────────
+// â”€â”€ HistÃ³rico â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 async function loadHist(){
   const hist=await fetch('/api/historico').then(r=>r.json());
   document.getElementById('hist-tb').innerHTML=hist.length?hist.map(h=>`
@@ -1737,10 +1611,11 @@ async function loadHist(){
     :'<tr><td colspan="4" style="text-align:center;color:var(--mu);padding:20px">Sem registros</td></tr>';
 }
 
-// ── Init gestão ───────────────────────────────────────────────
+// â”€â”€ Init gestÃ£o â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function gLoad(){finLoad();gpLoad();nf2Load();apLoad();emLoad();loadHist();}
 </script>
 </div>
 </div>
 </body>
 </html>
+
