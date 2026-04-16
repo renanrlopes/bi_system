@@ -1080,7 +1080,7 @@ loadDB(); loadNFFromAPI();
     <p style="font-size:11px;color:var(--mu);margin:0 0 10px">Colunas recomendadas: ITEM e COD NCM.</p>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <input id="nf2-file" type="file" accept=".xlsx,.xls" class="dinp" style="max-width:340px;padding:6px" onchange="nf2OnFileSelected(this)">
-      <button onclick="nf2ImportFromSelected()" class="cbtn">Importar planilha</button>
+      <button id="nf2-import-btn" type="button" onclick="nf2ImportFromSelected()" class="cbtn">Importar planilha</button>
     </div>
     <div id="nf2-import-status" style="margin-top:10px;font-size:12px;color:var(--mu)">Aguardando importação de planilha.</div>
 
@@ -1545,17 +1545,35 @@ function nf2CancelEdit(){
 async function nf2Del(id){if(!confirm('Excluir?'))return;await gAPI('DELETE','/api/notas/'+id);gToast('Excluída');nf2Load();}
 function nf2OpenPdf(id){window.open('/api/notas/'+id+'/pdf','_blank');}
 function nf2Filter(f){nf2F=f;['all','cmv','dp'].forEach(k=>{const el=document.getElementById('nf2f-'+k);if(el)el.classList.toggle('on',k===f||(f==='desp'&&k==='dp'));});nf2Render();}
+function nf2Toast(msg,err=false){
+  try{ if(typeof gToast==='function') gToast(msg,err); }catch(_){ /* no-op */ }
+}
+function nf2SetImportStatus(msg){
+  const statusEl=document.getElementById('nf2-import-status');
+  if(statusEl)statusEl.textContent=msg;
+}
+function nf2WireImportButton(){
+  const btn=document.getElementById('nf2-import-btn');
+  if(btn&&!btn.dataset.bound){
+    btn.addEventListener('click',(ev)=>{ev.preventDefault();ev.stopPropagation();nf2ImportFromSelected();});
+    btn.dataset.bound='1';
+  }
+  const inp=document.getElementById('nf2-file');
+  if(inp&&!inp.dataset.bound){
+    inp.addEventListener('change',()=>nf2OnFileSelected(inp));
+    inp.dataset.bound='1';
+  }
+}
 function nf2OnFileSelected(inp){
   const file=inp&&inp.files&&inp.files[0];
-  const statusEl=document.getElementById('nf2-import-status');
-  if(statusEl)statusEl.textContent=file?`Arquivo selecionado: ${file.name}`:'Aguardando importação de planilha.';
+  nf2SetImportStatus(file?`Arquivo selecionado: ${file.name}`:'Aguardando importação de planilha.');
 }
 function nf2ImportFromSelected(){
+  nf2SetImportStatus('Botão Importar planilha clicado. Validando arquivo...');
   const inp=document.getElementById('nf2-file');
   if(!inp||!inp.files||!inp.files[0]){
-    gToast('Selecione um arquivo .xlsx antes de importar',true);
-    const statusEl=document.getElementById('nf2-import-status');
-    if(statusEl)statusEl.textContent='Selecione um arquivo .xlsx antes de importar.';
+    nf2Toast('Selecione um arquivo .xlsx antes de importar',true);
+    nf2SetImportStatus('Selecione um arquivo .xlsx antes de importar.');
     return;
   }
   nf2ImportItemNcm(inp);
@@ -1563,10 +1581,9 @@ function nf2ImportFromSelected(){
 async function nf2ImportItemNcm(inp){
   const file=inp&&inp.files&&inp.files[0];
   if(!file)return;
-  const statusEl=document.getElementById('nf2-import-status');
   try{
-    gToast('Importando planilha...');
-    if(statusEl)statusEl.textContent='Importando planilha...';
+    nf2Toast('Importando planilha...');
+    nf2SetImportStatus('Importando planilha...');
     const form=new FormData();
     form.append('file',file);
     const r=await fetch('/api/import/notas_item_ncm',{method:'POST',body:form});
@@ -1576,23 +1593,25 @@ async function nf2ImportItemNcm(inp){
 
     if(!r.ok||!d.ok){
       const msg=d.error||`Erro ao importar (HTTP ${r.status})`;
-      gToast(msg,true);
-      if(statusEl)statusEl.textContent=msg;
+      nf2Toast(msg,true);
+      nf2SetImportStatus(msg);
       return;
     }
 
     const okMsg=`Importação concluída: ${d.added} novas, ${d.updated} atualizadas`;
-    gToast(okMsg);
-    if(statusEl)statusEl.textContent=okMsg;
+    nf2Toast(okMsg);
+    nf2SetImportStatus(okMsg);
     nf2Load();
   }catch(err){
     const msg=`Falha ao importar planilha: ${err&&err.message?err.message:'erro inesperado'}`;
-    gToast(msg,true);
-    if(statusEl)statusEl.textContent=msg;
+    nf2Toast(msg,true);
+    nf2SetImportStatus(msg);
   }finally{
     inp.value='';
   }
 }
+document.addEventListener('DOMContentLoaded',nf2WireImportButton);
+setTimeout(nf2WireImportButton,0);
 
 // �"?�"? Aportes �"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?�"?
 let apList=[], emList=[];
