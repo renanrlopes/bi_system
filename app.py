@@ -848,6 +848,17 @@ def import_notas_item_ncm():
         def _is_ncm_like(txt: str) -> bool:
             return bool(re.fullmatch(r'\d{6,10}', _ncm_digits(txt)))
 
+        def _looks_like_supplier_name(txt: str) -> bool:
+            s = str(txt or '').upper()
+            if not s:
+                return False
+            supplier_tokens = (
+                ' LTDA', ' EIRELI', ' S/A', ' SA ', ' MEI', ' ME ', ' EPP',
+                ' IMPORTACAO', ' IMPORTS', ' DISTRIBUIDORA', ' COMERCIO',
+                ' SERVICOS', ' CONTABEIS'
+            )
+            return any(tok in f' {s} ' for tok in supplier_tokens)
+
         item_col = next((orig for nrm, orig in normalized_cols if nrm in item_aliases), None)
         ncm_col = next((orig for nrm, orig in normalized_cols if nrm in ncm_aliases), None)
 
@@ -861,6 +872,7 @@ def import_notas_item_ncm():
                 date_hits = sum(1 for v in non_empty if _looks_like_date_text(v))
                 ncm_hits = sum(1 for v in non_empty if _is_ncm_like(v))
                 text_hits = sum(1 for v in non_empty if any(ch.isalpha() for ch in v))
+                supplier_hits = sum(1 for v in non_empty if _looks_like_supplier_name(v))
                 col_meta.append({
                     'orig': orig,
                     'nrm': nrm,
@@ -868,6 +880,7 @@ def import_notas_item_ncm():
                     'date_hits': date_hits,
                     'ncm_hits': ncm_hits,
                     'text_hits': text_hits,
+                    'supplier_hits': supplier_hits,
                 })
 
             if not ncm_col:
@@ -880,7 +893,11 @@ def import_notas_item_ncm():
                     c for c in col_meta
                     if c['orig'] != ncm_col and c['nrm'] not in date_aliases and c['date_hits'] == 0
                 ]
-                item_cands = sorted(item_cands, key=lambda c: (c['text_hits'], c['non_empty']), reverse=True)
+                item_cands = sorted(
+                    item_cands,
+                    key=lambda c: (c['text_hits'] - c['supplier_hits'], c['text_hits'], c['non_empty']),
+                    reverse=True,
+                )
                 if item_cands and item_cands[0]['text_hits'] > 0:
                     item_col = item_cands[0]['orig']
 
@@ -910,6 +927,8 @@ def import_notas_item_ncm():
 
             if _looks_like_date_text(item):
                 item = ''
+            if _looks_like_supplier_name(item):
+                item = ''
 
             # Fallback por linha: usa a primeira celula textual como item.
             if not item:
@@ -920,6 +939,8 @@ def import_notas_item_ncm():
                     if _looks_like_date_text(t):
                         continue
                     if _is_ncm_like(t):
+                        continue
+                    if _looks_like_supplier_name(t):
                         continue
                     item = t
                     break
@@ -998,6 +1019,8 @@ def import_notas_item_ncm():
             'replaced': replace_mode,
             'previous_count': previous_count,
             'final_count': len(notas),
+            'item_col': str(item_col),
+            'ncm_col': str(ncm_col),
         })
     except Exception as e:
         return jsonify({'ok': False, 'error': str(e)}), 400

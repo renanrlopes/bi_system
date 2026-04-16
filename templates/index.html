@@ -1593,9 +1593,10 @@ async function nf2ImportItemNcm(inp){
       return;
     }
 
+    const colsInfo=(d.item_col&&d.ncm_col)?` Colunas usadas: ITEM=${d.item_col}, NCM=${d.ncm_col}.`:'';
     const okMsg=d.replaced
-      ?`Importação concluída: base substituída (${d.final_count} registros). ${d.added} novos, ${d.updated} consolidados.`
-      :`Importação concluída: ${d.added} novas, ${d.updated} atualizadas`;
+      ?`Importação concluída: base substituída (${d.final_count} registros). ${d.added} novos, ${d.updated} consolidados.${colsInfo}`
+      :`Importação concluída: ${d.added} novas, ${d.updated} atualizadas.${colsInfo}`;
     nf2Toast(okMsg);
     nf2SetImportStatus(okMsg);
     nf2Load();
