@@ -788,14 +788,77 @@ def import_notas_item_ncm():
             'codncm', 'codigoncm', 'ncm', 'ncmsh', 'classificacaofiscal',
             'classfiscal', 'ncmfiscal'
         }
+        date_aliases = {
+            'data', 'date', 'dt', 'dtemissao', 'emissao', 'dataemissao',
+            'datanota', 'datafiscal', 'datadocumento'
+        }
+
+        def _cell_text(v):
+            if pd.isna(v):
+                return ''
+            txt = str(v).strip()
+            return '' if txt.lower() == 'nan' else txt
+
+        def _looks_like_date_text(txt: str) -> bool:
+            if not txt:
+                return False
+            s = txt.strip()
+            # 2026-04-16 / 2026-04-16 00:00:00
+            if re.fullmatch(r'\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}(:\d{2})?)?', s):
+                return True
+            # 16/04/2026 / 16-04-2026
+            if re.fullmatch(r'\d{1,2}[/-]\d{1,2}[/-]\d{2,4}', s):
+                return True
+            return False
+
+        def _ncm_digits(txt: str) -> str:
+            return re.sub(r'\D+', '', txt or '')
+
+        def _is_ncm_like(txt: str) -> bool:
+            return bool(re.fullmatch(r'\d{6,10}', _ncm_digits(txt)))
 
         item_col = next((orig for nrm, orig in normalized_cols if nrm in item_aliases), None)
         ncm_col = next((orig for nrm, orig in normalized_cols if nrm in ncm_aliases), None)
 
-        # Fallback: quando nao reconhece cabecalho, usa as duas primeiras colunas.
+        # Fallback por conteudo: evita usar coluna de data como ITEM.
         if (not item_col or not ncm_col) and len(df.columns) >= 2:
-            item_col = item_col or df.columns[0]
-            ncm_col = ncm_col or df.columns[1]
+            sample = df.head(200)
+            col_meta = []
+            for nrm, orig in normalized_cols:
+                vals = [_cell_text(v) for v in sample[orig].tolist()]
+                non_empty = [v for v in vals if v]
+                date_hits = sum(1 for v in non_empty if _looks_like_date_text(v))
+                ncm_hits = sum(1 for v in non_empty if _is_ncm_like(v))
+                text_hits = sum(1 for v in non_empty if any(ch.isalpha() for ch in v))
+                col_meta.append({
+                    'orig': orig,
+                    'nrm': nrm,
+                    'non_empty': len(non_empty),
+                    'date_hits': date_hits,
+                    'ncm_hits': ncm_hits,
+                    'text_hits': text_hits,
+                })
+
+            if not ncm_col:
+                cands = sorted(col_meta, key=lambda c: (c['ncm_hits'], c['non_empty']), reverse=True)
+                if cands and cands[0]['ncm_hits'] > 0:
+                    ncm_col = cands[0]['orig']
+
+            if not item_col:
+                item_cands = [
+                    c for c in col_meta
+                    if c['orig'] != ncm_col and c['nrm'] not in date_aliases and c['date_hits'] == 0
+                ]
+                item_cands = sorted(item_cands, key=lambda c: (c['text_hits'], c['non_empty']), reverse=True)
+                if item_cands and item_cands[0]['text_hits'] > 0:
+                    item_col = item_cands[0]['orig']
+
+            # Ultimo fallback: duas primeiras nao-data.
+            if not item_col or not ncm_col:
+                non_date_cols = [orig for nrm, orig in normalized_cols if nrm not in date_aliases]
+                if len(non_date_cols) >= 2:
+                    item_col = item_col or non_date_cols[0]
+                    ncm_col = ncm_col or non_date_cols[1]
 
         if not item_col or not ncm_col:
             encontrados = ', '.join([str(c) for c in df.columns])
@@ -806,15 +869,12 @@ def import_notas_item_ncm():
         updated = 0
         total_rows = int(len(df.index))
 
-        def _cell_text(v):
-            if pd.isna(v):
-                return ''
-            txt = str(v).strip()
-            return '' if txt.lower() == 'nan' else txt
-
         def _extract_item_and_ncm(row):
             item = _cell_text(row.get(item_col))
             cod_ncm = _cell_text(row.get(ncm_col))
+
+            if _looks_like_date_text(item):
+                item = ''
 
             # Fallback por linha: usa a primeira celula textual como item.
             if not item:
@@ -822,7 +882,9 @@ def import_notas_item_ncm():
                     t = _cell_text(raw)
                     if not t:
                         continue
-                    if re.fullmatch(r'\d{6,10}', re.sub(r'\D+', '', t)):
+                    if _looks_like_date_text(t):
+                        continue
+                    if _is_ncm_like(t):
                         continue
                     item = t
                     break
@@ -833,7 +895,7 @@ def import_notas_item_ncm():
                     t = _cell_text(raw)
                     if not t:
                         continue
-                    digits = re.sub(r'\D+', '', t)
+                    digits = _ncm_digits(t)
                     if re.fullmatch(r'\d{6,10}', digits):
                         cod_ncm = digits
                         break
