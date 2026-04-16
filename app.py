@@ -879,9 +879,10 @@ def import_notas_item_ncm():
             added += 1
 
         if added == 0 and updated == 0:
+            cols_txt = ', '.join([str(c) for c in df.columns])
             return jsonify({
                 'ok': False,
-                'error': 'Nenhuma linha válida encontrada para importar. Verifique se a planilha tem ITEM e COD NCM (ou deixe essas informações nas duas primeiras colunas).',
+                'error': f'Nenhuma linha válida encontrada para importar. Colunas detectadas: {cols_txt}',
                 'total_rows': total_rows,
                 'detected_columns': [str(c) for c in df.columns],
             }), 400

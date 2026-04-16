@@ -1084,6 +1084,7 @@ loadDB(); loadNFFromAPI();
         <input type="file" accept=".xlsx" style="display:none" onchange="nf2ImportItemNcm(this)">
       </label>
     </div>
+    <div id="nf2-import-status" style="margin-top:10px;font-size:12px;color:var(--mu)">Aguardando importação de planilha.</div>
 
     <div id="nf2-edit-panel" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--bdr)">
       <div class="ct" id="nf2-mode-title">Editando nota fiscal</div>
@@ -1115,7 +1116,7 @@ loadDB(); loadNFFromAPI();
       <button onclick="nf2Filter('cmv')" id="nf2f-cmv" class="mt">CMV</button>
       <button onclick="nf2Filter('desp')" id="nf2f-dp" class="mt">Despesas</button>
     </div>
-    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>NF</th><th>Fornecedor</th><th>ITEM</th><th>COD NCM</th><th class="r">Total</th><th class="r">c/Nota</th><th class="r">SN</th><th>Tipo</th><th>PDF</th><th>Obs</th><th class="r">Ação</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
+    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>ITEM</th><th>COD NCM</th><th class="r">Ação</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
     <div id="nf2-ft" style="padding:9px 10px;text-align:right;font-size:12px;color:var(--mu);border-top:1px solid var(--bdr)"></div>
   </div>
 </div>
@@ -1487,22 +1488,14 @@ function nf2Render(){
   const lista=nf2F==='all'?nf2List:nf2List.filter(n=>n.tipo===nf2F);
   document.getElementById('nf2-tb').innerHTML=lista.length?lista.map(n=>`
     <tr><td class="dt">${n.data?`${(n.data||'').slice(8)}/${(n.data||'').slice(5,7)}`:'—'}</td>
-    <td style="font-family:var(--fm);font-size:11px">${n.numero||''}</td>
-    <td style="font-size:12px;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${n.fornecedor||''}</td>
     <td style="font-size:11px;color:var(--mu);max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${n.item||''}">${n.item||'—'}</td>
     <td style="font-size:11px;color:var(--mu)">${n.cod_ncm||'—'}</td>
-    <td style="text-align:right;font-family:var(--fm);font-size:11px;color:var(--am)">${fc2(n.valor||0)}</td>
-    <td class="r">${n.valor_nf?fc2(n.valor_nf):'—'}</td><td class="r">${n.valor_sn?fc2(n.valor_sn):'—'}</td>
-    <td><span style="font-size:10px;padding:2px 6px;border-radius:20px;font-weight:500;background:${n.tipo==='cmv'?'rgba(0,229,160,.12)':'rgba(245,158,11,.12)'};color:${n.tipo==='cmv'?'var(--g)':'var(--am)'}">${n.tipo==='cmv'?'CMV':'Desp'}</span></td>
-    <td>${n.has_pdf?`<button onclick="nf2OpenPdf(${n.id})" style="padding:3px 8px;background:rgba(59,130,246,.12);color:var(--b);border:1px solid rgba(59,130,246,.3);border-radius:5px;cursor:pointer;font-size:11px">Abrir</button>`:'—'}</td>
-    <td style="font-size:11px;color:var(--mu)">${n.obs||''}</td>
     <td style="text-align:right">
       <button onclick="nf2Edit(${n.id})" style="padding:3px 8px;background:var(--bg3);color:var(--tx);border:1px solid var(--bdr);border-radius:5px;cursor:pointer;font-size:11px;margin-right:3px">Editar</button>
       <button onclick="nf2Del(${n.id})" style="padding:3px 8px;background:rgba(244,63,94,.12);color:var(--r);border:1px solid rgba(244,63,94,.3);border-radius:5px;cursor:pointer;font-size:11px">Excluir</button>
     </td></tr>`).join('')
-    :'<tr><td colspan="12" style="text-align:center;color:var(--mu);padding:20px">Nenhuma nota</td></tr>';
-  const tot=lista.reduce((a,n)=>a+(n.valor||0),0);
-  document.getElementById('nf2-ft').textContent=lista.length?`Total: R$ ${tot.toLocaleString('pt-BR',{minimumFractionDigits:2})} (${lista.length} notas)`:'';
+    :'<tr><td colspan="4" style="text-align:center;color:var(--mu);padding:20px">Nenhuma nota</td></tr>';
+  document.getElementById('nf2-ft').textContent=lista.length?`${lista.length} notas`:'';
 }
 async function nf2Save(){
   if(!nf2EditId)return gToast('Use o botão Editar na tabela para alterar uma nota',true);
@@ -1557,8 +1550,10 @@ function nf2Filter(f){nf2F=f;['all','cmv','dp'].forEach(k=>{const el=document.ge
 async function nf2ImportItemNcm(inp){
   const file=inp.files&&inp.files[0];
   if(!file)return;
+  const statusEl=document.getElementById('nf2-import-status');
   try{
     gToast('Importando planilha...');
+    if(statusEl)statusEl.textContent='Importando planilha...';
     const form=new FormData();
     form.append('file',file);
     const r=await fetch('/api/import/notas_item_ncm',{method:'POST',body:form});
@@ -1567,14 +1562,20 @@ async function nf2ImportItemNcm(inp){
     try{ d=JSON.parse(text||'{}'); }catch(_){ d={ok:false,error:text||`Falha HTTP ${r.status}`}; }
 
     if(!r.ok||!d.ok){
-      gToast(d.error||'Erro ao importar ITEM/COD NCM',true);
+      const msg=d.error||`Erro ao importar (HTTP ${r.status})`;
+      gToast(msg,true);
+      if(statusEl)statusEl.textContent=msg;
       return;
     }
 
-    gToast(`Importação concluída: ${d.added} novas, ${d.updated} atualizadas`);
+    const okMsg=`Importação concluída: ${d.added} novas, ${d.updated} atualizadas`;
+    gToast(okMsg);
+    if(statusEl)statusEl.textContent=okMsg;
     nf2Load();
   }catch(err){
-    gToast(`Falha ao importar planilha: ${err&&err.message?err.message:'erro inesperado'}`,true);
+    const msg=`Falha ao importar planilha: ${err&&err.message?err.message:'erro inesperado'}`;
+    gToast(msg,true);
+    if(statusEl)statusEl.textContent=msg;
   }finally{
     inp.value='';
   }
