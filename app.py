@@ -489,11 +489,6 @@ def delete_produto(pid):
 @login_required
 def get_notas():
     notas = load('notas', default=[])
-    notas_clean, removed = _sanitize_notas_remove_legacy(notas)
-    if removed:
-        save('notas', notas_clean)
-        log_action('notas.cleanup_legacy', f'removidos={removed}')
-    notas = notas_clean
     return jsonify([_nota_public(n) for n in notas])
 
 @app.route('/api/notas', methods=['POST'])
