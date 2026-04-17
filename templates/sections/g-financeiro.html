@@ -1,0 +1,18 @@
+<div class="pg" id="page-g-financeiro">
+  <div class="sh"><div class="st">Dados Financeiros Mensais</div><span class="sb2">Editável — salva no banco</span></div>
+  <div style="background:rgba(59,130,246,.06);border:1px solid rgba(59,130,246,.2);border-radius:var(--rd);padding:12px 16px;margin-bottom:14px;font-size:12px;color:var(--mu);line-height:1.7">
+    Edite os valores mensais abaixo. Eles alimentam todos os gráficos, DRE e KPIs do painel. <strong style="color:var(--b)">Salve ao terminar.</strong>
+  </div>
+  <div id="fin-tabs" style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px;margin-bottom:14px;width:fit-content">
+    <button class="mt on" onclick="finTab('receitas',this)">Receitas</button>
+    <button class="mt" onclick="finTab('cmv',this)">CMV</button>
+    <button class="mt" onclick="finTab('desp',this)">Despesas</button>
+    <button class="mt" onclick="finTab('emp',this)">Empréstimos</button>
+    <button class="mt" onclick="finTab('debml',this)">Déb. ML</button>
+    <button class="mt" onclick="finTab('meses',this)">Períodos</button>
+  </div>
+  <div id="fin-body"></div>
+  <div style="margin-top:14px;display:flex;gap:8px">
+    <button onclick="finSave()" class="cbtn">Salvar dados financeiros</button>
+  </div>
+</div>

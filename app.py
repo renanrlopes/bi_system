@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_file
-from functools import wraps
+from flask import Flask, request, jsonify, session, send_file
 import json, os, hashlib, io, zipfile, threading, time, re, shutil
 import base64
 from datetime import datetime
@@ -13,6 +12,10 @@ except ModuleNotFoundError:
 
 from db import init_db, list_users, get_user, verify_user, save_sync_run, list_sync_runs
 from ml_sync import sync_mercado_livre_data
+from auth import init_auth
+from data_routes import init_data_routes
+from produto_routes import init_produto_routes
+from capital_routes import init_capital_routes
 
 try:
     import psycopg
@@ -56,11 +59,6 @@ DEFAULT_USERS = {
     'user3': {'hash': hashlib.sha256(b'user3123').hexdigest(), 'role': 'viewer'},
     'user4': {'hash': hashlib.sha256(b'user4123').hexdigest(), 'role': 'viewer'},
 }
-
-LOGIN_ATTEMPTS = {}
-MAX_LOGIN_ATTEMPTS = 6
-LOCK_SECONDS = 300
-
 
 def bootstrap_data_dir():
     """If using external DATA_DIR, seed missing JSON files from bundled ./data."""
@@ -196,61 +194,13 @@ def log_action(action, detail=''):
     logs.append({'ts': datetime.now().strftime('%d/%m/%Y %H:%M:%S'), 'user': session.get('user','?'), 'action': action, 'detail': detail})
     save('logs/historico', logs[-500:])
 
-def login_required(f):
-    @wraps(f)
-    def dec(*a, **kw):
-        if 'user' not in session: return redirect(url_for('login'))
-        return f(*a, **kw)
-    return dec
-
-def editor_required(f):
-    @wraps(f)
-    def dec(*a, **kw):
-        if 'user' not in session: return redirect(url_for('login'))
-        user = get_user(DB_PATH, session['user'])
-        if (user or {}).get('role') not in ('admin','editor'):
-            return jsonify({'ok':False,'error':'Sem permissão de edição'}), 403
-        return f(*a, **kw)
-    return dec
-
-def admin_required(f):
-    @wraps(f)
-    def dec(*a, **kw):
-        if 'user' not in session: return redirect(url_for('login'))
-        user = get_user(DB_PATH, session['user'])
-        if (user or {}).get('role') != 'admin':
-            return jsonify({'ok':False,'error':'Acesso restrito ao admin'}), 403
-        return f(*a, **kw)
-    return dec
-
-
-def _client_ip():
-    forwarded = request.headers.get('X-Forwarded-For', '')
-    if forwarded:
-        return forwarded.split(',')[0].strip()
-    return request.remote_addr or 'unknown'
-
-
-def _is_login_locked(ip: str):
-    info = LOGIN_ATTEMPTS.get(ip)
-    if not info:
-        return False
-    if info.get('count', 0) < MAX_LOGIN_ATTEMPTS:
-        return False
-    blocked_until = info.get('blocked_until', 0)
-    return time.time() < blocked_until
-
-
-def _register_login_failure(ip: str):
-    info = LOGIN_ATTEMPTS.get(ip, {'count': 0, 'blocked_until': 0})
-    info['count'] += 1
-    if info['count'] >= MAX_LOGIN_ATTEMPTS:
-        info['blocked_until'] = time.time() + LOCK_SECONDS
-    LOGIN_ATTEMPTS[ip] = info
-
-
-def _register_login_success(ip: str):
-    LOGIN_ATTEMPTS.pop(ip, None)
+login_required, editor_required, admin_required = init_auth(
+    app,
+    DB_PATH,
+    get_user,
+    verify_user,
+    log_action,
+)
 
 
 def _require_json_object(payload, fields=None):
@@ -436,107 +386,39 @@ def _start_background_ml_sync():
     t = threading.Thread(target=loop_sync, daemon=True)
     t.start()
 
-@app.route('/')
-@login_required
-def index():
-    u = session['user']
-    user = get_user(DB_PATH, u)
-    return render_template('index.html', user=u, role=(user or {}).get('role','viewer'))
+init_data_routes(
+    app,
+    load,
+    save,
+    log_action,
+    login_required,
+    editor_required,
+    _require_json_object,
+    _validate_meses,
+    _validate_extrato,
+    _validate_estoque,
+    _build_skus_from_produtos,
+)
 
-@app.route('/login', methods=['GET','POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        ip = _client_ip()
-        if _is_login_locked(ip):
-            error = 'Muitas tentativas. Aguarde alguns minutos.'
-            return render_template('login.html', error=error)
-        u = request.form.get('username','').strip()
-        pwd = request.form.get('password','')
-        user = verify_user(DB_PATH, u, pwd)
-        if user:
-            session['user'] = u
-            _register_login_success(ip)
-            log_action('login')
-            return redirect(url_for('index'))
-        _register_login_failure(ip)
-        error = 'Usuário ou senha incorretos'
-    return render_template('login.html', error=error)
+init_produto_routes(
+    app,
+    load,
+    save,
+    log_action,
+    login_required,
+    editor_required,
+    _require_json_object,
+)
 
-@app.route('/logout')
-def logout():
-    log_action('logout')
-    session.clear()
-    return redirect(url_for('login'))
-
-# ── Financeiro (V, CMV, DEB_ML, ENC, EMP, DESP) ──────────────
-@app.route('/api/financeiro', methods=['GET'])
-@login_required
-def get_fin(): return jsonify(load('financeiro', default={}))
-
-@app.route('/api/financeiro', methods=['POST'])
-@editor_required
-def save_fin():
-    ok, msg = _require_json_object(request.json, fields=['V'])
-    if not ok:
-        return jsonify({'ok': False, 'error': msg}), 400
-    save('financeiro', request.json)
-    log_action('financeiro.save')
-    return jsonify({'ok': True})
-
-# ── Meses ─────────────────────────────────────────────────────
-@app.route('/api/meses', methods=['GET'])
-@login_required
-def get_meses(): return jsonify(load('meses', default=[{'key':'2026-01','label':'Jan/2026'},{'key':'2026-02','label':'Fev/2026'},{'key':'2026-03','label':'Mar/2026'}]))
-
-@app.route('/api/meses', methods=['POST'])
-@editor_required
-def save_meses():
-    ok, msg = _validate_meses(request.json)
-    if not ok:
-        return jsonify({'ok': False, 'error': msg}), 400
-    save('meses', request.json)
-    log_action('meses.save')
-    return jsonify({'ok': True})
-
-# ── Produtos ──────────────────────────────────────────────────
-@app.route('/api/produtos', methods=['GET'])
-@login_required
-def get_produtos(): return jsonify(load('produtos'))
-
-@app.route('/api/produtos', methods=['POST'])
-@editor_required
-def add_produto():
-    ok, msg = _require_json_object(request.json, fields=['sku'])
-    if not ok:
-        return jsonify({'ok': False, 'error': msg}), 400
-    produtos = load('produtos')
-    d = {**request.json, 'id': int(datetime.now().timestamp()*1000)}
-    produtos.append(d)
-    save('produtos', produtos)
-    log_action('produto.add', d.get('sku',''))
-    return jsonify({'ok': True, 'produto': d})
-
-@app.route('/api/produtos/<int:pid>', methods=['PUT'])
-@editor_required
-def update_produto(pid):
-    produtos = load('produtos')
-    for i,p in enumerate(produtos):
-        if p['id'] == pid:
-            produtos[i] = {**p, **request.json, 'id': pid}
-            save('produtos', produtos)
-            log_action('produto.update', produtos[i].get('sku',''))
-            return jsonify({'ok': True})
-    return jsonify({'ok': False}), 404
-
-@app.route('/api/produtos/<int:pid>', methods=['DELETE'])
-@editor_required
-def delete_produto(pid):
-    produtos = load('produtos')
-    rem = next((p for p in produtos if p['id']==pid), None)
-    save('produtos', [p for p in produtos if p['id']!=pid])
-    log_action('produto.delete', rem.get('sku','') if rem else str(pid))
-    return jsonify({'ok': True})
+init_capital_routes(
+    app,
+    load,
+    save,
+    log_action,
+    login_required,
+    editor_required,
+    _require_json_object,
+)
 
 # ── Notas ─────────────────────────────────────────────────────
 @app.route('/api/notas', methods=['GET'])
@@ -691,133 +573,6 @@ def delete_nota(nid):
     save('notas', [n for n in notas if n['id']!=nid])
     log_action('nota.delete', f"NF {rem.get('numero','') if rem else nid}")
     return jsonify({'ok': True})
-
-# ── Aportes ───────────────────────────────────────────────────
-@app.route('/api/aportes', methods=['GET'])
-@login_required
-def get_aportes(): return jsonify(load('aportes', default=[]))
-
-@app.route('/api/aportes', methods=['POST'])
-@editor_required
-def add_aporte():
-    ok, msg = _require_json_object(request.json, fields=['socio', 'valor', 'tipo'])
-    if not ok:
-        return jsonify({'ok': False, 'error': msg}), 400
-    aportes = load('aportes', default=[])
-    d = {**request.json, 'id': int(datetime.now().timestamp()*1000)}
-    aportes.append(d)
-    save('aportes', aportes)
-    log_action('aporte.add', f"{d.get('socio','')} R$ {d.get('valor',0)}")
-    return jsonify({'ok': True})
-
-@app.route('/api/aportes/<int:aid>', methods=['DELETE'])
-@editor_required
-def delete_aporte(aid):
-    aportes = load('aportes', default=[])
-    save('aportes', [a for a in aportes if a['id']!=aid])
-    log_action('aporte.delete', str(aid))
-    return jsonify({'ok': True})
-
-# ── Empréstimos ───────────────────────────────────────────────
-@app.route('/api/emprestimos', methods=['GET'])
-@login_required
-def get_emp(): return jsonify(load('emprestimos', default=[]))
-
-@app.route('/api/emprestimos', methods=['POST'])
-@editor_required
-def add_emp():
-    ok, msg = _require_json_object(request.json, fields=['descricao', 'valor'])
-    if not ok:
-        return jsonify({'ok': False, 'error': msg}), 400
-    emps = load('emprestimos', default=[])
-    d = {**request.json, 'id': int(datetime.now().timestamp()*1000)}
-    emps.append(d)
-    save('emprestimos', emps)
-    log_action('emp.add', f"R$ {d.get('valor',0)}")
-    return jsonify({'ok': True})
-
-@app.route('/api/emprestimos/<int:eid>', methods=['DELETE'])
-@editor_required
-def delete_emp(eid):
-    emps = load('emprestimos', default=[])
-    save('emprestimos', [e for e in emps if e['id']!=eid])
-    log_action('emp.delete', str(eid))
-    return jsonify({'ok': True})
-
-# ── Extrato ───────────────────────────────────────────────────
-@app.route('/api/extrato', methods=['GET'])
-@login_required
-def get_extrato(): return jsonify(load('extrato', default={}))
-
-@app.route('/api/extrato', methods=['POST'])
-@editor_required
-def save_extrato():
-    ok, msg = _validate_extrato(request.json)
-    if not ok:
-        return jsonify({'ok': False, 'error': msg}), 400
-    save('extrato', request.json)
-    log_action('extrato.save')
-    return jsonify({'ok': True})
-
-# ── Despesas ──────────────────────────────────────────────────
-@app.route('/api/despesas', methods=['GET'])
-@login_required
-def get_desp(): return jsonify(load('despesas', default={}))
-
-@app.route('/api/despesas', methods=['POST'])
-@editor_required
-def save_desp():
-    save('despesas', request.json)
-    log_action('despesas.save')
-    return jsonify({'ok': True})
-
-# ── Estoque ───────────────────────────────────────────────────
-@app.route('/api/estoque', methods=['GET'])
-@login_required
-def get_est(): return jsonify(load('estoque', default=[]))
-
-@app.route('/api/estoque', methods=['POST'])
-@editor_required
-def save_est():
-    ok, msg = _validate_estoque(request.json)
-    if not ok:
-        return jsonify({'ok': False, 'error': msg}), 400
-    save('estoque', request.json)
-    log_action('estoque.save')
-    return jsonify({'ok': True})
-
-# ── SKUs ranking ──────────────────────────────────────────────
-@app.route('/api/skus', methods=['GET'])
-@login_required
-def get_skus():
-    skus = load('skus', default=[])
-    if not skus:
-        skus = _build_skus_from_produtos()
-    return jsonify(skus)
-
-@app.route('/api/skus', methods=['POST'])
-@editor_required
-def save_skus():
-    save('skus', request.json)
-    log_action('skus.save')
-    return jsonify({'ok': True})
-
-# ── Margem por SKU ────────────────────────────────────────────
-@app.route('/api/marg', methods=['GET'])
-@login_required
-def get_marg(): return jsonify(load('marg', default=[]))
-
-@app.route('/api/marg', methods=['POST'])
-@editor_required
-def save_marg():
-    save('marg', request.json)
-    log_action('marg.save')
-    return jsonify({'ok': True})
-
-# ── Histórico ─────────────────────────────────────────────────
-@app.route('/api/historico', methods=['GET'])
-@login_required
-def get_hist(): return jsonify(list(reversed(load('logs/historico', default=[]))))
 
 # ── Import Excel ──────────────────────────────────────────────
 @app.route('/api/import/produtos', methods=['POST'])

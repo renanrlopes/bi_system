@@ -1,0 +1,28 @@
+<div class="pg" id="page-extrato">
+    <div class="sh">
+      <div class="st">Extrato Mercado Pago</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;gap:4px;flex-wrap:wrap" id="ext-tabs">
+          <button class="mt on" onclick="fe('all',this)">Todos</button>
+          <button class="mt" onclick="fe('2026-01',this)">Jan/26</button>
+          <button class="mt" onclick="fe('2026-02',this)">Fev/26</button>
+          <button class="mt" onclick="fe('2026-03',this)">Mar/26</button>
+        </div>
+        <button class="cbtn" onclick="extSave()">Salvar extrato</button>
+      </div>
+    </div>
+    <div id="emp-hl"></div>
+    <div class="kg" id="kpi-ext"></div>
+    <div class="g2 sec">
+      <div class="card"><div class="ct">Entradas × Saídas por mês</div><div class="cw" style="height:190px"><canvas id="ch-eb"></canvas></div></div>
+      <div class="card"><div class="ct">Composição das saídas</div><div class="cw" style="height:190px"><canvas id="ch-ep"></canvas></div></div>
+    </div>
+    <div class="card sec">
+      <div class="ct">Categorias por mês</div>
+      <table class="tb"><thead><tr><th>Categoria</th><th class="r">Jan/26</th><th class="r">Fev/26</th><th class="r">Mar/26</th><th class="r">Total</th></tr></thead><tbody id="ext-tb"></tbody></table>
+    </div>
+    <div class="card sec">
+      <div class="ct">Editar categorias por mês</div>
+      <div id="ext-edit-body"></div>
+    </div>
+  </div>

@@ -1,0 +1,39 @@
+<div class="pg" id="page-g-aportes">
+  <div class="sh"><div class="st">Aportes e Empréstimos</div></div>
+  <div class="g2 sec">
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
+      <div class="ct">Novo aporte de capital</div>
+      <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Sócio</div><select id="ap-socio" class="dinp"><option value="Lucas Cristiano Pereira">Lucas</option></select></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="ap-data" type="date" class="dinp"></div>
+      </div>
+      <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor (R$)</div><input id="ap-val" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Tipo</div><select id="ap-tipo" class="dinp"><option value="entrada">Entrada</option><option value="devolucao">Devolução</option></select></div>
+      </div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição / Obs</div><input id="ap-obs" class="dinp" placeholder="Ex: Pix recebido · 143..."></div>
+      <button onclick="apSave()" class="cbtn">Salvar aporte</button>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
+      <div class="ct">Novo empréstimo</div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="em-data" type="date" class="dinp"></div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição</div><input id="em-desc" class="dinp" placeholder="Ex: Dinheiro Express"></div>
+      <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor entrada (R$)</div><input id="em-val" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Total a pagar (R$)</div><input id="em-tot" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
+      </div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="em-obs" class="dinp" placeholder="Ex: 20% de cada venda"></div>
+      <button onclick="emSave()" class="cbtn">Salvar empréstimo</button>
+    </div>
+  </div>
+  <div class="g2 sec">
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
+      <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);font-size:11px;color:var(--mu)">Aportes cadastrados</div>
+      <table class="tb"><thead><tr><th>Data</th><th>Sócio</th><th>Descrição</th><th class="r">Valor</th><th>Tipo</th><th class="r">Ação</th></tr></thead><tbody id="ap-tb"></tbody></table>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
+      <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);font-size:11px;color:var(--mu)">Empréstimos cadastrados</div>
+      <table class="tb"><thead><tr><th>Data</th><th>Descrição</th><th class="r">Entrada</th><th class="r">Total pagar</th><th class="r">Ação</th></tr></thead><tbody id="em-tb"></tbody></table>
+    </div>
+  </div>
+</div>

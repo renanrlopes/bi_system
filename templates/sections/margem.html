@@ -1,0 +1,40 @@
+<div class="pg" id="page-margem">
+    <div class="sh">
+      <div class="st" id="mg-title">Margem por SKU</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px" id="mg-mes-tabs">
+        </div>
+        <div style="display:flex;gap:3px;background:var(--bg3);border-radius:var(--rs);padding:3px">
+          <button class="mt on" onclick="fMarg('all',this)">Todos</button>
+          <button class="mt" onclick="fMarg('ok',this)">Positiva</button>
+          <button class="mt" onclick="fMarg('neg',this)">Negativa</button>
+          <button class="mt" onclick="fMarg('sem',this)">Sem custo</button>
+        </div>
+      </div>
+    </div>
+    <div class="kg" id="kpi-marg"></div>
+    <div class="card sec" style="padding:0;overflow:hidden">
+      <div style="overflow-x:auto">
+        <table class="tb" style="min-width:900px">
+          <thead>
+            <tr>
+              <th style="min-width:160px">SKU</th>
+              <th class="r">Custo<br>unit.</th>
+              <th class="r">Un.<br>vendidas</th>
+              <th class="r">Receita<br>total</th>
+              <th class="r">Tarifas<br>ML</th>
+              <th class="r">Líq. ML<br>total</th>
+              <th class="r">CMV<br>total</th>
+              <th class="r">Mg. Bruta</th>
+              <th class="r">Mg. Líquida</th>
+              <th class="r">Custo<br>imob.</th>
+              <th class="r">V30</th>
+              <th class="r">Giro<br>(dias)</th>
+              <th class="r">ROI<br>mensal</th>
+            </tr>
+          </thead>
+          <tbody id="marg-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>

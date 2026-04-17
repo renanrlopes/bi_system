@@ -1,0 +1,39 @@
+<div class="pg" id="page-g-skus">
+  <div class="sh"><div class="st">Importar Dados</div></div>
+  <div class="g2 sec">
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
+      <div class="ct">Ranking de SKUs (.xlsx)</div>
+      <p style="font-size:12px;color:var(--mu);margin-bottom:12px;line-height:1.7">Colunas esperadas: <strong style="color:var(--g)">Produto, Pedidos, Unidades, Receita, Liquido</strong></p>
+      <label style="display:block;border:2px dashed var(--bdr2);border-radius:var(--rd);padding:20px;text-align:center;cursor:pointer">
+        <svg width="28" height="28" fill="none" stroke="var(--mu)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p style="font-size:12px;color:var(--mu);margin-top:6px">Clique para selecionar</p>
+        <p id="skuimp-name" style="font-size:11px;color:var(--g);margin-top:4px"></p>
+        <input type="file" accept=".xlsx" style="display:none" onchange="importSKUs(this)">
+      </label>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
+      <div class="ct">Produtos / Custos (.xlsx)</div>
+      <p style="font-size:12px;color:var(--mu);margin-bottom:12px;line-height:1.7">Colunas esperadas: <strong style="color:var(--g)">Produto (ou SKU), Custo</strong></p>
+      <label style="display:block;border:2px dashed var(--bdr2);border-radius:var(--rd);padding:20px;text-align:center;cursor:pointer">
+        <svg width="28" height="28" fill="none" stroke="var(--mu)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <p style="font-size:12px;color:var(--mu);margin-top:6px">Clique para selecionar</p>
+        <p id="prodimp-name" style="font-size:11px;color:var(--g);margin-top:4px"></p>
+        <input type="file" accept=".xlsx" style="display:none" onchange="importProds(this)">
+      </label>
+    </div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px">
+    <div class="ct">Backup dos dados</div>
+    <p style="font-size:12px;color:var(--mu);margin-bottom:12px">Faça download de todos os dados do sistema em um arquivo .zip.</p>
+    <a href="/api/backup" class="cbtn" style="text-decoration:none;display:inline-flex">Baixar backup</a>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-top:12px">
+    <div class="ct">Mercado Livre API</div>
+    <p style="font-size:12px;color:var(--mu);margin-bottom:12px">Sincroniza pedidos pagos e atualiza automaticamente vendas e ranking de SKUs.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
+      <button onclick="mlSyncNow()" class="cbtn">Sincronizar agora</button>
+      <button onclick="mlSyncStatus()" style="padding:8px 14px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:13px;font-family:var(--fb)">Ver status</button>
+    </div>
+    <div id="ml-sync-status" style="font-size:11px;color:var(--mu)">Sem sincronização nesta sessão.</div>
+  </div>
+</div>

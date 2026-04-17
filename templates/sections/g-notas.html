@@ -1,0 +1,46 @@
+<div class="pg" id="page-g-notas">
+  <div class="sh"><div class="st">Notas Fiscais</div></div>
+  <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-bottom:14px">
+    <div class="ct">Importação em lote</div>
+    <p style="font-size:12px;color:var(--mu);margin:4px 0 10px">Importe a planilha e depois use o botão Editar na tabela para completar os dados.</p>
+    <p style="font-size:11px;color:var(--mu);margin:0 0 10px">Colunas recomendadas: ITEM e COD NCM.</p>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <input id="nf2-file" type="file" accept=".xlsx,.xls" class="dinp" style="max-width:340px;padding:6px" onchange="nf2OnFileSelected(this)">
+      <button id="nf2-import-btn" type="button" onclick="nf2ImportFromSelected()" class="cbtn">Importar planilha</button>
+    </div>
+    <div id="nf2-import-status" style="margin-top:10px;font-size:12px;color:var(--mu)">Aguardando importação de planilha.</div>
+
+    <div id="nf2-edit-panel" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--bdr)">
+      <div class="ct" id="nf2-mode-title">Editando nota fiscal</div>
+      <div class="form-grid-3" style="display:grid;grid-template-columns:1fr 1fr 2fr;gap:10px;margin-bottom:10px">
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Data</div><input id="nf2-data" type="date" class="dinp"></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Número NF</div><input id="nf2-num" class="dinp" placeholder="Ex: 12534"></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Fornecedor</div><input id="nf2-forn" class="dinp" placeholder="Nome do fornecedor"></div>
+      </div>
+      <div class="form-grid-4" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-bottom:10px">
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor total</div><input id="nf2-val" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor c/ Nota</div><input id="nf2-nf" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Valor SN</div><input id="nf2-sn" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Tipo</div><select id="nf2-tipo" class="dinp"><option value="cmv">CMV</option><option value="desp">Despesa</option></select></div>
+      </div>
+      <div class="form-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">ITEM</div><input id="nf2-item" class="dinp" placeholder="Nome do item"></div>
+        <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">COD NCM</div><input id="nf2-ncm" class="dinp" placeholder="Código NCM"></div>
+      </div>
+      <div style="margin-bottom:10px"><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Observação</div><input id="nf2-obs" class="dinp" placeholder="Opcional"></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <button onclick="nf2Save()" class="cbtn" id="nf2-save-btn">Salvar edição</button>
+        <button onclick="nf2CancelEdit()" id="nf2-cancel-btn" style="padding:8px 14px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:13px;font-family:var(--fb)">Cancelar edição</button>
+      </div>
+    </div>
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
+    <div style="padding:8px 14px;border-bottom:1px solid var(--bdr);display:flex;gap:4px">
+      <button onclick="nf2Filter('all')" id="nf2f-all" class="mt on">Todas</button>
+      <button onclick="nf2Filter('cmv')" id="nf2f-cmv" class="mt">CMV</button>
+      <button onclick="nf2Filter('desp')" id="nf2f-dp" class="mt">Despesas</button>
+    </div>
+    <div style="overflow-x:auto"><table class="tb"><thead><tr><th>Data</th><th>ITEM</th><th>COD NCM</th><th class="r">Ação</th></tr></thead><tbody id="nf2-tb"></tbody></table></div>
+    <div id="nf2-ft" style="padding:9px 10px;text-align:right;font-size:12px;color:var(--mu);border-top:1px solid var(--bdr)"></div>
+  </div>
+</div>

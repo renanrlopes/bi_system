@@ -1,0 +1,41 @@
+<div class="pg" id="page-g-produtos">
+  <div class="sh"><div class="st">Produtos / Custos</div><span class="sb2" id="gp-count2">—</span></div>
+  <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);padding:16px;margin-bottom:14px">
+    <div class="ct">Cadastrar / editar produto</div>
+    <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:10px">
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">SKU</div><input id="gp-sku" class="dinp" placeholder="Nome do produto"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Descrição detalhada</div><input id="gp-desc" class="dinp" placeholder="Descrição completa do item"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Embalagem</div><input id="gp-emb" class="dinp" placeholder="Ex: caixa com 12"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Quantidade</div><input id="gp-qt" type="number" class="dinp" placeholder="0"></div>
+    </div>
+    <div class="form-grid-4" style="display:grid;grid-template-columns:1fr 1fr 1.5fr 1.5fr;gap:10px;margin-bottom:10px">
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Custo unit. (R$)</div><input id="gp-custo" type="number" step="0.01" class="dinp" placeholder="0,00"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Custo total (R$)</div><input id="gp-custo-total" type="number" step="0.01" class="dinp" placeholder="Auto: qtd x custo unit."></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Equivalente no catálogo</div><input id="gp-eq" class="dinp" placeholder="Produto equivalente"></div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Ref. / Página</div><input id="gp-ref" class="dinp" placeholder="Ex: Catálogo 2026 p.14"></div>
+    </div>
+    <div class="form-grid-4" style="display:grid;grid-template-columns:2fr 2fr 1fr 1fr;gap:10px;margin-bottom:12px">
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Obs</div><input id="gp-obs" class="dinp" placeholder="Observações do produto"></div>
+      <div>
+        <div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Foto (arquivo)</div>
+        <input id="gp-foto-arq" type="file" accept="image/*" class="dinp" style="padding:6px">
+        <div id="gp-foto-info" style="font-size:10px;color:var(--mu);margin-top:4px">Nenhum arquivo selecionado</div>
+      </div>
+      <div><div style="font-size:10px;color:var(--mu);margin-bottom:4px;text-transform:uppercase">Vendas 30d</div><input id="gp-v30" type="number" class="dinp" placeholder="0"></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button onclick="gpSave()" class="cbtn">Salvar</button>
+      <button onclick="gpClear()" style="padding:8px 14px;background:var(--bg3);color:var(--mu);border:1px solid var(--bdr);border-radius:var(--rs);cursor:pointer;font-size:13px;font-family:var(--fb)">Limpar</button>
+      <label style="font-size:12px;color:var(--g);cursor:pointer;padding:8px 14px;background:rgba(0,229,160,.08);border:1px solid rgba(0,229,160,.25);border-radius:var(--rs)">
+        Importar Excel <input type="file" accept=".xlsx" id="gp-file" style="display:none" onchange="gpImport(this)">
+      </label>
+    </div>
+    <input type="hidden" id="gp-id">
+  </div>
+  <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--rd);overflow:hidden">
+    <div style="overflow-x:auto"><table class="tb" style="min-width:1400px">
+      <thead><tr><th>#</th><th>SKU</th><th>Descrição detalhada</th><th>Embalagem</th><th class="r">Quantidade</th><th class="r">Custo Unit.</th><th class="r">Custo Total</th><th>Obs</th><th>Equivalente no catálogo</th><th>Ref. / Página</th><th>Foto</th><th class="r">V30</th><th class="r">Ações</th></tr></thead>
+      <tbody id="gp-tb"></tbody>
+    </table></div>
+  </div>
+</div>
