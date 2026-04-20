@@ -118,6 +118,8 @@ def init_pg_kv_store():
                 )
             conn.commit()
     except Exception as exc:
+        if os.getenv('RENDER', '').lower() == 'true':
+            raise RuntimeError(f'Falha ao inicializar PostgreSQL no Render: {exc}')
         _disable_postgres(str(exc))
 
 
@@ -812,18 +814,8 @@ def import_notas_item_ncm():
             if not item:
                 continue
 
-            # Evita importar linha que parece fornecedor/observacao financeira no campo ITEM.
-            if _looks_like_supplier_name(item):
-                continue
-
-            # Evita importar textos de observacao/financeiro como item.
-            item_up = item.upper()
-            if any(tok in item_up for tok in ('PGTO', 'PAGTO', 'A VISTA', 'NOTA EMITIDA', 'CONTABILIDADE', 'MATERIAL DE ESCRITORIO', 'CHAVE DE ACESSO', 'NF EMITIDA')):
-                continue
-
-            # ITEM precisa parecer descricao de produto.
-            if not any(ch.isalpha() for ch in item):
-                continue
+            # Importacao ITEM/COD NCM deve ser permissiva: aceita ITEM textual
+            # ou numerico para nao descartar tabela valida.
 
             # Normaliza NCM para digitos quando possivel, mas nao descarta a linha
             # por formato para preservar tabela ITEM/COD NCM importada.
