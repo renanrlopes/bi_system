@@ -658,6 +658,19 @@ def import_notas_item_ncm():
             'codncm', 'codigoncm', 'ncm', 'ncmsh', 'classificacaofiscal',
             'classfiscal', 'ncmfiscal'
         }
+        numero_aliases = {
+            'nf', 'numero', 'numeronf', 'notafiscal', 'numerodanota',
+            'numerodanotafiscal', 'numnf', 'documento'
+        }
+        fornecedor_aliases = {
+            'fornecedor', 'emitente', 'razaosocial', 'nomefornecedor'
+        }
+        valor_nf_aliases = {
+            'valorcomnota', 'valorcnota', 'valornf', 'valorcomnf'
+        }
+        valor_sn_aliases = {
+            'valorsemnota', 'valorsn', 'valorsemnf', 'semnota'
+        }
         date_aliases = {
             'data', 'date', 'dt', 'dtemissao', 'emissao', 'dataemissao',
             'datanota', 'datafiscal', 'datadocumento'
@@ -675,18 +688,6 @@ def import_notas_item_ncm():
                 data0 = next((orig for nrm, orig in cols0 if nrm in date_aliases), None)
                 if item0 and ncm0:
                     return df0, item0, ncm0, data0, 0
-
-                # Fallback: usa as 2 primeiras colunas nao vazias como ITEM/NCM.
-                non_empty_cols = []
-                for c in df0.columns:
-                    try:
-                        has_data = df0[c].astype(str).str.strip().replace('nan', '').replace('None', '').ne('').any()
-                    except Exception:
-                        has_data = False
-                    if has_data:
-                        non_empty_cols.append(c)
-                if len(non_empty_cols) >= 2:
-                    return df0, non_empty_cols[0], non_empty_cols[1], data0, 0
 
             # Tentativa 2: cabecalho deslocado em alguma linha.
             df_raw = pd.read_excel(xls, sheet_name=sheet_name, header=None)
@@ -747,6 +748,34 @@ def import_notas_item_ncm():
             txt = str(v).strip()
             return '' if txt.lower() == 'nan' else txt
 
+        def _to_float(v):
+            s = _cell_text(v)
+            if not s:
+                return 0.0
+            s = s.replace('R$', '').replace(' ', '')
+            # aceita 1.234,56 e 1234.56
+            if ',' in s and '.' in s:
+                s = s.replace('.', '').replace(',', '.')
+            else:
+                s = s.replace(',', '.')
+            try:
+                return float(s)
+            except Exception:
+                return 0.0
+
+        def _to_iso_date(txt: str) -> str:
+            data_txt = _cell_text(txt)
+            if not data_txt:
+                return ''
+            m = re.fullmatch(r'(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})', data_txt)
+            if m:
+                dd, mm, yy = m.groups()
+                yy = ('20' + yy) if len(yy) == 2 else yy
+                return f'{int(yy):04d}-{int(mm):02d}-{int(dd):02d}'
+            if re.fullmatch(r'\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}(:\d{2})?)?', data_txt):
+                return data_txt[:10]
+            return ''
+
         def _looks_like_date_text(txt: str) -> bool:
             if not txt:
                 return False
@@ -777,10 +806,93 @@ def import_notas_item_ncm():
             return any(tok in f' {s} ' for tok in supplier_tokens)
 
         if not item_col or not ncm_col:
+            nf_df = None
+            nf_data_col = None
+            nf_num_col = None
+            nf_forn_col = None
+            nf_vnf_col = None
+            nf_vsn_col = None
+
+            for s in xls.sheet_names:
+                df0 = pd.read_excel(xls, sheet_name=s)
+                if df0 is None or df0.empty:
+                    continue
+                cols0 = [(_norm_col(c), c) for c in df0.columns]
+                cand_data = next((orig for nrm, orig in cols0 if nrm in date_aliases), None)
+                cand_num = next((orig for nrm, orig in cols0 if nrm in numero_aliases), None)
+                cand_forn = next((orig for nrm, orig in cols0 if nrm in fornecedor_aliases), None)
+                cand_vnf = next((orig for nrm, orig in cols0 if nrm in valor_nf_aliases), None)
+                cand_vsn = next((orig for nrm, orig in cols0 if nrm in valor_sn_aliases), None)
+                if cand_num and cand_forn and (cand_vnf or cand_vsn):
+                    nf_df = df0
+                    nf_data_col = cand_data
+                    nf_num_col = cand_num
+                    nf_forn_col = cand_forn
+                    nf_vnf_col = cand_vnf
+                    nf_vsn_col = cand_vsn
+                    selected_sheet = s
+                    selected_header_row = 0
+                    break
+
+            if nf_df is None:
+                return jsonify({
+                    'ok': False,
+                    'error': f'Não consegui identificar ITEM/COD NCM nem colunas de Notas (DATA/NF/FORNECEDOR/VALOR). Abas encontradas: {", ".join([str(s) for s in xls.sheet_names])}',
+                }), 400
+
+            replace_mode = True
+            notas_existing = load('notas', default=[])
+            previous_count = len(notas_existing) if isinstance(notas_existing, list) else 0
+            notas = []
+            total_rows = int(len(nf_df.index))
+
+            for i, row in nf_df.iterrows():
+                numero = _cell_text(row.get(nf_num_col))
+                fornecedor = _cell_text(row.get(nf_forn_col))
+                if not numero and not fornecedor:
+                    continue
+                valor_nf = _to_float(row.get(nf_vnf_col)) if nf_vnf_col else 0.0
+                valor_sn = _to_float(row.get(nf_vsn_col)) if nf_vsn_col else 0.0
+                valor_total = max(0.0, valor_nf + valor_sn)
+                notas.append({
+                    'id': int(datetime.now().timestamp() * 1000) + i,
+                    'data': _to_iso_date(row.get(nf_data_col)) if nf_data_col else '',
+                    'numero': numero,
+                    'fornecedor': fornecedor,
+                    'item': '',
+                    'cod_ncm': '',
+                    'valor': valor_total,
+                    'valor_nf': valor_nf,
+                    'valor_sn': valor_sn,
+                    'tipo': 'cmv',
+                    'obs': 'Importado de planilha de notas',
+                })
+
+            if not notas:
+                cols_txt = ', '.join([str(c) for c in nf_df.columns])
+                return jsonify({
+                    'ok': False,
+                    'error': f'Nenhuma linha válida encontrada para importar. Colunas detectadas: {cols_txt}',
+                    'total_rows': total_rows,
+                    'detected_columns': [str(c) for c in nf_df.columns],
+                }), 400
+
+            save('notas', notas)
+            log_action('import.notas_planilha', f'replace | prev={previous_count} | add={len(notas)}')
             return jsonify({
-                'ok': False,
-                'error': f'Não consegui identificar ITEM e COD NCM em nenhuma aba. Abas encontradas: {", ".join([str(s) for s in xls.sheet_names])}',
-            }), 400
+                'ok': True,
+                'added': len(notas),
+                'updated': 0,
+                'total_rows': total_rows,
+                'replaced': replace_mode,
+                'previous_count': previous_count,
+                'final_count': len(notas),
+                'item_col': '',
+                'ncm_col': '',
+                'data_col': str(nf_data_col) if nf_data_col else '',
+                'sheet': str(selected_sheet) if selected_sheet else '',
+                'header_row': int(selected_header_row),
+            })
 
         # Sempre substitui para evitar mistura com base antiga em deploys com frontend defasado.
         replace_mode = True
@@ -805,15 +917,7 @@ def import_notas_item_ncm():
                 cod_ncm = digits or cod_ncm
 
             # Normaliza data para AAAA-MM-DD quando possivel.
-            data_iso = ''
-            if data_txt:
-                m = re.fullmatch(r'(\d{1,2})[/-](\d{1,2})[/-](\d{2,4})', data_txt)
-                if m:
-                    dd, mm, yy = m.groups()
-                    yy = ('20' + yy) if len(yy) == 2 else yy
-                    data_iso = f'{int(yy):04d}-{int(mm):02d}-{int(dd):02d}'
-                elif re.fullmatch(r'\d{4}-\d{2}-\d{2}(\s+\d{2}:\d{2}(:\d{2})?)?', data_txt):
-                    data_iso = data_txt[:10]
+            data_iso = _to_iso_date(data_txt)
 
             return item, cod_ncm, data_iso
 
