@@ -115,7 +115,14 @@ async function loadDB(){
 // Also load notas from API for NF page
 async function loadNFFromAPI(){
   const notas=await fetch('/api/notas').then(r=>r.json());
-  const notasCompras=(notas||[]).filter(n=>!String((n||{}).obs||'').toUpperCase().includes('IMPORTADO DE PLANILHA ITEM/COD NCM'));
+  const notasCompras=(notas||[]).filter(n=>{
+    const obsImport=String((n||{}).obs||'').toUpperCase().includes('IMPORTADO DE PLANILHA ITEM/COD NCM');
+    if(obsImport) return false;
+    const numero=String((n||{}).numero||'').trim();
+    const fornecedor=String((n||{}).fornecedor||'').trim();
+    const valor=Number((n||{}).valor||0);
+    return !!numero && !!fornecedor && valor>0;
+  });
   CP.splice(0,CP.length,...notasCompras.map(n=>({d:n.data?n.data.slice(8)+'/'+n.data.slice(5,7):n.data||'',n:n.numero||'',f:n.fornecedor||'',v:n.valor||0,m:n.data?n.data.slice(0,7):'',t:n.tipo||'cmv',nf:n.valor_nf||0,sn:n.valor_sn||0,particular:n.particular||false})));
   rNF();rComp();rForn();
 }

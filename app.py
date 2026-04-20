@@ -676,6 +676,18 @@ def import_notas_item_ncm():
                 if item0 and ncm0:
                     return df0, item0, ncm0, data0, 0
 
+                # Fallback: usa as 2 primeiras colunas nao vazias como ITEM/NCM.
+                non_empty_cols = []
+                for c in df0.columns:
+                    try:
+                        has_data = df0[c].astype(str).str.strip().replace('nan', '').replace('None', '').ne('').any()
+                    except Exception:
+                        has_data = False
+                    if has_data:
+                        non_empty_cols.append(c)
+                if len(non_empty_cols) >= 2:
+                    return df0, non_empty_cols[0], non_empty_cols[1], data0, 0
+
             # Tentativa 2: cabecalho deslocado em alguma linha.
             df_raw = pd.read_excel(xls, sheet_name=sheet_name, header=None)
             if df_raw.empty:
