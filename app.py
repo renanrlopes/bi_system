@@ -166,6 +166,7 @@ def _load_json_file(path, default=None):
 def bootstrap_pg_store():
     if not USE_POSTGRES:
         return
+    missing = object()
     for root, _, files in os.walk(DEFAULT_DATA_DIR):
         rel_root = os.path.relpath(root, DEFAULT_DATA_DIR)
         for fname in files:
@@ -173,8 +174,8 @@ def bootstrap_pg_store():
                 continue
             name = fname[:-5]
             key = name if rel_root == '.' else f"{rel_root.replace(os.sep, '/')}/{name}"
-            current = _pg_get_json(key, default=_MISSING)
-            if current is not _MISSING:
+            current = _pg_get_json(key, default=missing)
+            if current is not missing:
                 continue
             src_path = os.path.join(root, fname)
             _pg_set_json(key, _load_json_file(src_path, default=[]))
