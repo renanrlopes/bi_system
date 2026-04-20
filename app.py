@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, session, send_file
-import json, os, hashlib, io, zipfile, threading, time, re, shutil
+import json, os, hashlib, io, zipfile, threading, time, re, shutil, tempfile
 import base64
 from datetime import datetime
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
@@ -38,6 +38,10 @@ DB_PATH = os.getenv('DB_PATH', os.path.join(DATA_DIR, 'app.db'))
 DATABASE_URL = os.getenv('DATABASE_URL', '').strip()
 USE_POSTGRES = bool(DATABASE_URL)
 _MISSING = object()
+_JSON_IO_LOCK = threading.RLock()
+
+if os.getenv('RENDER', '').lower() == 'true' and not USE_POSTGRES:
+    print('[warn] Render sem DATABASE_URL: dados em JSON local podem ser perdidos em restart/deploy.')
 
 
 def _disable_postgres(reason: str):
@@ -179,15 +183,34 @@ def load(name, default=None):
     if USE_POSTGRES:
         return _pg_get_json(name, default if default is not None else [])
     path = os.path.join(DATA_DIR, f'{name}.json')
-    return _load_json_file(path, default=default)
+    with _JSON_IO_LOCK:
+        return _load_json_file(path, default=default)
+
+
+def _atomic_write_json(path, data):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp_path = None
+    try:
+        with tempfile.NamedTemporaryFile('w', encoding='utf-8', dir=os.path.dirname(path), delete=False) as tmp:
+            json.dump(data, tmp, ensure_ascii=False, indent=2)
+            tmp.flush()
+            os.fsync(tmp.fileno())
+            tmp_path = tmp.name
+        os.replace(tmp_path, path)
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
 
 def save(name, data):
     if USE_POSTGRES:
         _pg_set_json(name, data)
         return
     path = os.path.join(DATA_DIR, f'{name}.json')
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, 'w', encoding='utf-8') as f: json.dump(data, f, ensure_ascii=False, indent=2)
+    with _JSON_IO_LOCK:
+        _atomic_write_json(path, data)
 
 def log_action(action, detail=''):
     logs = load('logs/historico', default=[])

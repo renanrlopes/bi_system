@@ -129,6 +129,8 @@ O processo salva automaticamente:
 
 Observação: com `DATABASE_URL` preenchida, o sistema deixa de depender de disco local para os dados principais.
 
+Importante: em plataformas com filesystem efêmero (ex.: Render Free), usar somente JSON local pode causar perda de dados após restart/redeploy.
+
 ### Opção 2: Docker
 
 ```bash
