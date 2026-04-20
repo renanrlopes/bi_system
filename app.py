@@ -444,22 +444,17 @@ init_capital_routes(
 @login_required
 def get_notas():
     notas = load('notas', default=[])
-    notas2, removed = _sanitize_notas_invalid_catalog_rows(notas)
-    cleaned_supplier = 0
-    for n in notas2:
-        obs = str((n or {}).get('obs') or '').upper()
-        if 'IMPORTADO DE PLANILHA ITEM/COD NCM' not in obs:
-            continue
-        fornecedor = str((n or {}).get('fornecedor') or '').strip()
-        item = str((n or {}).get('item') or '').strip()
-        if fornecedor and item and fornecedor.lower() == item.lower():
-            n['fornecedor'] = ''
-            cleaned_supplier += 1
-    if removed or cleaned_supplier:
-        save('notas', notas2)
-        log_action('notas.cleanup_invalid_catalog', f'removidos={removed}, fornecedor_limpo={cleaned_supplier}')
-    notas = notas2
-    return jsonify([_nota_public(n) for n in notas])
+    out = []
+    for n in notas:
+        d = _nota_public(n)
+        obs = str((d or {}).get('obs') or '').upper()
+        if 'IMPORTADO DE PLANILHA ITEM/COD NCM' in obs:
+            fornecedor = str((d or {}).get('fornecedor') or '').strip()
+            item = str((d or {}).get('item') or '').strip()
+            if fornecedor and item and fornecedor.lower() == item.lower():
+                d['fornecedor'] = ''
+        out.append(d)
+    return jsonify(out)
 
 @app.route('/api/notas', methods=['POST'])
 @editor_required
