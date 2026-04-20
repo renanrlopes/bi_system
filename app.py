@@ -838,8 +838,6 @@ def import_notas_item_ncm():
                 existing['cod_ncm'] = cod_ncm
                 if data_iso:
                     existing['data'] = data_iso
-                if not str(existing.get('fornecedor') or '').strip():
-                    existing['fornecedor'] = item
                 after = (str(existing.get('cod_ncm') or '').strip(), str(existing.get('item') or '').strip())
                 if before != after:
                     updated += 1
@@ -849,7 +847,7 @@ def import_notas_item_ncm():
                 'id': int(datetime.now().timestamp() * 1000) + added,
                 'data': data_iso,
                 'numero': '',
-                'fornecedor': item,
+                'fornecedor': '',
                 'item': item,
                 'cod_ncm': cod_ncm,
                 'valor': 0,
