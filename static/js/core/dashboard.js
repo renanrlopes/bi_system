@@ -420,17 +420,36 @@ function rComp(){
 }
 
 function rForn(){
-  const mp={};CP.forEach(c=>{mp[c.f]=(mp[c.f]||0)+c.v;});
-  const sorted=Object.entries(mp).sort((a,b)=>b[1]-a[1]),tot=sorted.reduce((a,v)=>a+v[1],0),conc=sorted[0][1]/tot*100;
-  document.getElementById('kpi-fn').innerHTML=`<div class="kc cb"><div class="kl">Total comprado</div><div class="kv">${f(tot)}</div><div class="ks">${sorted.length} fornecedores</div></div><div class="kc ca"><div class="kl">Maior fornecedor</div><div class="kv" style="font-size:13px;color:var(--am)">P&D Impex</div><div class="ks">${f(sorted[0][1])} · ${conc.toFixed(0)}%</div></div><div class="kc ${conc>60?'cr':'cg'}"><div class="kl">Concentração</div><div class="kv" style="color:${conc>60?'var(--r)':'var(--g)'}">${conc.toFixed(0)}%</div><div class="ks">${conc>60?'Alta — risco':'Saudável'}</div></div>`;
+  const mp={};
+  CP.forEach(c=>{
+    const forn=String(c.f||'').trim();
+    const val=Number(c.v||0);
+    if(!forn||val<=0)return;
+    mp[forn]=(mp[forn]||0)+val;
+  });
+
+  const sorted=Object.entries(mp).sort((a,b)=>b[1]-a[1]);
+  const tot=sorted.reduce((a,v)=>a+v[1],0);
+  const top=sorted[0]||['—',0];
+  const conc=tot>0?(top[1]/tot*100):0;
+
+  document.getElementById('kpi-fn').innerHTML=`<div class="kc cb"><div class="kl">Total comprado</div><div class="kv">${f(tot)}</div><div class="ks">${sorted.length} fornecedores</div></div><div class="kc ca"><div class="kl">Maior fornecedor</div><div class="kv" style="font-size:13px;color:var(--am)">${top[0]}</div><div class="ks">${f(top[1])} · ${conc.toFixed(0)}%</div></div><div class="kc ${conc>60?'cr':'cg'}"><div class="kl">Concentração</div><div class="kv" style="color:${conc>60?'var(--r)':'var(--g)'}">${conc.toFixed(0)}%</div><div class="ks">${conc>60?'Alta — risco':'Saudável'}</div></div>`;
+
   const cls=['#3b82f6','#00e5a0','#f59e0b','#f43f5e','#a78bfa','#1D9E75','#fb923c','#7a7f8e'];
-  document.getElementById('fb-bars').innerHTML=sorted.map((s,i)=>`<div class="fbr"><div class="fbn" title="${s[0]}">${s[0].split(' ').slice(0,3).join(' ')}</div><div class="fbbw"><div class="fbbar" style="width:${(s[1]/sorted[0][1]*100).toFixed(0)}%;background:${cls[i%cls.length]}"></div></div><div class="fbv">${f(s[1])}</div><div class="fbp">${(s[1]/tot*100).toFixed(1)}%</div></div>`).join('');
+  const bars=sorted.length
+    ? sorted.map((s,i)=>`<div class="fbr"><div class="fbn" title="${s[0]}">${s[0].split(' ').slice(0,3).join(' ')}</div><div class="fbbw"><div class="fbbar" style="width:${top[1]>0?(s[1]/top[1]*100).toFixed(0):0}%;background:${cls[i%cls.length]}"></div></div><div class="fbv">${f(s[1])}</div><div class="fbp">${tot>0?(s[1]/tot*100).toFixed(1):'0.0'}%</div></div>`).join('')
+    : '<div style="padding:10px;color:var(--mu);font-size:12px">Sem dados de fornecedores no período.</div>';
+  document.getElementById('fb-bars').innerHTML=bars;
 }
 
 function rSKU(){
-  const mxR=Math.max(...SK.map(s=>s.r)),totR=SK.reduce((a,s)=>a+s.r,0);
+  if(!Array.isArray(SK)||!SK.length){
+    document.getElementById('sku-tb').innerHTML='<tbody><tr><td colspan="7" style="text-align:center;color:var(--mu);padding:16px">Sem dados de SKU</td></tr></tbody>';
+    return;
+  }
+  const mxR=Math.max(...SK.map(s=>Number(s.r||0)),1),totR=SK.reduce((a,s)=>a+Number(s.r||0),0);
   let h='<thead><tr><th style="width:24px"></th><th>Produto</th><th class="r">Pedidos</th><th class="r">Receita bruta</th><th class="r">Líquido ML</th><th class="r">Retenção</th><th class="r">% Total</th></tr></thead><tbody>';
-  SK.forEach((s,i)=>{const ret=s.r-s.l,retP=(ret/s.r*100).toFixed(0),sh=(s.r/totR*100).toFixed(1),bw=Math.round(s.r/mxR*100);h+=`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><div>${s.s}</div><div class="bsp" style="width:${bw}%"></div></td><td class="r">${s.p}</td><td class="rp">${f(s.r)}</td><td class="r" style="color:var(--g)">${f(s.l)}</td><td class="rn">−${retP}%</td><td class="r">${sh}%</td></tr>`;});
+  SK.forEach((s,i)=>{const r=Number(s.r||0),l=Number(s.l||0),ret=r-l,retP=r>0?(ret/r*100).toFixed(0):'0',sh=totR>0?(r/totR*100).toFixed(1):'0.0',bw=Math.round(r/mxR*100);h+=`<tr><td><span class="rank ${i<3?'top':''}">${i+1}</span></td><td><div>${s.s}</div><div class="bsp" style="width:${bw}%"></div></td><td class="r">${s.p}</td><td class="rp">${f(r)}</td><td class="r" style="color:var(--g)">${f(l)}</td><td class="rn">−${retP}%</td><td class="r">${sh}%</td></tr>`;});
   document.getElementById('sku-tb').innerHTML=h+'</tbody>';
 }
 
