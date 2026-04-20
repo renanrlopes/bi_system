@@ -354,17 +354,12 @@ def _sanitize_notas_invalid_catalog_rows(notas: list):
             return True
         return False
 
-    def looks_invalid_ncm(ncm_raw):
-        digits = re.sub(r'\D+', '', str(ncm_raw or ''))
-        return len(digits) != 8
-
     clean = []
     removed = 0
     for n in notas:
         if is_catalog_import_row(n):
             item_norm = norm_txt((n or {}).get('item'))
-            ncm_raw = (n or {}).get('cod_ncm')
-            if looks_invalid_item(item_norm) or looks_invalid_ncm(ncm_raw):
+            if looks_invalid_item(item_norm):
                 removed += 1
                 continue
         clean.append(n)
@@ -450,9 +445,19 @@ init_capital_routes(
 def get_notas():
     notas = load('notas', default=[])
     notas2, removed = _sanitize_notas_invalid_catalog_rows(notas)
-    if removed:
+    cleaned_supplier = 0
+    for n in notas2:
+        obs = str((n or {}).get('obs') or '').upper()
+        if 'IMPORTADO DE PLANILHA ITEM/COD NCM' not in obs:
+            continue
+        fornecedor = str((n or {}).get('fornecedor') or '').strip()
+        item = str((n or {}).get('item') or '').strip()
+        if fornecedor and item and fornecedor.lower() == item.lower():
+            n['fornecedor'] = ''
+            cleaned_supplier += 1
+    if removed or cleaned_supplier:
         save('notas', notas2)
-        log_action('notas.cleanup_invalid_catalog', f'removidos={removed}')
+        log_action('notas.cleanup_invalid_catalog', f'removidos={removed}, fornecedor_limpo={cleaned_supplier}')
     notas = notas2
     return jsonify([_nota_public(n) for n in notas])
 
@@ -825,11 +830,17 @@ def import_notas_item_ncm():
             if not any(ch.isalpha() for ch in item):
                 continue
 
-            # NCM valido: exatamente 8 digitos.
-            cod_digits = re.sub(r'\D+', '', str(cod_ncm or ''))
-            if len(cod_digits) != 8:
-                continue
-            cod_ncm = cod_digits
+            # Normaliza NCM para digitos quando possivel, mas nao descarta a linha
+            # por formato para preservar tabela ITEM/COD NCM importada.
+            cod_txt = str(cod_ncm or '').strip()
+            cod_digits = re.sub(r'\D+', '', cod_txt)
+            if cod_digits:
+                # Caso comum do Excel: 12345678.0 -> 123456780
+                if len(cod_digits) == 9 and cod_digits.endswith('0') and cod_txt.endswith('.0'):
+                    cod_digits = cod_digits[:-1]
+                cod_ncm = cod_digits
+            else:
+                cod_ncm = cod_txt
 
             existing = next((n for n in notas if str(n.get('item') or '').strip().lower() == item.lower()), None)
             if existing:
