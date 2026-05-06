@@ -1,215 +1,185 @@
 <div id="page-catalogo" class="pg">
-  <style>
-    #page-catalogo .hdr{background:#181818;padding:22px 44px;display:flex;align-items:center;justify-content:space-between}
-    #page-catalogo .hdr h1{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;color:#fff}
-    #page-catalogo .hdr p{font-size:11px;color:#888;margin-top:4px;letter-spacing:.1em;text-transform:uppercase}
-    #page-catalogo .pill{display:inline-block;font-size:10px;font-weight:500;color:#d4a843;border:1px solid #d4a843;padding:4px 14px;border-radius:100px;letter-spacing:.08em}
-    #page-catalogo .sub{font-size:10px;color:#555;margin-top:6px}
-    #page-catalogo .sec{padding:16px 44px 7px;display:flex;align-items:center;gap:10px}
-    #page-catalogo .sec::before{content:'';display:block;width:18px;height:2px;background:#d4a843;border-radius:2px;flex-shrink:0}
-    #page-catalogo .sec span{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#999}
-    #page-catalogo .divider{height:1px;background:#efefef;margin:2px 44px 0}
-    #page-catalogo .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0 44px 16px}
-    #page-catalogo .g2{display:grid;grid-template-columns:repeat(2,190px);gap:10px;padding:0 44px 16px}
-    #page-catalogo .card{border:1px solid #ebebeb;border-radius:10px;overflow:hidden;background:#fafafa}
-    #page-catalogo .img-box{width:100%;background:#fff;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #ebebeb;position:relative;overflow:hidden}
-    #page-catalogo .img-box img{width:100%;height:100%;object-fit:contain;padding:7px}
-    #page-catalogo .badge{position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;z-index:2}
-    #page-catalogo .hi{background:#e6f4e6;color:#2a7a2a}
-    #page-catalogo .md{background:#fff3e0;color:#a05800}
-    #page-catalogo .lo{background:#fdecea;color:#b83232}
-    #page-catalogo .info{padding:7px 9px 9px}
-    #page-catalogo .nm{font-size:10px;font-weight:500;color:#1a1a1a;line-height:1.4;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:28px}
-    #page-catalogo .sp{font-size:9px;color:#bbb;font-weight:300}
-    #page-catalogo .ftr{background:#181818;padding:13px 44px;display:flex;align-items:center;justify-content:space-between;margin-top:2px}
-    #page-catalogo .ftr-l{font-size:9px;color:#555;font-weight:300}
-    #page-catalogo .leg{display:flex;gap:14px}
-    #page-catalogo .li{display:flex;align-items:center;gap:5px;font-size:9px;color:#666}
-    #page-catalogo .dot{width:7px;height:7px;border-radius:50%}
-    #page-catalogo .dh{background:#4caf50}.dm{background:#ff9800}.dl{background:#e53935}
-  </style>
-
-  <div class="hdr">
+  <div class="sh">
     <div>
-      <h1>Catálogo de Produtos</h1>
-      <p>Linha completa para o seu lar</p>
-    </div>
-    <div style="text-align:right">
-      <div class="pill">✦ Produtos em Estoque</div>
-      <div class="sub">Preços e condições mediante consulta</div>
+      <div class="st">Catálogo de Produtos</div>
+      <div class="sb2">✦ Produtos em Estoque</div>
     </div>
   </div>
 
-  <div class="sec"><span>Fogões &amp; Cooktops</span></div>
-  <div class="g5">
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23333' x='20' y='30' width='160' height='90' rx='8'/%3E%3Ccircle fill='%23555' cx='50' cy='50' r='12'/%3E%3Ccircle fill='%23555' cx='100' cy='50' r='12'/%3E%3Ccircle fill='%23555' cx='150' cy='50' r='12'/%3E%3Crect fill='%23666' x='25' y='75' width='150' height='40' rx='4'/%3E%3C/svg%3E" alt="Fogão 5 Bocas Itatiaia Star New — Preto, Bivolt">
-        <span class="badge lo">Estoque: 16</span>
-      </div>
-      <div class="info">
-        <div class="nm">Fogão 5 Bocas Itatiaia Star New — Preto, Bivolt</div>
-        <div class="sp">Acend. Automático · Classe A · GLP/GN</div>
-      </div>
+  <div class="sec">
+    <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+      <span style="display:block;width:16px;height:2px;background:var(--o);border-radius:2px"></span>
+      Fogões &amp; Cooktops
     </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23222' x='20' y='30' width='160' height='90' rx='8'/%3E%3Ccircle fill='%23666' cx='40' cy='45' r='10'/%3E%3Ccircle fill='%23666' cx='80' cy='45' r='10'/%3E%3Ccircle fill='%23666' cx='120' cy='45' r='10'/%3E%3Ccircle fill='%23666' cx='160' cy='45' r='10'/%3E%3Crect fill='%23444' x='25' y='75' width='150' height='35' rx='4'/%3E%3C/svg%3E" alt="Fogão 4 Bocas Consul Facilissimo — Cinza, 110V">
-        <span class="badge md">Estoque: 28</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#333" x="20" y="30" width="160" height="90" rx="8"/><circle fill="#555" cx="50" cy="50" r="12"/><circle fill="#555" cx="100" cy="50" r="12"/><circle fill="#555" cx="150" cy="50" r="12"/><rect fill="#666" x="25" y="75" width="150" height="40" rx="4"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fdecea;color:#b83232">Estoque: 16</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Fogão 5 Bocas Itatiaia Star New — Preto</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">Acend. Automático · Classe A</div>
+        </div>
       </div>
-      <div class="info">
-        <div class="nm">Fogão 4 Bocas Consul Facilissimo — Cinza, 110V</div>
-        <div class="sp">Acend. Automático · Classe A · Grelha de Ferro</div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#222" x="20" y="30" width="160" height="90" rx="8"/><circle fill="#666" cx="40" cy="45" r="10"/><circle fill="#666" cx="80" cy="45" r="10"/><circle fill="#666" cx="120" cy="45" r="10"/><circle fill="#666" cx="160" cy="45" r="10"/><rect fill="#444" x="25" y="75" width="150" height="35" rx="4"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fff3e0;color:#a05800">Estoque: 28</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Fogão 4 Bocas Consul Facilissimo</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">Acend. Automático · Grelha</div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23111' x='15' y='25' width='170' height='100' rx='6'/%3E%3Ccircle fill='%23d4a843' cx='45' cy='50' r='11'/%3E%3Ccircle fill='%23d4a843' cx='100' cy='50' r='11'/%3E%3Ccircle fill='%23d4a843' cx='155' cy='50' r='11'/%3E%3Crect fill='%23333' x='20' y='75' width='160' height='40' rx='3'/%3E%3C/svg%3E" alt="Cooktop 3 Bocas Tramontina — Inox, Bivolt">
-        <span class="badge hi">Estoque: 42</span>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#111" x="15" y="25" width="170" height="100" rx="6"/><circle fill="#d4a843" cx="45" cy="50" r="11"/><circle fill="#d4a843" cx="100" cy="50" r="11"/><circle fill="#d4a843" cx="155" cy="50" r="11"/><rect fill="#333" x="20" y="75" width="160" height="40" rx="3"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#e6f4e6;color:#2a7a2a">Estoque: 42</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Cooktop 3 Bocas Tramontina — Inox</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">Queimadores Rápidos · Bivolt</div>
+        </div>
       </div>
-      <div class="info">
-        <div class="nm">Cooktop 3 Bocas Tramontina — Inox, Bivolt</div>
-        <div class="sp">Queimadores Rápidos · Acend. Automático · Classe A</div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#444" x="18" y="28" width="164" height="95" rx="7"/><circle fill="#888" cx="50" cy="50" r="10"/><circle fill="#888" cx="100" cy="50" r="10"/><circle fill="#888" cx="150" cy="50" r="10"/><rect fill="#555" x="25" y="75" width="150" height="35" rx="4"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fff3e0;color:#a05800">Estoque: 19</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Fogão 3 Bocas Electrolux</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">Queimador Duplo · 110V</div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23444' x='18' y='28' width='164' height='95' rx='7'/%3E%3Ccircle fill='%23888' cx='50' cy='50' r='10'/%3E%3Ccircle fill='%23888' cx='100' cy='50' r='10'/%3E%3Ccircle fill='%23888' cx='150' cy='50' r='10'/%3E%3Crect fill='%23555' x='25' y='75' width='150' height='35' rx='4'/%3E%3C/svg%3E" alt="Fogão 3 Bocas Electrolux — Preto Fosco, 110V">
-        <span class="badge md">Estoque: 19</span>
-      </div>
-      <div class="info">
-        <div class="nm">Fogão 3 Bocas Electrolux — Preto Fosco, 110V</div>
-        <div class="sp">Queimador Duplo · Acend. Automático · Classe A</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%231a1a1a' x='17' y='26' width='166' height='98' rx='8'/%3E%3Ccircle fill='%23999' cx='40' cy='48' r='9'/%3E%3Ccircle fill='%23999' cx='80' cy='48' r='9'/%3E%3Ccircle fill='%23999' cx='120' cy='48' r='9'/%3E%3Ccircle fill='%23999' cx='160' cy='48' r='9'/%3E%3Crect fill='%23333' x='22' y='72' width='156' height='42' rx='5'/%3E%3C/svg%3E" alt="Fogão 4 Bocas Brastemp Gourmand — Inox, Bivolt">
-        <span class="badge lo">Estoque: 8</span>
-      </div>
-      <div class="info">
-        <div class="nm">Fogão 4 Bocas Brastemp Gourmand — Inox, Bivolt</div>
-        <div class="sp">Forno Multifunção · GLP/GN · Classe A</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="sec"><span>Fornos Elétricos</span></div>
-  <div class="g5">
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23333' x='30' y='30' width='140' height='90'/%3E%3Crect fill='%23222' x='40' y='45' width='120' height='60'/%3E%3Ccircle fill='%23d4a843' cx='60' cy='115' r='4'/%3E%3Ccircle fill='%23d4a843' cx='100' cy='115' r='4'/%3E%3Ccircle fill='%23d4a843' cx='140' cy='115' r='4'/%3E%3C/svg%3E" alt="Forno Elétrico Mondial Compact — Preto, Bivolt">
-        <span class="badge md">Estoque: 22</span>
-      </div>
-      <div class="info">
-        <div class="nm">Forno Elétrico Mondial Compact — Preto, Bivolt</div>
-        <div class="sp">30 litros · Temperatura até 250°C · Timer Digital</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23444' x='28' y='28' width='144' height='94'/%3E%3Crect fill='%23111' x='38' y='42' width='124' height='64'/%3E%3Crect fill='%23777' x='42' y='108' width='30' height='6'/%3E%3Crect fill='%23777' x='85' y='108' width='30' height='6'/%3E%3Crect fill='%23777' x='128' y='108' width='30' height='6'/%3E%3C/svg%3E" alt="Forno Elétrico Philco Premium — Inox, 110V">
-        <span class="badge hi">Estoque: 35</span>
-      </div>
-      <div class="info">
-        <div class="nm">Forno Elétrico Philco Premium — Inox, 110V</div>
-        <div class="sp">48 litros · Controle Eletrônico · 3 Funções</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23222' x='25' y='25' width='150' height='100'/%3E%3Crect fill='%23555' x='35' y='40' width='130' height='65'/%3E%3Ccircle fill='%23999' cx='50' cy='115' r='5'/%3E%3Ccircle fill='%23999' cx='100' cy='115' r='5'/%3E%3Ccircle fill='%23999' cx='150' cy='115' r='5'/%3E%3C/svg%3E" alt="Forno Elétrico Britania — Preto, Bivolt">
-        <span class="badge md">Estoque: 17</span>
-      </div>
-      <div class="info">
-        <div class="nm">Forno Elétrico Britania — Preto, Bivolt</div>
-        <div class="sp">40 litros · 6 Níveis · Assador Giratório</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23555' x='32' y='32' width='136' height='86'/%3E%3Crect fill='%23333' x='42' y='48' width='116' height='52'/%3E%3Ccircle fill='%23bbb' cx='60' cy='110' r='4'/%3E%3Ccircle fill='%23bbb' cx='100' cy='110' r='4'/%3E%3Ccircle fill='%23bbb' cx='140' cy='110' r='4'/%3E%3C/svg%3E" alt="Forno Elétrico Electrolux — Inox, 220V">
-        <span class="badge lo">Estoque: 11</span>
-      </div>
-      <div class="info">
-        <div class="nm">Forno Elétrico Electrolux — Inox, 220V</div>
-        <div class="sp">52 litros · Convecção · Classe A</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23444' x='30' y='28' width='140' height='94'/%3E%3Crect fill='%23666' x='40' y='43' width='120' height='60'/%3E%3Crect fill='%23888' x='48' y='107' width='25' height='6'/%3E%3Crect fill='%23888' x='88' y='107' width='25' height='6'/%3E%3Crect fill='%23888' x='128' y='107' width='25' height='6'/%3E%3C/svg%3E" alt="Forno Elétrico Suggar Turbo — Preto, Bivolt">
-        <span class="badge md">Estoque: 24</span>
-      </div>
-      <div class="info">
-        <div class="nm">Forno Elétrico Suggar Turbo — Preto, Bivolt</div>
-        <div class="sp">44 litros · 8 Funções · Termostato Digital</div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#1a1a1a" x="17" y="26" width="166" height="98" rx="8"/><circle fill="#999" cx="40" cy="48" r="9"/><circle fill="#999" cx="80" cy="48" r="9"/><circle fill="#999" cx="120" cy="48" r="9"/><circle fill="#999" cx="160" cy="48" r="9"/><rect fill="#333" x="22" y="72" width="156" height="42" rx="5"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fdecea;color:#b83232">Estoque: 8</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Fogão 4 Bocas Brastemp Gourmand</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">Forno Multifunção · Inox</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="sec"><span>Microondas</span></div>
-  <div class="g5">
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23444' x='35' y='35' width='130' height='80'/%3E%3Crect fill='%23222' x='45' y='48' width='110' height='50' rx='2'/%3E%3Ccircle fill='%23d4a843' cx='65' cy='110' r='5'/%3E%3Ccircle fill='%23d4a843' cx='100' cy='110' r='5'/%3E%3Ccircle fill='%23d4a843' cx='135' cy='110' r='5'/%3E%3C/svg%3E" alt="Microondas Electrolux — Preto, 110V">
-        <span class="badge hi">Estoque: 31</span>
-      </div>
-      <div class="info">
-        <div class="nm">Microondas Electrolux — Preto, 110V</div>
-        <div class="sp">25 litros · 8 Níveis · Classe A</div>
-      </div>
+  <div class="sec">
+    <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+      <span style="display:block;width:16px;height:2px;background:var(--o);border-radius:2px"></span>
+      Fornos Elétricos
     </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23555' x='38' y='38' width='124' height='74'/%3E%3Crect fill='%23333' x='48' y='52' width='104' height='45' rx='3'/%3E%3Ccircle fill='%23999' cx='62' cy='108' r='4'/%3E%3Ccircle fill='%23999' cx='100' cy='108' r='4'/%3E%3Ccircle fill='%23999' cx='138' cy='108' r='4'/%3E%3C/svg%3E" alt="Microondas Consul Espelhado — Inox, Bivolt">
-        <span class="badge md">Estoque: 18</span>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#333" x="30" y="30" width="140" height="90"/><rect fill="#222" x="40" y="45" width="120" height="60"/><circle fill="#d4a843" cx="60" cy="115" r="4"/><circle fill="#d4a843" cx="100" cy="115" r="4"/><circle fill="#d4a843" cx="140" cy="115" r="4"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fff3e0;color:#a05800">Estoque: 22</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Forno Elétrico Mondial Compact</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">30L · Bivolt · Digital</div>
+        </div>
       </div>
-      <div class="info">
-        <div class="nm">Microondas Consul Espelhado — Inox, Bivolt</div>
-        <div class="sp">20 litros · Sensor de Umidade · Display Digital</div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#444" x="28" y="28" width="144" height="94"/><rect fill="#111" x="38" y="42" width="124" height="64"/><rect fill="#777" x="42" y="108" width="30" height="6"/><rect fill="#777" x="85" y="108" width="30" height="6"/><rect fill="#777" x="128" y="108" width="30" height="6"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#e6f4e6;color:#2a7a2a">Estoque: 35</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Forno Elétrico Philco Premium</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">48L · Inox · 3 Funções</div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23333' x='32' y='32' width='136' height='86'/%3E%3Crect fill='%23111' x='42' y='48' width='116' height='50' rx='2'/%3E%3Ccircle fill='%23aaa' cx='60' cy='110' r='5'/%3E%3Ccircle fill='%23aaa' cx='100' cy='110' r='5'/%3E%3Ccircle fill='%23aaa' cx='140' cy='110' r='5'/%3E%3C/svg%3E" alt="Microondas Brastemp Gourmand — Preto, 220V">
-        <span class="badge lo">Estoque: 9</span>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#222" x="25" y="25" width="150" height="100"/><rect fill="#555" x="35" y="40" width="130" height="65"/><circle fill="#999" cx="50" cy="115" r="5"/><circle fill="#999" cx="100" cy="115" r="5"/><circle fill="#999" cx="150" cy="115" r="5"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fff3e0;color:#a05800">Estoque: 17</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Forno Elétrico Britania</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">40L · 6 Níveis · Bivolt</div>
+        </div>
       </div>
-      <div class="info">
-        <div class="nm">Microondas Brastemp Gourmand — Preto, 220V</div>
-        <div class="sp">32 litros · Inverter · Classe A</div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#555" x="32" y="32" width="136" height="86"/><rect fill="#333" x="42" y="48" width="116" height="52"/><circle fill="#bbb" cx="60" cy="110" r="4"/><circle fill="#bbb" cx="100" cy="110" r="4"/><circle fill="#bbb" cx="140" cy="110" r="4"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fdecea;color:#b83232">Estoque: 11</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Forno Elétrico Electrolux</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">52L · Convecção · 220V</div>
+        </div>
       </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23666' x='36' y='36' width='128' height='78'/%3E%3Crect fill='%23444' x='46' y='50' width='108' height='48' rx='2'/%3E%3Ccircle fill='%23d4a843' cx='64' cy='110' r='4'/%3E%3Ccircle fill='%23d4a843' cx='100' cy='110' r='4'/%3E%3Ccircle fill='%23d4a843' cx='136' cy='110' r='4'/%3E%3C/svg%3E" alt="Microondas Philco 30L — Inox, Bivolt">
-        <span class="badge md">Estoque: 25</span>
-      </div>
-      <div class="info">
-        <div class="nm">Microondas Philco 30L — Inox, Bivolt</div>
-        <div class="sp">30 litros · 10 Potências · LED</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="img-box" style="height:118px">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 150'%3E%3Crect fill='%23f5f5f5' width='200' height='150'/%3E%3Crect fill='%23555' x='34' y='34' width='132' height='82'/%3E%3Crect fill='%23222' x='44' y='48' width='112' height='52' rx='3'/%3E%3Ccircle fill='%23bbb' cx='58' cy='110' r='5'/%3E%3Ccircle fill='%23bbb' cx='100' cy='110' r='5'/%3E%3Ccircle fill='%23bbb' cx='142' cy='110' r='5'/%3E%3C/svg%3E" alt="Microondas Britania Classic — Preto, 110V">
-        <span class="badge hi">Estoque: 38</span>
-      </div>
-      <div class="info">
-        <div class="nm">Microondas Britania Classic — Preto, 110V</div>
-        <div class="sp">20 litros · Manual · Classe A</div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#444" x="30" y="28" width="140" height="94"/><rect fill="#666" x="40" y="43" width="120" height="60"/><rect fill="#888" x="48" y="107" width="25" height="6"/><rect fill="#888" x="88" y="107" width="25" height="6"/><rect fill="#888" x="128" y="107" width="25" height="6"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fff3e0;color:#a05800">Estoque: 24</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Forno Elétrico Suggar Turbo</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">44L · 8 Funções · Bivolt</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="ftr">
-    <div class="ftr-l">
-      Legenda de Estoque
+  <div class="sec">
+    <div style="font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);margin-bottom:12px;display:flex;align-items:center;gap:8px">
+      <span style="display:block;width:16px;height:2px;background:var(--o);border-radius:2px"></span>
+      Microondas
     </div>
-    <div class="leg">
-      <div class="li"><div class="dot dh"></div>Alto</div>
-      <div class="li"><div class="dot dm"></div>Médio</div>
-      <div class="li"><div class="dot dl"></div>Baixo</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px">
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#444" x="35" y="35" width="130" height="80"/><rect fill="#222" x="45" y="48" width="110" height="50" rx="2"/><circle fill="#d4a843" cx="65" cy="110" r="5"/><circle fill="#d4a843" cx="100" cy="110" r="5"/><circle fill="#d4a843" cx="135" cy="110" r="5"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#e6f4e6;color:#2a7a2a">Estoque: 31</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Microondas Electrolux</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">25L · 8 Níveis · 110V</div>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#555" x="38" y="38" width="124" height="74"/><rect fill="#333" x="48" y="52" width="104" height="45" rx="3"/><circle fill="#999" cx="62" cy="108" r="4"/><circle fill="#999" cx="100" cy="108" r="4"/><circle fill="#999" cx="138" cy="108" r="4"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fff3e0;color:#a05800">Estoque: 18</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Microondas Consul Espelhado</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">20L · Sensor · Inox</div>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#333" x="32" y="32" width="136" height="86"/><rect fill="#111" x="42" y="48" width="116" height="50" rx="2"/><circle fill="#aaa" cx="60" cy="110" r="5"/><circle fill="#aaa" cx="100" cy="110" r="5"/><circle fill="#aaa" cx="140" cy="110" r="5"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fdecea;color:#b83232">Estoque: 9</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Microondas Brastemp Gourmand</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">32L · Inverter · 220V</div>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#666" x="36" y="36" width="128" height="78"/><rect fill="#444" x="46" y="50" width="108" height="48" rx="2"/><circle fill="#d4a843" cx="64" cy="110" r="4"/><circle fill="#d4a843" cx="100" cy="110" r="4"/><circle fill="#d4a843" cx="136" cy="110" r="4"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#fff3e0;color:#a05800">Estoque: 25</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Microondas Philco 30L</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">30L · 10 Potências · Inox</div>
+        </div>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden;background:var(--bg3);border:1px solid var(--bdr)">
+        <div style="width:100%;aspect-ratio:4/3;background:var(--bg2);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--bdr);overflow:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" style="width:80%;height:80%"><rect fill="var(--bg3)" width="200" height="150"/><rect fill="#555" x="34" y="34" width="132" height="82"/><rect fill="#222" x="44" y="48" width="112" height="52" rx="3"/><circle fill="#bbb" cx="58" cy="110" r="5"/><circle fill="#bbb" cx="100" cy="110" r="5"/><circle fill="#bbb" cx="142" cy="110" r="5"/></svg>
+          <span style="position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;background:#e6f4e6;color:#2a7a2a">Estoque: 38</span>
+        </div>
+        <div style="padding:8px 10px">
+          <div style="font-size:10px;font-weight:500;color:var(--tx);line-height:1.3;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">Microondas Britania Classic</div>
+          <div style="font-size:9px;color:var(--mu);font-weight:300">20L · Manual · 110V</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
