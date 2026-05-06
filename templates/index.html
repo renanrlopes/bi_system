@@ -81,6 +81,14 @@
               <line x1="6" y1="20" x2="6" y2="14" />
             </svg>Margem por SKU
           </div>
+          <div class="ni" onclick="sp('catalogo')">
+            <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" />
+              <rect x="14" y="3" width="7" height="7" />
+              <rect x="14" y="14" width="7" height="7" />
+              <rect x="3" y="14" width="7" height="7" />
+            </svg>Catálogo
+          </div>
           <div class="nl">Gestão</div>
           <div class="ni" onclick="sp('g-financeiro')">
             <svg fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
@@ -155,6 +163,7 @@
         {% include 'sections/fornec.html' %}
         {% include 'sections/estoque.html' %}
         {% include 'sections/margem.html' %}
+        {% include 'sections/catalogo.html' %}
 
         <!-- TOAST -->
         <div id="g-toast" style="position:fixed;bottom:24px;right:24px;background:var(--bg2);border:1px solid var(--g);border-radius:var(--rs);padding:12px 18px;font-size:13px;color:var(--g);z-index:9999;display:none;box-shadow:0 4px 20px rgba(0,0,0,.4)"></div>

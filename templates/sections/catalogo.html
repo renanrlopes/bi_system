@@ -1,0 +1,67 @@
+<div id="catalogo" class="page" style="display:none;">
+  <style>
+    #catalogo .hdr{background:#181818;padding:22px 44px;display:flex;align-items:center;justify-content:space-between}
+    #catalogo .hdr h1{font-family:'Playfair Display',serif;font-size:1.85rem;font-weight:700;color:#fff}
+    #catalogo .hdr p{font-size:11px;color:#888;margin-top:4px;letter-spacing:.1em;text-transform:uppercase}
+    #catalogo .pill{display:inline-block;font-size:10px;font-weight:500;color:#d4a843;border:1px solid #d4a843;padding:4px 14px;border-radius:100px;letter-spacing:.08em}
+    #catalogo .sub{font-size:10px;color:#555;margin-top:6px}
+    #catalogo .sec{padding:16px 44px 7px;display:flex;align-items:center;gap:10px}
+    #catalogo .sec::before{content:'';display:block;width:18px;height:2px;background:#d4a843;border-radius:2px;flex-shrink:0}
+    #catalogo .sec span{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#999}
+    #catalogo .divider{height:1px;background:#efefef;margin:2px 44px 0}
+    #catalogo .g5{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;padding:0 44px 16px}
+    #catalogo .g2{display:grid;grid-template-columns:repeat(2,190px);gap:10px;padding:0 44px 16px}
+    #catalogo .card{border:1px solid #ebebeb;border-radius:10px;overflow:hidden;background:#fafafa}
+    #catalogo .img-box{width:100%;background:#fff;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #ebebeb;position:relative;overflow:hidden}
+    #catalogo .img-box img{width:100%;height:100%;object-fit:contain;padding:7px}
+    #catalogo .badge{position:absolute;top:6px;right:6px;font-size:8px;font-weight:600;padding:2px 7px;border-radius:100px;z-index:2}
+    #catalogo .hi{background:#e6f4e6;color:#2a7a2a}
+    #catalogo .md{background:#fff3e0;color:#a05800}
+    #catalogo .lo{background:#fdecea;color:#b83232}
+    #catalogo .info{padding:7px 9px 9px}
+    #catalogo .nm{font-size:10px;font-weight:500;color:#1a1a1a;line-height:1.4;margin-bottom:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:28px}
+    #catalogo .sp{font-size:9px;color:#bbb;font-weight:300}
+    #catalogo .ftr{background:#181818;padding:13px 44px;display:flex;align-items:center;justify-content:space-between;margin-top:2px}
+    #catalogo .ftr-l{font-size:9px;color:#555;font-weight:300}
+    #catalogo .leg{display:flex;gap:14px}
+    #catalogo .li{display:flex;align-items:center;gap:5px;font-size:9px;color:#666}
+    #catalogo .dot{width:7px;height:7px;border-radius:50%}
+    #catalogo .dh{background:#4caf50}.dm{background:#ff9800}.dl{background:#e53935}
+  </style>
+
+  <div class="hdr">
+    <div>
+      <h1>Catálogo de Produtos</h1>
+      <p>Linha completa para o seu lar</p>
+    </div>
+    <div style="text-align:right">
+      <div class="pill">✦ Produtos em Estoque</div>
+      <div class="sub">Preços e condições mediante consulta</div>
+    </div>
+  </div>
+
+  <div class="sec"><span>Fogões &amp; Cooktops</span></div>
+  <div class="g5">
+    <div class="card">
+      <div class="img-box" style="height:118px">
+        <img src="data:image/jpeg;base64,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" alt="Fogão 5 Bocas Itatiaia Star New — Preto, Bivolt">
+        <span class="badge lo">Estoque: 16</span>
+      </div>
+      <div class="info">
+        <div class="nm">Fogão 5 Bocas Itatiaia Star New — Preto, Bivolt</div>
+        <div class="sp">Acend. Automático · Classe A · GLP/GN</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ftr">
+    <div class="ftr-l">
+      Legenda de Estoque
+    </div>
+    <div class="leg">
+      <div class="li"><div class="dot dh"></div>Alto</div>
+      <div class="li"><div class="dot dm"></div>Médio</div>
+      <div class="li"><div class="dot dl"></div>Baixo</div>
+    </div>
+  </div>
+</div>
