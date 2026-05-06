@@ -165,8 +165,8 @@ function sp(p){
   document.querySelectorAll('.pg').forEach(el=>el.classList.remove('on'));
   document.querySelectorAll('.ni').forEach(el=>el.classList.remove('on'));
   document.getElementById('page-'+p).classList.add('on');
-  const ps=['overview','dre','aportes','extrato','evolucao','produtos','compras','fornec','estoque','margem','g-financeiro','g-produtos','g-notas','g-aportes','g-skus','g-historico'];
-  const ts=['Visão geral','DRE Gerencial','Aportes de capital','Extrato ML','Evolução Mensal','Produtos / SKU','Notas de Compra','Fornecedores','Estoque Full','Margem por SKU','Dados Financeiros','Produtos / Custos','Notas Fiscais','Aportes / Empréstimos','Importar Dados','Histórico de Alterações'];
+  const ps=['overview','dre','aportes','extrato','evolucao','produtos','compras','fornec','estoque','margem','catalogo','g-financeiro','g-produtos','g-notas','g-aportes','g-skus','g-historico'];
+  const ts=['Visão geral','DRE Gerencial','Aportes de capital','Extrato ML','Evolução Mensal','Produtos / SKU','Notas de Compra','Fornecedores','Estoque Full','Margem por SKU','Catálogo de Produtos','Dados Financeiros','Produtos / Custos','Notas Fiscais','Aportes / Empréstimos','Importar Dados','Histórico de Alterações'];
   const idx=ps.indexOf(p);
   if(idx>=0)document.querySelectorAll('.ni')[idx].classList.add('on');
   document.getElementById('pgt').textContent=ts[idx]||p;
